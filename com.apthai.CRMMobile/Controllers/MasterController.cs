@@ -1,0 +1,112 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
+using System.Threading.Tasks;
+using com.apthai.CRMMobile.Model;
+using com.apthai.CRMMobile.Repositories.Interfaces;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
+using System.IO;
+using Ionic.Zip;
+using Microsoft.Extensions.Hosting.Internal;
+using Microsoft.AspNetCore.Hosting;
+using com.apthai.CRMMobile.Repositories;
+using System.Net.Http.Headers;
+using System.Net;
+using Microsoft.AspNetCore.Mvc.Filters;
+using Serilog;
+using com.apthai.CRMMobile.Model.DefectAPI;
+using Microsoft.Extensions.Configuration;
+using com.apthai.CRMMobile.Configuration;
+using Microsoft.AspNetCore.StaticFiles;
+using com.apthai.CRMMobile.CustomModel;
+using com.apthai.CoreApp.Data.Services;
+using com.apthai.CRMMobile.HttpRestModel;
+using Microsoft.Extensions.Primitives;
+
+namespace com.apthai.CRMMobile.Controllers
+{
+    public class MasterController : ControllerBase
+    {
+        private readonly IAuthorizeService _authorizeService;
+        private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly IConfiguration _config;
+        private readonly IMasterRepository _masterRepository;
+        //private List<MStorageServer> _QISStorageServer;
+        protected AppSettings _appSetting;
+
+        public MasterController(IAuthorizeService authorizeService) {
+
+
+            _hostingEnvironment  = UtilsProvider.HostingEnvironment;
+            _config = UtilsProvider.Config;
+            _appSetting = UtilsProvider.AppSetting;
+            _unitOfWork = new UnitOfWork(_hostingEnvironment, _config);
+            _masterRepository = new MasterRepository(_hostingEnvironment, _config);
+            _authorizeService = authorizeService;
+        }
+        [HttpPost]
+        [Route("Test")]
+        public async Task<object> GetMasterCallType([FromBody]GetCAllArea data)
+        {
+                    return new
+                    {
+                        success = true,
+                        data = "Hello World!"
+                    };
+             
+        }
+        //-------------- Verify Key and Token From HTTP Header ------------------
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public bool VerifyHeader(out string ErrorMsg)
+        {
+            //if (data == null)
+            //{
+            //    return BadRequest();
+            //}
+
+            //string ipaddress = _accessor.HttpContext.Connection.RemoteIpAddress.ToString();
+            string ipaddress = "5555555";
+            StringValues api_key;
+            StringValues EmpCode;
+
+            var isValidHeader = false;
+            //APIITVendor //VendorData = new APIITVendor();
+            if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
+            {
+                string AccessKey = api_key.First();
+                string EmpCodeKey = EmpCode.First();
+
+                if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
+                {
+                    bool CanAccess = _authorizeService.AccessKeyAuthentication(AccessKey, EmpCodeKey);
+                    if (CanAccess == true)
+                    {
+                        ErrorMsg = "";
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                if (!isValidHeader)
+                {
+                    //_log.LogDebug(ipaddress + " :: Missing Authorization Header.");
+                    ErrorMsg = ipaddress + " :: Missing Authorization Header.";
+                    //VendorData = new APIITVendor();
+                    return false;
+                    //  return BadRequest("Missing Authorization Header.");
+                }
+            }
+            //VendorData = new APIITVendor();
+            ErrorMsg = "SomeThing Wrong with Header Contact Developer ASAP";
+            return false;
+        }
+    }
+
+
+}
