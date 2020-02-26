@@ -39,19 +39,21 @@ namespace com.apthai.CRMMobile.Controllers
         //private List<MStorageServer> _QISStorageServer;
         protected AppSettings _appSetting;
 
-        public MasterController(IAuthorizeService authorizeService) {
-
-
+        public MasterController(IAuthorizeService authorizeService,IUnitOfWork unitOfWork, IMasterRepository masterRepository)
+        {
             _hostingEnvironment  = UtilsProvider.HostingEnvironment;
             _config = UtilsProvider.Config;
             _appSetting = UtilsProvider.AppSetting;
-            _unitOfWork = new UnitOfWork(_hostingEnvironment, _config);
-            _masterRepository = new MasterRepository(_hostingEnvironment, _config);
+            _unitOfWork = unitOfWork;
+            // ------------- แบบนี้จะอ้าง ถึง Repo ตรงๆ ไม่รอรับการทำ AutoMate-Test ได้
+            //_masterRepository = new MasterRepository(_hostingEnvironment, _config);
+            // ------------- ควรใช้แบบนี้
+            _masterRepository = masterRepository;
             _authorizeService = authorizeService;
         }
-        [HttpPost]
+        [HttpGet]
         [Route("Test")]
-        public async Task<object> GetMasterCallType([FromBody]GetCAllArea data)
+        public async Task<object> GetMasterCallType()
         {
                     return new
                     {
