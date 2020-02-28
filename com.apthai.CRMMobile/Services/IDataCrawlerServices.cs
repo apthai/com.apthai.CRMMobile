@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using com.apthai.CRMMobile.Model.DefectAPI;
 using Newtonsoft.Json.Linq;
 namespace com.apthai.CoreApp.Data.Services
 {

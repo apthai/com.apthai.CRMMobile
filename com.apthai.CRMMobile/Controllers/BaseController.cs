@@ -18,7 +18,6 @@ using System.Net.Http.Headers;
 using System.Net;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Serilog;
-using com.apthai.CRMMobile.Model.DefectAPI;
 using Microsoft.Extensions.Configuration;
 using com.apthai.CRMMobile.Configuration;
 using Microsoft.AspNetCore.StaticFiles;

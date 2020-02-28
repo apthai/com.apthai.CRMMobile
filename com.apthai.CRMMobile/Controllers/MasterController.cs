@@ -18,7 +18,6 @@ using System.Net.Http.Headers;
 using System.Net;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Serilog;
-using com.apthai.CRMMobile.Model.DefectAPI;
 using Microsoft.Extensions.Configuration;
 using com.apthai.CRMMobile.Configuration;
 using Microsoft.AspNetCore.StaticFiles;
@@ -85,12 +84,12 @@ namespace com.apthai.CRMMobile.Controllers
 
                 if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
                 {
-                    bool CanAccess = _authorizeService.AccessKeyAuthentication(AccessKey, EmpCodeKey);
-                    if (CanAccess == true)
-                    {
-                        ErrorMsg = "";
-                        return true;
-                    }
+                    //bool CanAccess = _authorizeService.AccessKeyAuthentication(AccessKey, EmpCodeKey);
+                    //if (CanAccess == true)
+                    //{
+                    //    ErrorMsg = "";
+                    //    return true;
+                    //}
                 }
             }
             else

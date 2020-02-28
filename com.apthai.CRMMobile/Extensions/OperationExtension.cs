@@ -1,5 +1,4 @@
-﻿using com.apthai.CRMMobile.Model.DefectAPI;
-using com.apthai.CRMMobile.Repositories;
+﻿using com.apthai.CRMMobile.Repositories;
 using Microsoft.Extensions.Caching.Memory;
 using System;
 using System.Collections.Generic;

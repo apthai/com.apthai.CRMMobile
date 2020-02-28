@@ -15,7 +15,6 @@ using Newtonsoft.Json.Linq;
 using System.Data;
 using Newtonsoft.Json.Extensions;
 using Newtonsoft.Json;
-using com.apthai.CRMMobile.Model.DefectAPI;
 using com.apthai.CRMMobile.Repositories.Interfaces;
 using Microsoft.AspNetCore.Hosting;
 using com.apthai.CRMMobile.Repositories;

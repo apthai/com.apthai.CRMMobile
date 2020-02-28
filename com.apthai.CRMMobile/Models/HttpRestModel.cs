@@ -1,4 +1,4 @@
-﻿using com.apthai.CRMMobile.Model.DefectAPI;
+﻿
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json.Linq;
 using Swashbuckle.AspNetCore.Filters;

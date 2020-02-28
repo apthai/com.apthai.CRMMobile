@@ -14,7 +14,6 @@ using Dapper;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using com.apthai.CRMMobile.Data;
-using com.apthai.CRMMobile.Model.DefectAPI;
 using webSerInstance;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
@@ -98,24 +97,25 @@ namespace com.apthai.CoreApp.Data.Services
             return resturnUser;
 
         }
-        public bool AccessKeyAuthentication(string AC , string EmpCode)
-        {
-            AccessKeyControl accessKeyControl = _UserRepository.CheckUserAccessKey(EmpCode, AC);
-            if (accessKeyControl != null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+
+        //public bool AccessKeyAuthentication(string AC, string EmpCode)
+        //{
+        //    AccessKeyControl accessKeyControl = _UserRepository.CheckUserAccessKey(EmpCode, AC);
+        //    if (accessKeyControl != null)
+        //    {
+        //        return false;
+        //    }
+        //    else
+        //    {
+        //        return true;
+        //    }
+        //}
         //public CustomModels.WSAuthorizeModel GetUserPrincipal(string userName)
         //{
 
         //    var resturnUser = new CustomModels.WSAuthorizeModel();
         //    var result = new AutorizeData();
-        //  //  var AuthenticationProvider = ConfigurationManager.AppSettings["Authorize.Provider"].ToLower();
+        //    //  var AuthenticationProvider = ConfigurationManager.AppSettings["Authorize.Provider"].ToLower();
 
         //    if (AuthenticationProvider == "domain")
         //    {

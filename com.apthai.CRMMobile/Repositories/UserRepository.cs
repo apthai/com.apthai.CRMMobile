@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using com.apthai.CRMMobile.Model.DefectAPI;
 using com.apthai.CRMMobile.Repositories.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -28,66 +27,66 @@ namespace com.apthai.CRMMobile.Repositories
 
         }
 
-        public AccessKeyControl GetUserAccessKey(string EmpCode)
-        {
-            using (IDbConnection conn = WebConnection)
-            {
-                conn.Open();
-                var result = conn.Query<AccessKeyControl>("select * from AccessKeyControl WITH(NOLOCK) where EmpCode=@EmpCode", new { EmpCode = EmpCode }).FirstOrDefault();
+        //public AccessKeyControl GetUserAccessKey(string EmpCode)
+        //{
+        //    using (IDbConnection conn = WebConnection)
+        //    {
+        //        conn.Open();
+        //        var result = conn.Query<AccessKeyControl>("select * from AccessKeyControl WITH(NOLOCK) where EmpCode=@EmpCode", new { EmpCode = EmpCode }).FirstOrDefault();
 
-                return result;
-            }
-        }
-        public AccessKeyControl CheckUserAccessKey(string EmpCode , string AccessKey)
-        {
-            using (IDbConnection conn = WebConnection)
-            {
-                conn.Open();
-                var result = conn.Query<AccessKeyControl>("select * from AccessKeyControl WITH(NOLOCK) where EmpCode=@EmpCode and AccessKey=@AccessKey", new { EmpCode = EmpCode, AccessKey=AccessKey }).FirstOrDefault();
+        //        return result;
+        //    }
+        //}
+        //public AccessKeyControl CheckUserAccessKey(string EmpCode , string AccessKey)
+        //{
+        //    using (IDbConnection conn = WebConnection)
+        //    {
+        //        conn.Open();
+        //        var result = conn.Query<AccessKeyControl>("select * from AccessKeyControl WITH(NOLOCK) where EmpCode=@EmpCode and AccessKey=@AccessKey", new { EmpCode = EmpCode, AccessKey=AccessKey }).FirstOrDefault();
 
-                return result;
-            }
-        }
-        public bool InsertUserAccessKey(AccessKeyControl AC)
-        {
-            try
-            {
-                using (IDbConnection conn = WebConnection)
-                {
-                    conn.Open();
-                    var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
+        //        return result;
+        //    }
+        //}
+        //public bool InsertUserAccessKey(AccessKeyControl AC)
+        //{
+        //    try
+        //    {
+        //        using (IDbConnection conn = WebConnection)
+        //        {
+        //            conn.Open();
+        //            var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
 
-                    var result = conn.Insert(AC, tran);
-                    tran.Commit();
+        //            var result = conn.Insert(AC, tran);
+        //            tran.Commit();
 
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-        public bool UpdateUserAccessKey(AccessKeyControl AC)
-        {
-            try
-            {
-                using (IDbConnection conn = WebConnection)
-                {
-                    conn.Open();
-                    var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
+        //            return true;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
+        //public bool UpdateUserAccessKey(AccessKeyControl AC)
+        //{
+        //    try
+        //    {
+        //        using (IDbConnection conn = WebConnection)
+        //        {
+        //            conn.Open();
+        //            var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
 
-                    var result = conn.Update(AC, tran);
-                    tran.Commit();
+        //            var result = conn.Update(AC, tran);
+        //            tran.Commit();
 
-                    return true;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //            return true;
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
         //public async Task<vwUser> GetUser(string userId)
         //{
         //    using (IDbConnection conn = WebConnection)

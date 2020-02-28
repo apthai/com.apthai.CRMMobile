@@ -1,5 +1,4 @@
 ﻿using Dapper;
-using com.apthai.CRMMobile.Model.DefectAPI;
 using com.apthai.CRMMobile.Repositories.Interfaces;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -38,65 +37,65 @@ namespace com.apthai.CRMMobile.Repositories
             return c;
         }
 
-        public List<callarea> GetCallAreaByProductCat_Sync(string ProductTypeCate)
-        {
-            using (IDbConnection conn = WebConnection)
-            {
-                try
-                {
-                    if (ProductTypeCate == null || ProductTypeCate == "")
-                    {
-                        string sQuery = "Select * From callarea where Active = 1 ";
-                        var result = conn.Query<callarea>(sQuery).ToList();
-                        return result;
-                    }
-                    else
-                    {
-                        string sQuery = "Select * From callarea where ProductTypeCate = @ProductTypeCate And Active = 1 ";
-                        var result = conn.Query<callarea>(sQuery, new { ProductTypeCate = ProductTypeCate }).ToList();
-                        return result;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("MasterRepository.GetCallAreaByProductCat_Sync() :: Error ", ex);
-                }
-            }
-        }
-        public List<calltype> GetCallCallType_Sync()
-        {
-            using (IDbConnection conn = WebConnection)
-            {
-                try
-                {
-                    string sQuery = "Select * From callType where Active = 1 ";
-                    var result = conn.Query<calltype>(sQuery).ToList();
-                    return result;
+        //public List<callarea> GetCallAreaByProductCat_Sync(string ProductTypeCate)
+        //{
+        //    using (IDbConnection conn = WebConnection)
+        //    {
+        //        try
+        //        {
+        //            if (ProductTypeCate == null || ProductTypeCate == "")
+        //            {
+        //                string sQuery = "Select * From callarea where Active = 1 ";
+        //                var result = conn.Query<callarea>(sQuery).ToList();
+        //                return result;
+        //            }
+        //            else
+        //            {
+        //                string sQuery = "Select * From callarea where ProductTypeCate = @ProductTypeCate And Active = 1 ";
+        //                var result = conn.Query<callarea>(sQuery, new { ProductTypeCate = ProductTypeCate }).ToList();
+        //                return result;
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            throw new Exception("MasterRepository.GetCallAreaByProductCat_Sync() :: Error ", ex);
+        //        }
+        //    }
+        //}
+        //public List<calltype> GetCallCallType_Sync()
+        //{
+        //    using (IDbConnection conn = WebConnection)
+        //    {
+        //        try
+        //        {
+        //            string sQuery = "Select * From callType where Active = 1 ";
+        //            var result = conn.Query<calltype>(sQuery).ToList();
+        //            return result;
 
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("MasterRepository.GetCallAreaByProductCat_Sync() :: Error ", ex);
-                }
-            }
-        }
-        public callTDefect GetCallTDefect_Sync(int TDefectID)
-        {
-            using (IDbConnection conn = WebConnection)
-            {
-                try
-                {
-                    string sQuery = "Select * From callTDefect " +
-                        "where TDefectID = @TDefectID And DocIsActive = 1 ";
-                    var result = conn.Query<callTDefect>(sQuery, new { TDefectID = TDefectID }).FirstOrDefault();
-                    return result;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            throw new Exception("MasterRepository.GetCallAreaByProductCat_Sync() :: Error ", ex);
+        //        }
+        //    }
+        //}
+        //public callTDefect GetCallTDefect_Sync(int TDefectID)
+        //{
+        //    using (IDbConnection conn = WebConnection)
+        //    {
+        //        try
+        //        {
+        //            string sQuery = "Select * From callTDefect " +
+        //                "where TDefectID = @TDefectID And DocIsActive = 1 ";
+        //            var result = conn.Query<callTDefect>(sQuery, new { TDefectID = TDefectID }).FirstOrDefault();
+        //            return result;
 
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("MasterRepository.GetCallAreaByProductCat_Sync() :: Error ", ex);
-                }
-            }
-        }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            throw new Exception("MasterRepository.GetCallAreaByProductCat_Sync() :: Error ", ex);
+        //        }
+        //    }
+        //}
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
-using com.apthai.CRMMobile.Model.DefectAPI;
 
 namespace com.apthai.CRMMobile.Repositories
 {
@@ -9,10 +8,10 @@ namespace com.apthai.CRMMobile.Repositories
     {
 
         // Task<vwUser> GetUser(string userId);
-        AccessKeyControl GetUserAccessKey(string EmpCode);
-        bool InsertUserAccessKey(AccessKeyControl AC);
-        bool UpdateUserAccessKey(AccessKeyControl AC);
-        AccessKeyControl CheckUserAccessKey(string EmpCode, string AccessKey);
+        //AccessKeyControl GetUserAccessKey(string EmpCode);
+        //bool InsertUserAccessKey(AccessKeyControl AC);
+        //bool UpdateUserAccessKey(AccessKeyControl AC);
+        //AccessKeyControl CheckUserAccessKey(string EmpCode, string AccessKey);
        //Task<List<vwUser>> GetAllUser();
        // Model.QISAuth.vwUser GetUserData(int UserID);
 

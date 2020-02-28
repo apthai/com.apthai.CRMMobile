@@ -12,7 +12,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json; 
 using Newtonsoft.Json.Linq;
-using com.apthai.CRMMobile.Model.DefectAPI;   
 using com.apthai.CRMMobile.Repositories;
 using Swashbuckle.AspNetCore.Annotations;
 
@@ -91,39 +90,46 @@ namespace com.apthai.CRMMobile.Controllers
                         valid = false
                     };
                 }
-                AccessKeyControl AC = _UserRepository.GetUserAccessKey(Result.EmployeeID);
-                if (AC == null)
+                return new
                 {
-                    AccessKeyControl accessKeyControl = new AccessKeyControl();
-                    accessKeyControl.EmpCode = Result.EmployeeID;
-                    accessKeyControl.AccessKey = generateAccessKey(Result.EmployeeID);
-                    accessKeyControl.LoginDate = DateTime.Now;
+                    success = false,
+                    data = Result.LoginResultMessage,
+                    valid = false
+                };
+                // เป็นส่วนของการ Control Access Key ของระบบ ตัวอย่างนี้เป็นของระบบ Defect
+                //AccessKeyControl AC = _UserRepository.GetUserAccessKey(Result.EmployeeID);
+                //if (AC == null)
+                //{
+                //    AccessKeyControl accessKeyControl = new AccessKeyControl();
+                //    accessKeyControl.EmpCode = Result.EmployeeID;
+                //    accessKeyControl.AccessKey = generateAccessKey(Result.EmployeeID);
+                //    accessKeyControl.LoginDate = DateTime.Now;
 
-                    bool Insert = _UserRepository.InsertUserAccessKey(accessKeyControl);
+                //    bool Insert = _UserRepository.InsertUserAccessKey(accessKeyControl);
 
-                    return new
-                    {
-                        success = true,
-                        data = Result,
-                        AccessKey = accessKeyControl.AccessKey,
-                        valid = false
-                    };
-                }
-                else
-                {
-                    AC.AccessKey = generateAccessKey(Result.EmployeeID);
-                    AC.LoginDate = DateTime.Now;
+                //    return new
+                //    {
+                //        success = true,
+                //        data = Result,
+                //        AccessKey = accessKeyControl.AccessKey,
+                //        valid = false
+                //    };
+                //}
+                //else
+                //{
+                //    AC.AccessKey = generateAccessKey(Result.EmployeeID);
+                //    AC.LoginDate = DateTime.Now;
 
-                    bool Update = _UserRepository.UpdateUserAccessKey(AC);
+                //    bool Update = _UserRepository.UpdateUserAccessKey(AC);
 
-                    return new
-                    {
-                        success = true,
-                        data = Result,
-                        AccessKey = AC.AccessKey,
-                        valid = false
-                    };
-                }
+                //    return new
+                //    {
+                //        success = true,
+                //        data = Result,
+                //        AccessKey = AC.AccessKey,
+                //        valid = false
+                //    };
+                //}
             }
             catch (Exception ex)
             {
