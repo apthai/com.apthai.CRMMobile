@@ -155,7 +155,7 @@ namespace com.apthai.CRMMobile
                 c.AddSecurityDefinition("Bearer", new ApiKeyScheme
                 {
                     Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                    Name = "Authorization",
+                    Name = "api_Accesskey",
                     In = "header",
                     Type = "apiKey"
                 });

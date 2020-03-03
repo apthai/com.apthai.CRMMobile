@@ -127,6 +127,16 @@ namespace com.apthai.CRMMobile.Controllers
         {
             try
             {
+                string ErrorHeader = "";
+                if (!VerifyHeader(out ErrorHeader))
+                {
+                    return new
+                    {
+                        success = false,
+                        data = "Invalid AccessKey!!. ",
+                        valid = false
+                    };
+                }
                 string APApiKey = Environment.GetEnvironmentVariable("API_Key");
                 if (APApiKey == null)
                 {
@@ -209,17 +219,19 @@ namespace com.apthai.CRMMobile.Controllers
         {
             try
             {
-                string APApiKey = Environment.GetEnvironmentVariable("API_Key");
-                if (APApiKey == null)
+                #region VerifyHeader
+                string ErrorHeader = "";
+                if (!VerifyHeader(out ErrorHeader))
                 {
-                    APApiKey = UtilsProvider.AppSetting.ApiKey;
+                    return new
+                    {
+                        success = false,
+                        data = "Invalid AccessKey!!. ",
+                        valid = false
+                    };
                 }
-                string APApiToken = Environment.GetEnvironmentVariable("Api_Token");
-                if (APApiToken == null)
-                {
-                    APApiToken = UtilsProvider.AppSetting.ApiToken;
-                }
-
+                #endregion
+               
                 var client = new HttpClient();
                 ThaiBulkOTPRequest thaiBulkOTPRequest = new ThaiBulkOTPRequest();
                 thaiBulkOTPRequest.key = UtilsProvider.AppSetting.ThaiBulkApiKey;
@@ -274,17 +286,18 @@ namespace com.apthai.CRMMobile.Controllers
         {
             try
             {
-                string APApiKey = Environment.GetEnvironmentVariable("API_Key");
-                if (APApiKey == null)
+                #region VerifyHeader
+                string ErrorHeader = "";
+                if (!VerifyHeader(out ErrorHeader))
                 {
-                    APApiKey = UtilsProvider.AppSetting.ApiKey;
+                    return new
+                    {
+                        success = false,
+                        data = "Invalid AccessKey!!. ",
+                        valid = false
+                    };
                 }
-                string APApiToken = Environment.GetEnvironmentVariable("Api_Token");
-                if (APApiToken == null)
-                {
-                    APApiToken = UtilsProvider.AppSetting.ApiToken;
-                }
-
+                #endregion
                 var client = new HttpClient();
                 ThaiBulkOTPRequest thaiBulkOTPRequest = new ThaiBulkOTPRequest();
                 var Content = new StringContent(JsonConvert.SerializeObject(thaiBulkOTPRequest));
@@ -293,7 +306,7 @@ namespace com.apthai.CRMMobile.Controllers
                 {
                     PostURL = UtilsProvider.AppSetting.ThaiBulkVerifyOTPURL;
                 }
-                string RequestParam = "?key=" + data.key + "&secret=" + data.secret + "&token=" + data.token + "&pin=" + data.token;
+                string RequestParam = "?key=" + data.key + "&secret=" + data.secret + "&token=" + data.token + "&pin=" + data.pin;
                 PostURL = PostURL + RequestParam;
                 var Respond = await client.PostAsync(PostURL, Content);
                 if (Respond.StatusCode != System.Net.HttpStatusCode.OK)
@@ -315,7 +328,7 @@ namespace com.apthai.CRMMobile.Controllers
                 {
                     success = true,
                     data = returnObj,
-                    Message = "Request OTP Successfully!. Please Check OTP Number sended to your mobile !"
+                    Message = "Verify OTP Successfully!. The Pin is Match"
                 };
 
 
@@ -330,6 +343,47 @@ namespace com.apthai.CRMMobile.Controllers
         public string generateToken(string PhoneNumber)
         {
             return string.Format("{0}_{1:N}", PhoneNumber, Guid.NewGuid());
+        }
+
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public bool VerifyHeader(out string ErrorMsg)
+        {
+
+            string ipaddress = "5555555";
+            StringValues api_key;
+            StringValues EmpCode;
+
+            var isValidHeader = false;
+            //APIITVendor //VendorData = new APIITVendor();
+            if (Request.Headers.TryGetValue("api_Accesskey", out api_key))
+            {
+                string AccessKey = api_key.First();
+                string EmpCodeKey = EmpCode.First();
+
+                if (!string.IsNullOrEmpty(AccessKey))
+                {
+                    bool CorrectACKey = SHAHelper.VerifyHash("APiCRMMobile", "SHA512", AccessKey);
+                    if (CorrectACKey)
+                    {
+                        ErrorMsg = "";
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                if (!isValidHeader)
+                {
+                    //_log.LogDebug(ipaddress + " :: Missing Authorization Header.");
+                    ErrorMsg = ipaddress + " :: Missing Authorization Header.";
+                    //VendorData = new APIITVendor();
+                    return false;
+                    //  return BadRequest("Missing Authorization Header.");
+                }
+            }
+            //VendorData = new APIITVendor();
+            ErrorMsg = "SomeThing Wrong with Header Contact Developer ASAP";
+            return false;
         }
     }
 }

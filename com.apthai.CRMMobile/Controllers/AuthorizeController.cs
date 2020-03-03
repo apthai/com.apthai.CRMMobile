@@ -287,5 +287,46 @@ namespace com.apthai.CRMMobile.Controllers
         {
             return string.Format("{0}_{1:N}", EmpCode, Guid.NewGuid());
         }
+
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public bool VerifyHeader(out string ErrorMsg)
+        {
+
+            string ipaddress = "5555555";
+            StringValues api_key;
+            StringValues EmpCode;
+
+            var isValidHeader = false;
+            //APIITVendor //VendorData = new APIITVendor();
+            if (Request.Headers.TryGetValue("api_Accesskey", out api_key))
+            {
+                string AccessKey = api_key.First();
+                string EmpCodeKey = EmpCode.First();
+
+                if (!string.IsNullOrEmpty(AccessKey))
+                {
+                    bool CorrectACKey = SHAHelper.VerifyHash("APiCRMMobile","SHA512", AccessKey);
+                    if (CorrectACKey)
+                    {
+                        ErrorMsg = "";
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                if (!isValidHeader)
+                {
+                    //_log.LogDebug(ipaddress + " :: Missing Authorization Header.");
+                    ErrorMsg = ipaddress + " :: Missing Authorization Header.";
+                    //VendorData = new APIITVendor();
+                    return false;
+                    //  return BadRequest("Missing Authorization Header.");
+                }
+            }
+            //VendorData = new APIITVendor();
+            ErrorMsg = "SomeThing Wrong with Header Contact Developer ASAP";
+            return false;
+        }
     }
 }
