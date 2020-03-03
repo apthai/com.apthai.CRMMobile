@@ -127,26 +127,20 @@ namespace com.apthai.CRMMobile.Controllers
         {
             try
             {
-                string ErrorHeader = "";
-                if (!VerifyHeader(out ErrorHeader))
-                {
-                    return new
-                    {
-                        success = false,
-                        data = "Invalid AccessKey!!. ",
-                        valid = false
-                    };
-                }
-                string APApiKey = Environment.GetEnvironmentVariable("API_Key");
-                if (APApiKey == null)
-                {
-                    APApiKey = UtilsProvider.AppSetting.ApiKey;
-                }
-                string APApiToken = Environment.GetEnvironmentVariable("Api_Token");
-                if (APApiToken == null)
-                {
-                    APApiToken = UtilsProvider.AppSetting.ApiToken;
-                }
+                //#region VerifyHeader
+                //string ErrorHeader = "";
+                //if (!VerifyHeader(out ErrorHeader))
+                //{
+                //    return new
+                //    {
+                //        success = false,
+                //        data = "Invalid AccessKey!!. ",
+                //        valid = false
+                //    };
+                //}
+                //#endregion
+                
+                bool asd = SHAHelper.VerifyHash("verify", "SHA512", GenerateAccessToken);
                 Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByIDCardNO(data.CitizenIdentityNo);
                 if (contact == null)
                 {
@@ -188,12 +182,13 @@ namespace com.apthai.CRMMobile.Controllers
 
                 bool insert = _UserRepository.InsertCSUserProfile(cSUserProfile);
 
+                string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
                 Model.CRMMobile.UserLogin cSUserLogin = new Model.CRMMobile.UserLogin();
                 cSUserLogin.UserPhoneNumber = data.PhoneNumber;
                 cSUserLogin.LoginDate = DateTime.Now.ToShortDateString();
                 cSUserLogin.DeviceID = data.DeviceID;
                 cSUserLogin.DeviceType = data.DeviceType;
-                cSUserLogin.UserToken = generateToken(data.PhoneNumber);
+                cSUserLogin.UserToken = GenerateAccessToken ;
 
                 bool insertUserLogin = _UserRepository.InsertCSUserLogin(cSUserLogin);
 
