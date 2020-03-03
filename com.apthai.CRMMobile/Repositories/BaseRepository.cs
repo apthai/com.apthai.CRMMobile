@@ -45,11 +45,11 @@ namespace com.apthai.CRMMobile.Repositories
             }
         }
 
-        protected IDbConnection SyncConnection
+        protected IDbConnection MobileConnection
         {
             get
             {
-                var conn = Environment.GetEnvironmentVariable("DefaultSyncConnection");
+                var conn = Environment.GetEnvironmentVariable("DefaultMobileConnection");
                 return new SqlConnection(conn);
             }
         }

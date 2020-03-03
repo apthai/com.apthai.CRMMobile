@@ -18,5 +18,9 @@ namespace com.apthai.CRMMobile.Configuration
         public string ApiKey { get; set; }
         public string ApiToken { get; set; }
         public string AuthorizeURL { get; set; }
+        public string ThaiBulkApiKey { get; set; }
+        public string ThaiBulkSecret { get; set; }
+        public string ThaiBulkVerifyOTPURL { get; set; }
+        public string ThaiBulkRequestOTPURL { get; set; }
     }
 }

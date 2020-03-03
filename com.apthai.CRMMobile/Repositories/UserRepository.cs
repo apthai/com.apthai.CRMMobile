@@ -11,6 +11,7 @@ using System.IO;
 using Newtonsoft.Json;
 using Dapper.Contrib.Extensions;
 using Microsoft.AspNetCore.Hosting;
+using com.apthai.CRMMobile.CustomModel;
 
 namespace com.apthai.CRMMobile.Repositories
 {
@@ -26,109 +27,81 @@ namespace com.apthai.CRMMobile.Repositories
             _hostingEnvironment = environment;
 
         }
+        //---------------- Log In Module --------------------------------------
+        public List<Model.CRMWeb.ContactPhone> GetContactPhoneNumberByContactID_Web(string ContactID)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMWeb.ContactPhone>("select * from CTM.ContactPhone WITH(NOLOCK) " +
+                    "where ContactID=@ContactID", new { ContactID = ContactID }).ToList();
 
-        //public AccessKeyControl GetUserAccessKey(string EmpCode)
-        //{
-        //    using (IDbConnection conn = WebConnection)
-        //    {
-        //        conn.Open();
-        //        var result = conn.Query<AccessKeyControl>("select * from AccessKeyControl WITH(NOLOCK) where EmpCode=@EmpCode", new { EmpCode = EmpCode }).FirstOrDefault();
+                return result;
+            }
+        }
+        public Model.CRMWeb.ContactPhone GetSingleContactPhoneNumberByContactID_Web(string ContactID,string PhoneNumber)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMWeb.ContactPhone>("select * from CTM.ContactPhone WITH(NOLOCK) " +
+                    "where ContactID=@ContactID AND PhoneNumber=@PhoneNumber", new { ContactID = ContactID, PhoneNumber = PhoneNumber }).FirstOrDefault();
 
-        //        return result;
-        //    }
-        //}
-        //public AccessKeyControl CheckUserAccessKey(string EmpCode , string AccessKey)
-        //{
-        //    using (IDbConnection conn = WebConnection)
-        //    {
-        //        conn.Open();
-        //        var result = conn.Query<AccessKeyControl>("select * from AccessKeyControl WITH(NOLOCK) where EmpCode=@EmpCode and AccessKey=@AccessKey", new { EmpCode = EmpCode, AccessKey=AccessKey }).FirstOrDefault();
+                return result;
+            }
+        }
+        public Model.CRMWeb.Contact GetCRMContactByIDCardNO(string CitizenIdentityNo)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMWeb.Contact>("select * from ctm.Contact WITH(NOLOCK) " +
+                    "where CitizenIdentityNo=@CitizenIdentityNo", new { CitizenIdentityNo = CitizenIdentityNo }).FirstOrDefault();
 
-        //        return result;
-        //    }
-        //}
-        //public bool InsertUserAccessKey(AccessKeyControl AC)
-        //{
-        //    try
-        //    {
-        //        using (IDbConnection conn = WebConnection)
-        //        {
-        //            conn.Open();
-        //            var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
+                return result;
+            }
+        }
+        public bool InsertCSUserProfile(Model.CRMMobile.UserProfile data)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                try
+                {
+                    conn.Open();
+                    var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
 
-        //            var result = conn.Insert(AC, tran);
-        //            tran.Commit();
+                    var result = conn.Update(data, tran);
+                    tran.Commit();
+                    
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("MasterRepository.InsertCSUserProfile() :: Error ", ex);
+                }
+            }
+        }
+        public bool InsertCSUserLogin(Model.CRMMobile.UserLogin data)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                try
+                {
+                    conn.Open();
+                    var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
 
-        //            return true;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
-        //public bool UpdateUserAccessKey(AccessKeyControl AC)
-        //{
-        //    try
-        //    {
-        //        using (IDbConnection conn = WebConnection)
-        //        {
-        //            conn.Open();
-        //            var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
+                    var result = conn.Update(data, tran);
+                    tran.Commit();
 
-        //            var result = conn.Update(AC, tran);
-        //            tran.Commit();
-
-        //            return true;
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-        //}
-        //public async Task<vwUser> GetUser(string userId)
-        //{
-        //    using (IDbConnection conn = WebConnection)
-        //    {
-        //        conn.Open();
-        //        var result = await conn.QueryAsync<vwUser>("select * from vw_User WITH(NOLOCK) where UserID=@ID", new { ID = userId });
-        //        if (result.Any())
-        //        {
-        //            return result.FirstOrDefault();
-        //        }
-        //        else
-        //        {
-        //            return new vwUser();
-        //        }
-        //    }
-        //}
-        //public Model.QISAuth.vwUser GetUserData(int UserID)
-        //{
-        //    using (IDbConnection conn = AuthConnection)
-        //    {
-        //        conn.Open();
-        //        var result = conn.Query<Model.QISAuth.vwUser>("select * from vw_User WITH(NOLOCK) where UserID=@UserID", new { UserID = UserID });
-        //        if (result.Any())
-        //        {
-        //            return result.FirstOrDefault();
-        //        }
-        //        else
-        //        {
-        //            return new Model.QISAuth.vwUser();
-        //        }
-        //    }
-        //}
-        //public async Task<List<vwUser>> GetAllUser()
-        //{
-        //    using (IDbConnection conn = WebConnection)
-        //    {
-        //        conn.Open();
-        //        var result = await conn.QueryAsync<vwUser>("select * from vw_User  WITH(NOLOCK)");
-        //        return result.ToList() ?? new List<vwUser>();
-        //    }
-        //}
-
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("MasterRepository.InsertCSUserProfile() :: Error ", ex);
+                }
+            }
+        }
+        //---------------------------------------------------------------------
     }
 
 }

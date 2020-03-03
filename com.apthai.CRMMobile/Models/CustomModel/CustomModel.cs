@@ -10,9 +10,27 @@ namespace com.apthai.CRMMobile.CustomModel
     //    public callarea callarea { get; set; }
     //    public List<calldescription> calldescriptions { get; set; }
     //}
-    //public class GetCallTransactionDefectObj 
-    //{
-    //    public callTDefect callTDefect { get; set; }
-    //    public List<callTDefectDetail> callTDefectDetail { get; set; }
-    //}
+    public class GetUserCRMPhoneNumber
+    {
+        public List<Model.CRMWeb.ContactPhone> contactPhones { get; set; }
+        public string FirstNameTH { get; set; }
+        public string LastNameTH { get; set; }
+        public string CitizenIdentityNo { get; set; }
+        public bool IsVIP { get; set; }
+    }
+    public class ThaiBulkOTPRequest
+    {
+        public string key { get; set; }
+        public string secret { get; set; }
+        public string msisdn { get; set; }
+    }
+    public class thaiBulkOTPRequestReturnObj
+    {
+        public ThaiBulkOTPRequestReturn data { get; set; }
+    }
+    public class ThaiBulkOTPRequestReturn
+    {
+        public string status { get; set; }
+        public string token { get; set; }
+    }
 }

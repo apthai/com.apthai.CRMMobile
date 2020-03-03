@@ -12,8 +12,11 @@ namespace com.apthai.CRMMobile.HttpRestModel
 {
     public partial class LoginData
     {
+        public string PhoneNumber { get; set; }
         public string UserName { get; set; }
         public string Password { get; set; }
+        public int PINCode { get; set; }
+        public string CitizenIdentityNo { get; set; }
         public string AppCode { get; set; }
 
     }
@@ -70,10 +73,21 @@ namespace com.apthai.CRMMobile.HttpRestModel
         public string AccessKey { get; set; }
         public string EmpCode { get; set; }
     }
-
     public class GetCAllType
     {
         public string AccessKey { get; set; }
         public string EmpCode { get; set; }
+    }
+    public class RegisterData
+    {
+        public string CitizenIdentityNo { get; set; }
+        public string PhoneNumber { get; set; }
+        public string DeviceID { get; set; }
+        public string DeviceType { get; set; }
+        public int PINCode { get; set; }
+    }
+    public class RequestOTPParam
+    {
+        public string PhoneNumber { get; set; }
     }
 }
