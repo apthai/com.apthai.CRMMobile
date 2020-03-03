@@ -219,18 +219,18 @@ namespace com.apthai.CRMMobile.Controllers
         {
             try
             {
-                #region VerifyHeader
-                string ErrorHeader = "";
-                if (!VerifyHeader(out ErrorHeader))
-                {
-                    return new
-                    {
-                        success = false,
-                        data = "Invalid AccessKey!!. ",
-                        valid = false
-                    };
-                }
-                #endregion
+                //#region VerifyHeader
+                //string ErrorHeader = "";
+                //if (!VerifyHeader(out ErrorHeader))
+                //{
+                //    return new
+                //    {
+                //        success = false,
+                //        data = "Invalid AccessKey!!. ",
+                //        valid = false
+                //    };
+                //}
+                //#endregion
                
                 var client = new HttpClient();
                 ThaiBulkOTPRequest thaiBulkOTPRequest = new ThaiBulkOTPRequest();
@@ -286,18 +286,21 @@ namespace com.apthai.CRMMobile.Controllers
         {
             try
             {
-                #region VerifyHeader
-                string ErrorHeader = "";
-                if (!VerifyHeader(out ErrorHeader))
-                {
-                    return new
-                    {
-                        success = false,
-                        data = "Invalid AccessKey!!. ",
-                        valid = false
-                    };
-                }
-                #endregion
+
+                //#region VerifyHeader
+                //string ErrorHeader = "";
+                //if (!VerifyHeader(out ErrorHeader))
+                //{
+                //    return new
+                //    {
+                //        success = false,
+                //        data = "Invalid AccessKey!!. ",
+                //        valid = false
+                //    };
+                //}
+                //#endregion
+
+
                 var client = new HttpClient();
                 ThaiBulkOTPRequest thaiBulkOTPRequest = new ThaiBulkOTPRequest();
                 var Content = new StringContent(JsonConvert.SerializeObject(thaiBulkOTPRequest));
