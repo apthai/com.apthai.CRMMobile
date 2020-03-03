@@ -270,7 +270,7 @@ namespace com.apthai.CRMMobile.Controllers
         [Route("VerifyOTP")]
         [SwaggerOperation(Summary = "Request OTP From ThaiBulk เพื่อมสเพื่อยืนยันตัวตน เพื่อใช่งานระบบ ",
             Description = "เพื่อทำการ ยืนยันตัวตนของผู้ใช้งาน ซึ่ง 1 คนสามารถมีมากกว่า 1 UserLogin ได้")]
-        public async Task<object> VerifyOTP([FromBody]RequestOTPParam data)
+        public async Task<object> VerifyOTP([FromBody]ThaiBulkVerifyOTP data)
         {
             try
             {
@@ -286,14 +286,15 @@ namespace com.apthai.CRMMobile.Controllers
                 }
 
                 var client = new HttpClient();
-                
+                ThaiBulkOTPRequest thaiBulkOTPRequest = new ThaiBulkOTPRequest();
+                var Content = new StringContent(JsonConvert.SerializeObject(thaiBulkOTPRequest));
                 string PostURL = Environment.GetEnvironmentVariable("ThaiBulkVerifyOTPURL");
                 if (PostURL == null)
                 {
                     PostURL = UtilsProvider.AppSetting.ThaiBulkVerifyOTPURL;
                 }
-                //string RequestParam = "?key=" + thaiBulkOTPRequest.key + "&secret=" + thaiBulkOTPRequest.secret + "&msisdn=" + thaiBulkOTPRequest.msisdn;
-                //PostURL = PostURL + RequestParam;
+                string RequestParam = "?key=" + data.key + "&secret=" + data.secret + "&token=" + data.token + "&pin=" + data.token;
+                PostURL = PostURL + RequestParam;
                 var Respond = await client.PostAsync(PostURL, Content);
                 if (Respond.StatusCode != System.Net.HttpStatusCode.OK)
                 {
@@ -306,8 +307,8 @@ namespace com.apthai.CRMMobile.Controllers
                 }
                 var RespondData = await Respond.Content.ReadAsStringAsync();
                 RespondData = RespondData.Replace(@"\", "");
-                thaiBulkOTPRequestReturnObj returnObj = new thaiBulkOTPRequestReturnObj();
-                returnObj = JsonConvert.DeserializeObject<thaiBulkOTPRequestReturnObj>(RespondData);
+                thaiBulkOTPVerifyReturnObj returnObj = new thaiBulkOTPVerifyReturnObj();
+                returnObj = JsonConvert.DeserializeObject<thaiBulkOTPVerifyReturnObj>(RespondData);
 
 
                 return new

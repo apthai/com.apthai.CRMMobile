@@ -74,6 +74,7 @@ namespace com.apthai.CRMMobile.Controllers
                 Model.CRMWeb.ContactPhone contactPhone = new Model.CRMWeb.ContactPhone();
                 Model.CRMMobile.UserProfile cSUserProfile = new Model.CRMMobile.UserProfile();
                 //cSUserProfile.CRMContactID = cRMContact.ContactID.ToString();
+
                 cSUserProfile.TitleExtEN = cRMContact.TitleExtTH;
                 cSUserProfile.FirstNameTH = cRMContact.FirstNameTH;
                 cSUserProfile.LastNameTH = cRMContact.LastNameTH;
