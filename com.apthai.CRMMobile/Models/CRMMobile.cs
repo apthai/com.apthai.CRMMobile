@@ -33,6 +33,7 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string DeviceID { get; set; }
         public string DeviceType { get; set; }
         public string UserToken { get; set; }
+        public string FireBaseToken { get; set; }
     }
 
     [Table("UserProfile")]

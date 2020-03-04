@@ -26,8 +26,6 @@ namespace com.apthai.CRMMobile.CustomModel
     }
     public class ThaiBulkVerifyOTP
     {
-        public string key { get; set; }
-        public string secret { get; set; }
         public string token { get; set; }
         public string pin { get; set; }
     }

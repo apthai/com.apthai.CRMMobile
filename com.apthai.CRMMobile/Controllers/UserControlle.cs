@@ -140,7 +140,7 @@ namespace com.apthai.CRMMobile.Controllers
                 //}
                 //#endregion
                 
-                bool asd = SHAHelper.VerifyHash("verify", "SHA512", GenerateAccessToken);
+                //bool asd = SHAHelper.VerifyHash("verify", "SHA512", GenerateAccessToken);
                 Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByIDCardNO(data.CitizenIdentityNo);
                 if (contact == null)
                 {
@@ -294,8 +294,16 @@ namespace com.apthai.CRMMobile.Controllers
                 //    };
                 //}
                 //#endregion
-
-
+                string key = Environment.GetEnvironmentVariable("ThaiBulkVerifyOTPURL");
+                if (key == null)
+                {
+                    key = UtilsProvider.AppSetting.ThaiBulkApiKey;
+                }
+                string secret = Environment.GetEnvironmentVariable("ThaiBulkVerifyOTPURL");
+                if (secret == null)
+                {
+                    secret = UtilsProvider.AppSetting.ThaiBulkSecret;
+                }
                 var client = new HttpClient();
                 ThaiBulkOTPRequest thaiBulkOTPRequest = new ThaiBulkOTPRequest();
                 var Content = new StringContent(JsonConvert.SerializeObject(thaiBulkOTPRequest));
@@ -304,7 +312,7 @@ namespace com.apthai.CRMMobile.Controllers
                 {
                     PostURL = UtilsProvider.AppSetting.ThaiBulkVerifyOTPURL;
                 }
-                string RequestParam = "?key=" + data.key + "&secret=" + data.secret + "&token=" + data.token + "&pin=" + data.pin;
+                string RequestParam = "?key=" + key + "&secret=" + secret + "&token=" + data.token + "&pin=" + data.pin;
                 PostURL = PostURL + RequestParam;
                 var Respond = await client.PostAsync(PostURL, Content);
                 if (Respond.StatusCode != System.Net.HttpStatusCode.OK)

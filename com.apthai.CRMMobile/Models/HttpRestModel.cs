@@ -13,7 +13,6 @@ namespace com.apthai.CRMMobile.HttpRestModel
     public partial class LoginData
     {
         public string PhoneNumber { get; set; }
-        public string UserName { get; set; }
         public string Password { get; set; }
         public int PINCode { get; set; }
         public string CitizenIdentityNo { get; set; }

@@ -35,150 +35,150 @@ namespace com.apthai.CRMMobile.Controllers
             _UserRepository = userRepository;
         }
 
-        [HttpPost]
-        [Route("Register")]
-        [SwaggerOperation(Summary = "Register User เพื่อใช่ระบบ ซึ่งจะไป หาข้อมูลจากระบบ CRM",
-       Description = "Access Key ใช้ในการเรียหใช้ Function ต่างๆ เพื่อไม่ให้ User Login หลายเครื่องในเวลาเดียวกัน")]
-        public async Task<object> PostLogin([FromBody] LoginData data)
-        {
-            try
-            {
-                StringValues api_key;
-                StringValues EmpCode;
-                if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
-                {
-                    string AccessKey = api_key.First();
-                    string EmpCodeKey = EmpCode.First();
+       // [HttpPost]
+       // [Route("CheckPIN")]
+       // [SwaggerOperation(Summary = "Register User เพื่อใช่ระบบ ซึ่งจะไป หาข้อมูลจากระบบ CRM",
+       //Description = "Access Key ใช้ในการเรียหใช้ Function ต่างๆ เพื่อไม่ให้ User Login หลายเครื่องในเวลาเดียวกัน")]
+       // public async Task<object> PostLogin([FromBody] LoginData data)
+       // {
+       //     try
+       //     {
+       //         StringValues api_key;
+       //         StringValues EmpCode;
+       //         if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
+       //         {
+       //             string AccessKey = api_key.First();
+       //             string EmpCodeKey = EmpCode.First();
 
-                    if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
-                    {
-                        return new
-                        {
-                            success = false,
-                            data = new AutorizeDataJWT(),
-                            message = "Incorrect API KEY !!"
-                        };
-                    }
-                }
+       //             if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
+       //             {
+       //                 return new
+       //                 {
+       //                     success = false,
+       //                     data = new AutorizeDataJWT(),
+       //                     message = "Incorrect API KEY !!"
+       //                 };
+       //             }
+       //         }
                 
-                Model.CRMWeb.Contact cRMContact = _UserRepository.GetCRMContactByIDCardNO(data.CitizenIdentityNo);
-                if (cRMContact == null)
-                {
-                    return new
-                    {
-                        success = false,
-                        data = new AutorizeDataJWT(),
-                        message = "Only AP Customer Can Regist to the System !!"
-                    };
-                }
-                Model.CRMWeb.ContactPhone contactPhone = new Model.CRMWeb.ContactPhone();
-                Model.CRMMobile.UserProfile cSUserProfile = new Model.CRMMobile.UserProfile();
-                //cSUserProfile.CRMContactID = cRMContact.ContactID.ToString();
+       //         Model.CRMWeb.Contact cRMContact = _UserRepository.GetCRMContactByIDCardNO(data.CitizenIdentityNo);
+       //         if (cRMContact == null)
+       //         {
+       //             return new
+       //             {
+       //                 success = false,
+       //                 data = new AutorizeDataJWT(),
+       //                 message = "Only AP Customer Can Regist to the System !!"
+       //             };
+       //         }
+       //         Model.CRMWeb.ContactPhone contactPhone = new Model.CRMWeb.ContactPhone();
+       //         Model.CRMMobile.UserProfile cSUserProfile = new Model.CRMMobile.UserProfile();
+       //         //cSUserProfile.CRMContactID = cRMContact.ContactID.ToString();
 
-                cSUserProfile.TitleExtEN = cRMContact.TitleExtTH;
-                cSUserProfile.FirstNameTH = cRMContact.FirstNameTH;
-                cSUserProfile.LastNameTH = cRMContact.LastNameTH;
-                cSUserProfile.Nickname = cRMContact.Nickname;
-                cSUserProfile.TitleExtEN = cRMContact.TitleExtEN;
-                cSUserProfile.FirstNameEN = cRMContact.FirstNameEN;
-                cSUserProfile.MiddleNameEN = cRMContact.MiddleNameEN;
-                cSUserProfile.LastNameEN = cRMContact.LastNameEN;
-                cSUserProfile.CitizenIdentityNo = cRMContact.CitizenIdentityNo;
-                cSUserProfile.Created = DateTime.Now.ToShortDateString();
-                cSUserProfile.CreatedBy = "System-Register";
-                cSUserProfile.Updated = null;
-                cSUserProfile.UpdatedBy = null;
-                cSUserProfile.IsActive = true;
-                cSUserProfile.PINCode = data.PINCode;
+       //         cSUserProfile.TitleExtEN = cRMContact.TitleExtTH;
+       //         cSUserProfile.FirstNameTH = cRMContact.FirstNameTH;
+       //         cSUserProfile.LastNameTH = cRMContact.LastNameTH;
+       //         cSUserProfile.Nickname = cRMContact.Nickname;
+       //         cSUserProfile.TitleExtEN = cRMContact.TitleExtEN;
+       //         cSUserProfile.FirstNameEN = cRMContact.FirstNameEN;
+       //         cSUserProfile.MiddleNameEN = cRMContact.MiddleNameEN;
+       //         cSUserProfile.LastNameEN = cRMContact.LastNameEN;
+       //         cSUserProfile.CitizenIdentityNo = cRMContact.CitizenIdentityNo;
+       //         cSUserProfile.Created = DateTime.Now.ToShortDateString();
+       //         cSUserProfile.CreatedBy = "System-Register";
+       //         cSUserProfile.Updated = null;
+       //         cSUserProfile.UpdatedBy = null;
+       //         cSUserProfile.IsActive = true;
+       //         cSUserProfile.PINCode = data.PINCode;
 
-                string APApiKey = Environment.GetEnvironmentVariable("API_Key");
-                if (APApiKey == null)
-                {
-                    APApiKey = UtilsProvider.AppSetting.ApiKey;
-                }
-                string APApiToken = Environment.GetEnvironmentVariable("Api_Token");
-                if (APApiToken == null)
-                {
-                    APApiToken = UtilsProvider.AppSetting.ApiToken;
-                }
+       //         string APApiKey = Environment.GetEnvironmentVariable("API_Key");
+       //         if (APApiKey == null)
+       //         {
+       //             APApiKey = UtilsProvider.AppSetting.ApiKey;
+       //         }
+       //         string APApiToken = Environment.GetEnvironmentVariable("Api_Token");
+       //         if (APApiToken == null)
+       //         {
+       //             APApiToken = UtilsProvider.AppSetting.ApiToken;
+       //         }
 
-                var client = new HttpClient();
-                var Content = new StringContent(JsonConvert.SerializeObject(data));
-                Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                Content.Headers.Add("api_key", APApiKey);
-                Content.Headers.Add("api_token", APApiToken);
-                string PostURL = Environment.GetEnvironmentVariable("AuthenticationURL");
-                if (PostURL == null)
-                {
-                    PostURL = UtilsProvider.AppSetting.AuthorizeURL;
-                }
-                var Respond = await client.PostAsync(PostURL, Content);
-                if (Respond.StatusCode != System.Net.HttpStatusCode.OK)
-                {
-                    return new
-                    {
-                        success = false,
-                        data = new AutorizeDataJWT(),
-                        valid = false
-                    };
-                }
-                var RespondData = await Respond.Content.ReadAsStringAsync();
-                var Result = JsonConvert.DeserializeObject<AutorizeDataJWT>(RespondData);
-                if (Result.LoginResult == false)
-                {
-                    return new
-                    {
-                        success = false,
-                        data = Result.LoginResultMessage,
-                        valid = false
-                    };
-                }
-                return new
-                {
-                    success = false,
-                    data = Result.LoginResultMessage,
-                    valid = false
-                };
-                // เป็นส่วนของการ Control Access Key ของระบบ ตัวอย่างนี้เป็นของระบบ Defect
-                //AccessKeyControl AC = _UserRepository.GetUserAccessKey(Result.EmployeeID);
-                //if (AC == null)
-                //{
-                //    AccessKeyControl accessKeyControl = new AccessKeyControl();
-                //    accessKeyControl.EmpCode = Result.EmployeeID;
-                //    accessKeyControl.AccessKey = generateAccessKey(Result.EmployeeID);
-                //    accessKeyControl.LoginDate = DateTime.Now;
+       //         var client = new HttpClient();
+       //         var Content = new StringContent(JsonConvert.SerializeObject(data));
+       //         Content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+       //         Content.Headers.Add("api_key", APApiKey);
+       //         Content.Headers.Add("api_token", APApiToken);
+       //         string PostURL = Environment.GetEnvironmentVariable("AuthenticationURL");
+       //         if (PostURL == null)
+       //         {
+       //             PostURL = UtilsProvider.AppSetting.AuthorizeURL;
+       //         }
+       //         var Respond = await client.PostAsync(PostURL, Content);
+       //         if (Respond.StatusCode != System.Net.HttpStatusCode.OK)
+       //         {
+       //             return new
+       //             {
+       //                 success = false,
+       //                 data = new AutorizeDataJWT(),
+       //                 valid = false
+       //             };
+       //         }
+       //         var RespondData = await Respond.Content.ReadAsStringAsync();
+       //         var Result = JsonConvert.DeserializeObject<AutorizeDataJWT>(RespondData);
+       //         if (Result.LoginResult == false)
+       //         {
+       //             return new
+       //             {
+       //                 success = false,
+       //                 data = Result.LoginResultMessage,
+       //                 valid = false
+       //             };
+       //         }
+       //         return new
+       //         {
+       //             success = false,
+       //             data = Result.LoginResultMessage,
+       //             valid = false
+       //         };
+       //         // เป็นส่วนของการ Control Access Key ของระบบ ตัวอย่างนี้เป็นของระบบ Defect
+       //         //AccessKeyControl AC = _UserRepository.GetUserAccessKey(Result.EmployeeID);
+       //         //if (AC == null)
+       //         //{
+       //         //    AccessKeyControl accessKeyControl = new AccessKeyControl();
+       //         //    accessKeyControl.EmpCode = Result.EmployeeID;
+       //         //    accessKeyControl.AccessKey = generateAccessKey(Result.EmployeeID);
+       //         //    accessKeyControl.LoginDate = DateTime.Now;
 
-                //    bool Insert = _UserRepository.InsertUserAccessKey(accessKeyControl);
+       //         //    bool Insert = _UserRepository.InsertUserAccessKey(accessKeyControl);
 
-                //    return new
-                //    {
-                //        success = true,
-                //        data = Result,
-                //        AccessKey = accessKeyControl.AccessKey,
-                //        valid = false
-                //    };
-                //}
-                //else
-                //{
-                //    AC.AccessKey = generateAccessKey(Result.EmployeeID);
-                //    AC.LoginDate = DateTime.Now;
+       //         //    return new
+       //         //    {
+       //         //        success = true,
+       //         //        data = Result,
+       //         //        AccessKey = accessKeyControl.AccessKey,
+       //         //        valid = false
+       //         //    };
+       //         //}
+       //         //else
+       //         //{
+       //         //    AC.AccessKey = generateAccessKey(Result.EmployeeID);
+       //         //    AC.LoginDate = DateTime.Now;
 
-                //    bool Update = _UserRepository.UpdateUserAccessKey(AC);
+       //         //    bool Update = _UserRepository.UpdateUserAccessKey(AC);
 
-                //    return new
-                //    {
-                //        success = true,
-                //        data = Result,
-                //        AccessKey = AC.AccessKey,
-                //        valid = false
-                //    };
-                //}
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Internal server error :: " + ex.Message);
-            }
-        }
+       //         //    return new
+       //         //    {
+       //         //        success = true,
+       //         //        data = Result,
+       //         //        AccessKey = AC.AccessKey,
+       //         //        valid = false
+       //         //    };
+       //         //}
+       //     }
+       //     catch (Exception ex)
+       //     {
+       //         return StatusCode(500, "Internal server error :: " + ex.Message);
+       //     }
+       // }
 
         //[HttpPost]
         //[Route("login")]
