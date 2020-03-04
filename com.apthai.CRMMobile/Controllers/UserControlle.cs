@@ -39,44 +39,44 @@ namespace com.apthai.CRMMobile.Controllers
         [Route("GetUserPhoneNumberByIDCardNo")]
         [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
        Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
-        public async Task<object> GetUserPhoneNumberByIDCardNo([FromBody] LoginData data)
+        public async Task<object> GetUserPhoneNumberByIDCardNo([FromBody]Register data)
         {
             try
             {
                 StringValues api_key;
                 StringValues EmpCode;
-                if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
-                {
-                    string AccessKey = api_key.First();
-                    string EmpCodeKey = EmpCode.First();
+                //if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
+                //{
+                //    string AccessKey = api_key.First();
+                //    string EmpCodeKey = EmpCode.First();
 
-                    if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
-                    {
-                        return new
-                        {
-                            success = false,
-                            data = new AutorizeDataJWT(),
-                            message = "Require Key to Access the Function"
-                        };
-                    }
-                    else
-                    {
-                        string APApiKey = Environment.GetEnvironmentVariable("API_Key");
-                        if (APApiKey == null)
-                        {
-                            APApiKey = UtilsProvider.AppSetting.ApiKey;
-                        }
-                        if (api_key != APApiKey)
-                        {
-                            return new
-                            {
-                                success = false,
-                                data = new AutorizeDataJWT(),
-                                message = "Incorrect API KEY !!"
-                            };
-                        }
-                    }
-                }
+                //    if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
+                //    {
+                //        return new
+                //        {
+                //            success = false,
+                //            data = new AutorizeDataJWT(),
+                //            message = "Require Key to Access the Function"
+                //        };
+                //    }
+                //    else
+                //    {
+                //        string APApiKey = Environment.GetEnvironmentVariable("API_Key");
+                //        if (APApiKey == null)
+                //        {
+                //            APApiKey = UtilsProvider.AppSetting.ApiKey;
+                //        }
+                //        if (api_key != APApiKey)
+                //        {
+                //            return new
+                //            {
+                //                success = false,
+                //                data = new AutorizeDataJWT(),
+                //                message = "Incorrect API KEY !!"
+                //            };
+                //        }
+                //    }
+                //}
                 
                 Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByIDCardNO(data.CitizenIdentityNo);
                 if (contact == null)

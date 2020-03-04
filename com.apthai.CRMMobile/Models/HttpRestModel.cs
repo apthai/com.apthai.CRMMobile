@@ -10,14 +10,11 @@ using System.Threading.Tasks;
 
 namespace com.apthai.CRMMobile.HttpRestModel
 {
-    public partial class LoginData
+    public partial class Register
     {
         public string PhoneNumber { get; set; }
-        public string Password { get; set; }
         public int PINCode { get; set; }
         public string CitizenIdentityNo { get; set; }
-        public string AppCode { get; set; }
-
     }
     public class AutorizeDataJWT
     {
