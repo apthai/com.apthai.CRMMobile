@@ -39,7 +39,7 @@ namespace com.apthai.CRMMobile.Controllers
         [Route("GetUserPhoneNumberByIDCardNo")]
         [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
        Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
-        public async Task<object> GetUserPhoneNumberByIDCardNo([FromBody]Register data)
+        public async Task<object> GetUserPhoneNumberByIDCardNo([FromBody]GetUserPhoneParam data)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace com.apthai.CRMMobile.Controllers
 
                 return new
                 {
-                    success = false,
+                    success = true,
                     data = cRMContact,
                     message = "Get User Phone Success !"
                 };
