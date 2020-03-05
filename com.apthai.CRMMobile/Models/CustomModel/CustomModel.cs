@@ -5,11 +5,6 @@ using System.Threading.Tasks;
 
 namespace com.apthai.CRMMobile.CustomModel
 {
-    //public class GetCAllAreaxDescroiption
-    //{
-    //    public callarea callarea { get; set; }
-    //    public List<calldescription> calldescriptions { get; set; }
-    //}
     public class GetUserCRMPhoneNumber
     {
         public List<Model.CRMWeb.ContactPhone> contactPhones { get; set; }
@@ -47,5 +42,26 @@ namespace com.apthai.CRMMobile.CustomModel
         public string status { get; set; }
         public string token { get; set; }
     }
-    
+    public class VerifyPINReturnObj : Model.CRMMobile.UserLogin
+    {
+        public string CRMContactID { get; set; }
+        public string TitleExtTH { get; set; }
+        public string FirstNameTH { get; set; }
+        public string MiddleNameTH { get; set; }
+        public string LastNameTH { get; set; }
+        public string Nickname { get; set; }
+        public string TitleExtEN { get; set; }
+        public string FirstNameEN { get; set; }
+        public string MiddleNameEN { get; set; }
+        public string LastNameEN { get; set; }
+        public string CitizenIdentityNo { get; set; }
+        public string Created { get; set; }
+        public string CreatedBy { get; set; }
+        public string Updated { get; set; }
+        public string UpdatedBy { get; set; }
+        public bool IsActive { get; set; }
+        public int? PINCode { get; set; }
+        public string PhoneNumber { get; set; }
+    }
+
 }

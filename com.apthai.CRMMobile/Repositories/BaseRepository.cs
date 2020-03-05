@@ -50,6 +50,10 @@ namespace com.apthai.CRMMobile.Repositories
             get
             {
                 var conn = Environment.GetEnvironmentVariable("DefaultMobileConnection");
+                if (conn == null)
+                {
+                    conn = _config.GetConnectionString("DefaultMobileConnection");
+                }
                 return new SqlConnection(conn);
             }
         }

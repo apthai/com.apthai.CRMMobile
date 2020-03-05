@@ -12,18 +12,14 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
 {
   
 
-    [Table("CS_UserProfile")]
-    public partial class CSUserProfile
+   [Table("Table_1")]
+    public partial class Table1
     {
-        public int? ID { get; set; }
-        public int? CRMUserID { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string CreateDate { get; set; }
-        public int? PINCode { get; set; }
+        public string ID { get; set; }
+        public string name { get; set; }
     }
 
-    [Table("UserLogin")]
+   [Table("CS.UserLogin")]
     public partial class UserLogin
     {
         [Key]
@@ -34,9 +30,10 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string DeviceType { get; set; }
         public string UserToken { get; set; }
         public string FireBaseToken { get; set; }
+        public int? UserProfileID { get; set; }
     }
 
-    [Table("UserProfile")]
+   [Table("CS.UserProfile")]
     public partial class UserProfile
     {
         [Key]
@@ -52,11 +49,11 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string MiddleNameEN { get; set; }
         public string LastNameEN { get; set; }
         public string CitizenIdentityNo { get; set; }
+        public int? PINCode { get; set; }
+        public bool IsActive { get; set; }
         public string Created { get; set; }
         public string CreatedBy { get; set; }
         public string Updated { get; set; }
         public string UpdatedBy { get; set; }
-        public bool IsActive { get; set; }
-        public int? PINCode { get; set; }
     }
 }

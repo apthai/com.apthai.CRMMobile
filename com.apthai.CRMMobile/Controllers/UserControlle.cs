@@ -179,8 +179,8 @@ namespace com.apthai.CRMMobile.Controllers
                 cSUserProfile.UpdatedBy = null;
                 cSUserProfile.IsActive = true;
                 cSUserProfile.PINCode = data.PINCode;
-
-                bool insert = _UserRepository.InsertCSUserProfile(cSUserProfile);
+                long ProfileID = 0;
+                bool insert = _UserRepository.InsertCSUserProfile(cSUserProfile,out ProfileID);
 
                 string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
                 Model.CRMMobile.UserLogin cSUserLogin = new Model.CRMMobile.UserLogin();
@@ -189,7 +189,7 @@ namespace com.apthai.CRMMobile.Controllers
                 cSUserLogin.DeviceID = data.DeviceID;
                 cSUserLogin.DeviceType = data.DeviceType;
                 cSUserLogin.UserToken = GenerateAccessToken ;
-
+                cSUserLogin.UserProfileID = Convert.ToInt32(ProfileID);
                 bool insertUserLogin = _UserRepository.InsertCSUserLogin(cSUserLogin);
 
                 return new

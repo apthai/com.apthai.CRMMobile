@@ -39,6 +39,17 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
+        public Model.CRMWeb.ContactPhone GetContactPhoneNumberByContactIDandPhonNumber_Web(string ContactID,string PhoneNumber)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMWeb.ContactPhone>("select * from CTM.ContactPhone WITH(NOLOCK) " +
+                    "where ContactID=@ContactID AND PhoneNumber=@PhoneNumber", new { ContactID = ContactID,PhoneNumber = PhoneNumber }).FirstOrDefault();
+
+                return result;
+            }
+        }
         public Model.CRMWeb.ContactPhone GetSingleContactPhoneNumberByContactID_Web(string ContactID,string PhoneNumber)
         {
             using (IDbConnection conn = WebConnection)
@@ -55,13 +66,36 @@ namespace com.apthai.CRMMobile.Repositories
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
-                var result = conn.Query<Model.CRMWeb.Contact>("select * from ctm.Contact WITH(NOLOCK) " +
+                var result = conn.Query<Model.CRMWeb.Contact>("select * from CTM.Contact WITH(NOLOCK) " +
                     "where CitizenIdentityNo=@CitizenIdentityNo", new { CitizenIdentityNo = CitizenIdentityNo }).FirstOrDefault();
 
                 return result;
             }
         }
-        public bool InsertCSUserProfile(Model.CRMMobile.UserProfile data)
+        public VerifyPINReturnObj GetUserLogin_Mobile(int PINCode, string UserToken)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                conn.Open();
+                var result = conn.Query<VerifyPINReturnObj>("select * from CS.UserLogin WITH(NOLOCK) " +
+                    " LEFT JOIN CS.UserProfile ON CS.UserLogin.UserprofileID = CS.UserProfile.UserProfileID " +
+                    " where CS.UserProfile.PINCode=@PINCode AND CS.UserLogin.UserToken=@UserToken", new { PINCode = PINCode, UserToken = UserToken }).FirstOrDefault();
+
+                return result;
+            }
+        }
+        public Model.CRMMobile.UserLogin GetUserLoginByID_Mobile(int UserLoginID)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMMobile.UserLogin>("select * from CS.UserLogin WITH(NOLOCK) " +
+                    " where CS.UserLogin.UserLoginID=@UserLoginID", new { UserLoginID = UserLoginID }).FirstOrDefault();
+
+                return result;
+            }
+        }
+        public bool InsertCSUserProfile(Model.CRMMobile.UserProfile data,out long ProfileID)
         {
             using (IDbConnection conn = MobileConnection)
             {
@@ -69,8 +103,7 @@ namespace com.apthai.CRMMobile.Repositories
                 {
                     conn.Open();
                     var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
-
-                    var result = conn.Update(data, tran);
+                    ProfileID = conn.Insert(data, tran);
                     tran.Commit();
                     
                     return true;
@@ -90,7 +123,28 @@ namespace com.apthai.CRMMobile.Repositories
                     conn.Open();
                     var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
 
-                    var result = conn.Update(data, tran);
+                    var result = conn.Insert(data, tran);
+                    tran.Commit();
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("MasterRepository.InsertCSUserProfile() :: Error ", ex);
+                }
+            }
+        }
+
+
+        public bool UpdateCSUserLogin(Model.CRMMobile.UserLogin data)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                try
+                {
+                    conn.Open();
+                    var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
+                    var result = conn.Insert(data, tran);
                     tran.Commit();
 
                     return true;

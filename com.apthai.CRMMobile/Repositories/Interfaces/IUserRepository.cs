@@ -9,16 +9,14 @@ namespace com.apthai.CRMMobile.Repositories
     {
         Model.CRMWeb.Contact GetCRMContactByIDCardNO(string CitizenIdentityNo);
         List<Model.CRMWeb.ContactPhone> GetContactPhoneNumberByContactID_Web(string ContactID);
+        Model.CRMWeb.ContactPhone GetContactPhoneNumberByContactIDandPhonNumber_Web(string ContactID, string PhoneNumber);
         Model.CRMWeb.ContactPhone GetSingleContactPhoneNumberByContactID_Web(string ContactID, string PhoneNumber);
-        bool InsertCSUserProfile(Model.CRMMobile.UserProfile data);
+        VerifyPINReturnObj GetUserLogin_Mobile(int PINCode, string UserToken);
+        Model.CRMMobile.UserLogin GetUserLoginByID_Mobile(int UserLoginID);
+        bool InsertCSUserProfile(Model.CRMMobile.UserProfile data, out long ProfileID);
         bool InsertCSUserLogin(Model.CRMMobile.UserLogin data);
-        // Task<vwUser> GetUser(string userId);
-        //AccessKeyControl GetUserAccessKey(string EmpCode);
-        //bool InsertUserAccessKey(AccessKeyControl AC);
-        //bool UpdateUserAccessKey(AccessKeyControl AC);
-        //AccessKeyControl CheckUserAccessKey(string EmpCode, string AccessKey);
-        //Task<List<vwUser>> GetAllUser();
-        // Model.QISAuth.vwUser GetUserData(int UserID);
+        bool UpdateCSUserLogin(Model.CRMMobile.UserLogin data);
+        
 
     }
 }
