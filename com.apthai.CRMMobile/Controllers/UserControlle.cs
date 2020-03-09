@@ -178,7 +178,7 @@ namespace com.apthai.CRMMobile.Controllers
                 cSUserProfile.Updated = null;
                 cSUserProfile.UpdatedBy = null;
                 cSUserProfile.IsActive = true;
-                cSUserProfile.PINCode = data.PINCode;
+                cSUserProfile.PINCode = SHAHelper.ComputeHash(data.PINCode,"SHA512",null);
                 long ProfileID = 0;
                 bool insert = _UserRepository.InsertCSUserProfile(cSUserProfile,out ProfileID);
 

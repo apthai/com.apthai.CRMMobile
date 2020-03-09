@@ -49,7 +49,7 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string MiddleNameEN { get; set; }
         public string LastNameEN { get; set; }
         public string CitizenIdentityNo { get; set; }
-        public int? PINCode { get; set; }
+        public string PINCode { get; set; }
         public bool IsActive { get; set; }
         public string Created { get; set; }
         public string CreatedBy { get; set; }

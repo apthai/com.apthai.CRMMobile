@@ -60,7 +60,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string Updated { get; set; }
         public string UpdatedBy { get; set; }
         public bool IsActive { get; set; }
-        public int? PINCode { get; set; }
+        public string PINCode { get; set; }
         public string PhoneNumber { get; set; }
     }
 

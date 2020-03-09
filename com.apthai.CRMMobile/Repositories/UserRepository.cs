@@ -72,14 +72,14 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
-        public VerifyPINReturnObj GetUserLogin_Mobile(int PINCode, string UserToken)
+        public VerifyPINReturnObj GetUserLogin_Mobile(string UserToken)
         {
             using (IDbConnection conn = MobileConnection)
             {
                 conn.Open();
                 var result = conn.Query<VerifyPINReturnObj>("select * from CS.UserLogin WITH(NOLOCK) " +
                     " LEFT JOIN CS.UserProfile ON CS.UserLogin.UserprofileID = CS.UserProfile.UserProfileID " +
-                    " where CS.UserProfile.PINCode=@PINCode AND CS.UserLogin.UserToken=@UserToken", new { PINCode = PINCode, UserToken = UserToken }).FirstOrDefault();
+                    " where  CS.UserLogin.UserToken=@UserToken", new { UserToken = UserToken }).FirstOrDefault();
 
                 return result;
             }
@@ -134,8 +134,6 @@ namespace com.apthai.CRMMobile.Repositories
                 }
             }
         }
-
-
         public bool UpdateCSUserLogin(Model.CRMMobile.UserLogin data)
         {
             using (IDbConnection conn = MobileConnection)

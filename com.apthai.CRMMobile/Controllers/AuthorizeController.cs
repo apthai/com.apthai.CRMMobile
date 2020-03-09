@@ -56,18 +56,27 @@ namespace com.apthai.CRMMobile.Controllers
                 //        message = "Only AP Customer Can Regist to the System !!"
                 //    };
                 //}
-                VerifyPINReturnObj cSUserProfile = _UserRepository.GetUserLogin_Mobile(data.PINCode, data.AccessKey);
+                VerifyPINReturnObj cSUserProfile = _UserRepository.GetUserLogin_Mobile(data.AccessKey);
                 if (cSUserProfile == null)
                 {
                     return new
                     {
                         success = false,
-                        data = new AutorizeDataJWT(),
+                        data = new VerifyPINReturnObj(),
                         message = "Cannot Find the Matach Data"
                     };
                 }
                 else
                 {
+                    if (!SHAHelper.VerifyHash(data.PINCode,"SHA512", cSUserProfile.PINCode))
+                    {
+                        return new
+                        {
+                            success = false,
+                            data = new AutorizeDataJWT(),
+                            message = "PinCode is InCorrect!"
+                        };
+                    }
                     Model.CRMMobile.UserLogin userLogin = _UserRepository.GetUserLoginByID_Mobile(cSUserProfile.UserLoginID);
                     string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
                     userLogin.UserToken = GenerateAccessToken;

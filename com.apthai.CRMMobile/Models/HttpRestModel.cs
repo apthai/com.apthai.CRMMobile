@@ -18,7 +18,7 @@ namespace com.apthai.CRMMobile.HttpRestModel
     }
     public partial class CheckPinParam
     {
-        public int PINCode { get; set; }
+        public string PINCode { get; set; }
         public string AccessKey { get; set; }
         public string DeviceID { get; set; }
     }
@@ -90,7 +90,7 @@ namespace com.apthai.CRMMobile.HttpRestModel
         public string PhoneNumber { get; set; }
         public string DeviceID { get; set; }
         public string DeviceType { get; set; }
-        public int PINCode { get; set; }
+        public string PINCode { get; set; }
     }
     public class RequestOTPParam
     {
