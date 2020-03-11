@@ -20,14 +20,14 @@ namespace com.apthai.CRMMobile.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserControlle : BaseController
+    public class UserController : BaseController
     {
 
 
         private readonly IMasterRepository _masterRepo;
         private readonly IAuthorizeService _authorizeService;
         private readonly IUserRepository _UserRepository;
-        public UserControlle(IMasterRepository masterRepo , IAuthorizeService authorizeService,IUserRepository userRepository)
+        public UserController(IMasterRepository masterRepo , IAuthorizeService authorizeService,IUserRepository userRepository)
         {
 
             _masterRepo = masterRepo;
