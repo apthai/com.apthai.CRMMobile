@@ -64,4 +64,18 @@ namespace com.apthai.CRMMobile.CustomModel
         public string PhoneNumber { get; set; }
     }
 
+    public class GetUserPropotyObj
+    {
+        public Model.CRMWeb.Transfer transfer { get; set; }
+        public Model.CRMWeb.TransferOwner TransferOwner { get; set; }
+        public Model.CRMWeb.Unit Unit { get; set; }
+        public Model.CRMWeb.Project Project { get; set; }
+        public Model.CRMWeb.Floor Floor { get; set; }
+    }
+    public class GetUserPropotyReturnObj
+    {
+        public List<GetUserPropotyObj> getUserPropotyObjs { get; set; }
+    }
+
+
 }

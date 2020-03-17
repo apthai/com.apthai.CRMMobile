@@ -39,7 +39,7 @@ namespace com.apthai.CRMMobile.Controllers
         [Route("GetUserPhoneNumberByIDCardNo")]
         [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
        Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
-        public async Task<object> GetUserPhoneNumberByIDCardNo([FromBody]GetUserPhoneParam data)
+        public async Task<object> GetUserPhoneNumberByIDCardNo([FromBody]GetUserPropotyParam data)
         {
             try
             {
@@ -77,38 +77,75 @@ namespace com.apthai.CRMMobile.Controllers
                 //        }
                 //    }
                 //}
-                
-                Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByIDCardNO(data.CitizenIdentityNo);
+                GetUserPropotyReturnObj ReturnObj = new GetUserPropotyReturnObj();
+                Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByID(data.CustometID);
                 if (contact == null)
                 {
                     return new
                     {
                         success = false,
-                        data = new AutorizeDataJWT(),
-                        message = "Only AP Customer Can Regist to the System !!"
+                        data = new Model.CRMWeb.Transfer(),
+                        message = "Cannot Find Contact Data !"
                     };
                 }
-                List<Model.CRMWeb.ContactPhone> contactPhone = _UserRepository.GetContactPhoneNumberByContactID_Web(contact.ID.ToString());
-                if (contactPhone == null)
+                List<Model.CRMWeb.TransferOwner> transferOwners = _UserRepository.GetTransferOwnerByIDCardNO(contact.CitizenIdentityNo);
+                for (int i = 0; i < transferOwners.Count(); i++)
                 {
-                    return new
+                    GetUserPropotyObj getUserPropotyobj = new GetUserPropotyObj();
+                    Model.CRMWeb.Transfer transfer = _UserRepository.GetTransferByID(transferOwners[i].TransferID.ToString());
+                    if (transfer == null)
                     {
-                        success = false,
-                        data = new AutorizeDataJWT(),
-                        message = "There is no Assosiate Phone Number with this IDCard Number!!"
-                    };
-                }
-                GetUserCRMPhoneNumber cRMContact = new GetUserCRMPhoneNumber();
-                cRMContact.contactPhones = contactPhone;
-                cRMContact.FirstNameTH = contact.FirstNameTH;
-                cRMContact.LastNameTH = contact.LastNameTH;
-                cRMContact.IsVIP = contact.IsVIP;
-                cRMContact.CitizenIdentityNo = contact.CitizenIdentityNo;
+                        return new
+                        {
+                            success = false,
+                            data = new Model.CRMWeb.Transfer(),
+                            message = "Cannot Find data on Transfer Table !"
+                        };
+                    }
+                    Model.CRMWeb.Unit unit = _UserRepository.GetUnitByID(transfer.UnitID.ToString());
+                    if (unit == null)
+                    {
+                        return new
+                        {
+                            success = false,
+                            data = new Model.CRMWeb.Transfer(),
+                            message = "Cannot Find data on Transfer Table !"
+                        };
+                    }
+                    Model.CRMWeb.Project project = _UserRepository.GetProjectByID(unit.ProjectID.ToString());
+                    if (project == null)
+                    {
+                        return new
+                        {
+                            success = false,
+                            data = new Model.CRMWeb.Transfer(),
+                            message = "Cannot Find data on Transfer Table !"
+                        };
+                    }
+                    Model.CRMWeb.Floor floor = _UserRepository.GetFloorByID(unit.FloorID.ToString());
+                    if (floor == null)
+                    {
+                        return new
+                        {
+                            success = false,
+                            data = new Model.CRMWeb.Transfer(),
+                            message = "Cannot Find data on Transfer Table !"
+                        };
+                    }
 
+                    getUserPropotyobj.transfer = transfer;
+                    getUserPropotyobj.Unit = unit;
+                    getUserPropotyobj.Project = project;
+                    getUserPropotyobj.Floor = floor;
+
+                    ReturnObj.getUserPropotyObjs.Add(getUserPropotyobj);
+
+                }
+                
                 return new
                 {
                     success = true,
-                    data = cRMContact,
+                    data = ReturnObj,
                     message = "Get User Phone Success !"
                 };
 
@@ -337,6 +374,90 @@ namespace com.apthai.CRMMobile.Controllers
                     Message = "Verify OTP Successfully!. The Pin is Match"
                 };
 
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error :: " + ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("GetUserPropoty")]
+        [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
+      Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
+        public async Task<object> GetUserPropoty([FromBody]GetUserPhoneParam data)
+        {
+            try
+            {
+                StringValues api_key;
+                StringValues EmpCode;
+                //if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
+                //{
+                //    string AccessKey = api_key.First();
+                //    string EmpCodeKey = EmpCode.First();
+
+                //    if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
+                //    {
+                //        return new
+                //        {
+                //            success = false,
+                //            data = new AutorizeDataJWT(),
+                //            message = "Require Key to Access the Function"
+                //        };
+                //    }
+                //    else
+                //    {
+                //        string APApiKey = Environment.GetEnvironmentVariable("API_Key");
+                //        if (APApiKey == null)
+                //        {
+                //            APApiKey = UtilsProvider.AppSetting.ApiKey;
+                //        }
+                //        if (api_key != APApiKey)
+                //        {
+                //            return new
+                //            {
+                //                success = false,
+                //                data = new AutorizeDataJWT(),
+                //                message = "Incorrect API KEY !!"
+                //            };
+                //        }
+                //    }
+                //}
+
+                Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByIDCardNO(data.CitizenIdentityNo);
+                if (contact == null)
+                {
+                    return new
+                    {
+                        success = false,
+                        data = new AutorizeDataJWT(),
+                        message = "Only AP Customer Can Regist to the System !!"
+                    };
+                }
+                List<Model.CRMWeb.ContactPhone> contactPhone = _UserRepository.GetContactPhoneNumberByContactID_Web(contact.ID.ToString());
+                if (contactPhone == null)
+                {
+                    return new
+                    {
+                        success = false,
+                        data = new AutorizeDataJWT(),
+                        message = "There is no Assosiate Phone Number with this IDCard Number!!"
+                    };
+                }
+                GetUserCRMPhoneNumber cRMContact = new GetUserCRMPhoneNumber();
+                cRMContact.contactPhones = contactPhone;
+                cRMContact.FirstNameTH = contact.FirstNameTH;
+                cRMContact.LastNameTH = contact.LastNameTH;
+                cRMContact.IsVIP = contact.IsVIP;
+                cRMContact.CitizenIdentityNo = contact.CitizenIdentityNo;
+
+                return new
+                {
+                    success = true,
+                    data = cRMContact,
+                    message = "Get User Phone Success !"
+                };
 
             }
             catch (Exception ex)

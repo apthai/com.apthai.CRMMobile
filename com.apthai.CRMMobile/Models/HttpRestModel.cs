@@ -26,6 +26,10 @@ namespace com.apthai.CRMMobile.HttpRestModel
     {
         public string CitizenIdentityNo { get; set; }
     }
+    public partial class GetUserPropotyParam
+    {
+        public string CustometID { get; set; }
+    }
     public class AutorizeDataJWT
     {
         public bool LoginResult { get; set; }

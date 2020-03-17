@@ -72,6 +72,79 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
+
+        public Model.CRMWeb.Contact GetCRMContactByID(string ID)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMWeb.Contact>("select * from CTM.Contact WITH(NOLOCK) " +
+                    "where ID=@ID", new { ID = ID }).FirstOrDefault();
+
+                return result;
+            }
+        }
+
+        public List<Model.CRMWeb.TransferOwner> GetTransferOwnerByIDCardNO(string CitizenIdentityNo)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMWeb.TransferOwner>("SELECT * FROM SAL.TransferOwner WITH(NOLOCK) " +
+                    "where CitizenIdentityNo=@CitizenIdentityNo", new { CitizenIdentityNo = CitizenIdentityNo }).ToList();
+
+                return result;
+            }
+        }
+
+        public Model.CRMWeb.Transfer GetTransferByID(string TransferID)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMWeb.Transfer>("SELECT * FROM SAL.Transfer WITH(NOLOCK) " +
+                    "where ID=@TransferID", new { TransferID = TransferID }).FirstOrDefault();
+
+                return result;
+            }
+        }
+
+        public Model.CRMWeb.Unit GetUnitByID(string ID)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMWeb.Unit>("SELECT * FROM PRJ.Unit WITH(NOLOCK) " +
+                    "where ID=@ID", new { ID = ID }).FirstOrDefault();
+
+                return result;
+            }
+        }
+
+        public Model.CRMWeb.Project GetProjectByID(string ID)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMWeb.Project>("SELECT * FROM PRJ.Project WITH(NOLOCK) " +
+                    "where ID=@ID", new { ID = ID }).FirstOrDefault();
+
+                return result;
+            }
+        }
+
+        public Model.CRMWeb.Floor GetFloorByID(string ID)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMWeb.Floor>("SELECT * FROM PRJ.Floor WITH(NOLOCK) " +
+                    "where ID=@ID", new { ID = ID }).FirstOrDefault();
+
+                return result;
+            }
+        }
+
         public VerifyPINReturnObj GetUserLogin_Mobile(string UserToken)
         {
             using (IDbConnection conn = MobileConnection)
