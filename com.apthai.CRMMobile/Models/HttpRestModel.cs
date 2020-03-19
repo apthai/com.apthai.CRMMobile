@@ -105,4 +105,10 @@ namespace com.apthai.CRMMobile.HttpRestModel
     {
         public string UserID { get; set; }
     }
+    public partial class GetUserBillingTrackingParam
+    {
+        public string UserID { get; set; }
+        public string Project { get; set; }
+        public string Unit { get; set; }
+    }
 }

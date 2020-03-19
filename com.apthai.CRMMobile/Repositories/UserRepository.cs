@@ -233,7 +233,17 @@ namespace com.apthai.CRMMobile.Repositories
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
-                var result = conn.Query<iCRMBooking>("GetUserBookingMobile", new { UserID = UserID }).ToList();
+                var result = conn.Query<iCRMBooking>("GetUserBookingMobile", new { ContactID = UserID }, commandType: CommandType.StoredProcedure).ToList();
+
+                return result;
+            }
+        }
+        public List<GetBillingTrackingMobile> GetUserBillingTrackingByProjectandUnit(string ProjectID,string UnitID)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<GetBillingTrackingMobile>("GetBillingTrackingMobile", new { ProjectID = ProjectID, UnitID=UnitID }, commandType: CommandType.StoredProcedure).ToList();
 
                 return result;
             }

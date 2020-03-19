@@ -468,8 +468,8 @@ namespace com.apthai.CRMMobile.Controllers
 
         [HttpPost]
         [Route("GetUserBookingTrackingByUserID")]
-        [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
-Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
+        [SwaggerOperation(Summary = "ดึงข้อมูล การจองและสถานะการจองของลูกค้า",
+         Description = "ส่ง UserID (GUID) มาเพื่อดึงข้อมูลการจองของลูกค้านั้นๆ")]
         public async Task<object> GetUserBillingTrackingByUserID([FromBody]GetUserBookingTrackingByUserIDParam data)
         {
             try
@@ -520,6 +520,82 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                     };
                 }
                 List<iCRMBooking> getBilling = _UserRepository.GetUseriBookingByUserID(data.UserID);
+                if (getBilling.Count == null)
+                {
+                    return new
+                    {
+                        success = false,
+                        data = new AutorizeDataJWT(),
+                        message = "There is no Assosiate Phone Number with this IDCard Number!!"
+                    };
+                }
+                return new
+                {
+                    success = true,
+                    data = getBilling,
+                    message = "Get User iBooking Success !"
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error :: " + ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("GetUserBillingTracking")]
+        [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
+Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
+        public async Task<object> GetUserBillingTracking([FromBody]GetUserBillingTrackingParam data)
+        {
+            try
+            {
+                StringValues api_key;
+                StringValues EmpCode;
+                //if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
+                //{
+                //    string AccessKey = api_key.First();
+                //    string EmpCodeKey = EmpCode.First();
+
+                //    if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
+                //    {
+                //        return new
+                //        {
+                //            success = false,
+                //            data = new AutorizeDataJWT(),
+                //            message = "Require Key to Access the Function"
+                //        };
+                //    }
+                //    else
+                //    {
+                //        string APApiKey = Environment.GetEnvironmentVariable("API_Key");
+                //        if (APApiKey == null)
+                //        {
+                //            APApiKey = UtilsProvider.AppSetting.ApiKey;
+                //        }
+                //        if (api_key != APApiKey)
+                //        {
+                //            return new
+                //            {
+                //                success = false,
+                //                data = new AutorizeDataJWT(),
+                //                message = "Incorrect API KEY !!"
+                //            };
+                //        }
+                //    }
+                //}
+
+                //Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByID(data.UserID);
+                //if (contact == null)
+                //{
+                //    return new
+                //    {
+                //        success = false,
+                //        data = new AutorizeDataJWT(),
+                //        message = "Only AP Customer Can Regist to the System !!"
+                //    };
+                //}
+                List<GetBillingTrackingMobile> getBilling = _UserRepository.GetUserBillingTrackingByProjectandUnit(data.Project,data.Unit);
                 if (getBilling.Count == null)
                 {
                     return new
