@@ -467,10 +467,10 @@ namespace com.apthai.CRMMobile.Controllers
         }
 
         [HttpPost]
-        [Route("GetUserBookingTrackingByUserID")]
+        [Route("GetUserBookingByUserID")]
         [SwaggerOperation(Summary = "ดึงข้อมูล การจองและสถานะการจองของลูกค้า",
          Description = "ส่ง UserID (GUID) มาเพื่อดึงข้อมูลการจองของลูกค้านั้นๆ")]
-        public async Task<object> GetUserBillingTrackingByUserID([FromBody]GetUserBookingTrackingByUserIDParam data)
+        public async Task<object> GetUserBookingByUserID([FromBody]GetUserBookingTrackingByUserIDParam data)
         {
             try
             {
