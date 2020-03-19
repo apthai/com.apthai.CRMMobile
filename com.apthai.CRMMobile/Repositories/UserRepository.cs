@@ -227,6 +227,17 @@ namespace com.apthai.CRMMobile.Repositories
             }
         }
         //---------------------------------------------------------------------
+        //-------------------------- Get billing Tracking ---------------------
+        public List<iCRMBooking> GetUseriBookingByUserID(string UserID)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<iCRMBooking>("GetUserBookingMobile", new { UserID = UserID }).ToList();
+
+                return result;
+            }
+        }
     }
 
 }

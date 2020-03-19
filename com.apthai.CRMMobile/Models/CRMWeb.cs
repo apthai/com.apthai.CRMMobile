@@ -12,7 +12,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
 {
   
 
-    [Table("__EFMigrationsHistory")]
+   [Table("__EFMigrationsHistory")]
     public partial class EFMigrationsHistory
     {
         [ExplicitKey]
@@ -20,14 +20,14 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string ProductVersion { get; set; }
     }
 
-    [Table("__EFMigrationsHistory2")]
+   [Table("__EFMigrationsHistory2")]
     public partial class EFMigrationsHistory2
     {
         public string MigrationId { get; set; }
         public string ProductVersion { get; set; }
     }
 
-    [Table("ActivityTask")]
+   [Table("CTM.ActivityTask")]
     public partial class ActivityTask
     {
         [ExplicitKey]
@@ -59,7 +59,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ActivityTaskUpdateOverdueJob")]
+   [Table("CTM.ActivityTaskUpdateOverdueJob")]
     public partial class ActivityTaskUpdateOverdueJob
     {
         [ExplicitKey]
@@ -79,7 +79,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Address")]
+   [Table("PRJ.Address")]
     public partial class Address
     {
         [ExplicitKey]
@@ -130,7 +130,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Agent")]
+   [Table("MST.Agent")]
     public partial class Agent
     {
         [ExplicitKey]
@@ -159,7 +159,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("AgentEmployee")]
+   [Table("MST.AgentEmployee")]
     public partial class AgentEmployee
     {
         [ExplicitKey]
@@ -179,7 +179,16 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Agreement")]
+   [Table("HangFire.AggregatedCounter")]
+    public partial class AggregatedCounter
+    {
+        [ExplicitKey]
+        public string Key { get; set; }
+        public long Value { get; set; }
+        public DateTime? ExpireAt { get; set; }
+    }
+
+   [Table("SAL.Agreement")]
     public partial class Agreement
     {
         [ExplicitKey]
@@ -221,7 +230,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string MainOwnerName { get; set; }
     }
 
-    [Table("AgreementConfig")]
+   [Table("PRJ.AgreementConfig")]
     public partial class AgreementConfig
     {
         [ExplicitKey]
@@ -258,7 +267,6 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool IsDeleted { get; set; }
         public Guid? LegalEntityID { get; set; }
         public string AttorneyIssueDate { get; set; }
-        public string AttorneyNameTransfer { get; set; }
         public bool IsIncludeDoubleParking { get; set; }
         public bool IsNotLicenseLand { get; set; }
         public string LicenseLandExpireDate { get; set; }
@@ -280,9 +288,10 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
+        public Guid? AttorneyNameTransferID { get; set; }
     }
 
-    [Table("AgreementFile")]
+   [Table("SAL.AgreementFile")]
     public partial class AgreementFile
     {
         [ExplicitKey]
@@ -300,7 +309,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("AgreementOwner")]
+   [Table("SAL.AgreementOwner")]
     public partial class AgreementOwner
     {
         [ExplicitKey]
@@ -355,7 +364,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string FullnameTH { get; set; }
     }
 
-    [Table("AgreementOwnerAddress")]
+   [Table("SAL.AgreementOwnerAddress")]
     public partial class AgreementOwnerAddress
     {
         [ExplicitKey]
@@ -396,7 +405,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string OtherSubDistrict { get; set; }
     }
 
-    [Table("AgreementOwnerEmail")]
+   [Table("SAL.AgreementOwnerEmail")]
     public partial class AgreementOwnerEmail
     {
         [ExplicitKey]
@@ -416,7 +425,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("AgreementOwnerPhone")]
+   [Table("SAL.AgreementOwnerPhone")]
     public partial class AgreementOwnerPhone
     {
         [ExplicitKey]
@@ -439,7 +448,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("AgreementPrintingHistory")]
+   [Table("SAL.AgreementPrintingHistory")]
     public partial class AgreementPrintingHistory
     {
         [ExplicitKey]
@@ -458,7 +467,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? AgreementPrintingByUserID { get; set; }
     }
 
-    [Table("AttorneyTransfer")]
+   [Table("MST.AttorneyTransfer")]
     public partial class AttorneyTransfer
     {
         [ExplicitKey]
@@ -480,9 +489,17 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string Atty_Nationality { get; set; }
         public string Atty_Parent { get; set; }
         public string Atty_Address { get; set; }
+        public string Atty_District { get; set; }
+        public string Atty_HouseNo { get; set; }
+        public string Atty_Moo { get; set; }
+        public string Atty_Province { get; set; }
+        public string Atty_Road { get; set; }
+        public string Atty_Soi { get; set; }
+        public string Atty_Subdistrict { get; set; }
+        public string Atty_Village { get; set; }
     }
 
-    [Table("AuthorizeRule")]
+   [Table("USR.AuthorizeRule")]
     public partial class AuthorizeRule
     {
         [ExplicitKey]
@@ -502,7 +519,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("AuthorizeRuleByRole")]
+   [Table("USR.AuthorizeRuleByRole")]
     public partial class AuthorizeRuleByRole
     {
         [ExplicitKey]
@@ -520,7 +537,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Bank")]
+   [Table("MST.Bank")]
     public partial class Bank
     {
         [ExplicitKey]
@@ -545,7 +562,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("BankAccount")]
+   [Table("MST.BankAccount")]
     public partial class BankAccount
     {
         [ExplicitKey]
@@ -583,9 +600,11 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string DisplayName { get; set; }
         public bool IsForeignTransfer { get; set; }
         public bool IsQRCode { get; set; }
+        public string PCardGLAccountNo { get; set; }
+        public string DRServiceCode { get; set; }
     }
 
-    [Table("BankBranch")]
+   [Table("MST.BankBranch")]
     public partial class BankBranch
     {
         [ExplicitKey]
@@ -623,7 +642,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("BG")]
+   [Table("MST.BG")]
     public partial class BG
     {
         [ExplicitKey]
@@ -642,7 +661,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("BillPayment")]
+   [Table("FIN.BillPayment")]
     public partial class BillPayment
     {
         [ExplicitKey]
@@ -668,7 +687,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string FilePath { get; set; }
     }
 
-    [Table("BillPaymentDetail")]
+   [Table("FIN.BillPaymentDetail")]
     public partial class BillPaymentDetail
     {
         [ExplicitKey]
@@ -699,7 +718,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? BookingID { get; set; }
     }
 
-    [Table("BillPaymentDetailTemp")]
+   [Table("FIN.BillPaymentDetailTemp")]
     public partial class BillPaymentDetailTemp
     {
         [ExplicitKey]
@@ -730,7 +749,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("BillPaymentTemp")]
+   [Table("FIN.BillPaymentTemp")]
     public partial class BillPaymentTemp
     {
         [ExplicitKey]
@@ -755,7 +774,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public int TotalSuccessRecord { get; set; }
     }
 
-    [Table("BOConfiguration")]
+   [Table("MST.BOConfiguration")]
     public partial class BOConfiguration
     {
         [ExplicitKey]
@@ -788,7 +807,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public decimal? SalePrice { get; set; }
     }
 
-    [Table("Booking")]
+   [Table("SAL.Booking")]
     public partial class Booking
     {
         [ExplicitKey]
@@ -841,9 +860,17 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string AgentOther { get; set; }
         public string AllOwnerName { get; set; }
         public string MainOwnerName { get; set; }
+        public Guid? OpportunityID { get; set; }
+        public string BookingNoReferentSystem { get; set; }
+        public bool IsUnlocked3PercentTransferDiscount { get; set; }
+        public bool IsUnlockedTransferDiscount { get; set; }
+        public Guid? Unlocked3PercentTransferDiscountByUserID { get; set; }
+        public string Unlocked3PercentTransferDiscountDate { get; set; }
+        public Guid? UnlockedTransferDiscountByUserID { get; set; }
+        public string UnlockedTransferDiscountDate { get; set; }
     }
 
-    [Table("BookingOwner")]
+   [Table("SAL.BookingOwner")]
     public partial class BookingOwner
     {
         [ExplicitKey]
@@ -896,7 +923,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string FullnameTH { get; set; }
     }
 
-    [Table("BookingOwnerAddress")]
+   [Table("SAL.BookingOwnerAddress")]
     public partial class BookingOwnerAddress
     {
         [ExplicitKey]
@@ -941,7 +968,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string OtherDistrictTH { get; set; }
     }
 
-    [Table("BookingOwnerEmail")]
+   [Table("SAL.BookingOwnerEmail")]
     public partial class BookingOwnerEmail
     {
         [ExplicitKey]
@@ -961,7 +988,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("BookingOwnerPhone")]
+   [Table("SAL.BookingOwnerPhone")]
     public partial class BookingOwnerPhone
     {
         [ExplicitKey]
@@ -984,7 +1011,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Brand")]
+   [Table("MST.Brand")]
     public partial class Brand
     {
         [ExplicitKey]
@@ -1003,7 +1030,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Brand_kaitest")]
+   [Table("MST.Brand_kaitest")]
     public partial class Brandkaitest
     {
         public Guid ID { get; set; }
@@ -1019,7 +1046,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool IsUsed { get; set; }
     }
 
-    [Table("BudgetMinPrice")]
+   [Table("PRJ.BudgetMinPrice")]
     public partial class BudgetMinPrice
     {
         [ExplicitKey]
@@ -1043,7 +1070,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("BudgetMinPriceUnit")]
+   [Table("PRJ.BudgetMinPriceUnit")]
     public partial class BudgetMinPriceUnit
     {
         [ExplicitKey]
@@ -1062,7 +1089,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("BudgetPromotion")]
+   [Table("PRJ.BudgetPromotion")]
     public partial class BudgetPromotion
     {
         [ExplicitKey]
@@ -1083,7 +1110,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("BudgetPromotionSyncItem")]
+   [Table("PRJ.BudgetPromotionSyncItem")]
     public partial class BudgetPromotionSyncItem
     {
         [ExplicitKey]
@@ -1108,7 +1135,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("BudgetPromotionSyncItemResult")]
+   [Table("PRJ.BudgetPromotionSyncItemResult")]
     public partial class BudgetPromotionSyncItemResult
     {
         [ExplicitKey]
@@ -1133,7 +1160,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("BudgetPromotionSyncJob")]
+   [Table("PRJ.BudgetPromotionSyncJob")]
     public partial class BudgetPromotionSyncJob
     {
         [ExplicitKey]
@@ -1153,7 +1180,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("CalculateHighRiseSale")]
+   [Table("CMS.CalculateHighRiseSale")]
     public partial class CalculateHighRiseSale
     {
         [ExplicitKey]
@@ -1186,7 +1213,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? CommissionPercentTypeMasterCenterID { get; set; }
     }
 
-    [Table("CalculateHighRiseTransfer")]
+   [Table("CMS.CalculateHighRiseTransfer")]
     public partial class CalculateHighRiseTransfer
     {
         [ExplicitKey]
@@ -1213,7 +1240,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? CommissionPercentTypeMasterCenterID { get; set; }
     }
 
-    [Table("CalculateIncreaseDeductMoney")]
+   [Table("CMS.CalculateIncreaseDeductMoney")]
     public partial class CalculateIncreaseDeductMoney
     {
         [ExplicitKey]
@@ -1235,7 +1262,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("CalculateLowRiseSale")]
+   [Table("CMS.CalculateLowRiseSale")]
     public partial class CalculateLowRiseSale
     {
         [ExplicitKey]
@@ -1269,7 +1296,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? CommissionPercentTypeMasterCenterID { get; set; }
     }
 
-    [Table("CalculateLowRiseTransfer")]
+   [Table("CMS.CalculateLowRiseTransfer")]
     public partial class CalculateLowRiseTransfer
     {
         [ExplicitKey]
@@ -1298,7 +1325,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? CommissionPercentTypeMasterCenterID { get; set; }
     }
 
-    [Table("CalculatePerMonthHighRiseSale")]
+   [Table("CMS.CalculatePerMonthHighRiseSale")]
     public partial class CalculatePerMonthHighRiseSale
     {
         [ExplicitKey]
@@ -1331,7 +1358,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? CommissionPercentTypeMasterCenterID { get; set; }
     }
 
-    [Table("CalculatePerMonthHighRiseTransfer")]
+   [Table("CMS.CalculatePerMonthHighRiseTransfer")]
     public partial class CalculatePerMonthHighRiseTransfer
     {
         [ExplicitKey]
@@ -1360,7 +1387,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? CommissionPercentTypeMasterCenterID { get; set; }
     }
 
-    [Table("CalculatePerMonthLowRise")]
+   [Table("CMS.CalculatePerMonthLowRise")]
     public partial class CalculatePerMonthLowRise
     {
         [ExplicitKey]
@@ -1395,7 +1422,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? CommissionPercentTypeMasterCenterID { get; set; }
     }
 
-    [Table("CalendarLock")]
+   [Table("ACC.CalendarLock")]
     public partial class CalendarLock
     {
         [ExplicitKey]
@@ -1415,7 +1442,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("CancelMemo")]
+   [Table("SAL.CancelMemo")]
     public partial class CancelMemo
     {
         [ExplicitKey]
@@ -1454,7 +1481,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? ReturnProvinceID { get; set; }
     }
 
-    [Table("CancelReason")]
+   [Table("MST.CancelReason")]
     public partial class CancelReason
     {
         [ExplicitKey]
@@ -1474,7 +1501,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("CancelReturnSetting")]
+   [Table("MST.CancelReturnSetting")]
     public partial class CancelReturnSetting
     {
         [ExplicitKey]
@@ -1492,7 +1519,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ChangeAgreementOwnerFile")]
+   [Table("SAL.ChangeAgreementOwnerFile")]
     public partial class ChangeAgreementOwnerFile
     {
         [ExplicitKey]
@@ -1511,7 +1538,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ChangeAgreementOwnerWorkflow")]
+   [Table("SAL.ChangeAgreementOwnerWorkflow")]
     public partial class ChangeAgreementOwnerWorkflow
     {
         [ExplicitKey]
@@ -1548,7 +1575,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? ChangeAgreementOwnerStatusMasterCenterID { get; set; }
     }
 
-    [Table("ChangeAgreementOwnerWorkflowDetail")]
+   [Table("SAL.ChangeAgreementOwnerWorkflowDetail")]
     public partial class ChangeAgreementOwnerWorkflowDetail
     {
         [ExplicitKey]
@@ -1568,7 +1595,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public int? Order { get; set; }
     }
 
-    [Table("ChangeLCSale")]
+   [Table("CMS.ChangeLCSale")]
     public partial class ChangeLCSale
     {
         [ExplicitKey]
@@ -1597,7 +1624,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ChangeLCTransfer")]
+   [Table("CMS.ChangeLCTransfer")]
     public partial class ChangeLCTransfer
     {
         [ExplicitKey]
@@ -1618,7 +1645,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ChangePromotionWorkflow")]
+   [Table("PRM.ChangePromotionWorkflow")]
     public partial class ChangePromotionWorkflow
     {
         [ExplicitKey]
@@ -1646,9 +1673,10 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? RejectByUserID { get; set; }
         public string RejectDate { get; set; }
         public Guid SalePromotionStageMasterCenterID { get; set; }
+        public string DueSignDocDate { get; set; }
     }
 
-    [Table("ChangeUnitFile")]
+   [Table("SAL.ChangeUnitFile")]
     public partial class ChangeUnitFile
     {
         [ExplicitKey]
@@ -1667,7 +1695,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ChangeUnitWorkflow")]
+   [Table("SAL.ChangeUnitWorkflow")]
     public partial class ChangeUnitWorkflow
     {
         [ExplicitKey]
@@ -1700,7 +1728,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public decimal? TotalPaid { get; set; }
     }
 
-    [Table("CommissionContract")]
+   [Table("CMS.CommissionContract")]
     public partial class CommissionContract
     {
         [ExplicitKey]
@@ -1742,7 +1770,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("CommissionTransfer")]
+   [Table("CMS.CommissionTransfer")]
     public partial class CommissionTransfer
     {
         [ExplicitKey]
@@ -1771,7 +1799,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Company")]
+   [Table("MST.Company")]
     public partial class Company
     {
         [ExplicitKey]
@@ -1818,7 +1846,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Contact")]
+   [Table("CTM.Contact")]
     public partial class Contact
     {
         [ExplicitKey]
@@ -1879,7 +1907,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string FullnameTH { get; set; }
     }
 
-    [Table("contact_test")]
+   [Table("CTM.contact_test")]
     public partial class contacttest
     {
         public string ItemId { get; set; }
@@ -2057,7 +2085,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public DateTime? LastModifiedRecord { get; set; }
     }
 
-    [Table("ContactAddress")]
+   [Table("CTM.ContactAddress")]
     public partial class ContactAddress
     {
         [ExplicitKey]
@@ -2101,7 +2129,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ContactAddressProject")]
+   [Table("CTM.ContactAddressProject")]
     public partial class ContactAddressProject
     {
         [ExplicitKey]
@@ -2119,7 +2147,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ContactEmail")]
+   [Table("CTM.ContactEmail")]
     public partial class ContactEmail
     {
         [ExplicitKey]
@@ -2138,7 +2166,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ContactPhone")]
+   [Table("CTM.ContactPhone")]
     public partial class ContactPhone
     {
         [ExplicitKey]
@@ -2160,7 +2188,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ContactStory")]
+   [Table("OST.ContactStory")]
     public partial class ContactStory
     {
         [ExplicitKey]
@@ -2185,7 +2213,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ContactStoryGroup")]
+   [Table("OST.ContactStoryGroup")]
     public partial class ContactStoryGroup
     {
         [ExplicitKey]
@@ -2202,7 +2230,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ContactStoryType")]
+   [Table("OST.ContactStoryType")]
     public partial class ContactStoryType
     {
         [ExplicitKey]
@@ -2223,7 +2251,15 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Country")]
+   [Table("HangFire.Counter")]
+    public partial class Counter
+    {
+        public string Key { get; set; }
+        public int Value { get; set; }
+        public DateTime? ExpireAt { get; set; }
+    }
+
+   [Table("MST.Country")]
     public partial class Country
     {
         [ExplicitKey]
@@ -2242,7 +2278,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("CreditBanking")]
+   [Table("SAL.CreditBanking")]
     public partial class CreditBanking
     {
         [ExplicitKey]
@@ -2284,7 +2320,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? ProvinceID { get; set; }
     }
 
-    [Table("CreditBankingPrintingHistory")]
+   [Table("SAL.CreditBankingPrintingHistory")]
     public partial class CreditBankingPrintingHistory
     {
         [ExplicitKey]
@@ -2307,7 +2343,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("CRM_EReceipt_ExportLog")]
+   [Table("CRM_EReceipt_ExportLog")]
     public partial class CRMEReceiptExportLog
     {
         public int LogID { get; set; }
@@ -2324,7 +2360,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string EditRemark { get; set; }
     }
 
-    [Table("CRM_PayInTransfer_Other")]
+   [Table("CRM_PayInTransfer_Other")]
     public partial class CRMPayInTransferOther
     {
         public long ID { get; set; }
@@ -2340,7 +2376,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public DateTime? CancelDate { get; set; }
     }
 
-    [Table("CustomerWallet")]
+   [Table("FIN.CustomerWallet")]
     public partial class CustomerWallet
     {
         [ExplicitKey]
@@ -2359,7 +2395,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("CustomerWalletTransaction")]
+   [Table("FIN.CustomerWalletTransaction")]
     public partial class CustomerWalletTransaction
     {
         [ExplicitKey]
@@ -2379,7 +2415,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("DeductMoney")]
+   [Table("CMS.DeductMoney")]
     public partial class DeductMoney
     {
         [ExplicitKey]
@@ -2400,7 +2436,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("DepositDetail")]
+   [Table("FIN.DepositDetail")]
     public partial class DepositDetail
     {
         [ExplicitKey]
@@ -2420,7 +2456,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("DepositHeader")]
+   [Table("FIN.DepositHeader")]
     public partial class DepositHeader
     {
         [ExplicitKey]
@@ -2444,7 +2480,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("DirectCreditDebitApprovalForm")]
+   [Table("FIN.DirectCreditDebitApprovalForm")]
     public partial class DirectCreditDebitApprovalForm
     {
         [ExplicitKey]
@@ -2479,7 +2515,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("DirectCreditDebitExportDetail")]
+   [Table("FIN.DirectCreditDebitExportDetail")]
     public partial class DirectCreditDebitExportDetail
     {
         [ExplicitKey]
@@ -2503,7 +2539,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("DirectCreditDebitExportHeader")]
+   [Table("FIN.DirectCreditDebitExportHeader")]
     public partial class DirectCreditDebitExportHeader
     {
         [ExplicitKey]
@@ -2529,7 +2565,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("District")]
+   [Table("MST.District")]
     public partial class District
     {
         [ExplicitKey]
@@ -2549,7 +2585,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("DownPaymentLetter")]
+   [Table("LET.DownPaymentLetter")]
     public partial class DownPaymentLetter
     {
         [ExplicitKey]
@@ -2582,7 +2618,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public decimal RemainDownTotalAmount { get; set; }
     }
 
-    [Table("EDC")]
+   [Table("MST.EDC")]
     public partial class EDC
     {
         [ExplicitKey]
@@ -2609,7 +2645,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("EDCFee")]
+   [Table("MST.EDCFee")]
     public partial class EDCFee
     {
         [ExplicitKey]
@@ -2631,7 +2667,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("EmailNotification")]
+   [Table("NTF.EmailNotification")]
     public partial class EmailNotification
     {
         [ExplicitKey]
@@ -2656,7 +2692,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ErrorMessage")]
+   [Table("MST.ErrorMessage")]
     public partial class ErrorMessage
     {
         [ExplicitKey]
@@ -2671,7 +2707,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? UpdatedByUserID { get; set; }
     }
 
-    [Table("FavoriteMenu")]
+   [Table("USR.FavoriteMenu")]
     public partial class FavoriteMenu
     {
         [ExplicitKey]
@@ -2689,7 +2725,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("FET")]
+   [Table("FIN.FET")]
     public partial class FET
     {
         [ExplicitKey]
@@ -2721,7 +2757,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool IsCancel { get; set; }
     }
 
-    [Table("Floor")]
+   [Table("PRJ.Floor")]
     public partial class Floor
     {
         [ExplicitKey]
@@ -2743,7 +2779,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("FloorPlanImage")]
+   [Table("PRJ.FloorPlanImage")]
     public partial class FloorPlanImage
     {
         [ExplicitKey]
@@ -2762,7 +2798,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("GeneralSetting")]
+   [Table("CMS.GeneralSetting")]
     public partial class GeneralSetting
     {
         [ExplicitKey]
@@ -2784,7 +2820,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("GLAccountType")]
+   [Table("MST.GLAccountType")]
     public partial class GLAccountType
     {
         [ExplicitKey]
@@ -2806,7 +2842,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool IsActive { get; set; }
     }
 
-    [Table("GLDetail")]
+   [Table("ACC.GLDetail")]
     public partial class GLDetail
     {
         [ExplicitKey]
@@ -2831,7 +2867,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("GLExport")]
+   [Table("ACC.GLExport")]
     public partial class GLExport
     {
         [ExplicitKey]
@@ -2851,7 +2887,17 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("HighRiseFee")]
+   [Table("HangFire.Hash")]
+    public partial class Hash
+    {
+        [ExplicitKey]
+        public string Key { get; set; }
+        public string Field { get; set; }
+        public string Value { get; set; }
+        public string ExpireAt { get; set; }
+    }
+
+   [Table("PRJ.HighRiseFee")]
     public partial class HighRiseFee
     {
         [ExplicitKey]
@@ -2877,7 +2923,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ICON_EntForms_Agreement")]
+   [Table("ICON_EntForms_Agreement")]
     public partial class ICONEntFormsAgreement
     {
         public string ContractNumber { get; set; }
@@ -3005,7 +3051,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string ApprovePrintFile { get; set; }
     }
 
-    [Table("ICON_EntForms_AgreementDirectDebit")]
+   [Table("ICON_EntForms_AgreementDirectDebit")]
     public partial class ICONEntFormsAgreementDirectDebit
     {
         public int DirectID { get; set; }
@@ -3039,7 +3085,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool? EverApproved { get; set; }
     }
 
-    [Table("ICON_EntForms_AgreementOwner")]
+   [Table("ICON_EntForms_AgreementOwner")]
     public partial class ICONEntFormsAgreementOwner
     {
         public string ContractNumber { get; set; }
@@ -3093,7 +3139,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public DateTime? ModifyDate { get; set; }
     }
 
-    [Table("ICON_EntForms_AgreementPeriod")]
+   [Table("ICON_EntForms_AgreementPeriod")]
     public partial class ICONEntFormsAgreementPeriod
     {
         public string ContractNumber { get; set; }
@@ -3109,7 +3155,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public long ID { get; set; }
     }
 
-    [Table("ICON_EntForms_BankAccount")]
+   [Table("ICON_EntForms_BankAccount")]
     public partial class ICONEntFormsBankAccount
     {
         public int ID { get; set; }
@@ -3141,7 +3187,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool? isTransForeign { get; set; }
     }
 
-    [Table("ICON_EntForms_Booking")]
+   [Table("ICON_EntForms_Booking")]
     public partial class ICONEntFormsBooking
     {
         public string BookingNumber { get; set; }
@@ -3234,7 +3280,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public DateTime? LastMigrateTime { get; set; }
     }
 
-    [Table("ICON_EntForms_BookingOwner")]
+   [Table("ICON_EntForms_BookingOwner")]
     public partial class ICONEntFormsBookingOwner
     {
         public string BookingNumber { get; set; }
@@ -3277,7 +3323,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public DateTime? LastMigrateTime { get; set; }
     }
 
-    [Table("ICON_EntForms_Creditbanking")]
+   [Table("ICON_EntForms_Creditbanking")]
     public partial class ICONEntFormsCreditbanking
     {
         public long ID { get; set; }
@@ -3316,7 +3362,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public DateTime? EditDate { get; set; }
     }
 
-    [Table("ICON_EntForms_Transfer")]
+   [Table("ICON_EntForms_Transfer")]
     public partial class ICONEntFormsTransfer
     {
         public string TransferNumber { get; set; }
@@ -3399,7 +3445,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public int? RejectSignPreTransferBy { get; set; }
     }
 
-    [Table("ICON_EntForms_TransferCheque")]
+   [Table("ICON_EntForms_TransferCheque")]
     public partial class ICONEntFormsTransferCheque
     {
         public int ID { get; set; }
@@ -3416,7 +3462,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public int? TransferPaymentType { get; set; }
     }
 
-    [Table("ICON_EntForms_TransferDocument")]
+   [Table("ICON_EntForms_TransferDocument")]
     public partial class ICONEntFormsTransferDocument
     {
         public string TransferNumber { get; set; }
@@ -3427,7 +3473,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public long ID { get; set; }
     }
 
-    [Table("ICON_EntForms_TransferOwner")]
+   [Table("ICON_EntForms_TransferOwner")]
     public partial class ICONEntFormsTransferOwner
     {
         public int Transferrunning { get; set; }
@@ -3470,7 +3516,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string Mobile_old { get; set; }
     }
 
-    [Table("ICON_EntForms_TransferPayment")]
+   [Table("ICON_EntForms_TransferPayment")]
     public partial class ICONEntFormsTransferPayment
     {
         public string TransferNumber { get; set; }
@@ -3580,7 +3626,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public decimal? SumPreTransferFee { get; set; }
     }
 
-    [Table("ICON_EntForms_UnitHistory")]
+   [Table("ICON_EntForms_UnitHistory")]
     public partial class ICONEntFormsUnitHistory
     {
         public string HistoryID { get; set; }
@@ -3637,7 +3683,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string ApprovePrintFile { get; set; }
     }
 
-    [Table("ICON_Payment_Deposit")]
+   [Table("ICON_Payment_Deposit")]
     public partial class ICONPaymentDeposit
     {
         public string DepositID { get; set; }
@@ -3674,7 +3720,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public long ID { get; set; }
     }
 
-    [Table("ICON_Payment_DirectDBCRDetails")]
+   [Table("ICON_Payment_DirectDBCRDetails")]
     public partial class ICONPaymentDirectDBCRDetail
     {
         public string DBatchID { get; set; }
@@ -3700,7 +3746,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool? Tmp { get; set; }
     }
 
-    [Table("ICON_Payment_DirectDBCRHeader")]
+   [Table("ICON_Payment_DirectDBCRHeader")]
     public partial class ICONPaymentDirectDBCRHeader
     {
         public string RddBatchID { get; set; }
@@ -3726,7 +3772,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public DateTime? PeriodDate { get; set; }
     }
 
-    [Table("ICON_Payment_DownloadedPayment")]
+   [Table("ICON_Payment_DownloadedPayment")]
     public partial class ICONPaymentDownloadedPayment
     {
         public string SequenceNo { get; set; }
@@ -3769,7 +3815,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public long ID { get; set; }
     }
 
-    [Table("ICON_Payment_PayInTransfer")]
+   [Table("ICON_Payment_PayInTransfer")]
     public partial class ICONPaymentPayInTransfer
     {
         public string PayInID { get; set; }
@@ -3805,7 +3851,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string Remark { get; set; }
     }
 
-    [Table("ICON_Payment_PaymentDetails")]
+   [Table("ICON_Payment_PaymentDetails")]
     public partial class ICONPaymentPaymentDetail
     {
         public long ID { get; set; }
@@ -3822,7 +3868,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string OldPaymentType { get; set; }
     }
 
-    [Table("ICON_Payment_Received")]
+   [Table("ICON_Payment_Received")]
     public partial class ICONPaymentReceived
     {
         public string ReceivedID { get; set; }
@@ -3849,7 +3895,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public long ID { get; set; }
     }
 
-    [Table("ICON_Payment_TmpReceipt")]
+   [Table("ICON_Payment_TmpReceipt")]
     public partial class ICONPaymentTmpReceipt
     {
         public int TmpReceiptID { get; set; }
@@ -3899,7 +3945,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool? IsReturnMoneyByAccount { get; set; }
     }
 
-    [Table("ICON_PostToSAP_ChartOfAccount")]
+   [Table("ICON_PostToSAP_ChartOfAccount")]
     public partial class ICONPostToSAPChartOfAccount
     {
         public string AccountID { get; set; }
@@ -3917,7 +3963,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public long ID { get; set; }
     }
 
-    [Table("ICON_Tmp_ExportReceipt")]
+   [Table("ICON_Tmp_ExportReceipt")]
     public partial class ICONTmpExportReceipt
     {
         public long ID { get; set; }
@@ -3991,7 +4037,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public int? SendmailCounting { get; set; }
     }
 
-    [Table("IncreaseMoney")]
+   [Table("CMS.IncreaseMoney")]
     public partial class IncreaseMoney
     {
         [ExplicitKey]
@@ -4012,7 +4058,39 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("JobTransaction")]
+   [Table("HangFire.Job")]
+    public partial class Job
+    {
+        [Key]
+        public long Id { get; set; }
+        public long? StateId { get; set; }
+        public string StateName { get; set; }
+        public string InvocationData { get; set; }
+        public string Arguments { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? ExpireAt { get; set; }
+    }
+
+   [Table("HangFire.JobParameter")]
+    public partial class JobParameter
+    {
+        [ExplicitKey]
+        public long JobId { get; set; }
+        public string Name { get; set; }
+        public string Value { get; set; }
+    }
+
+   [Table("HangFire.JobQueue")]
+    public partial class JobQueue
+    {
+        [Key]
+        public int Id { get; set; }
+        public long JobId { get; set; }
+        public string Queue { get; set; }
+        public DateTime? FetchedAt { get; set; }
+    }
+
+   [Table("DMT.JobTransaction")]
     public partial class JobTransaction
     {
         [ExplicitKey]
@@ -4033,7 +4111,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("LandOffice")]
+   [Table("MST.LandOffice")]
     public partial class LandOffice
     {
         [ExplicitKey]
@@ -4051,7 +4129,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("LandOfficeDocCheckList")]
+   [Table("MST.LandOfficeDocCheckList")]
     public partial class LandOfficeDocCheckList
     {
         [ExplicitKey]
@@ -4086,7 +4164,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool? HR_Exps_Transfer_EN { get; set; }
     }
 
-    [Table("Lead")]
+   [Table("CTM.Lead")]
     public partial class Lead
     {
         [ExplicitKey]
@@ -4151,7 +4229,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("LeadActivity")]
+   [Table("CTM.LeadActivity")]
     public partial class LeadActivity
     {
         [ExplicitKey]
@@ -4178,7 +4256,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("LeadActivityStatus")]
+   [Table("CTM.LeadActivityStatus")]
     public partial class LeadActivityStatus
     {
         [ExplicitKey]
@@ -4200,7 +4278,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("LeadAssign")]
+   [Table("CTM.LeadAssign")]
     public partial class LeadAssign
     {
         [ExplicitKey]
@@ -4219,7 +4297,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("LeadScoring")]
+   [Table("CTM.LeadScoring")]
     public partial class LeadScoring
     {
         [ExplicitKey]
@@ -4240,7 +4318,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("LeadScoringType")]
+   [Table("CTM.LeadScoringType")]
     public partial class LeadScoringType
     {
         [ExplicitKey]
@@ -4260,7 +4338,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("LeadSyncJob")]
+   [Table("CTM.LeadSyncJob")]
     public partial class LeadSyncJob
     {
         [ExplicitKey]
@@ -4281,7 +4359,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("LegalEntity")]
+   [Table("MST.LegalEntity")]
     public partial class LegalEntity
     {
         [ExplicitKey]
@@ -4303,7 +4381,17 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("LowRiseBuildingPriceFee")]
+   [Table("HangFire.List")]
+    public partial class List
+    {
+        [Key]
+        public long Id { get; set; }
+        public string Key { get; set; }
+        public string Value { get; set; }
+        public DateTime? ExpireAt { get; set; }
+    }
+
+   [Table("PRJ.LowRiseBuildingPriceFee")]
     public partial class LowRiseBuildingPriceFee
     {
         [ExplicitKey]
@@ -4323,7 +4411,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("LowRiseFee")]
+   [Table("PRJ.LowRiseFee")]
     public partial class LowRiseFee
     {
         [ExplicitKey]
@@ -4342,7 +4430,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("LowRiseFenceFee")]
+   [Table("PRJ.LowRiseFenceFee")]
     public partial class LowRiseFenceFee
     {
         [ExplicitKey]
@@ -4367,7 +4455,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("MappingAgreement")]
+   [Table("PRM.MappingAgreement")]
     public partial class MappingAgreement
     {
         [ExplicitKey]
@@ -4390,7 +4478,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("MasterCenter")]
+   [Table("MST.MasterCenter")]
     public partial class MasterCenter
     {
         [ExplicitKey]
@@ -4412,7 +4500,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("MasterCenterGroup")]
+   [Table("MST.MasterCenterGroup")]
     public partial class MasterCenterGroup
     {
         [ExplicitKey]
@@ -4426,7 +4514,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool IsSystemOnly { get; set; }
     }
 
-    [Table("MasterPreSaleHouseModelItem")]
+   [Table("PRM.MasterPreSaleHouseModelItem")]
     public partial class MasterPreSaleHouseModelItem
     {
         [ExplicitKey]
@@ -4444,7 +4532,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("MasterPreSalePromotion")]
+   [Table("PRM.MasterPreSalePromotion")]
     public partial class MasterPreSalePromotion
     {
         [ExplicitKey]
@@ -4472,7 +4560,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool IsActive { get; set; }
     }
 
-    [Table("MasterPreSalePromotionItem")]
+   [Table("PRM.MasterPreSalePromotionItem")]
     public partial class MasterPreSalePromotionItem
     {
         [ExplicitKey]
@@ -4534,7 +4622,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("MasterPriceItem")]
+   [Table("MST.MasterPriceItem")]
     public partial class MasterPriceItem
     {
         public string Created { get; set; }
@@ -4560,7 +4648,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? GLAccountTypeMasterCenterID { get; set; }
     }
 
-    [Table("MasterSaleHouseModelFreeItem")]
+   [Table("PRM.MasterSaleHouseModelFreeItem")]
     public partial class MasterSaleHouseModelFreeItem
     {
         [ExplicitKey]
@@ -4578,7 +4666,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? ModelID { get; set; }
     }
 
-    [Table("MasterSaleHouseModelItem")]
+   [Table("PRM.MasterSaleHouseModelItem")]
     public partial class MasterSaleHouseModelItem
     {
         [ExplicitKey]
@@ -4596,7 +4684,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? ModelID { get; set; }
     }
 
-    [Table("MasterSalePromotion")]
+   [Table("PRM.MasterSalePromotion")]
     public partial class MasterSalePromotion
     {
         [ExplicitKey]
@@ -4625,7 +4713,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool IsActive { get; set; }
     }
 
-    [Table("MasterSalePromotionCreditCardItem")]
+   [Table("PRM.MasterSalePromotionCreditCardItem")]
     public partial class MasterSalePromotionCreditCardItem
     {
         [ExplicitKey]
@@ -4654,7 +4742,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool IsActive { get; set; }
     }
 
-    [Table("MasterSalePromotionFreeItem")]
+   [Table("PRM.MasterSalePromotionFreeItem")]
     public partial class MasterSalePromotionFreeItem
     {
         [ExplicitKey]
@@ -4681,7 +4769,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string PromotionItemNo { get; set; }
     }
 
-    [Table("MasterSalePromotionItem")]
+   [Table("PRM.MasterSalePromotionItem")]
     public partial class MasterSalePromotionItem
     {
         [ExplicitKey]
@@ -4742,7 +4830,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string MaterialName { get; set; }
     }
 
-    [Table("MasterTransferCreditCardItem")]
+   [Table("PRM.MasterTransferCreditCardItem")]
     public partial class MasterTransferCreditCardItem
     {
         [ExplicitKey]
@@ -4770,7 +4858,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("MasterTransferHouseModelFreeItem")]
+   [Table("PRM.MasterTransferHouseModelFreeItem")]
     public partial class MasterTransferHouseModelFreeItem
     {
         [ExplicitKey]
@@ -4788,7 +4876,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("MasterTransferHouseModelItem")]
+   [Table("PRM.MasterTransferHouseModelItem")]
     public partial class MasterTransferHouseModelItem
     {
         [ExplicitKey]
@@ -4806,7 +4894,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("MasterTransferPromotion")]
+   [Table("PRM.MasterTransferPromotion")]
     public partial class MasterTransferPromotion
     {
         [ExplicitKey]
@@ -4833,7 +4921,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool IsActive { get; set; }
     }
 
-    [Table("MasterTransferPromotionFreeItem")]
+   [Table("PRM.MasterTransferPromotionFreeItem")]
     public partial class MasterTransferPromotionFreeItem
     {
         [ExplicitKey]
@@ -4860,7 +4948,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("MasterTransferPromotionItem")]
+   [Table("PRM.MasterTransferPromotionItem")]
     public partial class MasterTransferPromotionItem
     {
         [ExplicitKey]
@@ -4921,7 +5009,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("MemoMoveMoney")]
+   [Table("FIN.MemoMoveMoney")]
     public partial class MemoMoveMoney
     {
         [ExplicitKey]
@@ -4944,7 +5032,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string PrintDate { get; set; }
     }
 
-    [Table("Menu")]
+   [Table("USR.Menu")]
     public partial class Menu
     {
         [ExplicitKey]
@@ -4965,7 +5053,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string MenuNameTH { get; set; }
     }
 
-    [Table("MenuAction")]
+   [Table("USR.MenuAction")]
     public partial class MenuAction
     {
         [ExplicitKey]
@@ -4985,7 +5073,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public int Order { get; set; }
     }
 
-    [Table("MenuPermission")]
+   [Table("USR.MenuPermission")]
     public partial class MenuPermission
     {
         [ExplicitKey]
@@ -5003,7 +5091,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? RoleID { get; set; }
     }
 
-    [Table("MergeContactResult")]
+   [Table("DMT.MergeContactResult")]
     public partial class MergeContactResult
     {
         [ExplicitKey]
@@ -5036,7 +5124,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("MinPrice")]
+   [Table("PRJ.MinPrice")]
     public partial class MinPrice
     {
         [ExplicitKey]
@@ -5062,7 +5150,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("MinPriceBudgetApproval")]
+   [Table("SAL.MinPriceBudgetApproval")]
     public partial class MinPriceBudgetApproval
     {
         [ExplicitKey]
@@ -5084,7 +5172,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("MinPriceBudgetWorkflow")]
+   [Table("SAL.MinPriceBudgetWorkflow")]
     public partial class MinPriceBudgetWorkflow
     {
         [ExplicitKey]
@@ -5135,7 +5223,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("MobileInstallation")]
+   [Table("NTF.MobileInstallation")]
     public partial class MobileInstallation
     {
         [ExplicitKey]
@@ -5154,7 +5242,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("MobileNotification")]
+   [Table("NTF.MobileNotification")]
     public partial class MobileNotification
     {
         [ExplicitKey]
@@ -5179,7 +5267,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Model")]
+   [Table("PRJ.Model")]
     public partial class Model
     {
         [ExplicitKey]
@@ -5207,7 +5295,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Module")]
+   [Table("USR.Module")]
     public partial class Module
     {
         [ExplicitKey]
@@ -5226,7 +5314,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string NameEng { get; set; }
     }
 
-    [Table("MyTask")]
+   [Table("USR.MyTask")]
     public partial class MyTask
     {
         [ExplicitKey]
@@ -5252,7 +5340,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("NotificationTemplate")]
+   [Table("NTF.NotificationTemplate")]
     public partial class NotificationTemplate
     {
         [ExplicitKey]
@@ -5278,7 +5366,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? UpdatedByUserID { get; set; }
     }
 
-    [Table("OfflinePaymentDetail")]
+   [Table("FIN.OfflinePaymentDetail")]
     public partial class OfflinePaymentDetail
     {
         [ExplicitKey]
@@ -5309,7 +5397,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? CreditCardTypeID { get; set; }
     }
 
-    [Table("OfflinePaymentHeader")]
+   [Table("FIN.OfflinePaymentHeader")]
     public partial class OfflinePaymentHeader
     {
         [ExplicitKey]
@@ -5346,7 +5434,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool IsNewBookingPayment { get; set; }
     }
 
-    [Table("Opportunity")]
+   [Table("CTM.Opportunity")]
     public partial class Opportunity
     {
         [ExplicitKey]
@@ -5379,7 +5467,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("OpportunityActivity")]
+   [Table("CTM.OpportunityActivity")]
     public partial class OpportunityActivity
     {
         [ExplicitKey]
@@ -5403,7 +5491,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("OpportunityActivityResult")]
+   [Table("CTM.OpportunityActivityResult")]
     public partial class OpportunityActivityResult
     {
         [ExplicitKey]
@@ -5422,7 +5510,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("OpportunityActivityStatus")]
+   [Table("CTM.OpportunityActivityStatus")]
     public partial class OpportunityActivityStatus
     {
         [ExplicitKey]
@@ -5443,7 +5531,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("OpportunityAssign")]
+   [Table("CTM.OpportunityAssign")]
     public partial class OpportunityAssign
     {
         [ExplicitKey]
@@ -5461,7 +5549,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("OtherUnitInfoTag")]
+   [Table("PRJ.OtherUnitInfoTag")]
     public partial class OtherUnitInfoTag
     {
         [ExplicitKey]
@@ -5479,7 +5567,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Payment")]
+   [Table("FIN.Payment")]
     public partial class Payment
     {
         [ExplicitKey]
@@ -5505,7 +5593,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid PaymentStateMasterCenterID { get; set; }
     }
 
-    [Table("PaymentItem")]
+   [Table("FIN.PaymentItem")]
     public partial class PaymentItem
     {
         [ExplicitKey]
@@ -5529,7 +5617,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public int Period { get; set; }
     }
 
-    [Table("PaymentMethod")]
+   [Table("FIN.PaymentMethod")]
     public partial class PaymentMethod
     {
         [ExplicitKey]
@@ -5584,60 +5672,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? OfflinePaymentHeaderID { get; set; }
     }
 
-    [Table("PaymentMethod2")]
-    public partial class PaymentMethod2
-    {
-        [ExplicitKey]
-        public Guid ID { get; set; }
-        public Guid PaymentID { get; set; }
-        public decimal PayAmount { get; set; }
-        public string Created { get; set; }
-        public string Updated { get; set; }
-        public bool? IsDeleted { get; set; }
-        public Guid? CreatedByUserID { get; set; }
-        public Guid? UpdatedByUserID { get; set; }
-        public Guid? PaymentMethodTypeMasterCenterID { get; set; }
-        public string LastMigrateDate { get; set; }
-        public string RefMigrateID1 { get; set; }
-        public string RefMigrateID2 { get; set; }
-        public string RefMigrateID3 { get; set; }
-        public Guid? BankAccountID { get; set; }
-        public bool? IsWrongAccount { get; set; }
-        public Guid? BillPaymentDetailID { get; set; }
-        public string ChequeDate { get; set; }
-        public string ChequeNo { get; set; }
-        public Guid? PayToCompanyID { get; set; }
-        public Guid? BankID { get; set; }
-        public Guid? BankBranchID { get; set; }
-        public decimal? Fee { get; set; }
-        public Guid? FeeConfirmByUserID { get; set; }
-        public string FeeConfirmDate { get; set; }
-        public bool? IsFeeConfirm { get; set; }
-        public decimal? Vat { get; set; }
-        public decimal? FeeIncludingVat { get; set; }
-        public decimal? FeePercent { get; set; }
-        public string BankBranchName { get; set; }
-        public Guid? FromPaymentMethodID { get; set; }
-        public Guid? BasePaymentMethodID { get; set; }
-        public bool? IsForeignCreditCard { get; set; }
-        public string CardNo { get; set; }
-        public Guid? EDCBankID { get; set; }
-        public Guid? EDCID { get; set; }
-        public Guid? CreditCardPaymentTypeMasterCenterID { get; set; }
-        public Guid? CreditCardTypeMasterCenterID { get; set; }
-        public Guid? DirectCreditDebitExportDetailID { get; set; }
-        public Guid? ForeignTransferTypeMasterCenterID { get; set; }
-        public string IR { get; set; }
-        public string TransferorName { get; set; }
-        public bool? IsRequestFET { get; set; }
-        public Guid? UnknownPaymentID { get; set; }
-        public Guid? ForeignBankID { get; set; }
-        public bool? IsNotifyFET { get; set; }
-        public string NotifyFETMemo { get; set; }
-        public string CancelRemark { get; set; }
-    }
-
-    [Table("PaymentMethodToItem")]
+   [Table("FIN.PaymentMethodToItem")]
     public partial class PaymentMethodToItem
     {
         [ExplicitKey]
@@ -5656,7 +5691,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("PostGLDetail")]
+   [Table("ACC.PostGLDetail")]
     public partial class PostGLDetail
     {
         [ExplicitKey]
@@ -5696,7 +5731,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string PostGLType { get; set; }
     }
 
-    [Table("PostGLFormatTextFileDetail")]
+   [Table("ACC.PostGLFormatTextFileDetail")]
     public partial class PostGLFormatTextFileDetail
     {
         [ExplicitKey]
@@ -5718,7 +5753,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? PostGLFormatTextFileHeaderID { get; set; }
     }
 
-    [Table("PostGLFormatTextFileHeader")]
+   [Table("ACC.PostGLFormatTextFileHeader")]
     public partial class PostGLFormatTextFileHeader
     {
         [ExplicitKey]
@@ -5737,7 +5772,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string FormatType { get; set; }
     }
 
-    [Table("PostGLHeader")]
+   [Table("ACC.PostGLHeader")]
     public partial class PostGLHeader
     {
         [ExplicitKey]
@@ -5766,7 +5801,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool IsCancel { get; set; }
     }
 
-    [Table("PostGLHouseType")]
+   [Table("ACC.PostGLHouseType")]
     public partial class PostGLHouseType
     {
         [ExplicitKey]
@@ -5786,7 +5821,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("PostGLTemp")]
+   [Table("ACC.PostGLTemp")]
     public partial class PostGLTemp
     {
         [ExplicitKey]
@@ -5836,7 +5871,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string GLAccountName { get; set; }
     }
 
-    [Table("PRCancelJob")]
+   [Table("PRM.PRCancelJob")]
     public partial class PRCancelJob
     {
         [ExplicitKey]
@@ -5861,7 +5896,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? TransferPromotionRequestID { get; set; }
     }
 
-    [Table("PRCancelJobItem")]
+   [Table("PRM.PRCancelJobItem")]
     public partial class PRCancelJobItem
     {
         [ExplicitKey]
@@ -5886,7 +5921,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? TransferPromotionRequestItemID { get; set; }
     }
 
-    [Table("PRCancelJobItemResult")]
+   [Table("PRM.PRCancelJobItemResult")]
     public partial class PRCancelJobItemResult
     {
         [ExplicitKey]
@@ -5912,7 +5947,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("PreSalePromotion")]
+   [Table("PRM.PreSalePromotion")]
     public partial class PreSalePromotion
     {
         [ExplicitKey]
@@ -5931,7 +5966,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("PreSalePromotionItem")]
+   [Table("PRM.PreSalePromotionItem")]
     public partial class PreSalePromotionItem
     {
         [ExplicitKey]
@@ -5955,7 +5990,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool IsActive { get; set; }
     }
 
-    [Table("PreSalePromotionRequest")]
+   [Table("PRM.PreSalePromotionRequest")]
     public partial class PreSalePromotionRequest
     {
         [ExplicitKey]
@@ -5980,7 +6015,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? PrintUserID { get; set; }
     }
 
-    [Table("PreSalePromotionRequestItem")]
+   [Table("PRM.PreSalePromotionRequestItem")]
     public partial class PreSalePromotionRequestItem
     {
         [ExplicitKey]
@@ -6008,7 +6043,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("PreSalePromotionRequestUnit")]
+   [Table("PRM.PreSalePromotionRequestUnit")]
     public partial class PreSalePromotionRequestUnit
     {
         [ExplicitKey]
@@ -6032,7 +6067,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? PrintUserID { get; set; }
     }
 
-    [Table("PriceList")]
+   [Table("PRJ.PriceList")]
     public partial class PriceList
     {
         [ExplicitKey]
@@ -6050,7 +6085,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("PriceListItem")]
+   [Table("PRJ.PriceListItem")]
     public partial class PriceListItem
     {
         [ExplicitKey]
@@ -6080,7 +6115,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("PriceListItemTemplate")]
+   [Table("PRJ.PriceListItemTemplate")]
     public partial class PriceListItemTemplate
     {
         [ExplicitKey]
@@ -6100,7 +6135,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("PriceListWorkflow")]
+   [Table("SAL.PriceListWorkflow")]
     public partial class PriceListWorkflow
     {
         [ExplicitKey]
@@ -6144,7 +6179,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Project")]
+   [Table("PRJ.Project")]
     public partial class Project
     {
         [ExplicitKey]
@@ -6213,7 +6248,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public float? PercentFreeDown { get; set; }
     }
 
-    [Table("ProjectVisitCounterSetting")]
+   [Table("CTM.ProjectVisitCounterSetting")]
     public partial class ProjectVisitCounterSetting
     {
         [ExplicitKey]
@@ -6231,7 +6266,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("PromotionMaterial")]
+   [Table("PRM.PromotionMaterial")]
     public partial class PromotionMaterial
     {
         [ExplicitKey]
@@ -6261,7 +6296,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("PromotionMaterialAddPrice")]
+   [Table("PRM.PromotionMaterialAddPrice")]
     public partial class PromotionMaterialAddPrice
     {
         [ExplicitKey]
@@ -6281,7 +6316,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("PromotionMaterialGroup")]
+   [Table("PRM.PromotionMaterialGroup")]
     public partial class PromotionMaterialGroup
     {
         [ExplicitKey]
@@ -6302,7 +6337,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("PromotionMaterialItem")]
+   [Table("PRM.PromotionMaterialItem")]
     public partial class PromotionMaterialItem
     {
         [ExplicitKey]
@@ -6359,7 +6394,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("PromotionVatRate")]
+   [Table("PRM.PromotionVatRate")]
     public partial class PromotionVatRate
     {
         [ExplicitKey]
@@ -6378,7 +6413,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Province")]
+   [Table("MST.Province")]
     public partial class Province
     {
         [ExplicitKey]
@@ -6397,7 +6432,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("PRRequestJob")]
+   [Table("PRM.PRRequestJob")]
     public partial class PRRequestJob
     {
         [ExplicitKey]
@@ -6422,7 +6457,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? TransferPromotionRequestID { get; set; }
     }
 
-    [Table("PRRequestJobItem")]
+   [Table("PRM.PRRequestJobItem")]
     public partial class PRRequestJobItem
     {
         [ExplicitKey]
@@ -6474,7 +6509,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? TransferPromotionRequestItemID { get; set; }
     }
 
-    [Table("PRRequestJobItemResult")]
+   [Table("PRM.PRRequestJobItemResult")]
     public partial class PRRequestJobItemResult
     {
         [ExplicitKey]
@@ -6500,7 +6535,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Quotation")]
+   [Table("SAL.Quotation")]
     public partial class Quotation
     {
         [ExplicitKey]
@@ -6525,7 +6560,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("QuotationCompare")]
+   [Table("SAL.QuotationCompare")]
     public partial class QuotationCompare
     {
         [ExplicitKey]
@@ -6542,7 +6577,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("QuotationPromotionExpense")]
+   [Table("PRM.QuotationPromotionExpense")]
     public partial class QuotationPromotionExpense
     {
         [ExplicitKey]
@@ -6564,7 +6599,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("QuotationSalePromotion")]
+   [Table("PRM.QuotationSalePromotion")]
     public partial class QuotationSalePromotion
     {
         [ExplicitKey]
@@ -6582,7 +6617,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? MasterSalePromotionID { get; set; }
     }
 
-    [Table("QuotationSalePromotionCreditCardItem")]
+   [Table("PRM.QuotationSalePromotionCreditCardItem")]
     public partial class QuotationSalePromotionCreditCardItem
     {
         [ExplicitKey]
@@ -6600,7 +6635,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? MasterSalePromotionCreditCardItemID { get; set; }
     }
 
-    [Table("QuotationSalePromotionFreeItem")]
+   [Table("PRM.QuotationSalePromotionFreeItem")]
     public partial class QuotationSalePromotionFreeItem
     {
         [ExplicitKey]
@@ -6619,7 +6654,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public int Quantity { get; set; }
     }
 
-    [Table("QuotationSalePromotionItem")]
+   [Table("PRM.QuotationSalePromotionItem")]
     public partial class QuotationSalePromotionItem
     {
         [ExplicitKey]
@@ -6639,7 +6674,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? MainQuotationSalePromotionID { get; set; }
     }
 
-    [Table("QuotationTransferCreditCardItem")]
+   [Table("PRM.QuotationTransferCreditCardItem")]
     public partial class QuotationTransferCreditCardItem
     {
         [ExplicitKey]
@@ -6657,7 +6692,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("QuotationTransferPromotion")]
+   [Table("PRM.QuotationTransferPromotion")]
     public partial class QuotationTransferPromotion
     {
         [ExplicitKey]
@@ -6676,7 +6711,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("QuotationTransferPromotionFreeItem")]
+   [Table("PRM.QuotationTransferPromotionFreeItem")]
     public partial class QuotationTransferPromotionFreeItem
     {
         [ExplicitKey]
@@ -6695,7 +6730,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("QuotationTransferPromotionItem")]
+   [Table("PRM.QuotationTransferPromotionItem")]
     public partial class QuotationTransferPromotionItem
     {
         [ExplicitKey]
@@ -6715,7 +6750,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("QuotationUnitPrice")]
+   [Table("SAL.QuotationUnitPrice")]
     public partial class QuotationUnitPrice
     {
         [ExplicitKey]
@@ -6761,7 +6796,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public float? PercentFreeDown { get; set; }
     }
 
-    [Table("QuotationUnitPriceItem")]
+   [Table("SAL.QuotationUnitPriceItem")]
     public partial class QuotationUnitPriceItem
     {
         [ExplicitKey]
@@ -6787,7 +6822,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("RateSale")]
+   [Table("CMS.RateSale")]
     public partial class RateSale
     {
         [ExplicitKey]
@@ -6806,7 +6841,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("RateSettingAgent")]
+   [Table("CMS.RateSettingAgent")]
     public partial class RateSettingAgent
     {
         [ExplicitKey]
@@ -6827,7 +6862,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("RateSettingFixSale")]
+   [Table("CMS.RateSettingFixSale")]
     public partial class RateSettingFixSale
     {
         [ExplicitKey]
@@ -6847,7 +6882,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("RateSettingFixSaleModel")]
+   [Table("CMS.RateSettingFixSaleModel")]
     public partial class RateSettingFixSaleModel
     {
         [ExplicitKey]
@@ -6868,7 +6903,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("RateSettingFixTransfer")]
+   [Table("CMS.RateSettingFixTransfer")]
     public partial class RateSettingFixTransfer
     {
         [ExplicitKey]
@@ -6888,7 +6923,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("RateSettingFixTransferModel")]
+   [Table("CMS.RateSettingFixTransferModel")]
     public partial class RateSettingFixTransferModel
     {
         [ExplicitKey]
@@ -6909,7 +6944,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("RateSettingSale")]
+   [Table("CMS.RateSettingSale")]
     public partial class RateSettingSale
     {
         [ExplicitKey]
@@ -6931,7 +6966,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("RateSettingTransfer")]
+   [Table("CMS.RateSettingTransfer")]
     public partial class RateSettingTransfer
     {
         [ExplicitKey]
@@ -6953,7 +6988,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("RateTransfer")]
+   [Table("CMS.RateTransfer")]
     public partial class RateTransfer
     {
         [ExplicitKey]
@@ -6972,7 +7007,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ReceiptDetail")]
+   [Table("FIN.ReceiptDetail")]
     public partial class ReceiptDetail
     {
         [ExplicitKey]
@@ -7007,7 +7042,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string BankNameEn { get; set; }
     }
 
-    [Table("ReceiptHeader")]
+   [Table("FIN.ReceiptHeader")]
     public partial class ReceiptHeader
     {
         [ExplicitKey]
@@ -7120,9 +7155,10 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public int TotalSendPrinting { get; set; }
         public string LockEmailRemarkCancel { get; set; }
         public string LockPrintingRemarkCancel { get; set; }
+        public string ContactNo { get; set; }
     }
 
-    [Table("ReceiptSendEmailHistory")]
+   [Table("FIN.ReceiptSendEmailHistory")]
     public partial class ReceiptSendEmailHistory
     {
         [ExplicitKey]
@@ -7141,7 +7177,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ReceiptSendPrintingHistory")]
+   [Table("FIN.ReceiptSendPrintingHistory")]
     public partial class ReceiptSendPrintingHistory
     {
         [ExplicitKey]
@@ -7161,7 +7197,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ReceiptSendPrintingHistoryDetail")]
+   [Table("FIN.ReceiptSendPrintingHistoryDetail")]
     public partial class ReceiptSendPrintingHistoryDetail
     {
         [ExplicitKey]
@@ -7179,7 +7215,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid ReceiptHeaderID { get; set; }
     }
 
-    [Table("ReceiptTempDetail")]
+   [Table("FIN.ReceiptTempDetail")]
     public partial class ReceiptTempDetail
     {
         [ExplicitKey]
@@ -7200,7 +7236,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ReceiptTempHeader")]
+   [Table("FIN.ReceiptTempHeader")]
     public partial class ReceiptTempHeader
     {
         [ExplicitKey]
@@ -7279,7 +7315,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public decimal TotalAmount { get; set; }
     }
 
-    [Table("RefreshToken")]
+   [Table("USR.RefreshToken")]
     public partial class RefreshToken
     {
         [ExplicitKey]
@@ -7293,7 +7329,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string ExpireDate { get; set; }
     }
 
-    [Table("RefundMemo")]
+   [Table("SAL.RefundMemo")]
     public partial class RefundMemo
     {
         [ExplicitKey]
@@ -7318,7 +7354,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefundDueDate { get; set; }
     }
 
-    [Table("RefundMemoCustomer")]
+   [Table("SAL.RefundMemoCustomer")]
     public partial class RefundMemoCustomer
     {
         [ExplicitKey]
@@ -7336,7 +7372,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? TransferOwnerID { get; set; }
     }
 
-    [Table("RevisitActivity")]
+   [Table("CTM.RevisitActivity")]
     public partial class RevisitActivity
     {
         [ExplicitKey]
@@ -7359,7 +7395,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("RevisitActivityResult")]
+   [Table("CTM.RevisitActivityResult")]
     public partial class RevisitActivityResult
     {
         [ExplicitKey]
@@ -7378,7 +7414,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("RevisitActivityStatus")]
+   [Table("CTM.RevisitActivityStatus")]
     public partial class RevisitActivityStatus
     {
         [ExplicitKey]
@@ -7398,7 +7434,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Role")]
+   [Table("USR.Role")]
     public partial class Role
     {
         [ExplicitKey]
@@ -7418,7 +7454,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("RoleGroup")]
+   [Table("USR.RoleGroup")]
     public partial class RoleGroup
     {
         [ExplicitKey]
@@ -7435,7 +7471,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("RoomPlanImage")]
+   [Table("PRJ.RoomPlanImage")]
     public partial class RoomPlanImage
     {
         [ExplicitKey]
@@ -7454,7 +7490,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("RoundFee")]
+   [Table("PRJ.RoundFee")]
     public partial class RoundFee
     {
         [ExplicitKey]
@@ -7477,7 +7513,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("RunningNumberCounter")]
+   [Table("MST.RunningNumberCounter")]
     public partial class RunningNumberCounter
     {
         [ExplicitKey]
@@ -7491,7 +7527,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? UpdatedByUserID { get; set; }
     }
 
-    [Table("SalePromotion")]
+   [Table("PRM.SalePromotion")]
     public partial class SalePromotion
     {
         [ExplicitKey]
@@ -7518,9 +7554,10 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? SalePromotionStageMasterCenterID { get; set; }
         public bool IsActive { get; set; }
         public Guid? ChangePromotionWorkflowID { get; set; }
+        public Guid? FromSalePromotionID { get; set; }
     }
 
-    [Table("SalePromotionCreditCardItem")]
+   [Table("PRM.SalePromotionCreditCardItem")]
     public partial class SalePromotionCreditCardItem
     {
         [ExplicitKey]
@@ -7540,7 +7577,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("SalePromotionDelivery")]
+   [Table("PRM.SalePromotionDelivery")]
     public partial class SalePromotionDelivery
     {
         [ExplicitKey]
@@ -7562,7 +7599,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? PrintUserID { get; set; }
     }
 
-    [Table("SalePromotionDeliveryItem")]
+   [Table("PRM.SalePromotionDeliveryItem")]
     public partial class SalePromotionDeliveryItem
     {
         [ExplicitKey]
@@ -7592,7 +7629,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public int? Quantity_equal { get; set; }
     }
 
-    [Table("SalePromotionExpense")]
+   [Table("PRM.SalePromotionExpense")]
     public partial class SalePromotionExpense
     {
         [ExplicitKey]
@@ -7615,7 +7652,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? PaymentReceiverMasterCenterID { get; set; }
     }
 
-    [Table("SalePromotionFreeItem")]
+   [Table("PRM.SalePromotionFreeItem")]
     public partial class SalePromotionFreeItem
     {
         [ExplicitKey]
@@ -7635,7 +7672,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public int Quantity { get; set; }
     }
 
-    [Table("SalePromotionItem")]
+   [Table("PRM.SalePromotionItem")]
     public partial class SalePromotionItem
     {
         [ExplicitKey]
@@ -7659,7 +7696,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool IsActive { get; set; }
     }
 
-    [Table("SalePromotionRequest")]
+   [Table("PRM.SalePromotionRequest")]
     public partial class SalePromotionRequest
     {
         [ExplicitKey]
@@ -7683,7 +7720,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? PrintUserID { get; set; }
     }
 
-    [Table("SalePromotionRequestItem")]
+   [Table("PRM.SalePromotionRequestItem")]
     public partial class SalePromotionRequestItem
     {
         [ExplicitKey]
@@ -7707,7 +7744,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string DenyRemark { get; set; }
     }
 
-    [Table("SalePromotionStockReceiveItem")]
+   [Table("PRM.SalePromotionStockReceiveItem")]
     public partial class SalePromotionStockReceiveItem
     {
         [ExplicitKey]
@@ -7737,7 +7774,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string Plant { get; set; }
     }
 
-    [Table("SAP_ZRFCMM01")]
+   [Table("PRM.SAP_ZRFCMM01")]
     public partial class SAPZRFCMM01
     {
         [ExplicitKey]
@@ -7760,7 +7797,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? UpdatedByUserID { get; set; }
     }
 
-    [Table("SAP_ZRFCMM02")]
+   [Table("PRM.SAP_ZRFCMM02")]
     public partial class SAPZRFCMM02
     {
         [ExplicitKey]
@@ -7794,7 +7831,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? UpdatedByUserID { get; set; }
     }
 
-    [Table("SAPMaterialSyncJob")]
+   [Table("PRM.SAPMaterialSyncJob")]
     public partial class SAPMaterialSyncJob
     {
         [ExplicitKey]
@@ -7815,7 +7852,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("SAPUnitStatus")]
+   [Table("ACC.SAPUnitStatus")]
     public partial class SAPUnitStatus
     {
         [ExplicitKey]
@@ -7838,7 +7875,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string Message { get; set; }
     }
 
-    [Table("SAPWBSProSyncJob")]
+   [Table("PRJ.SAPWBSProSyncJob")]
     public partial class SAPWBSProSyncJob
     {
         [ExplicitKey]
@@ -7858,7 +7895,33 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("SignContractWorkflow")]
+   [Table("HangFire.Schema")]
+    public partial class Schema
+    {
+        [ExplicitKey]
+        public int Version { get; set; }
+    }
+
+   [Table("HangFire.Server")]
+    public partial class Server
+    {
+        [ExplicitKey]
+        public string Id { get; set; }
+        public string Data { get; set; }
+        public DateTime LastHeartbeat { get; set; }
+    }
+
+   [Table("HangFire.Set")]
+    public partial class Set
+    {
+        [ExplicitKey]
+        public string Key { get; set; }
+        public double Score { get; set; }
+        public string Value { get; set; }
+        public DateTime? ExpireAt { get; set; }
+    }
+
+   [Table("SAL.SignContractWorkflow")]
     public partial class SignContractWorkflow
     {
         [ExplicitKey]
@@ -7880,7 +7943,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("SmsNotification")]
+   [Table("NTF.SmsNotification")]
     public partial class SmsNotification
     {
         [ExplicitKey]
@@ -7900,7 +7963,19 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("SubBG")]
+   [Table("HangFire.State")]
+    public partial class State
+    {
+        [Key]
+        public long Id { get; set; }
+        public long JobId { get; set; }
+        public string Name { get; set; }
+        public string Reason { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public string Data { get; set; }
+    }
+
+   [Table("MST.SubBG")]
     public partial class SubBG
     {
         [ExplicitKey]
@@ -7919,7 +7994,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("SubDistrict")]
+   [Table("MST.SubDistrict")]
     public partial class SubDistrict
     {
         [ExplicitKey]
@@ -7940,7 +8015,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("sysdiagrams")]
+   [Table("sysdiagrams")]
     public partial class sysdiagram
     {
         public string name { get; set; }
@@ -7951,7 +8026,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public byte[] definition { get; set; }
     }
 
-    [Table("TaskType")]
+   [Table("USR.TaskType")]
     public partial class TaskType
     {
         [ExplicitKey]
@@ -7972,35 +8047,35 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("temp_country")]
+   [Table("temp_country")]
     public partial class tempcountry
     {
         public string ContractNumber { get; set; }
         public Guid? CountryID { get; set; }
     }
 
-    [Table("temp_district")]
+   [Table("temp_district")]
     public partial class tempdistrict
     {
         public string ContractNumber { get; set; }
         public Guid? DistrictID { get; set; }
     }
 
-    [Table("temp_province")]
+   [Table("temp_province")]
     public partial class tempprovince
     {
         public string ContractNumber { get; set; }
         public Guid? ProvinceID { get; set; }
     }
 
-    [Table("temp_subdistrict")]
+   [Table("temp_subdistrict")]
     public partial class tempsubdistrict
     {
         public string ContractNumber { get; set; }
         public Guid? SubDistrictID { get; set; }
     }
 
-    [Table("TitledeedDetail")]
+   [Table("PRJ.TitledeedDetail")]
     public partial class TitledeedDetail
     {
         [ExplicitKey]
@@ -8032,7 +8107,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("TitledeedDetailHistory")]
+   [Table("PRJ.TitledeedDetailHistory")]
     public partial class TitledeedDetailHistory
     {
         [ExplicitKey]
@@ -8065,7 +8140,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("TitledeedReceive")]
+   [Table("SAL.TitledeedReceive")]
     public partial class TitledeedReceive
     {
         [ExplicitKey]
@@ -8087,7 +8162,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("TitledeedReceiveHistory")]
+   [Table("SAL.TitledeedReceiveHistory")]
     public partial class TitledeedReceiveHistory
     {
         [ExplicitKey]
@@ -8108,7 +8183,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Tower")]
+   [Table("PRJ.Tower")]
     public partial class Tower
     {
         [ExplicitKey]
@@ -8131,7 +8206,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Transfer")]
+   [Table("SAL.Transfer")]
     public partial class Transfer
     {
         [ExplicitKey]
@@ -8218,7 +8293,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public decimal? LegalEntityChangeAmount { get; set; }
     }
 
-    [Table("TransferBankTransfer")]
+   [Table("SAL.TransferBankTransfer")]
     public partial class TransferBankTransfer
     {
         [ExplicitKey]
@@ -8240,7 +8315,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("TransferCash")]
+   [Table("SAL.TransferCash")]
     public partial class TransferCash
     {
         [ExplicitKey]
@@ -8259,7 +8334,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("TransferCheque")]
+   [Table("SAL.TransferCheque")]
     public partial class TransferCheque
     {
         [ExplicitKey]
@@ -8283,7 +8358,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("TransferCreditCardItem")]
+   [Table("PRM.TransferCreditCardItem")]
     public partial class TransferCreditCardItem
     {
         [ExplicitKey]
@@ -8305,7 +8380,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool IsActive { get; set; }
     }
 
-    [Table("TransferDocument")]
+   [Table("SAL.TransferDocument")]
     public partial class TransferDocument
     {
         [ExplicitKey]
@@ -8329,7 +8404,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? ReceiveDocumentUserID { get; set; }
     }
 
-    [Table("TransferExpense")]
+   [Table("SAL.TransferExpense")]
     public partial class TransferExpense
     {
         [ExplicitKey]
@@ -8356,7 +8431,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? PaymentReceiverMasterCenterID { get; set; }
     }
 
-    [Table("TransferFeeResult")]
+   [Table("SAL.TransferFeeResult")]
     public partial class TransferFeeResult
     {
         [ExplicitKey]
@@ -8415,7 +8490,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public int? DepreRateTotal { get; set; }
     }
 
-    [Table("TransferLetter")]
+   [Table("LET.TransferLetter")]
     public partial class TransferLetter
     {
         [ExplicitKey]
@@ -8446,7 +8521,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid TransferLetterTypeMasterCenterID { get; set; }
     }
 
-    [Table("TransferOwner")]
+   [Table("SAL.TransferOwner")]
     public partial class TransferOwner
     {
         [ExplicitKey]
@@ -8511,7 +8586,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string FullnameTH { get; set; }
     }
 
-    [Table("TransferPrintForm")]
+   [Table("SAL.TransferPrintForm")]
     public partial class TransferPrintForm
     {
         [ExplicitKey]
@@ -8535,9 +8610,10 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string CorporateBuyingReasonOther { get; set; }
         public Guid? FenceTypeMasterCenterID { get; set; }
         public string No3Other { get; set; }
+        public Guid? AttorneyNameTransferID { get; set; }
     }
 
-    [Table("TransferPromotion")]
+   [Table("PRM.TransferPromotion")]
     public partial class TransferPromotion
     {
         [ExplicitKey]
@@ -8559,12 +8635,6 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool IsActive { get; set; }
         public Guid? ChangePromotionWorkflowID { get; set; }
         public bool IsFreeMortgageCharge { get; set; }
-        public bool IsUnlocked3PercentTransferDiscount { get; set; }
-        public bool IsUnlockedTransferDiscount { get; set; }
-        public Guid? Unlocked3PercentTransferDiscountByUserID { get; set; }
-        public string Unlocked3PercentTransferDiscountDate { get; set; }
-        public Guid? UnlockedTransferDiscountByUserID { get; set; }
-        public string UnlockedTransferDiscountDate { get; set; }
         public string LastMigrateDate { get; set; }
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
@@ -8575,7 +8645,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string TransferPromotionDate { get; set; }
     }
 
-    [Table("TransferPromotionDelivery")]
+   [Table("PRM.TransferPromotionDelivery")]
     public partial class TransferPromotionDelivery
     {
         [ExplicitKey]
@@ -8597,7 +8667,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? PrintUserID { get; set; }
     }
 
-    [Table("TransferPromotionDeliveryItem")]
+   [Table("PRM.TransferPromotionDeliveryItem")]
     public partial class TransferPromotionDeliveryItem
     {
         [ExplicitKey]
@@ -8627,7 +8697,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public int? Quantity_equal { get; set; }
     }
 
-    [Table("TransferPromotionExpense")]
+   [Table("PRM.TransferPromotionExpense")]
     public partial class TransferPromotionExpense
     {
         [ExplicitKey]
@@ -8650,7 +8720,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("TransferPromotionFreeItem")]
+   [Table("PRM.TransferPromotionFreeItem")]
     public partial class TransferPromotionFreeItem
     {
         [ExplicitKey]
@@ -8670,7 +8740,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("TransferPromotionItem")]
+   [Table("PRM.TransferPromotionItem")]
     public partial class TransferPromotionItem
     {
         [ExplicitKey]
@@ -8694,7 +8764,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool IsActive { get; set; }
     }
 
-    [Table("TransferPromotionRequest")]
+   [Table("PRM.TransferPromotionRequest")]
     public partial class TransferPromotionRequest
     {
         [ExplicitKey]
@@ -8718,7 +8788,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? PromotionRequestPRStatusMasterCenterID { get; set; }
     }
 
-    [Table("TransferPromotionRequestItem")]
+   [Table("PRM.TransferPromotionRequestItem")]
     public partial class TransferPromotionRequestItem
     {
         [ExplicitKey]
@@ -8742,7 +8812,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("TransferPromotionStockReceiveItem")]
+   [Table("PRM.TransferPromotionStockReceiveItem")]
     public partial class TransferPromotionStockReceiveItem
     {
         [ExplicitKey]
@@ -8772,7 +8842,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("TransferUnit")]
+   [Table("SAL.TransferUnit")]
     public partial class TransferUnit
     {
         [ExplicitKey]
@@ -8793,7 +8863,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("TypeOfRealEstate")]
+   [Table("MST.TypeOfRealEstate")]
     public partial class TypeOfRealEstate
     {
         [ExplicitKey]
@@ -8814,7 +8884,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Unit")]
+   [Table("PRJ.Unit")]
     public partial class Unit
     {
         [ExplicitKey]
@@ -8906,7 +8976,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string ScheduleTransferDate { get; set; }
     }
 
-    [Table("UnitDetail")]
+   [Table("UnitDetail")]
     public partial class UnitDetail
     {
         public Guid ID { get; set; }
@@ -8995,7 +9065,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public int Owner { get; set; }
     }
 
-    [Table("UnitOtherUnitInfoTag")]
+   [Table("PRJ.UnitOtherUnitInfoTag")]
     public partial class UnitOtherUnitInfoTag
     {
         [ExplicitKey]
@@ -9012,7 +9082,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("UnitPrice")]
+   [Table("SAL.UnitPrice")]
     public partial class UnitPrice
     {
         [ExplicitKey]
@@ -9059,7 +9129,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public float? PercentFreeDown { get; set; }
     }
 
-    [Table("UnitPriceInstallment")]
+   [Table("SAL.UnitPriceInstallment")]
     public partial class UnitPriceInstallment
     {
         [ExplicitKey]
@@ -9084,7 +9154,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("UnitPriceItem")]
+   [Table("SAL.UnitPriceItem")]
     public partial class UnitPriceItem
     {
         [ExplicitKey]
@@ -9114,7 +9184,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("UnitStory")]
+   [Table("OST.UnitStory")]
     public partial class UnitStory
     {
         [ExplicitKey]
@@ -9137,7 +9207,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("UnitStoryGroup")]
+   [Table("OST.UnitStoryGroup")]
     public partial class UnitStoryGroup
     {
         [ExplicitKey]
@@ -9154,7 +9224,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("UnitStoryType")]
+   [Table("OST.UnitStoryType")]
     public partial class UnitStoryType
     {
         [ExplicitKey]
@@ -9175,7 +9245,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("UnknownPayment")]
+   [Table("FIN.UnknownPayment")]
     public partial class UnknownPayment
     {
         [ExplicitKey]
@@ -9200,7 +9270,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("User")]
+   [Table("USR.User")]
     public partial class User
     {
         [ExplicitKey]
@@ -9233,7 +9303,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("UserAuthorizeProject")]
+   [Table("USR.UserAuthorizeProject")]
     public partial class UserAuthorizeProject
     {
         [ExplicitKey]
@@ -9251,7 +9321,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("UserBackgroundJob")]
+   [Table("USR.UserBackgroundJob")]
     public partial class UserBackgroundJob
     {
         [ExplicitKey]
@@ -9272,7 +9342,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("UserDefaultProject")]
+   [Table("USR.UserDefaultProject")]
     public partial class UserDefaultProject
     {
         [ExplicitKey]
@@ -9290,7 +9360,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("UserRole")]
+   [Table("USR.UserRole")]
     public partial class UserRole
     {
         [ExplicitKey]
@@ -9308,24 +9378,24 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    //[Table("Users")]
-    //public partial class User
-    //{
-    //    public int UserID { get; set; }
-    //    public string Username { get; set; }
-    //    public string FirstName { get; set; }
-    //    public string LastName { get; set; }
-    //    public bool IsSuperUser { get; set; }
-    //    public int? AffiliateId { get; set; }
-    //    public string Email { get; set; }
-    //    public string DisplayName { get; set; }
-    //    public bool UpdatePassword { get; set; }
-    //    public string EmployeeID { get; set; }
-    //    public int? LCType { get; set; }
-    //    public string UserGUID { get; set; }
-    //}
+   //[Table("Users")]
+   // public partial class User
+   // {
+   //     public int UserID { get; set; }
+   //     public string Username { get; set; }
+   //     public string FirstName { get; set; }
+   //     public string LastName { get; set; }
+   //     public bool IsSuperUser { get; set; }
+   //     public int? AffiliateId { get; set; }
+   //     public string Email { get; set; }
+   //     public string DisplayName { get; set; }
+   //     public bool UpdatePassword { get; set; }
+   //     public string EmployeeID { get; set; }
+   //     public int? LCType { get; set; }
+   //     public string UserGUID { get; set; }
+   // }
 
-    [Table("Visitor")]
+   [Table("CTM.Visitor")]
     public partial class Visitor
     {
         [ExplicitKey]
@@ -9400,7 +9470,44 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("WaiveQC")]
+   [Table("SAL.vw_LET_DownPaymentLetter")]
+    public partial class vwLETDownPaymentLetter
+    {
+        public Guid AgreementID { get; set; }
+        public string AgreementNo { get; set; }
+        public string ContractDate { get; set; }
+        public string UnitNo { get; set; }
+        public Guid? ProjectID { get; set; }
+        public string ProjectNo { get; set; }
+        public string ProjectType { get; set; }
+        public string ProjectTypeName { get; set; }
+        public decimal? SellingPrice { get; set; }
+        public int? InstallmentAmount { get; set; }
+        public decimal? TotalBookingContractDown { get; set; }
+        public decimal? PercentBookingContractDown { get; set; }
+        public decimal? SumPayedAmount { get; set; }
+        public string LastReceiveDate { get; set; }
+        public int IsOverTwelvePointFivePercent { get; set; }
+        public string DisplayName { get; set; }
+        public int? CountDueAmount { get; set; }
+        public decimal? SumDueAmount { get; set; }
+        public int? CountDueDate { get; set; }
+        public int? maxInstallmentPeriod { get; set; }
+        public int? minInstallmentPeriod { get; set; }
+        public Guid? ChangeAgreementOwnerTypeID { get; set; }
+        public string ChangeAgreementOwnerType { get; set; }
+        public Guid? LastDownPaymentLetterTypeID { get; set; }
+        public string LastDownPaymentLetterType { get; set; }
+        public string LastDownPaymentLetterTypeName { get; set; }
+        public string LastResponseDate { get; set; }
+        public Guid? LastLetterStatusID { get; set; }
+        public string LastLetterStatusName { get; set; }
+        public bool? LastOverTwelvePointFivePercent { get; set; }
+        public int? CTM1Amount { get; set; }
+        public int? CTM2Amount { get; set; }
+    }
+
+   [Table("PRJ.WaiveQC")]
     public partial class WaiveQC
     {
         [ExplicitKey]
@@ -9424,7 +9531,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("WaterElectricMeterPrice")]
+   [Table("PRJ.WaterElectricMeterPrice")]
     public partial class WaterElectricMeterPrice
     {
         [ExplicitKey]
@@ -9446,7 +9553,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("WebNotification")]
+   [Table("NTF.WebNotification")]
     public partial class WebNotification
     {
         [ExplicitKey]
@@ -9468,7 +9575,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("Workflow")]
+   [Table("WFL.Workflow")]
     public partial class Workflow
     {
         [ExplicitKey]
@@ -9492,7 +9599,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("WorkflowApprover")]
+   [Table("WFL.WorkflowApprover")]
     public partial class WorkflowApprover
     {
         [ExplicitKey]
@@ -9514,7 +9621,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("WorkflowApproverTemplate")]
+   [Table("WFL.WorkflowApproverTemplate")]
     public partial class WorkflowApproverTemplate
     {
         [ExplicitKey]
@@ -9534,7 +9641,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("WorkflowStep")]
+   [Table("WFL.WorkflowStep")]
     public partial class WorkflowStep
     {
         [ExplicitKey]
@@ -9553,7 +9660,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("WorkflowStepTemplate")]
+   [Table("WFL.WorkflowStepTemplate")]
     public partial class WorkflowStepTemplate
     {
         [ExplicitKey]
@@ -9571,7 +9678,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("WorkflowTemplate")]
+   [Table("WFL.WorkflowTemplate")]
     public partial class WorkflowTemplate
     {
         [ExplicitKey]
@@ -9589,7 +9696,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("WorkflowType")]
+   [Table("WFL.WorkflowType")]
     public partial class WorkflowType
     {
         [ExplicitKey]
@@ -9610,7 +9717,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-    [Table("ZPROM_DeliveryPromotion")]
+   [Table("ZPROM_DeliveryPromotion")]
     public partial class ZPROMDeliveryPromotion
     {
         public string DeliveryPromotionID { get; set; }
@@ -9633,7 +9740,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public DateTime? EditDate { get; set; }
     }
 
-    [Table("ZPROM_DeliveryPromotionDetail")]
+   [Table("ZPROM_DeliveryPromotionDetail")]
     public partial class ZPROMDeliveryPromotionDetail
     {
         public string DeliveryPromotionID { get; set; }
@@ -9643,7 +9750,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string Remark { get; set; }
     }
 
-    [Table("ZPROM_PromotionDetail")]
+   [Table("ZPROM_PromotionDetail")]
     public partial class ZPROMPromotionDetail
     {
         public string PromotionID { get; set; }
@@ -9669,7 +9776,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public byte? TabNo { get; set; }
     }
 
-    [Table("ZPROM_ReceivePromotion")]
+   [Table("ZPROM_ReceivePromotion")]
     public partial class ZPROMReceivePromotion
     {
         public string ReceivePromotionID { get; set; }
@@ -9692,7 +9799,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool? IsItemFromHO { get; set; }
     }
 
-    [Table("ZPROM_ReceivePromotionDetail")]
+   [Table("ZPROM_ReceivePromotionDetail")]
     public partial class ZPROMReceivePromotionDetail
     {
         public string ReceivePromotionID { get; set; }
@@ -9706,7 +9813,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public DateTime? ReceivePromotionDate { get; set; }
     }
 
-    [Table("ZPROM_SalePromotionDetail")]
+   [Table("ZPROM_SalePromotionDetail")]
     public partial class ZPROMSalePromotionDetail
     {
         public string DocumentID { get; set; }
@@ -9720,7 +9827,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public DateTime? LastMigrateTime { get; set; }
     }
 
-    [Table("ZPROM_SalePromotionFee")]
+   [Table("ZPROM_SalePromotionFee")]
     public partial class ZPROMSalePromotionFee
     {
         public string DocumentID { get; set; }
@@ -9738,7 +9845,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public DateTime? LastMigrateTime { get; set; }
     }
 
-    [Table("ZPROM_TransferPromotion")]
+   [Table("ZPROM_TransferPromotion")]
     public partial class ZPROMTransferPromotion
     {
         public string TransferPromotionID { get; set; }
@@ -9765,7 +9872,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public decimal? TotalBudgetPromotion { get; set; }
     }
 
-    [Table("ZPROM_TransferPromotionDetail")]
+   [Table("ZPROM_TransferPromotionDetail")]
     public partial class ZPROMTransferPromotionDetail
     {
         public string TransferPromotionID { get; set; }
@@ -9775,7 +9882,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool? IsSelected { get; set; }
     }
 
-    [Table("ZPROM_TransferPromotionFee")]
+   [Table("ZPROM_TransferPromotionFee")]
     public partial class ZPROMTransferPromotionFee
     {
         public string TransferPromotionID { get; set; }

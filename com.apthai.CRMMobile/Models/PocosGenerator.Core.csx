@@ -287,7 +287,7 @@ public class PocosGenerator {
 		}
 	}
 
-	private List<string> LoadStoredProcedures()
+	public List<string> LoadStoredProcedures()
 	{
 		try
 		{

@@ -22,7 +22,9 @@ namespace com.apthai.CRMMobile.Repositories
         bool InsertCSUserProfile(Model.CRMMobile.UserProfile data, out long ProfileID);
         bool InsertCSUserLogin(Model.CRMMobile.UserLogin data);
         bool UpdateCSUserLogin(Model.CRMMobile.UserLogin data);
-        
+        List<iCRMBooking> GetUseriBookingByUserID(string UserID);
+
+
 
     }
 }

@@ -100,4 +100,9 @@ namespace com.apthai.CRMMobile.HttpRestModel
     {
         public string PhoneNumber { get; set; }
     }
+
+    public partial class GetUserBookingTrackingByUserIDParam
+    {
+        public string UserID { get; set; }
+    }
 }

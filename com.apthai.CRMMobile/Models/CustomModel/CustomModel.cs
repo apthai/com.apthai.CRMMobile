@@ -76,6 +76,68 @@ namespace com.apthai.CRMMobile.CustomModel
     {
         public List<GetUserPropotyObj> getUserPropotyObjs { get; set; }
     }
-
+    public class GetBillingTrackingMobile
+    {
+        public string ProjectNo { get; set; }
+        public string UnitNo { get; set; }
+        public string TotalInstallment { get; set; }
+        public string NormalDownPayment { get; set; }
+        public string SpecialDownPayment { get; set; }
+        public string TotalInstallmentAmount { get; set; }
+        public string UnitPriceStageName { get; set; }
+        public string DetailDownPayment { get; set; }
+        public string DownPerInstallment { get; set; }
+        public string NormalDownPerInstallment { get; set; }
+        public string SpecialDownPaymentFlag { get; set; }
+        public string SpecialDownPerInstallment { get; set; }
+        public string PaymentDueDate { get; set; }
+        public string PaymentDate { get; set; }
+        public string AmountPaid { get; set; }
+        public string AmountBalance { get; set; }
+        public string FlagReceipt { get; set; }
+        public string FlagOverDue { get; set; }
+        public string FlagBooking { get; set; }
+        public string BookingAmount { get; set; }
+        public string PayBookingAmount { get; set; }
+        public string BookingPaymentDate { get; set; }
+        public string FlagAgreement { get; set; }
+        public string AgreementAmount { get; set; }
+        public string PayAgreementAmount { get; set; }
+        public string AgreementPaymentDate { get; set; }
+    }
+    public class iCRMBooking
+    {
+        public string URLPicture { get; set; }
+        public int ProjectID { get; set; }
+        public string Project { get; set; }
+        public string Unit { get; set; }
+        public string UnitStatus { get; set; }
+        public string HouseNumber { get; set; }
+        public string Building { get; set; }
+        public string floor { get; set; }
+        public string RoomCodeFloorCode { get; set; }
+        public string RoomPlanFloorPlan { get; set; }
+        public string TypeHouse { get; set; }
+        public string SaleArea { get; set; }
+        public string LivingSpace { get; set; }
+        public string BookingDate { get; set; }
+        public string AgreementDate { get; set; }
+        public string SalePrice { get; set; }
+        public string HouseReservationPrice { get; set; }
+        public string CashDiscount { get; set; }
+        public string SalesPriceDiscount { get; set; }
+        public string FlagMainBooker { get; set; }
+        public string FullnameMainBooker { get; set; }
+        public string NameMainBooker { get; set; }
+        public string LastNameMainBooker { get; set; }
+        public string CoBooker { get; set; }
+        public string FlagMainAgreement { get; set; }
+        public string FullnameMainAgreement { get; set; }
+        public string NameMainAgreement { get; set; }
+        public string LastNameMainAgreement { get; set; }
+        public string CoAgreement { get; set; }
+        public string TotalInstallments { get; set; }
+        public string PaidInstallments { get; set; }
+    }
 
 }
