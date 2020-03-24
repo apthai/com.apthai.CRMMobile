@@ -248,6 +248,16 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
+        public List<iCRMContact> GetUseriCRMContact_Web(string Contact )
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<iCRMContact>("iCRMConTactForMobile", new { Contact = Contact }, commandType: CommandType.StoredProcedure).ToList();
+
+                return result;
+            }
+        }
     }
 
 }

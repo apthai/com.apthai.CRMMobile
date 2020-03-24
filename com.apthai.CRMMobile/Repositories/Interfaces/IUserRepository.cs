@@ -24,6 +24,7 @@ namespace com.apthai.CRMMobile.Repositories
         bool UpdateCSUserLogin(Model.CRMMobile.UserLogin data);
         List<iCRMBooking> GetUseriBookingByUserID(string UserID);
         List<GetBillingTrackingMobile> GetUserBillingTrackingByProjectandUnit(string ProjectID, string UnitID);
+        List<iCRMContact> GetUseriCRMContact_Web(string Contact);
 
 
 

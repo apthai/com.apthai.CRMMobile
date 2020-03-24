@@ -138,6 +138,45 @@ namespace com.apthai.CRMMobile.CustomModel
         public string CoAgreement { get; set; }
         public string TotalInstallments { get; set; }
         public string PaidInstallments { get; set; }
+        public string AgreementNo { get; set; }
+        public string FlagCreditDebit { get; set; }
+    }
+    public class iCRMContact
+    {
+        public string ID { get; set; }
+        public int ContactNo { get; set; }
+        public string FullnameTH { get; set; }
+        public string ContactTitleTH { get; set; }
+        public string FirstNameTH { get; set; }
+        public string MiddleNameTH { get; set; }
+        public string LastNameTH { get; set; }
+        public string FullnameEN { get; set; }
+        public string ContactTitleEN { get; set; }
+        public string FirstNameEN { get; set; }
+        public string MiddleNameEN { get; set; }
+        public string LastNameEN { get; set; }
+        public string Email { get; set; }
+        public string CitizenIdentityNo { get; set; }
+        public string ContactAddressFullTH { get; set; }
+        public string HouseNoTH { get; set; }
+        public string MooTH { get; set; }
+        public string VillageTH { get; set; }
+        public string SoiTH { get; set; }
+        public string RoadTH { get; set; }
+        public string SubDistrictTH { get; set; }
+        public string ProvinceTH { get; set; }
+        public string CountryTH { get; set; }
+        public string PostalCode { get; set; }
+        public string PhoneNumber { get; set; }
+        public string HouseNoEN { get; set; }
+        public string MooEN { get; set; }
+        public string VillageEN { get; set; }
+        public string SoiEN { get; set; }
+        public string RoadEN { get; set; }
+        public string SubDistrictEN { get; set; }
+        public string DistrictEN { get; set; }
+        public string ProcinceEN { get; set; }
+        public string CountryEN { get; set; }
     }
 
 }

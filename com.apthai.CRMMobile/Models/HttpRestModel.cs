@@ -111,4 +111,8 @@ namespace com.apthai.CRMMobile.HttpRestModel
         public string Project { get; set; }
         public string Unit { get; set; }
     }
+    public partial class GetUserICRMContactParam
+    {
+        public string ContactNo { get; set; }
+    }
 }
