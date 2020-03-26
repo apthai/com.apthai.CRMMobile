@@ -22,6 +22,13 @@ namespace com.apthai.CRMMobile.HttpRestModel
         public string AccessKey { get; set; }
         public string DeviceID { get; set; }
     }
+    public partial class ChangePINParam
+    {
+        public string OldPIN { get; set; }
+        public string NewPIN { get; set; }
+        public string AccessKey { get; set; }
+        public string DeviceID { get; set; }
+    }
     public partial class GetUserPhoneParam
     {
         public string CitizenIdentityNo { get; set; }

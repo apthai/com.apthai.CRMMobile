@@ -98,6 +98,70 @@ namespace com.apthai.CRMMobile.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("ChangePIN")]
+        [SwaggerOperation(Summary = "Register User เพื่อใช่ระบบ ซึ่งจะไป หาข้อมูลจากระบบ CRM",
+       Description = "Access Key ใช้ในการเรียหใช้ Function ต่างๆ เพื่อไม่ให้ User Login หลายเครื่องในเวลาเดียวกัน")]
+        public async Task<object> ChangePIN([FromBody]ChangePINParam data)
+        {
+            try
+            {
+                StringValues api_key;
+                StringValues EmpCode;
+
+                //Model.CRMWeb.Contact cRMContact = _UserRepository.GetCRMContactByIDCardNO(data.CitizenIdentityNo);
+                //if (cRMContact == null)
+                //{
+                //    return new
+                //    {
+                //        success = false,
+                //        data = new AutorizeDataJWT(),
+                //        message = "Only AP Customer Can Regist to the System !!"
+                //    };
+                //}
+                VerifyPINReturnObj cSUserProfile = _UserRepository.GetUserLogin_Mobile(data.AccessKey);
+                Model.CRMMobile.UserProfile user = _UserRepository.GetUserProfileByCRMContactID_Mobile(cSUserProfile.CRMContactID);
+                if (cSUserProfile == null)
+                {
+                    return new
+                    {
+                        success = false,
+                        data = new VerifyPINReturnObj(),
+                        message = "Cannot Find the Matach Data"
+                    };
+
+                }
+                else
+                {
+                    if (!SHAHelper.VerifyHash(data.OldPIN, "SHA512", cSUserProfile.PINCode))
+                    {
+                        return new
+                        {
+                            success = false,
+                            data = new AutorizeDataJWT(),
+                            message = "PinCode is InCorrect!"
+                        };
+                    }
+                    //Model.CRMMobile.UserLogin userLogin = _UserRepository.GetUserLoginByID_Mobile(cSUserProfile.UserLoginID);
+
+                    string NewPIN = SHAHelper.ComputeHash(data.NewPIN, "SHA512", null);
+                    user.PINCode = NewPIN;
+                    bool updateUserPIN = _UserRepository.UpdateCSUserProfile(user);
+
+                    return new
+                    {
+                        success = true,
+                        data = cSUserProfile,
+                        message = "PIN Correct!"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error :: " + ex.Message);
+            }
+        }
+
         [ApiExplorerSettings(IgnoreApi = true)]
         public string generateToken(string PhoneNumber)
         {

@@ -168,6 +168,17 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
+        public Model.CRMMobile.UserProfile GetUserProfileByCRMContactID_Mobile(string CRMContactID)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMMobile.UserProfile>("select * from CS.UserProfile WITH(NOLOCK) " +
+                    " where CS.UserProfile.CRMContactID=@CRMContactID", new { CRMContactID = CRMContactID }).FirstOrDefault();
+
+                return result;
+            }
+        }
         public bool InsertCSUserProfile(Model.CRMMobile.UserProfile data,out long ProfileID)
         {
             using (IDbConnection conn = MobileConnection)
@@ -223,6 +234,25 @@ namespace com.apthai.CRMMobile.Repositories
                 catch (Exception ex)
                 {
                     throw new Exception("MasterRepository.InsertCSUserProfile() :: Error ", ex);
+                }
+            }
+        }
+        public bool UpdateCSUserProfile(Model.CRMMobile.UserProfile data)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                try
+                {
+                    conn.Open();
+                    var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
+                    var result = conn.Insert(data, tran);
+                    tran.Commit();
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("MasterRepository.UpdateCSUserProfile() :: Error ", ex);
                 }
             }
         }
