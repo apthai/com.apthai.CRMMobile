@@ -220,13 +220,14 @@ namespace com.apthai.CRMMobile.Controllers
                 bool insert = _UserRepository.InsertCSUserProfile(cSUserProfile,out ProfileID);
 
                 string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
-                Model.CRMMobile.UserLogin cSUserLogin = new Model.CRMMobile.UserLogin();
+                CRMUserLoginWithContactID cSUserLogin = new CRMUserLoginWithContactID();
                 cSUserLogin.UserPhoneNumber = data.PhoneNumber;
                 cSUserLogin.LoginDate = DateTime.Now.ToShortDateString();
                 cSUserLogin.DeviceID = data.DeviceID;
                 cSUserLogin.DeviceType = data.DeviceType;
                 cSUserLogin.UserToken = GenerateAccessToken ;
                 cSUserLogin.UserProfileID = Convert.ToInt32(ProfileID);
+                cSUserLogin.CRMContactID = contact.ID;
                 bool insertUserLogin = _UserRepository.InsertCSUserLogin(cSUserLogin);
 
                 return new
@@ -520,6 +521,23 @@ namespace com.apthai.CRMMobile.Controllers
                     };
                 }
                 List<iCRMBooking> getBilling = _UserRepository.GetUseriBookingByUserID(data.UserID);
+                for (int i = 0; i < getBilling.Count(); i++)
+                {
+                   var Project = getBilling[i].Project.Split(" ");
+                   string ProjectShowName = "";
+                    for (int ii = 1; ii < Project.Count(); ii++)
+                    {
+                        if (ProjectShowName == "")
+                        {
+                            ProjectShowName =  Project[ii];
+                        }
+                        else
+                        {
+                            ProjectShowName = ProjectShowName + " " + Project[ii];
+                        }
+                    }
+                    getBilling[i].ProjectShowName = ProjectShowName;
+                }
                 if (getBilling.Count == null)
                 {
                     return new

@@ -111,6 +111,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public int ProjectID { get; set; }
         public string Project { get; set; }
         public string Unit { get; set; }
+        public string ProjectShowName { get; set; }
         public string Brand { get; set; }
         public string UnitStatus { get; set; }
         public string HouseNumber { get; set; }
@@ -178,6 +179,10 @@ namespace com.apthai.CRMMobile.CustomModel
         public string DistrictEN { get; set; }
         public string ProcinceEN { get; set; }
         public string CountryEN { get; set; }
+    }
+    public class CRMUserLoginWithContactID : Model.CRMMobile.UserLogin
+    {
+        public Guid CRMContactID { get; set; }
     }
 
 }
