@@ -111,6 +111,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public int ProjectID { get; set; }
         public string Project { get; set; }
         public string Unit { get; set; }
+        public string Brand { get; set; }
         public string UnitStatus { get; set; }
         public string HouseNumber { get; set; }
         public string Building { get; set; }
