@@ -140,6 +140,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string FullnameMainAgreementEN { get; set; }
         public string NameMainAgreementEN { get; set; }
         public string LastNameMainAgreementEN { get; set; }
+        public string AgreementOwnerNational { get; set; }
         public string CoAgreement { get; set; }
         public string TotalInstallments { get; set; }
         public string PaidInstallments { get; set; }
