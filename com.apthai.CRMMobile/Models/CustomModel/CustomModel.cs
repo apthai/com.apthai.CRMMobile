@@ -142,6 +142,12 @@ namespace com.apthai.CRMMobile.CustomModel
         public string PaidInstallments { get; set; }
         public string AgreementNo { get; set; }
         public string FlagCreditDebit { get; set; }
+        public string BookingOwnerAddressTH { get; set; }
+        public string BookingOwnerAddressEN { get; set; }
+        public string AgreementOwnerAddressTH { get; set; }
+        public string AgreementOwnerAddressEN { get; set; }
+        public string BookingOwnerEmail { get; set; }
+        public string AgreementOwnerEmail { get; set; }
     }
     public class iCRMContact
     {
