@@ -168,6 +168,17 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
+        public Model.CRMMobile.UserLogin GetUserLoginByPhoneNumbandDevice_Mobile(string DeviceID,string UserPhoneNumber)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMMobile.UserLogin>("select * from CS.UserLogin WITH(NOLOCK) " +
+                    " where CS.UserLogin.UserPhoneNumber=@UserPhoneNumber And DeviceID=@DeviceID", new { UserPhoneNumber = UserPhoneNumber , DeviceID  = DeviceID }).FirstOrDefault();
+
+                return result;
+            }
+        }
         public Model.CRMMobile.UserProfile GetUserProfileByCRMContactID_Mobile(string CRMContactID)
         {
             using (IDbConnection conn = MobileConnection)
@@ -226,7 +237,8 @@ namespace com.apthai.CRMMobile.Repositories
                 {
                     conn.Open();
                     var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
-                    var result = conn.Insert(data, tran);
+
+                    var result = conn.Update(data, tran);
                     tran.Commit();
 
                     return true;

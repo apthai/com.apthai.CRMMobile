@@ -19,6 +19,7 @@ namespace com.apthai.CRMMobile.Repositories
         Model.CRMWeb.ContactPhone GetSingleContactPhoneNumberByContactID_Web(string ContactID, string PhoneNumber);
         VerifyPINReturnObj GetUserLogin_Mobile(string UserToken);
         Model.CRMMobile.UserLogin GetUserLoginByID_Mobile(int UserLoginID);
+        Model.CRMMobile.UserLogin GetUserLoginByPhoneNumbandDevice_Mobile(string DeviceID, string UserPhoneNumber);
         Model.CRMMobile.UserProfile GetUserProfileByCRMContactID_Mobile(string CRMContactID);
         bool UpdateChangePINCSUserProfile(Model.CRMMobile.UserProfile data);
         bool InsertCSUserProfile(Model.CRMMobile.UserProfile data, out long ProfileID);

@@ -198,44 +198,93 @@ namespace com.apthai.CRMMobile.Controllers
                         valid = false
                     };
                 }
-
-                Model.CRMMobile.UserProfile cSUserProfile = new Model.CRMMobile.UserProfile();
-                cSUserProfile.CRMContactID = contact.ID.ToString();
-                cSUserProfile.TitleExtEN = contact.TitleExtTH;
-                cSUserProfile.FirstNameTH = contact.FirstNameTH;
-                cSUserProfile.LastNameTH = contact.LastNameTH;
-                cSUserProfile.Nickname = contact.Nickname;
-                cSUserProfile.TitleExtEN = contact.TitleExtEN;
-                cSUserProfile.FirstNameEN = contact.FirstNameEN;
-                cSUserProfile.MiddleNameEN = contact.MiddleNameEN;
-                cSUserProfile.LastNameEN = contact.LastNameEN;
-                cSUserProfile.CitizenIdentityNo = contact.CitizenIdentityNo;
-                cSUserProfile.Created = DateTime.Now.ToShortDateString();
-                cSUserProfile.CreatedBy = "System-Register";
-                cSUserProfile.Updated = null;
-                cSUserProfile.UpdatedBy = null;
-                cSUserProfile.IsActive = true;
-                cSUserProfile.PINCode = SHAHelper.ComputeHash(data.PINCode,"SHA512",null);
-                long ProfileID = 0;
-                bool insert = _UserRepository.InsertCSUserProfile(cSUserProfile,out ProfileID);
-
-                string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
-                CRMUserLoginWithContactID cSUserLogin = new CRMUserLoginWithContactID();
-                cSUserLogin.UserPhoneNumber = data.PhoneNumber;
-                cSUserLogin.LoginDate = DateTime.Now.ToShortDateString();
-                cSUserLogin.DeviceID = data.DeviceID;
-                cSUserLogin.DeviceType = data.DeviceType;
-                cSUserLogin.UserToken = GenerateAccessToken ;
-                cSUserLogin.UserProfileID = Convert.ToInt32(ProfileID);
-                cSUserLogin.CRMContactID = contact.ID;
-                bool insertUserLogin = _UserRepository.InsertCSUserLogin(cSUserLogin);
-
-                return new
+                Model.CRMMobile.UserProfile ExistData = _UserRepository.GetUserProfileByCRMContactID_Mobile(contact.ID.ToString());
+                if (ExistData == null)
                 {
-                    success = true,
-                    data = cSUserLogin,
-                    Message = "Register Complete!"
-                };
+                    Model.CRMMobile.UserProfile cSUserProfile = new Model.CRMMobile.UserProfile();
+                    cSUserProfile.CRMContactID = contact.ID.ToString();
+                    cSUserProfile.TitleExtEN = contact.TitleExtTH;
+                    cSUserProfile.FirstNameTH = contact.FirstNameTH;
+                    cSUserProfile.LastNameTH = contact.LastNameTH;
+                    cSUserProfile.Nickname = contact.Nickname;
+                    cSUserProfile.TitleExtEN = contact.TitleExtEN;
+                    cSUserProfile.FirstNameEN = contact.FirstNameEN;
+                    cSUserProfile.MiddleNameEN = contact.MiddleNameEN;
+                    cSUserProfile.LastNameEN = contact.LastNameEN;
+                    cSUserProfile.CitizenIdentityNo = contact.CitizenIdentityNo;
+                    cSUserProfile.Created = DateTime.Now.ToShortDateString();
+                    cSUserProfile.CreatedBy = "System-Register";
+                    cSUserProfile.Updated = null;
+                    cSUserProfile.UpdatedBy = null;
+                    cSUserProfile.IsActive = true;
+                    cSUserProfile.PINCode = SHAHelper.ComputeHash(data.PINCode, "SHA512", null);
+                    long ProfileID = 0;
+                    bool insert = _UserRepository.InsertCSUserProfile(cSUserProfile, out ProfileID);
+
+                    string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
+                    CRMUserLoginWithContactID cSUserLogin = new CRMUserLoginWithContactID();
+                    cSUserLogin.UserPhoneNumber = data.PhoneNumber;
+                    cSUserLogin.LoginDate = DateTime.Now.ToShortDateString();
+                    cSUserLogin.DeviceID = data.DeviceID;
+                    cSUserLogin.DeviceType = data.DeviceType;
+                    cSUserLogin.UserToken = GenerateAccessToken;
+                    cSUserLogin.UserProfileID = Convert.ToInt32(ProfileID);
+                    cSUserLogin.CRMContactID = contact.ID;
+                    bool insertUserLogin = _UserRepository.InsertCSUserLogin(cSUserLogin);
+
+                    return new
+                    {
+                        success = true,
+                        data = cSUserLogin,
+                        Message = "Register Complete!"
+                    };
+                }
+                else
+                {
+                    Model.CRMMobile.UserLogin userLogin = _UserRepository.GetUserLoginByPhoneNumbandDevice_Mobile(data.DeviceID, data.PhoneNumber);
+                    if (userLogin == null)
+                    {
+                        string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
+                        CRMUserLoginWithContactID cSUserLogin = new CRMUserLoginWithContactID();
+                        cSUserLogin.UserPhoneNumber = data.PhoneNumber;
+                        cSUserLogin.LoginDate = DateTime.Now.ToShortDateString();
+                        cSUserLogin.DeviceID = data.DeviceID;
+                        cSUserLogin.DeviceType = data.DeviceType;
+                        cSUserLogin.UserToken = GenerateAccessToken;
+                        cSUserLogin.UserProfileID = ExistData.UserProfileID;
+                        cSUserLogin.CRMContactID = contact.ID;
+                        bool insertUserLogin = _UserRepository.InsertCSUserLogin(cSUserLogin);
+
+                        return new
+                        {
+                            success = true,
+                            data = cSUserLogin,
+                            Message = "Register Complete!"
+                        };
+                    }
+                    else
+                    {
+                        string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
+                        userLogin.UserToken = GenerateAccessToken;
+                        userLogin.LoginDate = DateTime.Now.ToShortDateString() ;
+                        CRMUserLoginWithContactID cSUserLogin = new CRMUserLoginWithContactID();
+                        cSUserLogin.UserPhoneNumber = data.PhoneNumber;
+                        cSUserLogin.LoginDate = userLogin.LoginDate;
+                        cSUserLogin.DeviceID = userLogin.DeviceID ;
+                        cSUserLogin.DeviceType = userLogin.DeviceType;
+                        cSUserLogin.UserToken = userLogin.UserToken;
+                        cSUserLogin.UserProfileID = userLogin.UserProfileID;
+                        cSUserLogin.CRMContactID = contact.ID;
+                        bool insertUserLogin = _UserRepository.UpdateCSUserLogin(userLogin);
+
+                        return new
+                        {
+                            success = true,
+                            data = cSUserLogin,
+                            Message = "Register Complete!"
+                        };
+                    }
+                }
                 
             }
             catch (Exception ex)

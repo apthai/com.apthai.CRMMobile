@@ -146,6 +146,7 @@ namespace com.apthai.CRMMobile.Controllers
 
                     string NewPIN = SHAHelper.ComputeHash(data.NewPIN, "SHA512", null);
                     user.PINCode = NewPIN;
+                    user.Updated = DateTime.Now.ToString();
                     bool updateUserPIN = _UserRepository.UpdateChangePINCSUserProfile(user);
 
 
