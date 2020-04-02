@@ -256,6 +256,25 @@ namespace com.apthai.CRMMobile.Repositories
                 }
             }
         }
+        public bool UpdateChangePINCSUserProfile(Model.CRMMobile.UserProfile data)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                try
+                {
+                    conn.Open();
+                    var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
+                    var result = conn.Update(data, tran);
+                    tran.Commit();
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("MasterRepository.UpdateCSUserProfile() :: Error ", ex);
+                }
+            }
+        }
         //---------------------------------------------------------------------
         //-------------------------- Get billing Tracking ---------------------
         public List<iCRMBooking> GetUseriBookingByUserID(string UserID)

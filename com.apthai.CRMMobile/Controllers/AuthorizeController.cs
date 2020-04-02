@@ -146,13 +146,13 @@ namespace com.apthai.CRMMobile.Controllers
 
                     string NewPIN = SHAHelper.ComputeHash(data.NewPIN, "SHA512", null);
                     user.PINCode = NewPIN;
-                    bool updateUserPIN = _UserRepository.UpdateCSUserProfile(user);
+                    bool updateUserPIN = _UserRepository.UpdateChangePINCSUserProfile(user);
 
                     return new
                     {
                         success = true,
-                        data = cSUserProfile,
-                        message = "PIN Correct!"
+                        data = new Model.CRMMobile.UserProfile() ,
+                        message = "ChangePIN Success !!"
                     };
                 }
             }
