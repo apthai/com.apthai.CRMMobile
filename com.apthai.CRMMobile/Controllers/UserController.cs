@@ -268,6 +268,9 @@ namespace com.apthai.CRMMobile.Controllers
                     }
                     else
                     {
+                        ExistData.PINCode = SHAHelper.ComputeHash(data.PINCode, "SHA512", null);
+                        bool insert = _UserRepository.UpdateCSUserProfile(ExistData);
+
                         string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
                         userLogin.UserToken = GenerateAccessToken;
                         userLogin.LoginDate = DateTime.Now.ToShortDateString() ;
