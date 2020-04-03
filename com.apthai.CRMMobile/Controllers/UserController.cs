@@ -244,6 +244,11 @@ namespace com.apthai.CRMMobile.Controllers
                     Model.CRMMobile.UserLogin userLogin = _UserRepository.GetUserLoginByPhoneNumbandDevice_Mobile(data.DeviceID, data.PhoneNumber);
                     if (userLogin == null)
                     {
+                        ExistData.PINCode = SHAHelper.ComputeHash(data.PINCode, "SHA512", null);
+                        long ProfileID = 0;
+                        bool insert = _UserRepository.InsertCSUserProfile(ExistData, out ProfileID);
+
+
                         string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
                         CRMUserLoginWithContactID cSUserLogin = new CRMUserLoginWithContactID();
                         cSUserLogin.UserPhoneNumber = data.PhoneNumber;
