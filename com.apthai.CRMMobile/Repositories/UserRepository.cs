@@ -257,7 +257,7 @@ namespace com.apthai.CRMMobile.Repositories
                 {
                     conn.Open();
                     var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
-                    var result = conn.Insert(data, tran);
+                    var result = conn.Update(data, tran);
                     tran.Commit();
 
                     return true;
