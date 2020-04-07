@@ -152,6 +152,9 @@ namespace com.apthai.CRMMobile.CustomModel
         public string AgreementOwnerAddressEN { get; set; }
         public string BookingOwnerEmail { get; set; }
         public string AgreementOwnerEmail { get; set; }
+        public string ProjectAddressTH { get; set; }
+        public string ProjectAddressEN { get; set; }
+        public string PhoneNumber { get; set; }
     }
     public class iCRMContact
     {
