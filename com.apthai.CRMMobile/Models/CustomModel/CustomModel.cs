@@ -104,6 +104,8 @@ namespace com.apthai.CRMMobile.CustomModel
         public string AgreementAmount { get; set; }
         public string PayAgreementAmount { get; set; }
         public string AgreementPaymentDate { get; set; }
+        public string MasterPriceItemID { get; set; }
+        public string Period { get; set; }
     }
     public class iCRMBooking
     {
