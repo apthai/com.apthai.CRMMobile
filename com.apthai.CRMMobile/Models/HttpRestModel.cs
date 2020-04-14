@@ -122,4 +122,15 @@ namespace com.apthai.CRMMobile.HttpRestModel
     {
         public string ContactNo { get; set; }
     }
+    public partial class GetUserCardParam
+    {
+        public string ProjectNo { get; set; }
+        public string UnitNo { get; set; }
+    }
+    public partial class GetUserCreditCardParam
+    {
+        public string Key { get; set; }
+        public string ProjectNo { get; set; }
+        public string UnitNo { get; set; }
+    }
 }

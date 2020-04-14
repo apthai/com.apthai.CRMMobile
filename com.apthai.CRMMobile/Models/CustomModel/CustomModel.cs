@@ -200,5 +200,27 @@ namespace com.apthai.CRMMobile.CustomModel
     {
         public Guid CRMContactID { get; set; }
     }
-
+    public class GetUserCardReturnObj
+    {
+        public string ProjectID { get; set; }
+        public string Project { get; set; }
+        public string Unit { get; set; }
+        public string FullnameMainAgreement { get; set; }
+        public string NameMainAgreement { get; set; }
+        public string LastNameMainAgreement { get; set; }
+        public string FullnameMainAgreementEN { get; set; }
+        public string NameMainAgreementEN { get; set; }
+        public string LastNameMainAgreementEN { get; set; }
+        public string ContactNo { get; set; }
+        public string AgreementNo { get; set; }
+        public string FlagCreditDebit { get; set; }
+        public string Balance { get; set; }
+    }
+    public class GetUserCreditCardReturnObj
+    {
+        public string AccountNO { get; set; }
+        public string CreditCardExpireMonth { get; set; }
+        public string CreditCardExpireYear { get; set; }
+        public string OwnerName { get; set; }
+    }
 }

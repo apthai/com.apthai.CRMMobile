@@ -319,6 +319,26 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
+        public GetUserCardReturnObj GetUserCardByProjectandUnit(string ProjectID, string UnitID)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<GetUserCardReturnObj>("GetUserCardMobile", new { ProjectID = ProjectID, UnitID = UnitID }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+
+                return result;
+            }
+        }
+        public GetUserCreditCardReturnObj GetUserCreditCardByProjectandUnit(string Key,string ProjectID, string UnitID)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<GetUserCreditCardReturnObj>("GetUserCreditCardMobile", new {Key=Key ,ProjectID = ProjectID, UnitID = UnitID }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+
+                return result;
+            }
+        }
     }
 
 }
