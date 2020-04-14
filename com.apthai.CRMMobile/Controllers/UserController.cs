@@ -857,6 +857,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
             {
                 StringValues api_key;
                 StringValues EmpCode;
+
                 //if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
                 //{
                 //    string AccessKey = api_key.First();
