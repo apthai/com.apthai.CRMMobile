@@ -901,7 +901,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 //        message = "Only AP Customer Can Regist to the System !!"
                 //    };
                 //}
-                GetUserCreditCardReturnObj getUserCard = _UserRepository.GetUserCreditCardByProjectandUnit(data.Key,data.ProjectNo, data.UnitNo);
+                GetUserCreditCardReturnObj getUserCard = _UserRepository.GetUserCreditCardByProjectandUnit(data.ProjectNo, data.UnitNo);
                 if (getUserCard == null)
                 {
                     return new

@@ -30,7 +30,7 @@ namespace com.apthai.CRMMobile.Repositories
         List<GetBillingTrackingMobile> GetUserBillingTrackingByProjectandUnit(string ProjectID, string UnitID);
         List<iCRMContact> GetUseriCRMContact_Web(string Contact);
         List<GetUserCardReturnObj> GetUserCardByProjectandUnit(string ContactNo);
-        GetUserCreditCardReturnObj GetUserCreditCardByProjectandUnit(string Key, string ProjectID, string UnitID);
+        GetUserCreditCardReturnObj GetUserCreditCardByProjectandUnit(string ProjectID, string UnitID);
 
     }
 }
