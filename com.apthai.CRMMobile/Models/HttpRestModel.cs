@@ -130,7 +130,6 @@ namespace com.apthai.CRMMobile.HttpRestModel
     }
     public partial class GetUserCreditCardParam
     {
-        public string Key { get; set; }
         public string ProjectNo { get; set; }
         public string UnitNo { get; set; }
     }

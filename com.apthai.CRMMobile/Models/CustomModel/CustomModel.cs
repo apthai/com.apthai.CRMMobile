@@ -242,6 +242,12 @@ namespace com.apthai.CRMMobile.CustomModel
         public string expiresIn { get; set; }
         public string expiresAt { get; set; }
     }
+    public class SCBAuthObj
+    {
+        public string applicationKey { get; set; }
+        public string applicationSecret { get; set; }
+
+    }
     public class SCBAuthenRetrunObj
     {
         public SCBAuthenstatus status {get;set;}

@@ -74,11 +74,17 @@ namespace com.apthai.CRMMobile.Controllers
                 string ResourceOwnerID = data.resourceOwnerId;
                 string RequestID = data.requestUId;
                 string language = data.acceptlanguage;
-                var Header = @"{ 'resourceOwnerId': '" + ResourceOwnerID + "', 'requestUId': '" + RequestID + "', 'accept-language': '" + language + "' }";
+                SCBAuthObj  sCB = new SCBAuthObj();
+                sCB.applicationKey = "l79746708bafd440288a9da8ea96fa487d";
+                sCB.applicationSecret = "82f0268b0d6d4f1981607196fe38b9c4";
                 SCBAuthenRetrunObj Return = new SCBAuthenRetrunObj();
                 var client = new HttpClient();
-                var content = new StringContent(JsonConvert.SerializeObject(Header));  //รอปั้น Obj 
+                var content = new StringContent(JsonConvert.SerializeObject(sCB));  //รอปั้น Obj 
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                content.Headers.Add("resourceOwnerId",data.resourceOwnerId);
+                content.Headers.Add("requestUId", data.requestUId);
+                content.Headers.Add("requestUId", data.requestUId);
+                //content.Headers.Add("accept-language", data.acceptlanguage);
                 string PostURL = "https://api-sandbox.partners.scb/partners/sandbox/v1/oauth/token"; // SCB Link
                 var respond = await client.PostAsync(PostURL, content);
                 if (respond.StatusCode != System.Net.HttpStatusCode.OK)
@@ -97,7 +103,7 @@ namespace com.apthai.CRMMobile.Controllers
                     return new
                     {
                         success = true,
-                        data = new AutorizeDataJWT(),
+                        data = ResponData,
                         valid = "success : " + respond.StatusCode
                     };
                 }
