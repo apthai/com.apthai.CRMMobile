@@ -823,7 +823,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 //        message = "Only AP Customer Can Regist to the System !!"
                 //    };
                 //}
-                GetUserCardReturnObj getUserCard = _UserRepository.GetUserCardByProjectandUnit(data.ProjectNo, data.UnitNo);
+                List<GetUserCardReturnObj> getUserCard = _UserRepository.GetUserCardByProjectandUnit(data.ContactNo);
                 if (getUserCard == null)
                 {
                     return new

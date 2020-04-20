@@ -223,4 +223,29 @@ namespace com.apthai.CRMMobile.CustomModel
         public string CreditCardExpireYear { get; set; }
         public string OwnerName { get; set; }
     }
+
+    public class SCBAuthenHeader
+    {
+        public string resourceOwnerId { get; set; }
+        public string requestUId { get; set; }
+        public string acceptlanguage { get; set; }
+    }
+    public class SCBAuthenstatus
+    {
+        public string code { get; set; }
+        public string description { get; set; }
+    }
+    public class SCBAuthendata
+    {
+        public string accessToken { get; set; }
+        public string tokenType { get; set; }
+        public string expiresIn { get; set; }
+        public string expiresAt { get; set; }
+    }
+    public class SCBAuthenRetrunObj
+    {
+        public SCBAuthenstatus status {get;set;}
+        public SCBAuthendata data { get; set; }
+
+    }
 }

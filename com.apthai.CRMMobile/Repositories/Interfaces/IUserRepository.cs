@@ -29,7 +29,7 @@ namespace com.apthai.CRMMobile.Repositories
         List<iCRMBooking> GetUseriBookingByUserID(string UserID);
         List<GetBillingTrackingMobile> GetUserBillingTrackingByProjectandUnit(string ProjectID, string UnitID);
         List<iCRMContact> GetUseriCRMContact_Web(string Contact);
-        GetUserCardReturnObj GetUserCardByProjectandUnit(string ProjectID, string UnitID);
+        List<GetUserCardReturnObj> GetUserCardByProjectandUnit(string ContactNo);
         GetUserCreditCardReturnObj GetUserCreditCardByProjectandUnit(string Key, string ProjectID, string UnitID);
 
     }

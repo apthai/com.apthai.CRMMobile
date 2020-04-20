@@ -319,12 +319,12 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
-        public GetUserCardReturnObj GetUserCardByProjectandUnit(string ProjectID, string UnitID)
+        public List<GetUserCardReturnObj> GetUserCardByProjectandUnit(string ContactNo)
         {
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
-                var result = conn.Query<GetUserCardReturnObj>("GetUserCardMobile", new { ProjectID = ProjectID, UnitID = UnitID }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                var result = conn.Query<GetUserCardReturnObj>("GetUserCardMobile", new { ContactNo = ContactNo}, commandType: CommandType.StoredProcedure).ToList();
 
                 return result;
             }
