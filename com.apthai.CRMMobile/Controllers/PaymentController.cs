@@ -121,9 +121,11 @@ namespace com.apthai.CRMMobile.Controllers
                 //----------------------------------Get Token Done -------------------------------------------
                 //----------------------------------Start Request For DeepLink -------------------------------
                 var Deeplinkclient = new HttpClient();
+                List<string> subTransaction = new List<string>();
+                subTransaction.Add("BP");
                 SCBDeeplinkBodyObj sCBDeeplinkBody = new SCBDeeplinkBodyObj();
                 sCBDeeplinkBody.transactionType = "PURCHASE";
-                sCBDeeplinkBody.transactionSubType = "[\"BP\"]";
+                sCBDeeplinkBody.transactionSubType = subTransaction;
                 sCBDeeplinkBody.sessionValidityPeriod = 60;
                 sCBDeeplinkBody.sessionValidUntil = "";
                 SCBDeeplinkBillPaymentRetrunObj billPayment = new SCBDeeplinkBillPaymentRetrunObj();
@@ -151,25 +153,28 @@ namespace com.apthai.CRMMobile.Controllers
                 paymentInfo.imageUrl = "";
                 sCBsPaymentInfo.Add(paymentInfo);
                 SCBDeeplinkpaymentInfo paymentInfo2 = new SCBDeeplinkpaymentInfo();
-                paymentInfo.type = "TEXT>";
-                paymentInfo.title = "";
-                paymentInfo.header = "";
-                paymentInfo.description = "";
+                paymentInfo2.type = "TEXT>";
+                paymentInfo2.title = "";
+                paymentInfo2.header = "";
+                paymentInfo2.description = "";
                 sCBsPaymentInfo.Add(paymentInfo2);
                 merchantData.paymentInfo = sCBsPaymentInfo;
                 // --------------------------------------------------------------------------------
                 sCBDeeplinkBody.merchantMetaData = merchantData;
+                string Json = JsonConvert.SerializeObject(sCBDeeplinkBody);
                 var DeeplinkContent = new StringContent(JsonConvert.SerializeObject(sCBDeeplinkBody));  //รอปั้น Obj 
                 DeeplinkContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                DeeplinkContent.Headers.Add("authorization", "Bearer " + SCBAuthResult.data.accessToken);
-                DeeplinkContent.Headers.Add("resourceOwnerId", RequestID);
+                //Deeplinkclient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", SCBAuthResult.data.accessToken);
+                Deeplinkclient.DefaultRequestHeaders.Add("authorization", "Bearer " + SCBAuthResult.data.accessToken);
+                //DeeplinkContent.Headers.Add("authorization", "Bearer " + SCBAuthResult.data.accessToken);
+                DeeplinkContent.Headers.Add("resourceOwnerId", sCB.applicationKey);
                 DeeplinkContent.Headers.Add("requestUId", RequestID);
                 DeeplinkContent.Headers.Add("channel", "scbeasy");
                 //content.Headers.Add("accept-language", data.acceptlanguage);
                 string DeeplinkPostURL = "https://api-sandbox.partners.scb/partners/sandbox/v3/deeplink/transactions"; // SCB Link Auth
-                var Deeplinkrespond = await Deeplinkclient.PostAsync(DeeplinkPostURL, content);
-                SCBDeepLinkResponddata sCBDeepLinkRespond = new SCBDeepLinkResponddata();
-                if (Deeplinkrespond.StatusCode != System.Net.HttpStatusCode.OK)
+                var Deeplinkrespond = await Deeplinkclient.PostAsync(DeeplinkPostURL, DeeplinkContent);
+                SCBDeepLinkRetrunObj sCBDeepLinkRespond = new SCBDeepLinkRetrunObj();
+                if (Deeplinkrespond.StatusCode != System.Net.HttpStatusCode.Created)
                 {
                     return new
                     {
@@ -180,8 +185,8 @@ namespace com.apthai.CRMMobile.Controllers
                 }
                 else
                 {
-                    var DeepLinkResponData = await respond.Content.ReadAsStringAsync();
-                    sCBDeepLinkRespond = JsonConvert.DeserializeObject<SCBDeepLinkResponddata>(DeepLinkResponData);
+                    var DeepLinkResponData = await Deeplinkrespond.Content.ReadAsStringAsync();
+                    sCBDeepLinkRespond = JsonConvert.DeserializeObject<SCBDeepLinkRetrunObj>(DeepLinkResponData);
 
                     return new
                     {

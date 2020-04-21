@@ -286,10 +286,17 @@ namespace com.apthai.CRMMobile.CustomModel
         public string description { get; set; }
         public string imageUrl { get; set; }
     }
+    public class SCBDeeplinkpaymentInfo2
+    {
+        public string type { get; set; }
+        public string title { get; set; }
+        public string header { get; set; }
+        public string description { get; set; }
+    }
     public class SCBDeeplinkBodyObj
     {
         public string transactionType { get; set; }
-        public string transactionSubType { get; set; }
+        public List<string> transactionSubType { get; set; }
         public int sessionValidityPeriod { get; set; }
         public string sessionValidUntil { get; set; }
         public SCBDeeplinkBillPaymentRetrunObj billPayment { get; set; }
@@ -298,7 +305,7 @@ namespace com.apthai.CRMMobile.CustomModel
     public class SCBDeepLinkRetrunObj
     {
         public SCBAuthenstatus status { get; set; }
-        public SCBAuthendata data { get; set; }
+        public SCBDeepLinkResponddata data { get; set; }
 
     }
 }
