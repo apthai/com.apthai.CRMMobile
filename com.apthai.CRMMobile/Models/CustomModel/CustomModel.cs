@@ -215,6 +215,8 @@ namespace com.apthai.CRMMobile.CustomModel
         public string AgreementNo { get; set; }
         public string FlagCreditDebit { get; set; }
         public string Balance { get; set; }
+        public string National { get; set; }
+        public string IsThaiNationality { get; set; }
     }
     public class GetUserCreditCardReturnObj
     {
