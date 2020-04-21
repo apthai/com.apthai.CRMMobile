@@ -242,6 +242,12 @@ namespace com.apthai.CRMMobile.CustomModel
         public string expiresIn { get; set; }
         public string expiresAt { get; set; }
     }
+    public class SCBDeepLinkResponddata
+    {
+        public string transactionId { get; set; }
+        public string deeplinkUrl { get; set; }
+        public string userRefId { get; set; }
+    }
     public class SCBAuthObj
     {
         public string applicationKey { get; set; }
@@ -251,6 +257,45 @@ namespace com.apthai.CRMMobile.CustomModel
     public class SCBAuthenRetrunObj
     {
         public SCBAuthenstatus status {get;set;}
+        public SCBAuthendata data { get; set; }
+
+    }
+    public class SCBDeeplinkBillPaymentRetrunObj
+    {
+        public int paymentAmount { get; set; }
+        public string accountTo { get; set; }
+        public string accountFrom { get; set; }
+        public string ref1 { get; set; }
+        public string ref2 { get; set; }
+        public string ref3 { get; set; }
+
+    }
+    public class SCBDeeplinkmerchantMetaData
+    {
+        public string callbackurl { get; set; }
+        public string extraData { get; set; }
+        public List<SCBDeeplinkpaymentInfo> paymentInfo { get; set; }
+    }
+    public class SCBDeeplinkpaymentInfo
+    {
+        public string type { get; set; }
+        public string title { get; set; }
+        public string header { get; set; }
+        public string description { get; set; }
+        public string imageUrl { get; set; }
+    }
+    public class SCBDeeplinkBodyObj
+    {
+        public string transactionType { get; set; }
+        public string transactionSubType { get; set; }
+        public int sessionValidityPeriod { get; set; }
+        public string sessionValidUntil { get; set; }
+        public SCBDeeplinkBillPaymentRetrunObj billPayment { get; set; }
+        public SCBDeeplinkmerchantMetaData merchantMetaData { get; set; }
+    }
+    public class SCBDeepLinkRetrunObj
+    {
+        public SCBAuthenstatus status { get; set; }
         public SCBAuthendata data { get; set; }
 
     }

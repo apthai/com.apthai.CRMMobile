@@ -4,6 +4,7 @@ using com.apthai.CRMMobile.HttpRestModel;
 using com.apthai.CRMMobile.Repositories;
 using com.apthai.CRMMobile.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Primitives;
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Annotations;
@@ -21,9 +22,10 @@ namespace com.apthai.CRMMobile.Controllers
         private readonly IMasterRepository _masterRepo;
         private readonly IAuthorizeService _authorizeService;
         private readonly IUserRepository _UserRepository;
-        public PaymentController(IMasterRepository masterRepo, IAuthorizeService authorizeService, IUserRepository userRepository)
+        private readonly IConfiguration _config;
+        public PaymentController(IMasterRepository masterRepo, IAuthorizeService authorizeService, IUserRepository userRepository,IConfiguration configuration)
         {
-
+            _config = configuration;
             _masterRepo = masterRepo;
             _authorizeService = authorizeService;
             _UserRepository = userRepository;
@@ -71,22 +73,30 @@ namespace com.apthai.CRMMobile.Controllers
                 //        }
                 //    }
                 //}
-                string ResourceOwnerID = data.resourceOwnerId;
-                string RequestID = data.requestUId;
+                string ResourceOwnerID = data.CRMContactID;
+                string RequestID = data.CRMContactID;
                 string language = data.acceptlanguage;
                 SCBAuthObj  sCB = new SCBAuthObj();
-                sCB.applicationKey = "l79746708bafd440288a9da8ea96fa487d";
-                sCB.applicationSecret = "82f0268b0d6d4f1981607196fe38b9c4";
+                sCB.applicationSecret = Environment.GetEnvironmentVariable("SCBAPISecret"); 
+                sCB.applicationKey = Environment.GetEnvironmentVariable("SCBAPIKey");
+                if (sCB.applicationSecret == null)
+                {
+                    sCB.applicationSecret = UtilsProvider.AppSetting.SCBAPISecret;
+                }
+                if (sCB.applicationKey == null)
+                {
+                    sCB.applicationKey  = UtilsProvider.AppSetting.SCBAPIKey; 
+                }
                 SCBAuthenRetrunObj Return = new SCBAuthenRetrunObj();
                 var client = new HttpClient();
                 var content = new StringContent(JsonConvert.SerializeObject(sCB));  //รอปั้น Obj 
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/json");
-                content.Headers.Add("resourceOwnerId",data.resourceOwnerId);
-                content.Headers.Add("requestUId", data.requestUId);
-                content.Headers.Add("requestUId", data.requestUId);
+                content.Headers.Add("resourceOwnerId", sCB.applicationKey);
+                content.Headers.Add("requestUId", RequestID);
                 //content.Headers.Add("accept-language", data.acceptlanguage);
-                string PostURL = "https://api-sandbox.partners.scb/partners/sandbox/v1/oauth/token"; // SCB Link
+                string PostURL = "https://api-sandbox.partners.scb/partners/sandbox/v1/oauth/token"; // SCB Link Auth
                 var respond = await client.PostAsync(PostURL, content);
+                SCBAuthenRetrunObj SCBAuthResult = new SCBAuthenRetrunObj();
                 if (respond.StatusCode != System.Net.HttpStatusCode.OK)
                 {
                     return new
@@ -98,16 +108,88 @@ namespace com.apthai.CRMMobile.Controllers
                 }
                 else
                 {
-                    var ResponData = await respond.Content.ReadAsStreamAsync(); 
+                    var ResponData = await respond.Content.ReadAsStringAsync();
+                    SCBAuthResult = JsonConvert.DeserializeObject<SCBAuthenRetrunObj>(ResponData);
+
+                    //return new
+                    //{
+                    //    success = true,
+                    //    data = SCBAuthResult,
+                    //    valid = "success : " + respond.StatusCode
+                    //};
+                }
+                //----------------------------------Get Token Done -------------------------------------------
+                //----------------------------------Start Request For DeepLink -------------------------------
+                var Deeplinkclient = new HttpClient();
+                SCBDeeplinkBodyObj sCBDeeplinkBody = new SCBDeeplinkBodyObj();
+                sCBDeeplinkBody.transactionType = "PURCHASE";
+                sCBDeeplinkBody.transactionSubType = "[\"BP\"]";
+                sCBDeeplinkBody.sessionValidityPeriod = 60;
+                sCBDeeplinkBody.sessionValidUntil = "";
+                SCBDeeplinkBillPaymentRetrunObj billPayment = new SCBDeeplinkBillPaymentRetrunObj();
+                billPayment.paymentAmount = data.paymentAmount;
+                billPayment.accountTo = Environment.GetEnvironmentVariable("APSCBAccount");
+                if (billPayment.accountTo == null || billPayment.accountTo == "")
+                {
+                    billPayment.accountTo = UtilsProvider.AppSetting.APSCBAccount;
+                }
+                billPayment.accountFrom = data.accountFrom;
+                billPayment.ref1 = "ABCDEFGHIJ1234567890";
+                billPayment.ref2 = "ABCDEFGHIJ1234567890";
+                billPayment.ref3 = "ABCDEFGHIJ1234567890";
+                sCBDeeplinkBody.billPayment = billPayment;
+                SCBDeeplinkmerchantMetaData merchantData = new SCBDeeplinkmerchantMetaData();
+                merchantData.callbackurl = "";
+                merchantData.extraData = "{}";
+                //---------------------- sCBsPaymentInfo --------------------------------
+                List<SCBDeeplinkpaymentInfo> sCBsPaymentInfo = new List<SCBDeeplinkpaymentInfo>();
+                SCBDeeplinkpaymentInfo paymentInfo = new SCBDeeplinkpaymentInfo();
+                paymentInfo.type = "TEXT_WITH_IMAGE>";
+                paymentInfo.title = "";
+                paymentInfo.header = "";
+                paymentInfo.description = "";
+                paymentInfo.imageUrl = "";
+                sCBsPaymentInfo.Add(paymentInfo);
+                SCBDeeplinkpaymentInfo paymentInfo2 = new SCBDeeplinkpaymentInfo();
+                paymentInfo.type = "TEXT>";
+                paymentInfo.title = "";
+                paymentInfo.header = "";
+                paymentInfo.description = "";
+                sCBsPaymentInfo.Add(paymentInfo2);
+                merchantData.paymentInfo = sCBsPaymentInfo;
+                // --------------------------------------------------------------------------------
+                sCBDeeplinkBody.merchantMetaData = merchantData;
+                var DeeplinkContent = new StringContent(JsonConvert.SerializeObject(sCBDeeplinkBody));  //รอปั้น Obj 
+                DeeplinkContent.Headers.ContentType = new MediaTypeHeaderValue("application/json");
+                DeeplinkContent.Headers.Add("authorization", "Bearer " + SCBAuthResult.data.accessToken);
+                DeeplinkContent.Headers.Add("resourceOwnerId", RequestID);
+                DeeplinkContent.Headers.Add("requestUId", RequestID);
+                DeeplinkContent.Headers.Add("channel", "scbeasy");
+                //content.Headers.Add("accept-language", data.acceptlanguage);
+                string DeeplinkPostURL = "https://api-sandbox.partners.scb/partners/sandbox/v3/deeplink/transactions"; // SCB Link Auth
+                var Deeplinkrespond = await Deeplinkclient.PostAsync(DeeplinkPostURL, content);
+                SCBDeepLinkResponddata sCBDeepLinkRespond = new SCBDeepLinkResponddata();
+                if (Deeplinkrespond.StatusCode != System.Net.HttpStatusCode.OK)
+                {
+                    return new
+                    {
+                        success = false,
+                        data = new AutorizeDataJWT(),
+                        valid = "Error On Request Deeplink From SCB : " + Deeplinkrespond.StatusCode
+                    };
+                }
+                else
+                {
+                    var DeepLinkResponData = await respond.Content.ReadAsStringAsync();
+                    sCBDeepLinkRespond = JsonConvert.DeserializeObject<SCBDeepLinkResponddata>(DeepLinkResponData);
 
                     return new
                     {
                         success = true,
-                        data = ResponData,
+                        data = sCBDeepLinkRespond,
                         valid = "success : " + respond.StatusCode
                     };
                 }
-                
             }
             catch (Exception ex)
             {

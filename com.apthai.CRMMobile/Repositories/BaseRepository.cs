@@ -57,19 +57,7 @@ namespace com.apthai.CRMMobile.Repositories
                 return new SqlConnection(conn);
             }
         }
-
-        protected IDbConnection AuthConnection
-        {
-            get
-            {
-                var conn = Environment.GetEnvironmentVariable("DefaultAuthorizeConnection");
-                if (conn == null)
-                {
-                    conn = _config.GetConnectionString("DefaultAuthorizeConnection");
-                }
-                return new SqlConnection(conn);
-            }
-        }
+        
 
         protected async Task<T> WithConnection<T>(Func<IDbConnection, Task<T>> getData)
         {

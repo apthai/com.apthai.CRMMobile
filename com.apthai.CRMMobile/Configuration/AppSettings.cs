@@ -22,5 +22,8 @@ namespace com.apthai.CRMMobile.Configuration
         public string ThaiBulkSecret { get; set; }
         public string ThaiBulkVerifyOTPURL { get; set; }
         public string ThaiBulkRequestOTPURL { get; set; }
+        public string SCBAPISecret { get; set; }
+        public string SCBAPIKey { get; set; }
+        public string APSCBAccount { get; set; }
     }
 }

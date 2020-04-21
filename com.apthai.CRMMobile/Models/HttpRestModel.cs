@@ -135,8 +135,10 @@ namespace com.apthai.CRMMobile.HttpRestModel
     }
     public partial class SCBPaymentParam
     {
-        public string resourceOwnerId { get; set; }
-        public string requestUId { get; set; }
+        public string CRMContactID { get; set; }
         public string acceptlanguage { get; set; }
+        public int paymentAmount { get; set; }
+        public string accountTo { get; set; }
+        public string accountFrom { get; set; }
     }
 }
