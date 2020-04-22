@@ -137,7 +137,7 @@ namespace com.apthai.CRMMobile.HttpRestModel
     {
         public string CRMContactID { get; set; }
         public string acceptlanguage { get; set; }
-        public int paymentAmount { get; set; }
+        public double paymentAmount { get; set; }
         public string accountTo { get; set; }
         public string accountFrom { get; set; }
     }
