@@ -194,7 +194,8 @@ namespace com.apthai.CRMMobile.Controllers
                     {
                         success = true,
                         data = sCBDeepLinkRespond,
-                        valid = "success : " + respond.StatusCode
+                        valid = "success : " + respond.StatusCode,
+                        token = SCBAuthResult.data.accessToken
                     };
                 }
             }

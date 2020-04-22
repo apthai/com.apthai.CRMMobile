@@ -264,7 +264,7 @@ namespace com.apthai.CRMMobile.CustomModel
     }
     public class SCBDeeplinkBillPaymentRetrunObj
     {
-        public int paymentAmount { get; set; }
+        public double paymentAmount { get; set; }
         public string accountTo { get; set; }
         public string accountFrom { get; set; }
         public string ref1 { get; set; }
