@@ -254,7 +254,7 @@ namespace com.apthai.CRMMobile.Controllers
                 //}
                 string ResourceOwnerID = data.CRMContactID;
                 string RequestID = data.CRMContactID;
-                string language = data.acceptLanguage;
+                //string language = data.acceptLanguage;
                 string TransactionID = data.TransactionID.Trim();
                 SCBAuthObj sCB = new SCBAuthObj();
                 sCB.applicationSecret = Environment.GetEnvironmentVariable("SCBAPISecret");
