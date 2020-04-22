@@ -258,7 +258,7 @@ namespace com.apthai.CRMMobile.CustomModel
     }
     public class SCBAuthenRetrunObj
     {
-        public SCBAuthenstatus status {get;set;}
+        public SCBAuthenstatus status { get; set; }
         public SCBAuthendata data { get; set; }
 
     }
@@ -307,5 +307,58 @@ namespace com.apthai.CRMMobile.CustomModel
         public SCBAuthenstatus status { get; set; }
         public SCBDeepLinkResponddata data { get; set; }
 
+    }
+    //---------------- Get Transaction SCB -------------------------------
+    public class SCBGetTransactionObj
+    {
+        public SCBAuthenstatus status { get; set; }
+        public SCBGetTransactionData data { get; set; }
+    }
+    public class SCBGetTransactionData
+    {
+        public string partnerId { get; set; }
+        public string transactionMethod { get; set; }
+        public string updatedTimestamp { get; set; }
+        public string statusCode { get; set; }
+        public List<string> transactionSubType { get; set; }
+        public string userRefId { get; set; }
+        public string transactionId { get; set; }
+        public string transactionType { get; set; }
+        public string sessionValidityPeriod { get; set; }
+        public SCBGetTransactionBillPayment billPayment { get; set; }
+        public string partnerName { get; set; }
+        public string errorMessage { get; set; }
+        public SCBGetTransactionmerchantMetaData merchantMetaData { get; set; }
+        public string paidAmount { get; set; }
+        public string createdTimestamp { get; set; }
+        public string accountFrom { get; set; }
+
+    }
+    public class SCBGetTransactionBillPayment
+    {
+        public string accountTo { get; set; }
+        public string ref2 { get; set; }
+        public string ref1 { get; set; }
+        public string paymentAmount { get; set; }
+        public string accountFrom { get; set; }
+        public string ref3 { get; set; }
+    }
+    public class SCBGetTransactionmerchantMetaData
+    {
+        public string deeplinkUrl { get; set; }
+        public string callbackurl { get; set; }
+        public string extraData { get; set; }
+        public string paymentAmount { get; set; }
+        public string accountFrom { get; set; }
+        public string ref3 { get; set; }
+        public List<SCBGetTransactionpaymentInfo> paymentInfo { get; set; }
+    }
+    public class SCBGetTransactionpaymentInfo
+    {
+        public string header { get; set; }
+        public string description { get; set; }
+        public string type { get; set; }
+        public string title { get; set; }
+        public string imageUrl { get; set; }
     }
 }
