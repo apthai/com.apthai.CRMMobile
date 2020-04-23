@@ -189,13 +189,12 @@ namespace com.apthai.CRMMobile.Controllers
                 {
                     var DeepLinkResponData = await Deeplinkrespond.Content.ReadAsStringAsync();
                     sCBDeepLinkRespond = JsonConvert.DeserializeObject<SCBDeepLinkRetrunObj>(DeepLinkResponData);
-
+                    sCBDeepLinkRespond.SCBToken = SCBAuthResult.data.accessToken;
                     return new
                     {
                         success = true,
                         data = sCBDeepLinkRespond,
-                        valid = "success : " + respond.StatusCode,
-                        token = SCBAuthResult.data.accessToken
+                        valid = "success : " + respond.StatusCode
                     };
                 }
             }
