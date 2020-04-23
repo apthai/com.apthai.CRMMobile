@@ -306,7 +306,7 @@ namespace com.apthai.CRMMobile.CustomModel
     {
         public SCBAuthenstatus status { get; set; }
         public SCBDeepLinkResponddata data { get; set; }
-        public string SCBToken {get;set;
+        public string SCBToken { get; set; }
 
     }
     //---------------- Get Transaction SCB -------------------------------
