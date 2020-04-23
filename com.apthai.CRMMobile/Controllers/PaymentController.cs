@@ -137,7 +137,8 @@ namespace com.apthai.CRMMobile.Controllers
                 {
                     billPayment.accountTo = UtilsProvider.AppSetting.APSCBAccount;
                 }
-                billPayment.accountFrom = data.accountFrom;
+                //billPayment.accountFrom = data.accountFrom;
+                billPayment.accountFrom = "";
                 billPayment.ref1 = "ABCDEFGHIJ1234567890";
                 billPayment.ref2 = "ABCDEFGHIJ1234567890";
                 billPayment.ref3 = "ABCDEFGHIJ1234567890";
