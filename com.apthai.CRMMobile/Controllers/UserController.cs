@@ -15,6 +15,7 @@ using Newtonsoft.Json.Linq;
 using com.apthai.CRMMobile.Repositories;
 using Swashbuckle.AspNetCore.Annotations;
 using Microsoft.Extensions.Primitives;
+using System.Text.RegularExpressions;
 
 namespace com.apthai.CRMMobile.Controllers
 {
@@ -911,6 +912,16 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         message = "Cannot Find Data!"
                     };
                 }
+                var cardNumber = getUserCard.AccountNO;
+
+                var firstDigits = cardNumber.Substring(0, 6);
+                var lastDigits = cardNumber.Substring(cardNumber.Length - 4, 4);
+
+                var requiredMask = new String('X', cardNumber.Length - firstDigits.Length - lastDigits.Length);
+
+                var maskedString = string.Concat(firstDigits, requiredMask, lastDigits);
+                var maskedCardNumberWithSpaces = Regex.Replace(maskedString, ".{4}", "$0 ");
+                getUserCard.AccountNO = cardNumber;
                 return new
                 {
                     success = true,
