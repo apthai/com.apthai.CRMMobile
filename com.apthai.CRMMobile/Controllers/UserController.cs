@@ -921,7 +921,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
 
                 var maskedString = string.Concat(firstDigits, requiredMask, lastDigits);
                 var maskedCardNumberWithSpaces = Regex.Replace(maskedString, ".{4}", "$0 ");
-                getUserCard.AccountNO = cardNumber;
+                getUserCard.AccountNO = maskedCardNumberWithSpaces;
                 return new
                 {
                     success = true,
