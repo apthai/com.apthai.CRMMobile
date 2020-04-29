@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -217,6 +218,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string Balance { get; set; }
         public string National { get; set; }
         public string IsThaiNationality { get; set; }
+        public FileContentResult QRCode { get; set; }
     }
     public class GetUserCreditCardReturnObj
     {

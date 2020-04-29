@@ -16,6 +16,9 @@ using com.apthai.CRMMobile.Repositories;
 using Swashbuckle.AspNetCore.Annotations;
 using Microsoft.Extensions.Primitives;
 using System.Text.RegularExpressions;
+using System.Drawing;
+using System.IO;
+using QRCoder;
 
 namespace com.apthai.CRMMobile.Controllers
 {
@@ -825,6 +828,8 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 //    };
                 //}
                 List<GetUserCardReturnObj> getUserCard = _UserRepository.GetUserCardByProjectandUnit(data.ContactNo);
+                Model.CRMMobile.UserProfile Contact = _UserRepository.GetUserProfileByCRMContactID_Mobile(data.ContactNo);
+                
                 if (getUserCard == null)
                 {
                     return new
@@ -834,6 +839,17 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         message = "Cannot Find Data!"
                     };
                 }
+                for (int i = 0; i < getUserCard.Count(); i++)
+                {
+                    string QREncode = Contact.CitizenIdentityNo + getUserCard[i].ContactNo + getUserCard[i].AgreementNo + getUserCard[i].Balance;
+                    QRCodeGenerator qrGenerator = new QRCodeGenerator();
+                    QRCodeData qrCodeData = qrGenerator.CreateQrCode(QREncode, QRCodeGenerator.ECCLevel.Q);
+                    QRCode qrCode = new QRCode(qrCodeData);
+                    Bitmap qrCodeImage = qrCode.GetGraphic(20);
+                    var bitmapBytes = BitmapToBytes(qrCodeImage);
+                    getUserCard[i].QRCode = File(bitmapBytes, "image/jpeg");
+                }
+
                 return new
                 {
                     success = true,
@@ -935,6 +951,83 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 return StatusCode(500, "Internal server error :: " + ex.Message);
             }
         }
+
+        [HttpPost]
+        [Route("GenerateQACode")]
+        [SwaggerOperation(Summary = "GenerateQR Code สำหรับลูกค้าระบบ CRM ",
+Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
+        public async Task<object> GenerateQACode([FromBody]GetUserCreditCardParam data)
+        {
+            try
+            {
+                StringValues api_key;
+                StringValues EmpCode;
+
+                //if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
+                //{
+                //    string AccessKey = api_key.First();
+                //    string EmpCodeKey = EmpCode.First();
+
+                //    if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
+                //    {
+                //        return new
+                //        {
+                //            success = false,
+                //            data = new AutorizeDataJWT(),
+                //            message = "Require Key to Access the Function"
+                //        };
+                //    }
+                //    else
+                //    {
+                //        string APApiKey = Environment.GetEnvironmentVariable("API_Key");
+                //        if (APApiKey == null)
+                //        {
+                //            APApiKey = UtilsProvider.AppSetting.ApiKey;
+                //        }
+                //        if (api_key != APApiKey)
+                //        {
+                //            return new
+                //            {
+                //                success = false,
+                //                data = new AutorizeDataJWT(),
+                //                message = "Incorrect API KEY !!"
+                //            };
+                //        }
+                //    }
+                //}
+
+                //Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByID(data.UserID);
+                //if (contact == null)
+                //{
+                //    return new
+                //    {
+                //        success = false,
+                //        data = new AutorizeDataJWT(),
+                //        message = "Only AP Customer Can Regist to the System !!"
+                //    };
+                //}
+                //var QRCodeBarcodeText = "|" + TaxNo + IIf(ProjectNo == "70013", "01", "00") + Strings.Chr(13) + Ref1 + Strings.Chr(13) + Ref2 + Strings.Chr(13) + "000";
+                QRCodeGenerator qrGenerator = new QRCodeGenerator();
+                QRCodeData qrCodeData = qrGenerator.CreateQrCode("The text which should be encoded.", QRCodeGenerator.ECCLevel.Q);
+                QRCode qrCode = new QRCode(qrCodeData);
+                Bitmap qrCodeImage = qrCode.GetGraphic(20);
+                var bitmapBytes = BitmapToBytes(qrCodeImage); //Convert bitmap into a byte array
+                 
+
+                return new
+                {
+                    success = true,
+                    data = File(bitmapBytes, "image/jpeg"), //Return as file result
+                    message = "Get User's Card Success !"
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error :: " + ex.Message);
+            }
+        }
+
         [ApiExplorerSettings(IgnoreApi = true)]
         public string generateToken(string PhoneNumber)
         {
@@ -981,5 +1074,15 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
             ErrorMsg = "SomeThing Wrong with Header Contact Developer ASAP";
             return false;
         }
+        [ApiExplorerSettings(IgnoreApi = true)]
+        private static byte[] BitmapToBytes(Bitmap img)
+        {
+            using (MemoryStream stream = new MemoryStream())
+            {
+                img.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+                return stream.ToArray();
+            }
+        }
+
     }
 }
