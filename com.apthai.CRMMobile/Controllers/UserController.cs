@@ -828,7 +828,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 //    };
                 //}
                 List<GetUserCardReturnObj> getUserCard = _UserRepository.GetUserCardByProjectandUnit(data.ContactNo);
-                Model.CRMMobile.UserProfile Contact = _UserRepository.GetUserProfileByCRMContactID_Mobile(data.ContactNo);
+                //Model.CRMMobile.UserProfile Contact = _UserRepository.GetUserProfileByCRMContactID_Mobile(data.ContactNo);
                 
                 if (getUserCard == null)
                 {
@@ -839,16 +839,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         message = "Cannot Find Data!"
                     };
                 }
-                for (int i = 0; i < getUserCard.Count(); i++)
-                {
-                    string QREncode = Contact.CitizenIdentityNo + getUserCard[i].ContactNo + getUserCard[i].AgreementNo + getUserCard[i].Balance;
-                    QRCodeGenerator qrGenerator = new QRCodeGenerator();
-                    QRCodeData qrCodeData = qrGenerator.CreateQrCode(QREncode, QRCodeGenerator.ECCLevel.Q);
-                    QRCode qrCode = new QRCode(qrCodeData);
-                    Bitmap qrCodeImage = qrCode.GetGraphic(20);
-                    var bitmapBytes = BitmapToBytes(qrCodeImage);
-                    getUserCard[i].QRCode = File(bitmapBytes, "image/jpeg");
-                }
+                
 
                 return new
                 {
