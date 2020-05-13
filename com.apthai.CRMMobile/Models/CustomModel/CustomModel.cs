@@ -383,7 +383,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string ServiceCode { get; set; }
         public string BankAccountNo { get; set; }
         public string BillerID { get; set; }
-        public string CompanyID { get; set; }
+        public Guid CompanyID { get; set; }
         public string ProjectID { get; set; }
     }
 }
