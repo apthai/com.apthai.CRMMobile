@@ -68,7 +68,7 @@ namespace com.apthai.CRMMobile.Repositories
             {
                 try
                 {
-                    string sQuery = "SELECT ba.BillerID, ba.CompanyCode , prj.ProjectID " +
+                    string sQuery = "SELECT ba.*,ba.BillerID, ba.CompanyCode , prj.ProjectID " +
   "FROM MST.BankAccount ba " +
   "INNER JOIN MST.Company com ON com.ID = ba.CompanyID " +
   "INNER JOIN PRJ.Project prj ON prj.CompanyID = com.ID " +

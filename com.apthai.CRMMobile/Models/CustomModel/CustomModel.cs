@@ -374,8 +374,14 @@ namespace com.apthai.CRMMobile.CustomModel
         public string title { get; set; }
         public string imageUrl { get; set; }
     }
-    public class GetProjectInformation
+    public class GetProjectInformation 
     {
+        public string Name { get; set; }
+        public string MerchantID { get; set; }
+        public string IsPCard { get; set; }
+        public string GLAccountNo { get; set; }
+        public string ServiceCode { get; set; }
+        public string BankAccountNo { get; set; }
         public string BillerID { get; set; }
         public string CompanyID { get; set; }
         public string ProjectID { get; set; }
