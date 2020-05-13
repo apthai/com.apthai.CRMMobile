@@ -101,12 +101,22 @@ namespace com.apthai.CRMMobile.CustomModel
         public string BookingAmount { get; set; }
         public string PayBookingAmount { get; set; }
         public string BookingPaymentDate { get; set; }
+        public string FlagBookingReceipt { get; set; }
+        public string BookingReceiptNo { get; set; }
         public string FlagAgreement { get; set; }
         public string AgreementAmount { get; set; }
         public string PayAgreementAmount { get; set; }
         public string AgreementPaymentDate { get; set; }
+        public string FlagAgreementReceipt { get; set; }
+        public string AgreementReceiptNo { get; set; }
         public string MasterPriceItemID { get; set; }
         public string Period { get; set; }
+    }
+    public class BillingTrackingGroup
+    {
+        public int DetailDownPayment { get; set; }
+        public List<GetBillingTrackingMobile> GetBillingTrackingMobile { get; set; }
+        public double PayRemain { get; set; }
     }
     public class iCRMBooking
     {
@@ -363,5 +373,11 @@ namespace com.apthai.CRMMobile.CustomModel
         public string type { get; set; }
         public string title { get; set; }
         public string imageUrl { get; set; }
+    }
+    public class GetProjectInformation
+    {
+        public string BillerID { get; set; }
+        public string CompanyID { get; set; }
+        public string ProjectID { get; set; }
     }
 }

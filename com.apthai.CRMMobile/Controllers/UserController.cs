@@ -19,6 +19,9 @@ using System.Text.RegularExpressions;
 using System.Drawing;
 using System.IO;
 using QRCoder;
+using FirebaseAdmin.Auth;
+using Microsoft.EntityFrameworkCore.Internal;
+using MoreLinq;
 
 namespace com.apthai.CRMMobile.Controllers
 {
@@ -226,6 +229,15 @@ namespace com.apthai.CRMMobile.Controllers
                     bool insert = _UserRepository.InsertCSUserProfile(cSUserProfile, out ProfileID);
 
                     string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
+                    //------------------ Regis FireBase For FireBase's Token -----------------------
+
+                    var claims = new Dictionary<string, object>()
+                    {
+                      { "CRMContactID", contact.ID.ToString()},
+                      { "UserToken", GenerateAccessToken },
+                    };
+
+                    //-------------------------------------------------------------------------------
                     CRMUserLoginWithContactID cSUserLogin = new CRMUserLoginWithContactID();
                     cSUserLogin.UserPhoneNumber = data.PhoneNumber;
                     cSUserLogin.LoginDate = DateTime.Now.ToShortDateString();
@@ -235,7 +247,6 @@ namespace com.apthai.CRMMobile.Controllers
                     cSUserLogin.UserProfileID = Convert.ToInt32(ProfileID);
                     cSUserLogin.CRMContactID = contact.ID;
                     bool insertUserLogin = _UserRepository.InsertCSUserLogin(cSUserLogin);
-
                     return new
                     {
                         success = true,
@@ -683,10 +694,34 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         message = "There is no Assosiate Phone Number with this IDCard Number!!"
                     };
                 }
+                List<GetBillingTrackingMobile> DistinctList = getBilling.DistinctBy(p => p.DetailDownPayment).ToList();
+                List<BillingTrackingGroup> GroupList = new List<BillingTrackingGroup>();
+                for (int i = 0; i < DistinctList.Count(); i++)
+                {
+                    int DownPay = 1;
+                    double Balance = 0;
+                    List<GetBillingTrackingMobile> BillingGroup = getBilling.Where(S => S.DetailDownPayment == DownPay.ToString()).ToList();
+                    BillingTrackingGroup Group = new BillingTrackingGroup();
+                    for (int ii = 0; ii < BillingGroup.Count(); ii++)
+                    {
+                        Group.GetBillingTrackingMobile.Add(BillingGroup[ii]);
+                        Group.DetailDownPayment = DownPay;
+                        if (Group.PayRemain == 0)
+                        {
+                            Group.PayRemain = Convert.ToDouble(BillingGroup[ii].AmountBalance);
+                        }
+                        else
+                        {
+                            Group.PayRemain = Group.PayRemain - Convert.ToDouble(BillingGroup[ii].AmountPaid);
+                        }
+                    }
+                    GroupList.Add(Group);
+                    DownPay++;
+                }
                 return new
                 {
                     success = true,
-                    data = getBilling,
+                    data = GroupList,
                     message = "Get User iBooking Success !"
                 };
 
@@ -942,7 +977,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 return StatusCode(500, "Internal server error :: " + ex.Message);
             }
         }
-
+        
         [HttpPost]
         [Route("GenerateQACode")]
         [SwaggerOperation(Summary = "GenerateQR Code สำหรับลูกค้าระบบ CRM ",

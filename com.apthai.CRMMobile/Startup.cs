@@ -30,6 +30,8 @@ using Hangfire.Annotations;
 using Hangfire.Common;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.Extensions.FileProviders;
+using FirebaseAdmin;
+using Google.Apis.Auth.OAuth2;
 
 namespace com.apthai.CRMMobile
 {
@@ -201,7 +203,7 @@ namespace com.apthai.CRMMobile
             services.AddSingleton<IDataCrawlerServices, DataCrawlerServices>();
             services.AddSingleton<IUnitOfWork, UnitOfWork>();
             services.AddSingleton<IUserRepository, UserRepository>();
-
+            services.AddSingleton<IMobileMessagingClient, MobileMessagingClient>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -249,6 +251,11 @@ namespace com.apthai.CRMMobile
                 c.ShowExtensions();
                 c.RoutePrefix = "docs";
 
+            });
+
+            FirebaseApp.Create(new AppOptions()
+            {
+                Credential = GoogleCredential.FromFile("FireBaseAuth.json"),
             });
 
             app.UseHttpsRedirection();

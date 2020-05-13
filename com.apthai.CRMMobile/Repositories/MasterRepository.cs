@@ -62,23 +62,28 @@ namespace com.apthai.CRMMobile.Repositories
         //        }
         //    }
         //}
-        //public List<calltype> GetCallCallType_Sync()
-        //{
-        //    using (IDbConnection conn = WebConnection)
-        //    {
-        //        try
-        //        {
-        //            string sQuery = "Select * From callType where Active = 1 ";
-        //            var result = conn.Query<calltype>(sQuery).ToList();
-        //            return result;
+        public GetProjectInformation getProjectInformation_CRMWeb(string ProjectID)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                try
+                {
+                    string sQuery = "SELECT ba.BillerID, ba.CompanyCode , prj.ProjectID " +
+  "FROM MST.BankAccount ba " +
+  "INNER JOIN MST.Company com ON com.ID = ba.CompanyID " +
+  "INNER JOIN PRJ.Project prj ON prj.CompanyID = com.ID " +
+  "INNER JOIN PRJ.Unit unit ON unit.ProjectID = prj.ID " +
+  "WHERE ba.IsBillPayment = 1 AND prj.ProjectNo = @ProjectID ";
+                    var result = conn.Query<GetProjectInformation>(sQuery, new { ProjectID = ProjectID }).FirstOrDefault();
+                    return result;
 
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            throw new Exception("MasterRepository.GetCallAreaByProductCat_Sync() :: Error ", ex);
-        //        }
-        //    }
-        //}
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("MasterRepository.getProjectInformation_CRMWeb() :: Error ", ex);
+                }
+            }
+        }
         //public callTDefect GetCallTDefect_Sync(int TDefectID)
         //{
         //    using (IDbConnection conn = WebConnection)

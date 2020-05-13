@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace com.apthai.CRMMobile.Repositories.Interfaces
 {
-    public interface IMasterRepository
+    public interface IMobileMessagingClient
     {
-        GetProjectInformation getProjectInformation_CRMWeb(string ProjectID);
+        Task<int> TanonchaiJobSample();
         //List<calltype> GetCallCallType_Sync();
         //List<callarea> GetCallAreaByProductCat_Sync(string ProductTypeCate);
         //callTDefect GetCallTDefect_Sync(int TDefectID);

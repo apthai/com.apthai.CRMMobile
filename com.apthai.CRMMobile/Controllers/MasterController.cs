@@ -61,6 +61,23 @@ namespace com.apthai.CRMMobile.Controllers
                     };
              
         }
+
+        [HttpGet]
+        [Route("GetProjectInformation")]
+        public async Task<object> GetProjectInformation(string ProjectID)
+        {
+
+            GetProjectInformation projectInformation = _masterRepository.getProjectInformation_CRMWeb(ProjectID);
+
+            return new
+            {
+                success = true,
+                data = projectInformation,
+                Message = "GetProjectInformantion Successfully"
+            };
+
+        }
+
         //-------------- Verify Key and Token From HTTP Header ------------------
         [ApiExplorerSettings(IgnoreApi = true)]
         public bool VerifyHeader(out string ErrorMsg)
