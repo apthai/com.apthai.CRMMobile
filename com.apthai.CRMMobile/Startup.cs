@@ -24,10 +24,6 @@ using Newtonsoft.Json.Serialization;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.Filters;
 using com.apthai.CRMMobile.HttpRestModel;
-using Hangfire;
-using Hangfire.Dashboard;
-using Hangfire.Annotations;
-using Hangfire.Common;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.Extensions.FileProviders;
 using FirebaseAdmin;
@@ -180,8 +176,8 @@ namespace com.apthai.CRMMobile
             {
                 conn = Configuration.GetConnectionString("DefaultConnection");
             }
-            services.AddHangfire(config =>
-                config.UseSqlServerStorage(conn));
+            //services.AddHangfire(config =>
+            //    config.UseSqlServerStorage(conn));
 
 
             //services.AddSwaggerExamples();
@@ -226,15 +222,15 @@ namespace com.apthai.CRMMobile
 
             app.UseStaticFiles();
 
-            app.UseHangfireDashboard();
+            //app.UseHangfireDashboard();
 
-            app.UseHangfireServer();
+            //app.UseHangfireServer();
 
 
-            app.UseHangfireDashboard("/jobs", new DashboardOptions()
-            {
-                Authorization = new[] { new HangFireAuthorizationFilter() }
-            });
+            //app.UseHangfireDashboard("/jobs", new DashboardOptions()
+            //{
+            //    Authorization = new[] { new HangFireAuthorizationFilter() }
+            //});
 
             var name = settings.BaseRootPath;
             var endpoint = !string.IsNullOrEmpty(name) ?
@@ -268,7 +264,7 @@ namespace com.apthai.CRMMobile
             UtilsProvider.AppSetting = settings;
 
 
-            var manager = new RecurringJobManager();
+            //var manager = new RecurringJobManager();
             //manager.AddOrUpdate("core-daily_sync_master", Job.FromExpression(() => RecurringJobDaily_Master()), Cron.Daily(23 - 2, 30)); // 2 AM
             //manager.AddOrUpdate("TestHangFireJobs", Job.FromExpression(() => RecurringJobTestHangFire_Master()), Cron.Daily(23 - 2, 30)); // 2 AM
             ////var manager = new RecurringJobManager();
@@ -307,21 +303,5 @@ namespace com.apthai.CRMMobile
         }
         
     }
-
-    public class HangFireAuthorizationFilter : IDashboardAuthorizationFilter
-    {
-        public bool Authorize([NotNull] DashboardContext context)
-        {
-
-            //can add some more logic here...
-            //return HttpContext.Current.User.Identity.IsAuthenticated;
-            return true;
-
-
-        }
-
-
-    }
-
-
+    
 }
