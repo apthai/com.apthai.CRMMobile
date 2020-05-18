@@ -9,7 +9,7 @@ namespace com.apthai.CRMMobile.Repositories.Interfaces
 {
     public interface IMasterRepository
     {
-        GetProjectInformation getProjectInformation_CRMWeb(string ProjectID);
+        List<GetProjectInformation> getProjectInformation_CRMWeb(string ProjectID);
         //List<calltype> GetCallCallType_Sync();
         //List<callarea> GetCallAreaByProductCat_Sync(string ProductTypeCate);
         //callTDefect GetCallTDefect_Sync(int TDefectID);

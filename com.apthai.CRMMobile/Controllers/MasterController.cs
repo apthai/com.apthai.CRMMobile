@@ -67,7 +67,7 @@ namespace com.apthai.CRMMobile.Controllers
         public async Task<object> GetProjectInformation(string ProjectID)
         {
 
-            GetProjectInformation projectInformation = _masterRepository.getProjectInformation_CRMWeb(ProjectID);
+            List<GetProjectInformation> projectInformation = _masterRepository.getProjectInformation_CRMWeb(ProjectID);
 
             return new
             {

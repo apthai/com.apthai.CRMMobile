@@ -34,12 +34,14 @@ namespace com.apthai.CRMMobile.Controllers
         private readonly IMasterRepository _masterRepo;
         private readonly IAuthorizeService _authorizeService;
         private readonly IUserRepository _UserRepository;
-        public UserController(IMasterRepository masterRepo , IAuthorizeService authorizeService,IUserRepository userRepository)
+        private readonly IMobileMessagingClient _mobileMessagingClient;
+        public UserController(IMasterRepository masterRepo , IAuthorizeService authorizeService,IUserRepository userRepository, IMobileMessagingClient mobileMessagingClient)
         {
 
             _masterRepo = masterRepo;
             _authorizeService = authorizeService;
             _UserRepository = userRepository;
+            _mobileMessagingClient = mobileMessagingClient;
         }
 
         [HttpPost]
@@ -1044,6 +1046,94 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 {
                     success = true,
                     data = File(bitmapBytes, "image/jpeg"), //Return as file result
+                    message = "Get User's Card Success !"
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error :: " + ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [Route("CreateMobileNotification")]
+        [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
+Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
+        public async Task<object> CreateMobileNotification([FromBody]GetUserCreditCardParam data)
+        {
+            try
+            {
+                StringValues api_key;
+                StringValues EmpCode;
+
+                //if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
+                //{
+                //    string AccessKey = api_key.First();
+                //    string EmpCodeKey = EmpCode.First();
+
+                //    if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
+                //    {
+                //        return new
+                //        {
+                //            success = false,
+                //            data = new AutorizeDataJWT(),
+                //            message = "Require Key to Access the Function"
+                //        };
+                //    }
+                //    else
+                //    {
+                //        string APApiKey = Environment.GetEnvironmentVariable("API_Key");
+                //        if (APApiKey == null)
+                //        {
+                //            APApiKey = UtilsProvider.AppSetting.ApiKey;
+                //        }
+                //        if (api_key != APApiKey)
+                //        {
+                //            return new
+                //            {
+                //                success = false,
+                //                data = new AutorizeDataJWT(),
+                //                message = "Incorrect API KEY !!"
+                //            };
+                //        }
+                //    }
+                //}
+
+                //Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByID(data.UserID);
+                //if (contact == null)
+                //{
+                //    return new
+                //    {
+                //        success = false,
+                //        data = new AutorizeDataJWT(),
+                //        message = "Only AP Customer Can Regist to the System !!"
+                //    };
+                //}
+                GetUserCreditCardReturnObj getUserCard = _UserRepository.GetUserCreditCardByProjectandUnit(data.ProjectNo, data.UnitNo);
+                if (getUserCard == null)
+                {
+                    return new
+                    {
+                        success = false,
+                        data = new GetUserCreditCardReturnObj(),
+                        message = "Cannot Find Data!"
+                    };
+                }
+                var cardNumber = getUserCard.AccountNO;
+
+                var firstDigits = cardNumber.Substring(0, 6);
+                var lastDigits = cardNumber.Substring(cardNumber.Length - 4, 4);
+
+                var requiredMask = new String('X', cardNumber.Length - firstDigits.Length - lastDigits.Length);
+
+                var maskedString = string.Concat(firstDigits, requiredMask, lastDigits);
+                var maskedCardNumberWithSpaces = Regex.Replace(maskedString, ".{4}", "$0 ");
+                getUserCard.AccountNO = maskedCardNumberWithSpaces;
+                return new
+                {
+                    success = true,
+                    data = getUserCard,
                     message = "Get User's Card Success !"
                 };
 
