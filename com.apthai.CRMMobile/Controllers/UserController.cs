@@ -248,6 +248,7 @@ namespace com.apthai.CRMMobile.Controllers
                     cSUserLogin.UserToken = GenerateAccessToken;
                     cSUserLogin.UserProfileID = Convert.ToInt32(ProfileID);
                     cSUserLogin.CRMContactID = contact.ID;
+                    cSUserLogin.FireBaseToken = data.FireBaseToken;
                     bool insertUserLogin = _UserRepository.InsertCSUserLogin(cSUserLogin);
                     return new
                     {
@@ -1057,10 +1058,10 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
         }
 
         [HttpPost]
-        [Route("CreateMobileNotification")]
+        [Route("SendMobileNotification")]
         [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
 Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
-        public async Task<object> CreateMobileNotification([FromBody]GetUserCreditCardParam data)
+        public async Task<object> SendMobileNotification([FromBody]CreateMobileNotificationParam data)
         {
             try
             {
@@ -1099,41 +1100,14 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 //        }
                 //    }
                 //}
-
-                //Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByID(data.UserID);
-                //if (contact == null)
-                //{
-                //    return new
-                //    {
-                //        success = false,
-                //        data = new AutorizeDataJWT(),
-                //        message = "Only AP Customer Can Regist to the System !!"
-                //    };
-                //}
-                GetUserCreditCardReturnObj getUserCard = _UserRepository.GetUserCreditCardByProjectandUnit(data.ProjectNo, data.UnitNo);
-                if (getUserCard == null)
-                {
-                    return new
-                    {
-                        success = false,
-                        data = new GetUserCreditCardReturnObj(),
-                        message = "Cannot Find Data!"
-                    };
-                }
-                var cardNumber = getUserCard.AccountNO;
-
-                var firstDigits = cardNumber.Substring(0, 6);
-                var lastDigits = cardNumber.Substring(cardNumber.Length - 4, 4);
-
-                var requiredMask = new String('X', cardNumber.Length - firstDigits.Length - lastDigits.Length);
-
-                var maskedString = string.Concat(firstDigits, requiredMask, lastDigits);
-                var maskedCardNumberWithSpaces = Regex.Replace(maskedString, ".{4}", "$0 ");
-                getUserCard.AccountNO = maskedCardNumberWithSpaces;
+                
+                string Token = "fd2JuQd5HKs:APA91bFdBvhFD0zFP1nP_Q5nP_WR6lkSQmIkxcSPR7xOSsmuLBc0eeYS2jaIuKIm9M3RKeQXeNYaYCzqT0KzsBVP60BAFZRfBBXTIrT8oMgDwIURd4yrwD1gHU5FTFOLQyy0sdMxkoCK";
+                var a = _mobileMessagingClient.CreateNotification("tests", "My First Notifications", Token);
+                var b = _mobileMessagingClient.SendNotification(Token, "P'Pom", "คิดถึงน้องพลอยจัง วันนี้ไม่เจอเลย");
                 return new
                 {
                     success = true,
-                    data = getUserCard,
+                    data = "",
                     message = "Get User's Card Success !"
                 };
 

@@ -21,6 +21,14 @@ namespace com.apthai.CRMMobile.HttpRestModel
         public string PINCode { get; set; }
         public string AccessKey { get; set; }
         public string DeviceID { get; set; }
+        public string FireBaseToken { get; set; }
+    }
+    public partial class LogOutParam
+    {
+        public string PINCode { get; set; }
+        public string AccessKey { get; set; }
+        public string DeviceID { get; set; }
+        public string FireBaseToken { get; set; }
     }
     public partial class ChangePINParam
     {
@@ -102,6 +110,7 @@ namespace com.apthai.CRMMobile.HttpRestModel
         public string DeviceID { get; set; }
         public string DeviceType { get; set; }
         public string PINCode { get; set; }
+        public string FireBaseToken { get; set; }
     }
     public class RequestOTPParam
     {
@@ -132,6 +141,10 @@ namespace com.apthai.CRMMobile.HttpRestModel
     {
         public string ProjectNo { get; set; }
         public string UnitNo { get; set; }
+    }
+    public partial class CreateMobileNotificationParam
+    {
+        public string Token { get; set; }
     }
     public partial class SCBPaymentParam
     {

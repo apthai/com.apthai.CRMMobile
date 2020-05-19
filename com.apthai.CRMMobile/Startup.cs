@@ -248,11 +248,7 @@ namespace com.apthai.CRMMobile
                 c.RoutePrefix = "docs";
 
             });
-
-            FirebaseApp.Create(new AppOptions()
-            {
-                Credential = GoogleCredential.FromFile("FireBaseAuth.json"),
-            });
+            
 
             app.UseHttpsRedirection();
             app.UseCors(MyAllowSpecificOrigins);

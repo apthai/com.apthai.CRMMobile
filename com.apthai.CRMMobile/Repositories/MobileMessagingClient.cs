@@ -35,7 +35,7 @@ namespace com.apthai.CRMMobile.Repositories
 
         }
 
-        private Message CreateNotification(string title, string notificationBody, string token)
+        public Message CreateNotification(string title, string notificationBody, string token)
         {
             return new Message()
             {

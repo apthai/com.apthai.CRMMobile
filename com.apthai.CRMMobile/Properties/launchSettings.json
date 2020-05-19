@@ -17,7 +17,7 @@
         "SCBAPISecret": "0bd444d01f7a436fade44121266e8952",
         "AuthorizeEndpointUrlAddress": "http://192.168.0.40/authorizewebservice/Authorize.asmx?wsdl",
         "Api_Token": "CtOcOl54qoQVGAp6XaRnfI/PC/77cjN6c4tVj76uXwT+sEjnimRK8j2Dw+7uWPtqSSpt+rr/vZcswsd1o+V1phuvsBv0Ag==",
-        "DefaultConnection": "Data Source=192.168.3.33;Initial Catalog=crmrevo_test;User ID=revo;Password=P@ssw0rd; Application Name=CRM_BackgroundJob",
+        "DefaultConnection": "Data Source=192.168.3.33;Initial Catalog=crmrevo_test;User ID=revo;Password=P@ssw0rd; Application Name=WebAPI_com.apthai.CRMMobile",
         "API_Key": "z66PDOx/wrdRcfI38UAWy+eb6pw7ivpNdpz+eYJQScNX19mbFiA87KZvF2/qnLx+6JWUaNbBSrUtC4rYjOB4HIayTQU=",
         "SCBAPIKey": "l73c4e59679de54693849f74c5971f4072",
         "AuthenticationURL": "http://58.137.32.228/DotNetCoreAuth/Api/authorize/JWTUserLogin",

@@ -82,6 +82,7 @@ namespace com.apthai.CRMMobile.Controllers
                     string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
                     userLogin.UserToken = GenerateAccessToken;
                     cSUserProfile.UserToken = GenerateAccessToken;
+                    userLogin.FireBaseToken = data.FireBaseToken;
                     bool UpdateUserToken = _UserRepository.UpdateCSUserLogin(userLogin);
 
                     return new
@@ -155,6 +156,67 @@ namespace com.apthai.CRMMobile.Controllers
                         success = true,
                         data = new Model.CRMMobile.UserProfile() ,
                         message = "ChangePIN Success !!"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error :: " + ex.Message);
+            }
+        }
+        [HttpPost]
+        [Route("LogOut")]
+        [SwaggerOperation(Summary = "Register User เพื่อใช่ระบบ ซึ่งจะไป หาข้อมูลจากระบบ CRM",
+       Description = "Access Key ใช้ในการเรียหใช้ Function ต่างๆ เพื่อไม่ให้ User Login หลายเครื่องในเวลาเดียวกัน")]
+        public async Task<object> LogOut([FromBody]LogOutParam data)
+        {
+            try
+            {
+                StringValues api_key;
+                StringValues EmpCode;
+
+                //Model.CRMWeb.Contact cRMContact = _UserRepository.GetCRMContactByIDCardNO(data.CitizenIdentityNo);
+                //if (cRMContact == null)
+                //{
+                //    return new
+                //    {
+                //        success = false,
+                //        data = new AutorizeDataJWT(),
+                //        message = "Only AP Customer Can Regist to the System !!"
+                //    };
+                //}
+                VerifyPINReturnObj cSUserProfile = _UserRepository.GetUserLogin_Mobile(data.AccessKey);
+                if (cSUserProfile == null)
+                {
+                    return new
+                    {
+                        success = false,
+                        data = new VerifyPINReturnObj(),
+                        message = "Cannot Find the Matach Data"
+                    };
+
+                }
+                else
+                {
+                    if (!SHAHelper.VerifyHash(data.PINCode, "SHA512", cSUserProfile.PINCode))
+                    {
+                        return new
+                        {
+                            success = false,
+                            data = new AutorizeDataJWT(),
+                            message = "PinCode is InCorrect!"
+                        };
+                    }
+                    Model.CRMMobile.UserLogin userLogin = _UserRepository.GetUserLoginByID_Mobile(cSUserProfile.UserLoginID);
+                    //string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
+                    userLogin.FireBaseToken = null;
+                    bool UpdateUserToken = _UserRepository.UpdateCSUserLogin(userLogin);
+
+                    return new
+                    {
+                        success = true,
+                        data = cSUserProfile,
+                        message = "PIN Correct!"
                     };
                 }
             }
