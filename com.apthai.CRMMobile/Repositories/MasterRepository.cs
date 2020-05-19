@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using Dapper.Contrib.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using com.apthai.CRMMobile.CustomModel;
+using com.apthai.CRMMobile.Model.CRMMobile;
 
 namespace com.apthai.CRMMobile.Repositories
 {
@@ -81,6 +82,23 @@ namespace com.apthai.CRMMobile.Repositories
                 catch (Exception ex)
                 {
                     throw new Exception("MasterRepository.getProjectInformation_CRMWeb() :: Error ", ex);
+                }
+            }
+        }
+        public List<DocumentHeaderLevel1> GetAllDocumentHeaderLevel1()
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                try
+                {
+                    string sQuery = "SELECT * From DocumentHeaderLevel1 ";
+                    var result = conn.Query<DocumentHeaderLevel1>(sQuery).ToList();
+                    return result;
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("MasterRepository.GetAllDocumentHeaderLevel1() :: Error ", ex);
                 }
             }
         }

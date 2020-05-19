@@ -25,6 +25,7 @@ using com.apthai.CRMMobile.CustomModel;
 using com.apthai.CoreApp.Data.Services;
 using com.apthai.CRMMobile.HttpRestModel;
 using Microsoft.Extensions.Primitives;
+using com.apthai.CRMMobile.Model.CRMMobile;
 
 namespace com.apthai.CRMMobile.Controllers
 {
@@ -74,6 +75,22 @@ namespace com.apthai.CRMMobile.Controllers
                 success = true,
                 data = projectInformation,
                 Message = "GetProjectInformantion Successfully"
+            };
+
+        }
+
+        [HttpGet]
+        [Route("DocumentHeaderList")]
+        public async Task<object> DocumentHeaderList()
+        {
+
+            List<DocumentHeaderLevel1> projectInformation = _masterRepository.GetAllDocumentHeaderLevel1();
+
+            return new
+            {
+                success = true,
+                data = projectInformation,
+                Message = "DocumentHeaderList Successfully"
             };
 
         }

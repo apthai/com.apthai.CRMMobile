@@ -14,6 +14,7 @@
       "launchBrowser": true,
       "launchUrl": "api/values",
       "environmentVariables": {
+        "DefaultMobileConnection": "Data Source=192.168.2.52;Initial Catalog=db_icrm;User ID=sa;Password=P@ssw0rd; Application Name=ApiSync",
         "SCBAPISecret": "0bd444d01f7a436fade44121266e8952",
         "AuthorizeEndpointUrlAddress": "http://192.168.0.40/authorizewebservice/Authorize.asmx?wsdl",
         "Api_Token": "CtOcOl54qoQVGAp6XaRnfI/PC/77cjN6c4tVj76uXwT+sEjnimRK8j2Dw+7uWPtqSSpt+rr/vZcswsd1o+V1phuvsBv0Ag==",

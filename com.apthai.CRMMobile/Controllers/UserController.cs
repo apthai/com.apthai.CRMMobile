@@ -705,8 +705,10 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                     double Balance = 0;
                     List<GetBillingTrackingMobile> BillingGroup = getBilling.Where(S => S.DetailDownPayment == DownPay.ToString()).ToList();
                     BillingTrackingGroup Group = new BillingTrackingGroup();
+                    Group.GetBillingTrackingMobile = new List<GetBillingTrackingMobile>();
                     for (int ii = 0; ii < BillingGroup.Count(); ii++)
                     {
+                        
                         Group.GetBillingTrackingMobile.Add(BillingGroup[ii]);
                         Group.DetailDownPayment = DownPay;
                         if (Group.PayRemain == 0)
