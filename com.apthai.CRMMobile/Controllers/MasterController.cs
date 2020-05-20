@@ -95,6 +95,39 @@ namespace com.apthai.CRMMobile.Controllers
 
         }
 
+        [HttpPost]
+        [Route("DocumentDetailList")]
+        public async Task<object> DocumentDetailList([FromBody]GetDocumentDetailParam Data)
+        {
+
+            List<DocumentDetailLevel2> detailLists = _masterRepository.getDocumentDetailLevel2_CRMMobile(Data.HeaderID);
+            DocumentDetailListResult Result = new DocumentDetailListResult();
+            Result.DocumentDetailList = new List<DocumentDetailList>();
+            for (int i = 0; i < detailLists.Count(); i++)
+            {
+            DocumentDetailList Obj = new DocumentDetailList();
+                Obj.Created = detailLists[i].Created;
+                Obj.CreatedBy = detailLists[i].CreatedBy;
+                Obj.DocumentDetailID = detailLists[i].DocumentDetailID;
+                Obj.DocumentDetailName = detailLists[i].DocumentDetailName;
+                Obj.OrderOfDocumentDetail = detailLists[i].OrderOfDocumentDetail;
+                Obj.RefDocumentHeaderID = detailLists[i].RefDocumentHeaderID;
+                Obj.StatusDocumentDetail = detailLists[i].StatusDocumentDetail;
+                Obj.Updated = detailLists[i].Updated;
+                Obj.UpdatedBy = detailLists[i].UpdatedBy;
+                Obj.URLDocumentDetail = detailLists[i].URLDocumentDetail;
+                List<SubDocumentDetailLevel3> subDocuments = _masterRepository.getSubDocumentDetailLevel3_CRMMobile(detailLists[i].DocumentDetailID);
+                Obj.SubDoct = subDocuments;
+                Result.DocumentDetailList.Add(Obj);
+            }
+            return new
+            {
+                success = true,
+                data = Result,
+                Message = "DocumentDetailList Successfully"
+            };
+
+        }
         //-------------- Verify Key and Token From HTTP Header ------------------
         [ApiExplorerSettings(IgnoreApi = true)]
         public bool VerifyHeader(out string ErrorMsg)

@@ -102,6 +102,40 @@ namespace com.apthai.CRMMobile.Repositories
                 }
             }
         }
+        public List<DocumentDetailLevel2> getDocumentDetailLevel2_CRMMobile(string RefDocumentHeaderID)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                try
+                {
+                    string sQuery = "SELECT * FROM DOC.DocumentDetailLevel2 where RefDocumentHeaderID = @RefDocumentHeaderID";
+                    var result = conn.Query<DocumentDetailLevel2>(sQuery, new { RefDocumentHeaderID = RefDocumentHeaderID }).ToList();
+                    return result;
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("MasterRepository.getDocumentDetailLevel2_CRMMobile() :: Error ", ex);
+                }
+            }
+        }
+        public List<SubDocumentDetailLevel3> getSubDocumentDetailLevel3_CRMMobile(int RefDocumentDetailID)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                try
+                {
+                    string sQuery = "SELECT * FROM DOC.SubDocumentDetailLevel3 where RefDocumentDetailID = @RefDocumentDetailID";
+                    var result = conn.Query<SubDocumentDetailLevel3>(sQuery, new { RefDocumentDetailID = RefDocumentDetailID }).ToList();
+                    return result;
+
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("MasterRepository.getSubDocumentDetailLevel3_CRMMobile() :: Error ", ex);
+                }
+            }
+        }
         //public callTDefect GetCallTDefect_Sync(int TDefectID)
         //{
         //    using (IDbConnection conn = WebConnection)

@@ -386,4 +386,13 @@ namespace com.apthai.CRMMobile.CustomModel
         public Guid CompanyID { get; set; }
         public string ProjectID { get; set; }
     }
+    
+    public class DocumentDetailList : Model.CRMMobile.DocumentDetailLevel2
+    {
+        public List<Model.CRMMobile.SubDocumentDetailLevel3> SubDoct { get; set; }
+    }
+    public class DocumentDetailListResult 
+    {
+        public List<DocumentDetailList> DocumentDetailList { get; set; }
+    }
 }

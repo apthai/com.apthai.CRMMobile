@@ -12,6 +12,8 @@ namespace com.apthai.CRMMobile.Repositories.Interfaces
     {
         List<GetProjectInformation> getProjectInformation_CRMWeb(string ProjectID);
         List<DocumentHeaderLevel1> GetAllDocumentHeaderLevel1();
+        List<DocumentDetailLevel2> getDocumentDetailLevel2_CRMMobile(string RefDocumentHeaderID);
+        List<SubDocumentDetailLevel3> getSubDocumentDetailLevel3_CRMMobile(int RefDocumentDetailID);
         //List<calltype> GetCallCallType_Sync();
         //List<callarea> GetCallAreaByProductCat_Sync(string ProductTypeCate);
         //callTDefect GetCallTDefect_Sync(int TDefectID);
