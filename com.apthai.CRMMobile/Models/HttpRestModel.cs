@@ -103,6 +103,11 @@ namespace com.apthai.CRMMobile.HttpRestModel
         public string AccessKey { get; set; }
         public string EmpCode { get; set; }
     }
+    public class ChangeLanguageParam
+    {
+        public string Language { get; set; }
+        public string CRMContactID { get; set; }
+    }
     public class RegisterData
     {
         public string CitizenIdentityNo { get; set; }
@@ -111,6 +116,7 @@ namespace com.apthai.CRMMobile.HttpRestModel
         public string DeviceType { get; set; }
         public string PINCode { get; set; }
         public string FireBaseToken { get; set; }
+        public string Language { get; set; }
     }
     public class RequestOTPParam
     {

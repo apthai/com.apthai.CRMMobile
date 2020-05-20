@@ -191,5 +191,6 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string CreatedBy { get; set; }
         public string Updated { get; set; }
         public string UpdatedBy { get; set; }
+        public string Language { get; set; }
     }
 }

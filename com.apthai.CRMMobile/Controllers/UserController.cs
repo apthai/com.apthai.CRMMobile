@@ -45,10 +45,10 @@ namespace com.apthai.CRMMobile.Controllers
         }
 
         [HttpPost]
-        [Route("GetUserPropoty")]
-        [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
-       Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
-        public async Task<object> GetUserPropoty([FromBody]GetUserPropotyParam data)
+        [Route("ChangeLanguage")]
+        [SwaggerOperation(Summary = "เปลี่ยนภาษาของบุคคลนั้นๆ",
+       Description = "เปลี่ยนภาษาของบุคคลนั้นๆ")]
+        public async Task<object> ChangeLanguage([FromBody]ChangeLanguageParam data)
         {
             try
             {
@@ -86,76 +86,16 @@ namespace com.apthai.CRMMobile.Controllers
                 //        }
                 //    }
                 //}
-                GetUserPropotyReturnObj ReturnObj = new GetUserPropotyReturnObj();
-                Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByID(data.CustometID);
-                if (contact == null)
-                {
-                    return new
-                    {
-                        success = false,
-                        data = new Model.CRMWeb.Transfer(),
-                        message = "Cannot Find Contact Data !"
-                    };
-                }
-                List<Model.CRMWeb.TransferOwner> transferOwners = _UserRepository.GetTransferOwnerByIDCardNO(contact.CitizenIdentityNo);
-                for (int i = 0; i < transferOwners.Count(); i++)
-                {
-                    GetUserPropotyObj getUserPropotyobj = new GetUserPropotyObj();
-                    Model.CRMWeb.Transfer transfer = _UserRepository.GetTransferByID(transferOwners[i].TransferID.ToString());
-                    if (transfer == null)
-                    {
-                        return new
-                        {
-                            success = false,
-                            data = new Model.CRMWeb.Transfer(),
-                            message = "Cannot Find data on Transfer Table !"
-                        };
-                    }
-                    Model.CRMWeb.Unit unit = _UserRepository.GetUnitByID(transfer.UnitID.ToString());
-                    if (unit == null)
-                    {
-                        return new
-                        {
-                            success = false,
-                            data = new Model.CRMWeb.Transfer(),
-                            message = "Cannot Find data on Transfer Table !"
-                        };
-                    }
-                    Model.CRMWeb.Project project = _UserRepository.GetProjectByID(unit.ProjectID.ToString());
-                    if (project == null)
-                    {
-                        return new
-                        {
-                            success = false,
-                            data = new Model.CRMWeb.Transfer(),
-                            message = "Cannot Find data on Transfer Table !"
-                        };
-                    }
-                    Model.CRMWeb.Floor floor = _UserRepository.GetFloorByID(unit.FloorID.ToString());
-                    if (floor == null)
-                    {
-                        return new
-                        {
-                            success = false,
-                            data = new Model.CRMWeb.Transfer(),
-                            message = "Cannot Find data on Transfer Table !"
-                        };
-                    }
+                Model.CRMMobile.UserProfile userProfile = _UserRepository.GetUserProfileByCRMContactID_Mobile(data.CRMContactID);
+                userProfile.Language = data.Language.ToLower();
 
-                    getUserPropotyobj.transfer = transfer;
-                    getUserPropotyobj.Unit = unit;
-                    getUserPropotyobj.Project = project;
-                    getUserPropotyobj.Floor = floor;
-
-                    ReturnObj.getUserPropotyObjs.Add(getUserPropotyobj);
-
-                }
+                bool result = _UserRepository.UpdateCSUserProfile(userProfile);
                 
                 return new
                 {
                     success = true,
-                    data = ReturnObj,
-                    message = "Get User Phone Success !"
+                    data = userProfile,
+                    message = "change Laguage Success !"
                 };
 
             }
@@ -227,6 +167,7 @@ namespace com.apthai.CRMMobile.Controllers
                     cSUserProfile.UpdatedBy = null;
                     cSUserProfile.IsActive = true;
                     cSUserProfile.PINCode = SHAHelper.ComputeHash(data.PINCode, "SHA512", null);
+                    cSUserProfile.Language = data.Language.ToLower();
                     long ProfileID = 0;
                     bool insert = _UserRepository.InsertCSUserProfile(cSUserProfile, out ProfileID);
 
