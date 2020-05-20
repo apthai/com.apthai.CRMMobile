@@ -91,7 +91,7 @@ namespace com.apthai.CRMMobile.Repositories
             {
                 try
                 {
-                    string sQuery = "SELECT * From DocumentHeaderLevel1 ";
+                    string sQuery = "SELECT * From DOC.DocumentHeaderLevel1 ";
                     var result = conn.Query<DocumentHeaderLevel1>(sQuery).ToList();
                     return result;
 
