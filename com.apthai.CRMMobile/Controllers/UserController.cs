@@ -1104,7 +1104,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 //        }
                 //    }
                 //}
-                List<Model.CRMMobile.NotificationHistory> notificationHistories = _UserRepository.GetUserNotificationHistoryByCRMContactID_Mobile(data.UserProfileID);
+                List<Model.CRMMobile.NotificationHistory> notificationHistories = _UserRepository.GetUserNotificationHistoryByCRMContactID_Mobile(data.CRMContactID);
                
                 return new
                 {
