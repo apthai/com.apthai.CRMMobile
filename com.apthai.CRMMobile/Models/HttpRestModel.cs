@@ -108,6 +108,10 @@ namespace com.apthai.CRMMobile.HttpRestModel
         public string Language { get; set; }
         public string CRMContactID { get; set; }
     }
+    public class UserNotiHistoriesParam
+    {
+        public string CRMContactID { get; set; }
+    }
     public class RegisterData
     {
         public string CitizenIdentityNo { get; set; }

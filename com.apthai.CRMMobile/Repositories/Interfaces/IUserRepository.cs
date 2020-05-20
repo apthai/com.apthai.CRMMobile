@@ -9,6 +9,7 @@ namespace com.apthai.CRMMobile.Repositories
     {
         Model.CRMWeb.Contact GetCRMContactByIDCardNO(string CitizenIdentityNo);
         Model.CRMWeb.Contact GetCRMContactByID(string ID);
+        List<Model.CRMMobile.NotificationHistory> GetUserNotificationHistoryByCRMContactID_Mobile(string CRMContactID)
         List<Model.CRMWeb.TransferOwner> GetTransferOwnerByIDCardNO(string CitizenIdentityNo);
         Model.CRMWeb.Transfer GetTransferByID(string TransferID);
         Model.CRMWeb.Unit GetUnitByID(string ID);

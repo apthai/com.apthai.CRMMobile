@@ -1061,6 +1061,65 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
             }
         }
 
+        [HttpPost]
+        [Route("UserNotiHistroies")]
+        [SwaggerOperation(Summary = "เปลี่ยนภาษาของบุคคลนั้นๆ",
+       Description = "เปลี่ยนภาษาของบุคคลนั้นๆ")]
+        public async Task<object> UserNotiHistroies([FromBody]UserNotiHistoriesParam data)
+        {
+            try
+            {
+                StringValues api_key;
+                StringValues EmpCode;
+
+                //if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
+                //{
+                //    string AccessKey = api_key.First();
+                //    string EmpCodeKey = EmpCode.First();
+
+                //    if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
+                //    {
+                //        return new
+                //        {
+                //            success = false,
+                //            data = new AutorizeDataJWT(),
+                //            message = "Require Key to Access the Function"
+                //        };
+                //    }
+                //    else
+                //    {
+                //        string APApiKey = Environment.GetEnvironmentVariable("API_Key");
+                //        if (APApiKey == null)
+                //        {
+                //            APApiKey = UtilsProvider.AppSetting.ApiKey;
+                //        }
+                //        if (api_key != APApiKey)
+                //        {
+                //            return new
+                //            {
+                //                success = false,
+                //                data = new AutorizeDataJWT(),
+                //                message = "Incorrect API KEY !!"
+                //            };
+                //        }
+                //    }
+                //}
+                List<Model.CRMMobile.NotificationHistory> notificationHistories = _UserRepository.GetUserNotificationHistoryByCRMContactID_Mobile(data.UserProfileID);
+               
+                return new
+                {
+                    success = true,
+                    data = notificationHistories,
+                    message = "Get UserNotiHistroies Success !"
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error :: " + ex.Message);
+            }
+        }
+
         [ApiExplorerSettings(IgnoreApi = true)]
         public string generateToken(string PhoneNumber)
         {

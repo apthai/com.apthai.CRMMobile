@@ -190,6 +190,18 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
+        public List<Model.CRMMobile.NotificationHistory> GetUserNotificationHistoryByCRMContactID_Mobile(string CRMContactID)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMMobile.NotificationHistory>("select * from CS.UserProfile WITH(NOLOCK) " +
+                    " where CS.UserProfile.CRMContactID=@CRMContactID", new { CRMContactID = CRMContactID }).ToList();
+
+                return result;
+            }
+        }
+
         public bool InsertCSUserProfile(Model.CRMMobile.UserProfile data,out long ProfileID)
         {
             using (IDbConnection conn = MobileConnection)
