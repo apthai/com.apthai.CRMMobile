@@ -1045,13 +1045,16 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 //}
 
                 string Token = "";
+                string CRMContactID = "";
                 if (data.User == "MIN")
                 {
                     Token = "fd2JuQd5HKs:APA91bFdBvhFD0zFP1nP_Q5nP_WR6lkSQmIkxcSPR7xOSsmuLBc0eeYS2jaIuKIm9M3RKeQXeNYaYCzqT0KzsBVP60BAFZRfBBXTIrT8oMgDwIURd4yrwD1gHU5FTFOLQyy0sdMxkoCK";
+                    CRMContactID = "c1ee1cc1-cf81-4f80-9411-b5184f6c3efc";
                 }
                 else
                 {
-                    Token = "fS2vHmFLr0VSmAcqvrcAWn:APA91bHO028UYYV2mJ0m6blbEgpSDNUr1Pm_x6f9jpZIf7XoEDhulmlp-y8NHb_E-qANKhnus0OhjnnTx-MNER80LvAHFYhI2OMkmhyQ7xFj2DYf2rWWLZgH5ilKkRTe1kIb0Q7zAwph";
+                    Token = "c03ntc-jHUv2vdoFonSb5v:APA91bFAPKMJJMWwFr8qDHppXy4CRJ_G3871hVkeus0zlIcqc7BpSKijiJyzH-bbo_L2WaCgFgQPvv4Ww5JX-MxPezYgrgG4UXaPFv9bM5CWIVPUJXTww2I2KBXDEVLi-3aXzoMXhy_t";
+                    CRMContactID = "5b3c2e99-d792-45c0-a726-859b853d0333";
                 }
                 
                 var a = _mobileMessagingClient.CreateNotification("tests", "My First Notifications", Token);
@@ -1062,6 +1065,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 Model.CRMMobile.NotificationHistory Nh = new Model.CRMMobile.NotificationHistory();
                 Nh.Created = DateTime.Now.ToString();
                 Nh.ProjectNo = "Test Project";
+                Nh.CRMContactID = CRMContactID;
                 Nh.ProjectNameTH = "Project Test NH";
                 Nh.MsgType = "Manuel Type";
                 Nh.SendMsgStatus = true;
