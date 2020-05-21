@@ -30,6 +30,12 @@ namespace com.apthai.CRMMobile.HttpRestModel
         public string DeviceID { get; set; }
         public string FireBaseToken { get; set; }
     }
+    public partial class OnOffNotification
+    {
+        public bool OnOff { get; set; }
+        public string AccessKey { get; set; }
+        public string FireBaseToken { get; set; }
+    }
     public partial class ChangePINParam
     {
         public string OldPIN { get; set; }

@@ -29,6 +29,8 @@ using com.apthai.CRMMobile.Model.CRMMobile;
 
 namespace com.apthai.CRMMobile.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class MasterController : ControllerBase
     {
         private readonly IAuthorizeService _authorizeService;

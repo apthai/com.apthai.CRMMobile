@@ -1170,64 +1170,134 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
             }
         }
 
-       // [HttpPost]
-       // [Route("UserNotiHistroies")]
-       // [SwaggerOperation(Summary = "เปลี่ยนภาษาของบุคคลนั้นๆ",
-       //Description = "เปลี่ยนภาษาของบุคคลนั้นๆ")]
-       // public async Task<object> UserNotiHistroies([FromBody]UserNotiHistoriesParam data)
-       // {
-       //     try
-       //     {
-       //         StringValues api_key;
-       //         StringValues EmpCode;
+        [HttpPost]
+        [Route("OnOffNotification")]
+        [SwaggerOperation(Summary = "Register User เพื่อใช่ระบบ ซึ่งจะไป หาข้อมูลจากระบบ CRM",
+       Description = "Access Key ใช้ในการเรียหใช้ Function ต่างๆ เพื่อไม่ให้ User Login หลายเครื่องในเวลาเดียวกัน")]
+        public async Task<object> OnOffNotification([FromBody]OnOffNotification data)
+        {
+            try
+            {
+                StringValues api_key;
+                StringValues EmpCode;
 
-       //         //if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
-       //         //{
-       //         //    string AccessKey = api_key.First();
-       //         //    string EmpCodeKey = EmpCode.First();
+                //Model.CRMWeb.Contact cRMContact = _UserRepository.GetCRMContactByIDCardNO(data.CitizenIdentityNo);
+                //if (cRMContact == null)
+                //{
+                //    return new
+                //    {
+                //        success = false,
+                //        data = new AutorizeDataJWT(),
+                //        message = "Only AP Customer Can Regist to the System !!"
+                //    };
+                //}
+                VerifyPINReturnObj cSUserProfile = _UserRepository.GetUserLogin_Mobile(data.AccessKey);
+                if (cSUserProfile == null)
+                {
+                    return new
+                    {
+                        success = false,
+                        data = new VerifyPINReturnObj(),
+                        message = "Cannot Find the Matach Data"
+                    };
 
-       //         //    if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
-       //         //    {
-       //         //        return new
-       //         //        {
-       //         //            success = false,
-       //         //            data = new AutorizeDataJWT(),
-       //         //            message = "Require Key to Access the Function"
-       //         //        };
-       //         //    }
-       //         //    else
-       //         //    {
-       //         //        string APApiKey = Environment.GetEnvironmentVariable("API_Key");
-       //         //        if (APApiKey == null)
-       //         //        {
-       //         //            APApiKey = UtilsProvider.AppSetting.ApiKey;
-       //         //        }
-       //         //        if (api_key != APApiKey)
-       //         //        {
-       //         //            return new
-       //         //            {
-       //         //                success = false,
-       //         //                data = new AutorizeDataJWT(),
-       //         //                message = "Incorrect API KEY !!"
-       //         //            };
-       //         //        }
-       //         //    }
-       //         //}
-       //         List<Model.CRMMobile.NotificationHistory> notificationHistories = _UserRepository.GetUserNotificationHistoryByCRMContactID_Mobile(data.CRMContactID);
+                }
+                else
+                {
+                    if (data.OnOff == true)
+                    {
+                        Model.CRMMobile.UserLogin userLogin = _UserRepository.GetUserLoginByID_Mobile(cSUserProfile.UserLoginID);
+                        //string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
+                        userLogin.FireBaseToken = data.FireBaseToken;
+                        bool UpdateUserToken = _UserRepository.UpdateCSUserLogin(userLogin);
 
-       //         return new
-       //         {
-       //             success = true,
-       //             data = notificationHistories,
-       //             message = "Get UserNotiHistroies Success !"
-       //         };
+                        return new
+                        {
+                            success = true,
+                            data = cSUserProfile,
+                            message = "PIN Correct!"
+                        };
+                    }
+                    else
+                    {
+                        Model.CRMMobile.UserLogin userLogin = _UserRepository.GetUserLoginByID_Mobile(cSUserProfile.UserLoginID);
+                        //string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
+                        userLogin.FireBaseToken = null;
+                        bool UpdateUserToken = _UserRepository.UpdateCSUserLogin(userLogin);
 
-       //     }
-       //     catch (Exception ex)
-       //     {
-       //         return StatusCode(500, "Internal server error :: " + ex.Message);
-       //     }
-       // }
+                        return new
+                        {
+                            success = true,
+                            data = cSUserProfile,
+                            message = "PIN Correct!"
+                        };
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error :: " + ex.Message);
+            }
+        }
+
+        // [HttpPost]
+        // [Route("UserNotiHistroies")]
+        // [SwaggerOperation(Summary = "เปลี่ยนภาษาของบุคคลนั้นๆ",
+        //Description = "เปลี่ยนภาษาของบุคคลนั้นๆ")]
+        // public async Task<object> UserNotiHistroies([FromBody]UserNotiHistoriesParam data)
+        // {
+        //     try
+        //     {
+        //         StringValues api_key;
+        //         StringValues EmpCode;
+
+        //         //if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
+        //         //{
+        //         //    string AccessKey = api_key.First();
+        //         //    string EmpCodeKey = EmpCode.First();
+
+        //         //    if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
+        //         //    {
+        //         //        return new
+        //         //        {
+        //         //            success = false,
+        //         //            data = new AutorizeDataJWT(),
+        //         //            message = "Require Key to Access the Function"
+        //         //        };
+        //         //    }
+        //         //    else
+        //         //    {
+        //         //        string APApiKey = Environment.GetEnvironmentVariable("API_Key");
+        //         //        if (APApiKey == null)
+        //         //        {
+        //         //            APApiKey = UtilsProvider.AppSetting.ApiKey;
+        //         //        }
+        //         //        if (api_key != APApiKey)
+        //         //        {
+        //         //            return new
+        //         //            {
+        //         //                success = false,
+        //         //                data = new AutorizeDataJWT(),
+        //         //                message = "Incorrect API KEY !!"
+        //         //            };
+        //         //        }
+        //         //    }
+        //         //}
+        //         List<Model.CRMMobile.NotificationHistory> notificationHistories = _UserRepository.GetUserNotificationHistoryByCRMContactID_Mobile(data.CRMContactID);
+
+        //         return new
+        //         {
+        //             success = true,
+        //             data = notificationHistories,
+        //             message = "Get UserNotiHistroies Success !"
+        //         };
+
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         return StatusCode(500, "Internal server error :: " + ex.Message);
+        //     }
+        // }
 
         [ApiExplorerSettings(IgnoreApi = true)]
         public string generateToken(string PhoneNumber)
