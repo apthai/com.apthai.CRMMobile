@@ -1058,9 +1058,19 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 }
                 
                 var a = _mobileMessagingClient.CreateNotification("tests", "My First Notifications", Token);
-                string MsgTitle = "P'Pom";
-                string BodyMsg = "คิดถึงน้องพลอยจัง วันนี้ไม่เจอเลย";
-                var b = _mobileMessagingClient.SendNotification(Token, MsgTitle, BodyMsg);
+                string MsgTitleTH = "พี่ปอม";
+                string MsgTitleEN = "P'Pom";
+                string BodyMsgTH = "คิดถึงน้องพลอยจัง วันนี้ไม่เจอเลย /r/n " + "จะออกไปแตะขอบฟ้า แต่เหมือนว่าโชคชะตาไม่เข้าใจ มองไปไม่มัหนทาง แต่รู้ว่าจะต้องไปต่อไป สิ้นแสงขอบฟ้าสีคราม ร้องต่อไม่ได้แล้ว อยู่กับพี่จะมัแต่เสียงร้องของดนตรี ไม่มีเสียงร้องพร้อมน้ำตาแน่นอน <3";
+                string BodyMsgEN = "I miss N'Ploy /r/n " + "I want to touch the end of the sky. but distiny never understand me. there is no way ahead but i have to make a way through. If N'Ploy is with me there will be only a sound of joy , Never tears.";
+                if (data.Language.ToLower() == "th")
+                {
+                    var b = _mobileMessagingClient.SendNotification(Token, MsgTitleTH, BodyMsgTH);
+                }
+                else
+                {
+                    var b = _mobileMessagingClient.SendNotification(Token, MsgTitleEN, BodyMsgEN);
+                }
+                
 
                 Model.CRMMobile.NotificationHistory Nh = new Model.CRMMobile.NotificationHistory();
                 Nh.Created = DateTime.Now.ToString();
@@ -1069,8 +1079,10 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 Nh.ProjectNameTH = "Project Test NH";
                 Nh.MsgType = "Manuel Type";
                 Nh.SendMsgStatus = true;
-                Nh.MessageTitleTH = MsgTitle;
-                Nh.MsgTH = BodyMsg;
+                Nh.MessageTitleTH = MsgTitleTH;
+                Nh.MsgTH = BodyMsgTH;
+                Nh.MessageTitleENG = BodyMsgEN;
+                Nh.MsgEN = BodyMsgEN;
                 bool Insert = _UserRepository.InsertNotificationHistory(Nh);
                 if (Insert)
                 {
