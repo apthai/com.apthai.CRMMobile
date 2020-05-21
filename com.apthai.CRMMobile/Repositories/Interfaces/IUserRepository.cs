@@ -25,6 +25,7 @@ namespace com.apthai.CRMMobile.Repositories
         bool UpdateChangePINCSUserProfile(Model.CRMMobile.UserProfile data);
         bool InsertCSUserProfile(Model.CRMMobile.UserProfile data, out long ProfileID);
         bool InsertCSUserLogin(Model.CRMMobile.UserLogin data);
+        bool InsertNotificationHistory(Model.CRMMobile.NotificationHistory data);
         bool UpdateCSUserLogin(Model.CRMMobile.UserLogin data);
         bool UpdateCSUserProfile(Model.CRMMobile.UserProfile data);
         List<iCRMBooking> GetUseriBookingByUserID(string UserID);

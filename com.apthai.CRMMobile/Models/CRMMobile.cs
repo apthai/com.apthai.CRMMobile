@@ -71,7 +71,9 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string ProjectNo { get; set; }
         public string ProjectNameTH { get; set; }
         public string UnitNo { get; set; }
+        public string MessageTitleTH { get; set; }
         public string MsgTH { get; set; }
+        public string MessageTitleENG { get; set; }
         public string MsgEN { get; set; }
         public string MsgType { get; set; }
         public bool SendMsgStatus { get; set; }

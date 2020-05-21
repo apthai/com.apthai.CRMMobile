@@ -201,7 +201,6 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
-
         public bool InsertCSUserProfile(Model.CRMMobile.UserProfile data,out long ProfileID)
         {
             using (IDbConnection conn = MobileConnection)
@@ -238,6 +237,26 @@ namespace com.apthai.CRMMobile.Repositories
                 catch (Exception ex)
                 {
                     throw new Exception("MasterRepository.InsertCSUserProfile() :: Error ", ex);
+                }
+            }
+        }
+        public bool InsertNotificationHistory(Model.CRMMobile.NotificationHistory data)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                try
+                {
+                    conn.Open();
+                    var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
+
+                    var result = conn.Insert(data, tran);
+                    tran.Commit();
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("MasterRepository.InsertNotificationHistory() :: Error ", ex);
                 }
             }
         }

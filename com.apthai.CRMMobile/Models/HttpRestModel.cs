@@ -158,6 +158,7 @@ namespace com.apthai.CRMMobile.HttpRestModel
     }
     public partial class CreateMobileNotificationParam
     {
+        public string User { get; set; }
         public string Token { get; set; }
     }
     public partial class SCBPaymentParam

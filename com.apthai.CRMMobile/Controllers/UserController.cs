@@ -1002,7 +1002,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
 
         [HttpPost]
         [Route("SendMobileNotification")]
-        [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
+        [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด User = MIN | OAT",
 Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
         public async Task<object> SendMobileNotification([FromBody]CreateMobileNotificationParam data)
         {
@@ -1043,16 +1043,50 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 //        }
                 //    }
                 //}
-                
-                string Token = "fd2JuQd5HKs:APA91bFdBvhFD0zFP1nP_Q5nP_WR6lkSQmIkxcSPR7xOSsmuLBc0eeYS2jaIuKIm9M3RKeQXeNYaYCzqT0KzsBVP60BAFZRfBBXTIrT8oMgDwIURd4yrwD1gHU5FTFOLQyy0sdMxkoCK";
-                var a = _mobileMessagingClient.CreateNotification("tests", "My First Notifications", Token);
-                var b = _mobileMessagingClient.SendNotification(Token, "P'Pom", "คิดถึงน้องพลอยจัง วันนี้ไม่เจอเลย");
-                return new
+
+                string Token = "";
+                if (data.User == "MIN")
                 {
-                    success = true,
-                    data = "",
-                    message = "Get User's Card Success !"
-                };
+                    Token = "fd2JuQd5HKs:APA91bFdBvhFD0zFP1nP_Q5nP_WR6lkSQmIkxcSPR7xOSsmuLBc0eeYS2jaIuKIm9M3RKeQXeNYaYCzqT0KzsBVP60BAFZRfBBXTIrT8oMgDwIURd4yrwD1gHU5FTFOLQyy0sdMxkoCK";
+                }
+                else
+                {
+                    Token = "fS2vHmFLr0VSmAcqvrcAWn:APA91bHO028UYYV2mJ0m6blbEgpSDNUr1Pm_x6f9jpZIf7XoEDhulmlp-y8NHb_E-qANKhnus0OhjnnTx-MNER80LvAHFYhI2OMkmhyQ7xFj2DYf2rWWLZgH5ilKkRTe1kIb0Q7zAwph";
+                }
+                
+                var a = _mobileMessagingClient.CreateNotification("tests", "My First Notifications", Token);
+                string MsgTitle = "P'Pom";
+                string BodyMsg = "คิดถึงน้องพลอยจัง วันนี้ไม่เจอเลย";
+                var b = _mobileMessagingClient.SendNotification(Token, MsgTitle, BodyMsg);
+
+                Model.CRMMobile.NotificationHistory Nh = new Model.CRMMobile.NotificationHistory();
+                Nh.Created = DateTime.Now.ToString();
+                Nh.ProjectNo = "Test Project";
+                Nh.ProjectNameTH = "Project Test NH";
+                Nh.MsgType = "Manuel Type";
+                Nh.SendMsgStatus = true;
+                Nh.MessageTitleTH = MsgTitle;
+                Nh.MsgTH = BodyMsg;
+                bool Insert = _UserRepository.InsertNotificationHistory(Nh);
+                if (Insert)
+                {
+                    return new
+                    {
+                        success = true,
+                        data = "",
+                        message = "Get User's Card Success !"
+                    };
+                }
+                else
+                {
+                    return new
+                    {
+                        success = false,
+                        data = "",
+                        message = "Get User's Card Fail !"
+                    };
+                }
+                
 
             }
             catch (Exception ex)
@@ -1119,6 +1153,65 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 return StatusCode(500, "Internal server error :: " + ex.Message);
             }
         }
+
+       // [HttpPost]
+       // [Route("UserNotiHistroies")]
+       // [SwaggerOperation(Summary = "เปลี่ยนภาษาของบุคคลนั้นๆ",
+       //Description = "เปลี่ยนภาษาของบุคคลนั้นๆ")]
+       // public async Task<object> UserNotiHistroies([FromBody]UserNotiHistoriesParam data)
+       // {
+       //     try
+       //     {
+       //         StringValues api_key;
+       //         StringValues EmpCode;
+
+       //         //if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
+       //         //{
+       //         //    string AccessKey = api_key.First();
+       //         //    string EmpCodeKey = EmpCode.First();
+
+       //         //    if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
+       //         //    {
+       //         //        return new
+       //         //        {
+       //         //            success = false,
+       //         //            data = new AutorizeDataJWT(),
+       //         //            message = "Require Key to Access the Function"
+       //         //        };
+       //         //    }
+       //         //    else
+       //         //    {
+       //         //        string APApiKey = Environment.GetEnvironmentVariable("API_Key");
+       //         //        if (APApiKey == null)
+       //         //        {
+       //         //            APApiKey = UtilsProvider.AppSetting.ApiKey;
+       //         //        }
+       //         //        if (api_key != APApiKey)
+       //         //        {
+       //         //            return new
+       //         //            {
+       //         //                success = false,
+       //         //                data = new AutorizeDataJWT(),
+       //         //                message = "Incorrect API KEY !!"
+       //         //            };
+       //         //        }
+       //         //    }
+       //         //}
+       //         List<Model.CRMMobile.NotificationHistory> notificationHistories = _UserRepository.GetUserNotificationHistoryByCRMContactID_Mobile(data.CRMContactID);
+
+       //         return new
+       //         {
+       //             success = true,
+       //             data = notificationHistories,
+       //             message = "Get UserNotiHistroies Success !"
+       //         };
+
+       //     }
+       //     catch (Exception ex)
+       //     {
+       //         return StatusCode(500, "Internal server error :: " + ex.Message);
+       //     }
+       // }
 
         [ApiExplorerSettings(IgnoreApi = true)]
         public string generateToken(string PhoneNumber)
