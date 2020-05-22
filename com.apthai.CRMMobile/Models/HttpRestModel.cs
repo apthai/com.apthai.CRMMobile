@@ -36,6 +36,12 @@ namespace com.apthai.CRMMobile.HttpRestModel
         public string AccessKey { get; set; }
         public string FireBaseToken { get; set; }
     }
+    public partial class SetNotiIsReadParam
+    {
+        public string AccessKey { get; set; }
+        public string CRMContactID { get; set; }
+        public string NotiHistoryID { get; set; }
+    }
     public partial class ChangePINParam
     {
         public string OldPIN { get; set; }

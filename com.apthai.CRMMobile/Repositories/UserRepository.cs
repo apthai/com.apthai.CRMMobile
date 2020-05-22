@@ -201,6 +201,17 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
+        public Model.CRMMobile.NotificationHistory GetUserNotificationHistoryByNotiHistoryID_Mobile(string NotiHistory)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMMobile.NotificationHistory>("select * from NT.NotificationHistory WITH(NOLOCK) " +
+                    " where NT.NotificationHistory.NotiHistory=@NotiHistory", new { NotiHistory = NotiHistory }).FirstOrDefault();
+
+                return result;
+            }
+        }
         public bool InsertCSUserProfile(Model.CRMMobile.UserProfile data,out long ProfileID)
         {
             using (IDbConnection conn = MobileConnection)
@@ -320,6 +331,25 @@ namespace com.apthai.CRMMobile.Repositories
             }
         }
         public bool UpdateChangePINCSUserProfile(Model.CRMMobile.UserProfile data)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                try
+                {
+                    conn.Open();
+                    var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
+                    var result = conn.Update(data, tran);
+                    tran.Commit();
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("MasterRepository.UpdateCSUserProfile() :: Error ", ex);
+                }
+            }
+        }
+        public bool UpdateIsReadForNotification(Model.CRMMobile.NotificationHistory data)
         {
             using (IDbConnection conn = MobileConnection)
             {

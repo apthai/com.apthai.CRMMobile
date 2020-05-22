@@ -10,6 +10,7 @@ namespace com.apthai.CRMMobile.Repositories
         Model.CRMWeb.Contact GetCRMContactByIDCardNO(string CitizenIdentityNo);
         Model.CRMWeb.Contact GetCRMContactByID(string ID);
         List<Model.CRMMobile.NotificationHistory> GetUserNotificationHistoryByCRMContactID_Mobile(string CRMContactID);
+        Model.CRMMobile.NotificationHistory GetUserNotificationHistoryByNotiHistoryID_Mobile(string NotiHistory);
         List<Model.CRMWeb.TransferOwner> GetTransferOwnerByIDCardNO(string CitizenIdentityNo);
         Model.CRMWeb.Transfer GetTransferByID(string TransferID);
         Model.CRMWeb.Unit GetUnitByID(string ID);
@@ -23,6 +24,7 @@ namespace com.apthai.CRMMobile.Repositories
         Model.CRMMobile.UserLogin GetUserLoginByPhoneNumbandDevice_Mobile(string DeviceID, string UserPhoneNumber);
         Model.CRMMobile.UserProfile GetUserProfileByCRMContactID_Mobile(string CRMContactID);
         bool UpdateChangePINCSUserProfile(Model.CRMMobile.UserProfile data);
+        bool UpdateIsReadForNotification(Model.CRMMobile.NotificationHistory data);
         bool InsertCSUserProfile(Model.CRMMobile.UserProfile data, out long ProfileID);
         bool InsertCSUserLogin(Model.CRMMobile.UserLogin data);
         bool InsertNotificationHistory(Model.CRMMobile.NotificationHistory data);
