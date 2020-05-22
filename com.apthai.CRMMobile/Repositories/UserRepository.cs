@@ -260,6 +260,26 @@ namespace com.apthai.CRMMobile.Repositories
                 }
             }
         }
+        public bool InsertSCBTransaction(Model.CRMMobile.PaymentTransaction data)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                try
+                {
+                    conn.Open();
+                    var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
+
+                    var result = conn.Insert(data, tran);
+                    tran.Commit();
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("MasterRepository.InsertNotificationHistory() :: Error ", ex);
+                }
+            }
+        }
         public bool UpdateCSUserLogin(Model.CRMMobile.UserLogin data)
         {
             using (IDbConnection conn = MobileConnection)

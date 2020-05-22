@@ -75,6 +75,13 @@ namespace com.apthai.CRMMobile.Controllers
                 //        }
                 //    }
                 //}
+                Model.CRMMobile.PaymentTransaction transaction = new Model.CRMMobile.PaymentTransaction();
+                transaction.AccountFrom = data.accountFrom;
+                transaction.CRMContractID = data.CRMContactID;
+                transaction.PaymentAmount = Convert.ToDecimal(data.paymentAmount);
+                transaction.TransactionDate = DateTime.Now;
+                transaction.TransactionInfo = "SCB-PayMent";
+
                 string ResourceOwnerID = data.CRMContactID;
                 string RequestID = data.CRMContactID;
                 string language = data.acceptlanguage;
@@ -191,6 +198,9 @@ namespace com.apthai.CRMMobile.Controllers
                     var DeepLinkResponData = await Deeplinkrespond.Content.ReadAsStringAsync();
                     sCBDeepLinkRespond = JsonConvert.DeserializeObject<SCBDeepLinkRetrunObj>(DeepLinkResponData);
                     sCBDeepLinkRespond.SCBToken = SCBAuthResult.data.accessToken;
+
+                    transaction.Status = "Success";
+                    bool SaveResult = _UserRepository.InsertSCBTransaction(transaction);
                     return new
                     {
                         success = true,

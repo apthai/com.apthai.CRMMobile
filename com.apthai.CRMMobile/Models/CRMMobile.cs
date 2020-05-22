@@ -118,6 +118,17 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string UpdatedBy { get; set; }
     }
 
+   [Table("PaymentTransaction")]
+    public partial class PaymentTransaction
+    {
+        public string CRMContractID { get; set; }
+        public decimal? PaymentAmount { get; set; }
+        public string AccountFrom { get; set; }
+        public DateTime? TransactionDate { get; set; }
+        public string Status { get; set; }
+        public string TransactionInfo { get; set; }
+    }
+
    [Table("MST.ProjectLocation")]
     public partial class ProjectLocation
     {
@@ -169,6 +180,7 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string UserToken { get; set; }
         public string FireBaseToken { get; set; }
         public int? UserProfileID { get; set; }
+        public bool? Notification { get; set; }
     }
 
    [Table("CS.UserProfile")]

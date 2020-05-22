@@ -190,6 +190,7 @@ namespace com.apthai.CRMMobile.Controllers
                     cSUserLogin.UserProfileID = Convert.ToInt32(ProfileID);
                     cSUserLogin.CRMContactID = contact.ID;
                     cSUserLogin.FireBaseToken = data.FireBaseToken;
+                    cSUserLogin.Notification = true;
                     bool insertUserLogin = _UserRepository.InsertCSUserLogin(cSUserLogin);
                     return new
                     {
@@ -216,6 +217,7 @@ namespace com.apthai.CRMMobile.Controllers
                         cSUserLogin.UserToken = GenerateAccessToken;
                         cSUserLogin.UserProfileID = ExistData.UserProfileID;
                         cSUserLogin.CRMContactID = contact.ID;
+                        cSUserLogin.Notification = true;
                         bool insertUserLogin = _UserRepository.InsertCSUserLogin(cSUserLogin);
 
                         return new
@@ -1209,6 +1211,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         Model.CRMMobile.UserLogin userLogin = _UserRepository.GetUserLoginByID_Mobile(cSUserProfile.UserLoginID);
                         //string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
                         userLogin.FireBaseToken = data.FireBaseToken;
+                        userLogin.Notification = true;
                         bool UpdateUserToken = _UserRepository.UpdateCSUserLogin(userLogin);
 
                         return new
@@ -1222,7 +1225,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                     {
                         Model.CRMMobile.UserLogin userLogin = _UserRepository.GetUserLoginByID_Mobile(cSUserProfile.UserLoginID);
                         //string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
-                        userLogin.FireBaseToken = null;
+                        userLogin.Notification = false;
                         bool UpdateUserToken = _UserRepository.UpdateCSUserLogin(userLogin);
 
                         return new
