@@ -18,7 +18,8 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         [Key]
         public int DocumentDetailID { get; set; }
         public int RefDocumentHeaderID { get; set; }
-        public string DocumentDetailName { get; set; }
+        public string DocumentDetailNameTH { get; set; }
+        public string DocumentDetailNameEN { get; set; }
         public int OrderOfDocumentDetail { get; set; }
         public string URLDocumentDetail { get; set; }
         public string StatusDocumentDetail { get; set; }
@@ -33,7 +34,8 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
     {
         [Key]
         public int DocumentHeaderID { get; set; }
-        public string DocumentHeaderName { get; set; }
+        public string DocumentHeaderNameTH { get; set; }
+        public string DocumentHeaderNameEN { get; set; }
         public int OrderOfDocumentHeader { get; set; }
         public string StatusDocumentHeader { get; set; }
         public string URLDocumentHeader { get; set; }
@@ -152,7 +154,8 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         [Key]
         public int SubDocumentDetailID { get; set; }
         public int RefDocumentDetailID { get; set; }
-        public string SubDocumentDetailName { get; set; }
+        public string SubDocumentDetailNameTH { get; set; }
+        public string SubDocumentDetailNameEN { get; set; }
         public int OrderOfSubDocumentDetail { get; set; }
         public string StatusSubDocumentDetail { get; set; }
         public string URLSubDocumentDetail { get; set; }
@@ -182,6 +185,7 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string FireBaseToken { get; set; }
         public int? UserProfileID { get; set; }
         public bool? Notification { get; set; }
+        public string AppVersion { get; set; }
     }
 
    [Table("CS.UserProfile")]

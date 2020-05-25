@@ -111,7 +111,8 @@ namespace com.apthai.CRMMobile.Controllers
                 Obj.Created = detailLists[i].Created;
                 Obj.CreatedBy = detailLists[i].CreatedBy;
                 Obj.DocumentDetailID = detailLists[i].DocumentDetailID;
-                Obj.DocumentDetailName = detailLists[i].DocumentDetailName;
+                Obj.DocumentDetailNameTH = detailLists[i].DocumentDetailNameTH;
+                Obj.DocumentDetailNameEN = detailLists[i].DocumentDetailNameEN;
                 Obj.OrderOfDocumentDetail = detailLists[i].OrderOfDocumentDetail;
                 Obj.RefDocumentHeaderID = detailLists[i].RefDocumentHeaderID;
                 Obj.StatusDocumentDetail = detailLists[i].StatusDocumentDetail;

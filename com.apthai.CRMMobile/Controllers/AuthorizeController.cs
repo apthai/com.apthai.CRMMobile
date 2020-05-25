@@ -83,6 +83,8 @@ namespace com.apthai.CRMMobile.Controllers
                     userLogin.UserToken = GenerateAccessToken;
                     cSUserProfile.UserToken = GenerateAccessToken;
                     userLogin.FireBaseToken = data.FireBaseToken;
+                    userLogin.AppVersion = data.AppVersion;
+                    userLogin.DeviceType = data.OS;
                     bool UpdateUserToken = _UserRepository.UpdateCSUserLogin(userLogin);
 
                     return new
