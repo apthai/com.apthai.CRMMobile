@@ -198,15 +198,17 @@ namespace com.apthai.CRMMobile.Controllers
                 }
                 else
                 {
-                    if (!SHAHelper.VerifyHash(data.PINCode, "SHA512", cSUserProfile.PINCode))
-                    {
-                        return new
-                        {
-                            success = false,
-                            data = new AutorizeDataJWT(),
-                            message = "PinCode is InCorrect!"
-                        };
-                    }
+                    /// --------- Check PIN Code IS Correct
+                    //if (!SHAHelper.VerifyHash(data.PINCode, "SHA512", cSUserProfile.PINCode))
+                    //{
+                    //    return new
+                    //    {
+                    //        success = false,
+                    //        data = new AutorizeDataJWT(),
+                    //        message = "PinCode is InCorrect!"
+                    //    };
+                    //}
+
                     Model.CRMMobile.UserLogin userLogin = _UserRepository.GetUserLoginByID_Mobile(cSUserProfile.UserLoginID);
                     //string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
                     userLogin.FireBaseToken = null;
