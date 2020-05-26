@@ -170,6 +170,19 @@ namespace com.apthai.CRMMobile.CustomModel
         public string ProjectAddressEN { get; set; }
         public string PhoneNumber { get; set; }
     }
+    public class iCRMMyProperty
+    {
+        public string ProjectID { get; set; }
+        public string Project { get; set; }
+        public string ProjectEN { get; set; }
+        public string Unit { get; set; }
+        public string SellingPrice { get; set; }
+        public string PayAmount { get; set; }
+        public string ContactID { get; set; }
+        public string ContactNo { get; set; }
+        public string FirstNameTH { get; set; }
+        public string LastNameTH { get; set; }
+    }
     public class iCRMContact
     {
         public string ID { get; set; }

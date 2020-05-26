@@ -380,6 +380,16 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
+        public List<iCRMMyProperty> GetUseriCRMMyPropoty(string ContactID)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<iCRMMyProperty>("GetiCRMMyProperty", new { ContactID = ContactID }, commandType: CommandType.StoredProcedure).ToList();
+
+                return result;
+            }
+        }
         public List<GetBillingTrackingMobile> GetUserBillingTrackingByProjectandUnit(string ProjectID,string UnitID)
         {
             using (IDbConnection conn = WebConnection)
