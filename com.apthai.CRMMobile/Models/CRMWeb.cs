@@ -228,6 +228,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string BillPaymentNo { get; set; }
         public string AllOwnerName { get; set; }
         public string MainOwnerName { get; set; }
+        public string QRCodeFileName { get; set; }
     }
 
    [Table("PRJ.AgreementConfig")]
@@ -467,6 +468,26 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? AgreementPrintingByUserID { get; set; }
     }
 
+   [Table("AP_QC_UNIT_REQUEST_PHASE")]
+    public partial class APQCUNITREQUESTPHASE
+    {
+        public string M_SAP_CODE { get; set; }
+        public string UNIT_CODE { get; set; }
+        public int UnitID { get; set; }
+        public int? M_REQUEST_PHASE_ID { get; set; }
+        public string M_REQUEST_PHASE_NAME { get; set; }
+        public string REQUEST_COMPLETE { get; set; }
+        public string END_PRODUCT_COMPLETE { get; set; }
+        public DateTime? FINISHDATE { get; set; }
+        public DateTime? EndProductDate { get; set; }
+        public string ProductID { get; set; }
+        public string UnitNumber { get; set; }
+        public int IsImport { get; set; }
+        public int SE_COUNT { get; set; }
+        public string AppName { get; set; }
+        public string PhaseType { get; set; }
+    }
+
    [Table("MST.AttorneyTransfer")]
     public partial class AttorneyTransfer
     {
@@ -602,6 +623,10 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool IsQRCode { get; set; }
         public string PCardGLAccountNo { get; set; }
         public string DRServiceCode { get; set; }
+        public Guid? GLAccountCategoryMasterCenterID { get; set; }
+        public string BillerID { get; set; }
+        public string CompanyCode { get; set; }
+        public bool IsBillPayment { get; set; }
     }
 
    [Table("MST.BankBranch")]
@@ -1009,6 +1034,58 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
+    }
+
+   [Table("SAL.BookingOwnertemp")]
+    public partial class BookingOwnertemp
+    {
+        public Guid ID { get; set; }
+        public string Created { get; set; }
+        public string Updated { get; set; }
+        public Guid? CreatedByUserID { get; set; }
+        public Guid? UpdatedByUserID { get; set; }
+        public bool IsDeleted { get; set; }
+        public int Order { get; set; }
+        public Guid? BookingID { get; set; }
+        public Guid? FromContactID { get; set; }
+        public bool IsMainOwner { get; set; }
+        public string ContactNo { get; set; }
+        public Guid? ContactTypeMasterCenterID { get; set; }
+        public Guid? ContactTitleTHMasterCenterID { get; set; }
+        public string TitleExtTH { get; set; }
+        public string FirstNameTH { get; set; }
+        public string MiddleNameTH { get; set; }
+        public string LastNameTH { get; set; }
+        public string Nickname { get; set; }
+        public Guid? ContactTitleENMasterCenterID { get; set; }
+        public string TitleExtEN { get; set; }
+        public string FirstNameEN { get; set; }
+        public string MiddleNameEN { get; set; }
+        public string LastNameEN { get; set; }
+        public string CitizenIdentityNo { get; set; }
+        public string CitizenExpireDate { get; set; }
+        public Guid? NationalMasterCenterID { get; set; }
+        public Guid? GenderMasterCenterID { get; set; }
+        public string TaxID { get; set; }
+        public string PhoneNumber { get; set; }
+        public string PhoneNumberExt { get; set; }
+        public string ContactFirstName { get; set; }
+        public string ContactLastname { get; set; }
+        public string WeChatID { get; set; }
+        public string WhatsAppID { get; set; }
+        public string LineID { get; set; }
+        public string BirthDate { get; set; }
+        public bool IsVIP { get; set; }
+        public bool IsThaiNationality { get; set; }
+        public bool IsAgreementOwner { get; set; }
+        public string DeleteReason { get; set; }
+        public string LastMigrateDate { get; set; }
+        public string RefMigrateID1 { get; set; }
+        public string RefMigrateID2 { get; set; }
+        public string RefMigrateID3 { get; set; }
+        public string OtherNational { get; set; }
+        public string FullnameEN { get; set; }
+        public string FullnameTH { get; set; }
     }
 
    [Table("MST.Brand")]
@@ -1465,7 +1542,6 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public decimal? PenaltyAmount { get; set; }
         public decimal? ReturnAmount { get; set; }
         public Guid? ReturnBankID { get; set; }
-        public Guid? BankID { get; set; }
         public string ReturnBankAccount { get; set; }
         public Guid? ReturnBankBranchID { get; set; }
         public string ReturnBankAccountName { get; set; }
@@ -1479,6 +1555,28 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string ApproveDate { get; set; }
         public Guid? ApproveByUserID { get; set; }
         public Guid? ReturnProvinceID { get; set; }
+        public string PostGLDate { get; set; }
+        public string PostGLDocumentNo { get; set; }
+    }
+
+   [Table("SAL.CancelMemoFile")]
+    public partial class CancelMemoFile
+    {
+        [ExplicitKey]
+        public Guid ID { get; set; }
+        public string Created { get; set; }
+        public string Updated { get; set; }
+        public Guid? CreatedByUserID { get; set; }
+        public Guid? UpdatedByUserID { get; set; }
+        public bool IsDeleted { get; set; }
+        public string RefMigrateID1 { get; set; }
+        public string RefMigrateID2 { get; set; }
+        public string RefMigrateID3 { get; set; }
+        public string LastMigrateDate { get; set; }
+        public Guid? CancelMemoID { get; set; }
+        public string Name { get; set; }
+        public string File { get; set; }
+        public int FileType { get; set; }
     }
 
    [Table("MST.CancelReason")]
@@ -1573,6 +1671,8 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string PrintApprovedDate { get; set; }
         public Guid? SaleUserID { get; set; }
         public Guid? ChangeAgreementOwnerStatusMasterCenterID { get; set; }
+        public Guid? AgentID { get; set; }
+        public bool? IsTransferAll { get; set; }
     }
 
    [Table("SAL.ChangeAgreementOwnerWorkflowDetail")]
@@ -1674,6 +1774,30 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RejectDate { get; set; }
         public Guid SalePromotionStageMasterCenterID { get; set; }
         public string DueSignDocDate { get; set; }
+        public Guid? ReferContactID { get; set; }
+        public string ReferContactName { get; set; }
+        public bool? IsPrintApproved { get; set; }
+        public Guid? PrintApprovedByUserID { get; set; }
+        public string PrintApprovedDate { get; set; }
+    }
+
+   [Table("PRM.ChangePromotionWorkflowFile")]
+    public partial class ChangePromotionWorkflowFile
+    {
+        [ExplicitKey]
+        public Guid ID { get; set; }
+        public string Created { get; set; }
+        public string Updated { get; set; }
+        public Guid? CreatedByUserID { get; set; }
+        public Guid? UpdatedByUserID { get; set; }
+        public bool IsDeleted { get; set; }
+        public string RefMigrateID1 { get; set; }
+        public string RefMigrateID2 { get; set; }
+        public string RefMigrateID3 { get; set; }
+        public string LastMigrateDate { get; set; }
+        public Guid ChangePromotionWorkflowID { get; set; }
+        public string Name { get; set; }
+        public string File { get; set; }
     }
 
    [Table("SAL.ChangeUnitFile")]
@@ -1726,6 +1850,8 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
         public decimal? TotalPaid { get; set; }
+        public string PostGLDate { get; set; }
+        public string PostGLDocumentNo { get; set; }
     }
 
    [Table("CMS.CommissionContract")]
@@ -1905,6 +2031,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string DepartmentName { get; set; }
         public string FullnameEN { get; set; }
         public string FullnameTH { get; set; }
+        public Guid? CustomerTypeMasterCenterID { get; set; }
     }
 
    [Table("CTM.contact_test")]
@@ -2108,6 +2235,50 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string Updated { get; set; }
         public bool IsDeleted { get; set; }
         public Guid? ContactAddressTypeMasterCenterID { get; set; }
+        public Guid? CountryID { get; set; }
+        public Guid? DistrictID { get; set; }
+        public Guid? ProvinceID { get; set; }
+        public Guid? SubDistrictID { get; set; }
+        public string PostalCode { get; set; }
+        public Guid? CreatedByUserID { get; set; }
+        public Guid? UpdatedByUserID { get; set; }
+        public string OtherCountryEN { get; set; }
+        public string OtherCountryTH { get; set; }
+        public string OtherDistrictEN { get; set; }
+        public string OtherDistrictTH { get; set; }
+        public string OtherProvinceEN { get; set; }
+        public string OtherProvinceTH { get; set; }
+        public string OtherSubDistrictEN { get; set; }
+        public string OtherSubDistrictTH { get; set; }
+        public string LastMigrateDate { get; set; }
+        public string RefMigrateID1 { get; set; }
+        public string RefMigrateID2 { get; set; }
+        public string RefMigrateID3 { get; set; }
+    }
+
+   [Table("CTM.ContactAddress32")]
+    public partial class ContactAddress32
+    {
+        [ExplicitKey]
+        public Guid ID { get; set; }
+        public Guid ContactID { get; set; }
+        public string HouseNoTH { get; set; }
+        public string MooTH { get; set; }
+        public string VillageTH { get; set; }
+        public string SoiTH { get; set; }
+        public string RoadTH { get; set; }
+        public string ForeignDistrict { get; set; }
+        public string ForeignSubDistrict { get; set; }
+        public string HouseNoEN { get; set; }
+        public string MooEN { get; set; }
+        public string VillageEN { get; set; }
+        public string SoiEN { get; set; }
+        public string RoadEN { get; set; }
+        public string ForeignProvince { get; set; }
+        public string Created { get; set; }
+        public string Updated { get; set; }
+        public bool IsDeleted { get; set; }
+        public Guid? ContactAddress3TypeMasterCenterID { get; set; }
         public Guid? CountryID { get; set; }
         public Guid? DistrictID { get; set; }
         public Guid? ProvinceID { get; set; }
@@ -2360,6 +2531,21 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string EditRemark { get; set; }
     }
 
+   [Table("CRM_FreeDown")]
+    public partial class CRMFreeDown
+    {
+        public string DocumentID { get; set; }
+        public int DocumentType { get; set; }
+        public decimal FreeDownAmount { get; set; }
+        public double PercentFreeDown { get; set; }
+        public decimal MaxFreeDownAmount { get; set; }
+        public string CreateBy { get; set; }
+        public DateTime CreateDate { get; set; }
+        public string EditBy { get; set; }
+        public DateTime? EditDate { get; set; }
+        public string GLBatchID { get; set; }
+    }
+
    [Table("CRM_PayInTransfer_Other")]
     public partial class CRMPayInTransferOther
     {
@@ -2374,6 +2560,48 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public DateTime? CreateDate { get; set; }
         public int? CancelBy { get; set; }
         public DateTime? CancelDate { get; set; }
+    }
+
+   [Table("EQN.CustomerTransQAns")]
+    public partial class CustomerTransQAn
+    {
+        [ExplicitKey]
+        public Guid tran_id { get; set; }
+        public string contact_ref_id { get; set; }
+        public Guid? contact_ref_guid { get; set; }
+        public string eqn_ref_id { get; set; }
+        public string projectid { get; set; }
+        public string project_name { get; set; }
+        public string title_name { get; set; }
+        public string first_name { get; set; }
+        public string last_name { get; set; }
+        public string email { get; set; }
+        public string mobile_no { get; set; }
+        public string consent_flag { get; set; }
+        public string channel_convenient { get; set; }
+        public string csseen_media { get; set; }
+        public string csbudget { get; set; }
+        public string csincome { get; set; }
+        public string family_income { get; set; }
+        public string proj_compare { get; set; }
+        public string products_interest { get; set; }
+        public string cspersona { get; set; }
+        public string total_visit { get; set; }
+        public string reason_visit { get; set; }
+        public string decision_maker { get; set; }
+        public string probability { get; set; }
+        public string contradiction { get; set; }
+        public string buyornot { get; set; }
+        public string other { get; set; }
+        public string comment { get; set; }
+        public int? total_answer { get; set; }
+        public int? total_question { get; set; }
+        public string submit_dttm { get; set; }
+        public string process_flag { get; set; }
+        public string created { get; set; }
+        public string createdby { get; set; }
+        public string updated { get; set; }
+        public string updatedby { get; set; }
     }
 
    [Table("FIN.CustomerWallet")]
@@ -2478,6 +2706,8 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
+        public string PostGLDate { get; set; }
+        public string PostGLDocumentNo { get; set; }
     }
 
    [Table("FIN.DirectCreditDebitApprovalForm")]
@@ -2537,6 +2767,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
+        public string Period { get; set; }
     }
 
    [Table("FIN.DirectCreditDebitExportHeader")]
@@ -2596,7 +2827,6 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string DownPaymentLetterNo { get; set; }
         public string ResponseDate { get; set; }
         public string Remark { get; set; }
-        public string PostTrackingNo { get; set; }
         public string Created { get; set; }
         public string Updated { get; set; }
         public bool IsDeleted { get; set; }
@@ -2616,6 +2846,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string LetterTime { get; set; }
         public int RemainDownPeriodEnd { get; set; }
         public decimal RemainDownTotalAmount { get; set; }
+        public Guid? PostTrackingID { get; set; }
     }
 
    [Table("MST.EDC")]
@@ -2755,6 +2986,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
         public bool IsCancel { get; set; }
+        public Guid? UnknownPaymentID { get; set; }
     }
 
    [Table("PRJ.Floor")]
@@ -2777,6 +3009,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
+        public string DueTransferDate { get; set; }
     }
 
    [Table("PRJ.FloorPlanImage")]
@@ -3049,6 +3282,8 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public DateTime? ApprovePrintDate { get; set; }
         public string ApprovePrintFlag { get; set; }
         public string ApprovePrintFile { get; set; }
+        public DateTime? PrintCancelDate { get; set; }
+        public string PrintCancelBy { get; set; }
     }
 
    [Table("ICON_EntForms_AgreementDirectDebit")]
@@ -3155,6 +3390,25 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public long ID { get; set; }
     }
 
+   [Table("ICON_EntForms_Bank")]
+    public partial class ICONEntFormsBank
+    {
+        public string BankID { get; set; }
+        public string BankName { get; set; }
+        public string AdBankName { get; set; }
+        public bool? isCreditCard { get; set; }
+        public bool? NonBank { get; set; }
+        public bool? DeleteFlag { get; set; }
+        public string OldBankID { get; set; }
+        public string BankNameEng { get; set; }
+        public bool? IsCooperative { get; set; }
+        public bool? IsFreeMortgage { get; set; }
+        public string SWIFTCode { get; set; }
+        public Guid? Ref1 { get; set; }
+        public Guid? Ref2 { get; set; }
+        public DateTime? LastMigrateTime { get; set; }
+    }
+
    [Table("ICON_EntForms_BankAccount")]
     public partial class ICONEntFormsBankAccount
     {
@@ -3185,6 +3439,22 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string ca_runno { get; set; }
         public string OldCompanyID { get; set; }
         public bool? isTransForeign { get; set; }
+    }
+
+   [Table("ICON_EntForms_BankDirectDebit")]
+    public partial class ICONEntFormsBankDirectDebit
+    {
+        public string CompanyID { get; set; }
+        public string ProductID { get; set; }
+        public int BankAccountID { get; set; }
+        public string DirectType { get; set; }
+        public string CompAccountNameThai { get; set; }
+        public string CompAccountNameEng { get; set; }
+        public string CompServiceID { get; set; }
+        public string MerchantID { get; set; }
+        public string InputFile { get; set; }
+        public string OutputFile { get; set; }
+        public bool? IsDelete { get; set; }
     }
 
    [Table("ICON_EntForms_Booking")]
@@ -3275,6 +3545,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public DateTime? PreCancelDate { get; set; }
         public string PreSalePromotionID { get; set; }
         public decimal? MasterBudgetPromotion { get; set; }
+        public int? BookingType { get; set; }
         public Guid? Ref1 { get; set; }
         public Guid? Ref2 { get; set; }
         public DateTime? LastMigrateTime { get; set; }
@@ -3318,6 +3589,179 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public DateTime? BirthDate { get; set; }
         public string Phone_old { get; set; }
         public string Mobile_old { get; set; }
+    }
+
+   [Table("ICON_EntForms_Contacts")]
+    public partial class ICONEntFormsContact
+    {
+        public string ItemId { get; set; }
+        public long? OwnerId { get; set; }
+        public string BUID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string DisplayName { get; set; }
+        public string Status { get; set; }
+        public string StatusReason { get; set; }
+        public string Statusincrease { get; set; }
+        public string CreateBy { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public string ModifyBy { get; set; }
+        public DateTime? ModifyDate { get; set; }
+        public Guid? ContactGUID { get; set; }
+        public bool? IsUpdated { get; set; }
+        public bool? IsViP { get; set; }
+        public string Nationality { get; set; }
+        public string SourceKey { get; set; }
+        public string ContactID { get; set; }
+        public string ContactRunno { get; set; }
+        public string Gender { get; set; }
+        public DateTime? Date_of_birth { get; set; }
+        public string HouseID_4 { get; set; }
+        public string Moo_4 { get; set; }
+        public string Village_4 { get; set; }
+        public string Soi_4 { get; set; }
+        public string Road_4 { get; set; }
+        public string SubDistrict_4 { get; set; }
+        public string District_4 { get; set; }
+        public string Province_4 { get; set; }
+        public string PostalCode_4 { get; set; }
+        public string Country_4 { get; set; }
+        public string HouseID_1 { get; set; }
+        public string Moo_1 { get; set; }
+        public string Village_1 { get; set; }
+        public string Soi_1 { get; set; }
+        public string Road_1 { get; set; }
+        public string SubDistrict_1 { get; set; }
+        public string District_1 { get; set; }
+        public string Province_1 { get; set; }
+        public string PostalCode { get; set; }
+        public string Country_1 { get; set; }
+        public string Tel_1 { get; set; }
+        public string TelExt_1 { get; set; }
+        public string PostalCode_1 { get; set; }
+        public string HouseID_3 { get; set; }
+        public string Moo_3 { get; set; }
+        public string Village_3 { get; set; }
+        public string Soi_3 { get; set; }
+        public string Road_3 { get; set; }
+        public string SubDistrict_3 { get; set; }
+        public string District_3 { get; set; }
+        public string Province_3 { get; set; }
+        public string PostalCode_3 { get; set; }
+        public string Country_3 { get; set; }
+        public string HouseID_2 { get; set; }
+        public string Moo_2 { get; set; }
+        public string Village_2 { get; set; }
+        public string Soi_2 { get; set; }
+        public string Road_2 { get; set; }
+        public string SubDistrict_2 { get; set; }
+        public string District_2 { get; set; }
+        public string Province_2 { get; set; }
+        public string PostalCode_2 { get; set; }
+        public string Country_2 { get; set; }
+        public string Tel_2 { get; set; }
+        public string TelExt_2 { get; set; }
+        public string Tel_3 { get; set; }
+        public string Tel_4 { get; set; }
+        public string TelExt_3 { get; set; }
+        public string TelExt_4 { get; set; }
+        public string Title_1 { get; set; }
+        public string Title_2 { get; set; }
+        public bool? DM_Flag { get; set; }
+        public bool? SMS_Flag { get; set; }
+        public string EMail { get; set; }
+        public string LeadOwner { get; set; }
+        public string ContactRunningNumber { get; set; }
+        public string WebType { get; set; }
+        public string PersonalID { get; set; }
+        public string Remark { get; set; }
+        public string Ref_CS_CODE { get; set; }
+        public long autoid { get; set; }
+        public string Source { get; set; }
+        public bool? FromPhase2 { get; set; }
+        public string Tel_1_old { get; set; }
+        public string TelExt_1_old { get; set; }
+        public string Tel_2_old { get; set; }
+        public string TelExt_2_old { get; set; }
+        public string Tel_3_old { get; set; }
+        public string TelExt_3_old { get; set; }
+        public string Tel_4_old { get; set; }
+        public string TelExt_4_old { get; set; }
+        public bool IsLock { get; set; }
+        public string OldContactID { get; set; }
+        public bool? PreferToDM { get; set; }
+        public string FatherName { get; set; }
+        public string MotherName { get; set; }
+        public string SpouseName { get; set; }
+        public string NationalitySpouse { get; set; }
+        public int? IsUse { get; set; }
+        public int? CustomerType { get; set; }
+        public string Department { get; set; }
+        public string Mobile_1 { get; set; }
+        public string Mobile_2 { get; set; }
+        public string Mobile_3 { get; set; }
+        public string Mobile_4 { get; set; }
+        public string Mobile_5 { get; set; }
+        public string IssueBy { get; set; }
+        public string Province_4_Id { get; set; }
+        public string District_4_Id { get; set; }
+        public string SubDistrict_4_Id { get; set; }
+        public DateTime? ChangeDate { get; set; }
+        public int? TransferToSCV { get; set; }
+        public string District_2_Id { get; set; }
+        public string Province_2_Id { get; set; }
+        public string SubDistrict_2_Id { get; set; }
+        public string CustomerCategory { get; set; }
+        public string HouseID_4_ENG { get; set; }
+        public string Moo_4_ENG { get; set; }
+        public string Village_4_ENG { get; set; }
+        public string Soi_4_ENG { get; set; }
+        public string Road_4_ENG { get; set; }
+        public string SubDistrict_4_ENG { get; set; }
+        public string District_4_ENG { get; set; }
+        public string Province_4_ENG { get; set; }
+        public string Country_4_ENG { get; set; }
+        public string HouseID_1_ENG { get; set; }
+        public string Moo_1_ENG { get; set; }
+        public string Village_1_ENG { get; set; }
+        public string Soi_1_ENG { get; set; }
+        public string Road_1_ENG { get; set; }
+        public string SubDistrict_1_ENG { get; set; }
+        public string District_1_ENG { get; set; }
+        public string Province_1_ENG { get; set; }
+        public string Country_1_ENG { get; set; }
+        public string HouseID_3_ENG { get; set; }
+        public string Moo_3_ENG { get; set; }
+        public string Village_3_ENG { get; set; }
+        public string Soi_3_ENG { get; set; }
+        public string Road_3_ENG { get; set; }
+        public string SubDistrict_3_ENG { get; set; }
+        public string District_3_ENG { get; set; }
+        public string Province_3_ENG { get; set; }
+        public string Country_3_ENG { get; set; }
+        public string HouseID_2_ENG { get; set; }
+        public string Moo_2_ENG { get; set; }
+        public string Village_2_ENG { get; set; }
+        public string Soi_2_ENG { get; set; }
+        public string Road_2_ENG { get; set; }
+        public string SubDistrict_2_ENG { get; set; }
+        public string District_2_ENG { get; set; }
+        public string Province_2_ENG { get; set; }
+        public string Country_2_ENG { get; set; }
+        public string Title_1_ENG { get; set; }
+        public string Title_2_ENG { get; set; }
+        public string FirstName_ENG { get; set; }
+        public string LastName_ENG { get; set; }
+        public string DisplayName_ENG { get; set; }
+        public string Nationality_ENG { get; set; }
+        public string NickName { get; set; }
+        public string AddressName_2 { get; set; }
+        public string Floor_4 { get; set; }
+        public string Room_4 { get; set; }
+        public string WhatsAppID { get; set; }
+        public string WeChatID { get; set; }
+        public string LineID { get; set; }
+        public bool? IsNationalityThai { get; set; }
         public Guid? Ref1 { get; set; }
         public Guid? Ref2 { get; set; }
         public DateTime? LastMigrateTime { get; set; }
@@ -3683,6 +4127,47 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string ApprovePrintFile { get; set; }
     }
 
+   [Table("ICON_EntForms_UnitPriceList")]
+    public partial class ICONEntFormsUnitPriceList
+    {
+        public string UnitNumber { get; set; }
+        public string ProductID { get; set; }
+        public DateTime? ActiveDate { get; set; }
+        public decimal? StandardPrice { get; set; }
+        public decimal? KasornPrice { get; set; }
+        public decimal? UnitIncreasingAreaPrice { get; set; }
+        public decimal? IncreasingAreaPrice { get; set; }
+        public decimal? LocationPrice { get; set; }
+        public decimal? TotalSellingPrice { get; set; }
+        public decimal? PhusaPrice { get; set; }
+        public byte? ExtraDownPayment { get; set; }
+        public decimal? ExtraDownAmount { get; set; }
+        public decimal? BookingAmount { get; set; }
+        public decimal? ContractAmount { get; set; }
+        public decimal? PaymentForBank { get; set; }
+        public double? PercentDownPayment { get; set; }
+        public int? DownPaymentPeriod { get; set; }
+        public decimal? DownPaymentPerPeriod { get; set; }
+        public decimal? DownPayment { get; set; }
+        public decimal? DownAmount { get; set; }
+        public decimal? DeductBookingContact { get; set; }
+        public int? CommunityFeeMonthPeroid { get; set; }
+        public decimal? CommunityFeeRateMonth { get; set; }
+        public decimal? CommunityFund { get; set; }
+        public string SpecialDown { get; set; }
+        public decimal? SpecialDownPrice { get; set; }
+        public long ItemId { get; set; }
+        public bool? isLocked { get; set; }
+        public string UpdateStatus { get; set; }
+        public string Paydown { get; set; }
+        public decimal? PaydownAmount { get; set; }
+        public decimal? FurniturePrice { get; set; }
+        public bool? isThaiTransferForeign { get; set; }
+        public Guid? Ref1 { get; set; }
+        public Guid? Ref2 { get; set; }
+        public DateTime? LastMigrateTime { get; set; }
+    }
+
    [Table("ICON_Payment_Deposit")]
     public partial class ICONPaymentDeposit
     {
@@ -3815,6 +4300,17 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public long ID { get; set; }
     }
 
+   [Table("ICON_Payment_LockTransaction")]
+    public partial class ICONPaymentLockTransaction
+    {
+        public long ID { get; set; }
+        public DateTime? LockDate { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public int? CreateBy { get; set; }
+        public bool? Status { get; set; }
+        public string CompanyID { get; set; }
+    }
+
    [Table("ICON_Payment_PayInTransfer")]
     public partial class ICONPaymentPayInTransfer
     {
@@ -3849,6 +4345,35 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public int? WriteoffBy { get; set; }
         public DateTime? WriteoffDate { get; set; }
         public string Remark { get; set; }
+    }
+
+   [Table("ICON_Payment_Payment")]
+    public partial class ICONPaymentPayment
+    {
+        public int PayID { get; set; }
+        public string RCReferent { get; set; }
+        public DateTime? RDate { get; set; }
+        public int? PayType { get; set; }
+        public string CompanyID { get; set; }
+        public string BankID { get; set; }
+        public string BranchName { get; set; }
+        public string CreditType { get; set; }
+        public string CreditSlipID { get; set; }
+        public string CreditBankID { get; set; }
+        public string CreditAccount { get; set; }
+        public int? CreditChargeID { get; set; }
+        public string Number { get; set; }
+        public DateTime? DueDate { get; set; }
+        public string ExpireDate { get; set; }
+        public decimal? ChargeAmount { get; set; }
+        public decimal? Amount { get; set; }
+        public string DepositID { get; set; }
+        public DateTime? ValidDate { get; set; }
+        public int? CancelBy { get; set; }
+        public DateTime? CancelDate { get; set; }
+        public int? CreateBy { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public string CreateName { get; set; }
     }
 
    [Table("ICON_Payment_PaymentDetails")]
@@ -3960,6 +4485,61 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string DebitCode { get; set; }
         public string CreditCode { get; set; }
         public bool? Actived { get; set; }
+        public long ID { get; set; }
+    }
+
+   [Table("ICON_PostToSAP_Details")]
+    public partial class ICONPostToSAPDetail
+    {
+        public string BatchID { get; set; }
+        public string PostingKey { get; set; }
+        public string AccountCode { get; set; }
+        public int DetailsFormatID { get; set; }
+        public decimal Amount { get; set; }
+        public string TaxCode { get; set; }
+        public DateTime? ValueDate { get; set; }
+        public string WBSNumber { get; set; }
+        public string ProfitCenter { get; set; }
+        public string CostCenter { get; set; }
+        public int? Quantity { get; set; }
+        public string Unit { get; set; }
+        public string Assignment { get; set; }
+        public string ItemText { get; set; }
+        public string Referent_1 { get; set; }
+        public string Referent_2 { get; set; }
+        public string Referent_3 { get; set; }
+        public string CustomerName { get; set; }
+        public string Street { get; set; }
+        public string City { get; set; }
+        public string PortalCode { get; set; }
+        public string Country { get; set; }
+        public long ID { get; set; }
+    }
+
+   [Table("ICON_PostToSAP_Header")]
+    public partial class ICONPostToSAPHeader
+    {
+        public string BatchID { get; set; }
+        public int RunningID { get; set; }
+        public int PostID { get; set; }
+        public string CRMPostCode { get; set; }
+        public int? HeaderFormatID { get; set; }
+        public DateTime OperateDate { get; set; }
+        public string CRMCompanyID { get; set; }
+        public string SAPCompanyID { get; set; }
+        public DateTime? DocumentDate { get; set; }
+        public DateTime? PostingDate { get; set; }
+        public string DocumentType { get; set; }
+        public string ReferenceNumber { get; set; }
+        public string Branch { get; set; }
+        public string DocCurrency { get; set; }
+        public string HeaderText { get; set; }
+        public int? TimeToExport { get; set; }
+        public string CancelBatchID { get; set; }
+        public DateTime? CancelDate { get; set; }
+        public int? CancelBy { get; set; }
+        public int? CreateBy { get; set; }
+        public DateTime? CreateDate { get; set; }
         public long ID { get; set; }
     }
 
@@ -4127,6 +4707,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
+        public string Code { get; set; }
     }
 
    [Table("MST.LandOfficeDocCheckList")]
@@ -4254,6 +4835,8 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
+        public string EndCallTime { get; set; }
+        public string StartCallTime { get; set; }
     }
 
    [Table("CTM.LeadActivityStatus")]
@@ -4379,6 +4962,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
+        public string AgentCode { get; set; }
     }
 
    [Table("HangFire.List")]
@@ -4482,6 +5066,27 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
     public partial class MasterCenter
     {
         [ExplicitKey]
+        public Guid ID { get; set; }
+        public string Name { get; set; }
+        public string Key { get; set; }
+        public bool IsActive { get; set; }
+        public string Created { get; set; }
+        public string Updated { get; set; }
+        public bool IsDeleted { get; set; }
+        public int Order { get; set; }
+        public string MasterCenterGroupKey { get; set; }
+        public Guid? CreatedByUserID { get; set; }
+        public Guid? UpdatedByUserID { get; set; }
+        public string NameEN { get; set; }
+        public string LastMigrateDate { get; set; }
+        public string RefMigrateID1 { get; set; }
+        public string RefMigrateID2 { get; set; }
+        public string RefMigrateID3 { get; set; }
+    }
+
+   [Table("MST.MasterCenter_BK_28042020")]
+    public partial class MasterCenterBK28042020
+    {
         public Guid ID { get; set; }
         public string Name { get; set; }
         public string Key { get; set; }
@@ -4628,7 +5233,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string Created { get; set; }
         public string Updated { get; set; }
         public bool IsDeleted { get; set; }
-        public string ACCode { get; set; }
+        public string ShortKey { get; set; }
         public string Detail { get; set; }
         public string DetailEN { get; set; }
         public Guid? PriceTypeMasterCenterID { get; set; }
@@ -4830,34 +5435,6 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string MaterialName { get; set; }
     }
 
-   [Table("PRM.MasterTransferCreditCardItem")]
-    public partial class MasterTransferCreditCardItem
-    {
-        [ExplicitKey]
-        public Guid ID { get; set; }
-        public Guid MasterTransferPromotionID { get; set; }
-        public Guid? BankID { get; set; }
-        public string NameTH { get; set; }
-        public string NameEN { get; set; }
-        public string UnitTH { get; set; }
-        public string UnitEN { get; set; }
-        public int Quantity { get; set; }
-        public string Created { get; set; }
-        public string Updated { get; set; }
-        public bool IsDeleted { get; set; }
-        public Guid? EDCFeeID { get; set; }
-        public Guid? PromotionItemStatusMasterCenterID { get; set; }
-        public string PromotionItemNo { get; set; }
-        public int Order { get; set; }
-        public Guid? CreatedByUserID { get; set; }
-        public Guid? UpdatedByUserID { get; set; }
-        public double Fee { get; set; }
-        public string LastMigrateDate { get; set; }
-        public string RefMigrateID1 { get; set; }
-        public string RefMigrateID2 { get; set; }
-        public string RefMigrateID3 { get; set; }
-    }
-
    [Table("PRM.MasterTransferHouseModelFreeItem")]
     public partial class MasterTransferHouseModelFreeItem
     {
@@ -4919,6 +5496,34 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
         public bool IsActive { get; set; }
+    }
+
+   [Table("PRM.MasterTransferPromotionCreditCardItem")]
+    public partial class MasterTransferPromotionCreditCardItem
+    {
+        [ExplicitKey]
+        public Guid ID { get; set; }
+        public Guid MasterTransferPromotionID { get; set; }
+        public Guid? BankID { get; set; }
+        public string NameTH { get; set; }
+        public string NameEN { get; set; }
+        public string UnitTH { get; set; }
+        public string UnitEN { get; set; }
+        public int Quantity { get; set; }
+        public string Created { get; set; }
+        public string Updated { get; set; }
+        public bool IsDeleted { get; set; }
+        public Guid? EDCFeeID { get; set; }
+        public Guid? PromotionItemStatusMasterCenterID { get; set; }
+        public string PromotionItemNo { get; set; }
+        public int Order { get; set; }
+        public Guid? CreatedByUserID { get; set; }
+        public Guid? UpdatedByUserID { get; set; }
+        public double Fee { get; set; }
+        public string LastMigrateDate { get; set; }
+        public string RefMigrateID1 { get; set; }
+        public string RefMigrateID2 { get; set; }
+        public string RefMigrateID3 { get; set; }
     }
 
    [Table("PRM.MasterTransferPromotionFreeItem")]
@@ -5024,12 +5629,13 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
         public string LastMigrateDate { get; set; }
         public Guid? PaymentMethodID { get; set; }
-        public Guid DestinationCompanyID { get; set; }
+        public Guid? DestinationCompanyID { get; set; }
         public Guid MoveMoneyReasonMasterCenterID { get; set; }
         public string Remark { get; set; }
         public bool IsPrint { get; set; }
         public Guid? PrintByID { get; set; }
         public string PrintDate { get; set; }
+        public Guid? UnknownPaymentID { get; set; }
     }
 
    [Table("USR.Menu")]
@@ -5314,6 +5920,38 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string NameEng { get; set; }
     }
 
+   [Table("BI.Mst_Calendar_Week")]
+    public partial class MstCalendarWeek
+    {
+        [ExplicitKey]
+        public Guid ID { get; set; }
+        public int? Y { get; set; }
+        public int? Q { get; set; }
+        public int? M { get; set; }
+        public int? W { get; set; }
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+    }
+
+   [Table("BI.Mst_LeadIndicator_Target")]
+    public partial class MstLeadIndicatorTarget
+    {
+        [ExplicitKey]
+        public Guid ID { get; set; }
+        public int? Y { get; set; }
+        public int? Q { get; set; }
+        public int? M { get; set; }
+        public int? W { get; set; }
+        public string ProductID { get; set; }
+        public decimal Amount { get; set; }
+        public int? Unit { get; set; }
+        public string RecType { get; set; }
+        public string CreatedBy { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public string ModifiedBy { get; set; }
+        public DateTime? ModifiedDate { get; set; }
+    }
+
    [Table("USR.MyTask")]
     public partial class MyTask
     {
@@ -5489,6 +6127,8 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
+        public string EndCallTime { get; set; }
+        public string StartCallTime { get; set; }
     }
 
    [Table("CTM.OpportunityActivityResult")]
@@ -5589,8 +6229,16 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string ReceiptNo { get; set; }
         public string ReceiptTempNo { get; set; }
         public bool IsCancel { get; set; }
-        public string PaymentItemName { get; set; }
         public Guid PaymentStateMasterCenterID { get; set; }
+        public string PaymentItemName { get; set; }
+        public string AttachFileName { get; set; }
+        public string PaymentMethodName { get; set; }
+        public Guid? ContactID { get; set; }
+        public string ContactName { get; set; }
+        public string DepositDate { get; set; }
+        public string DepositNo { get; set; }
+        public string PostGLDate { get; set; }
+        public string PostGLDocumentNo { get; set; }
     }
 
    [Table("FIN.PaymentItem")]
@@ -5670,6 +6318,64 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string PaymentItemName { get; set; }
         public Guid? TransferPaymentID { get; set; }
         public Guid? OfflinePaymentHeaderID { get; set; }
+        public string DepositDate { get; set; }
+        public string DepositNo { get; set; }
+        public string PostGLDate { get; set; }
+        public string PostGLDocumentNo { get; set; }
+        public Guid? PaymentReceiverMasterCenterID { get; set; }
+    }
+
+   [Table("FIN.PaymentMethod2")]
+    public partial class PaymentMethod2
+    {
+        [ExplicitKey]
+        public Guid ID { get; set; }
+        public Guid PaymentID { get; set; }
+        public decimal PayAmount { get; set; }
+        public string Created { get; set; }
+        public string Updated { get; set; }
+        public bool? IsDeleted { get; set; }
+        public Guid? CreatedByUserID { get; set; }
+        public Guid? UpdatedByUserID { get; set; }
+        public Guid? PaymentMethodTypeMasterCenterID { get; set; }
+        public string LastMigrateDate { get; set; }
+        public string RefMigrateID1 { get; set; }
+        public string RefMigrateID2 { get; set; }
+        public string RefMigrateID3 { get; set; }
+        public Guid? BankAccountID { get; set; }
+        public bool? IsWrongAccount { get; set; }
+        public Guid? BillPaymentDetailID { get; set; }
+        public string ChequeDate { get; set; }
+        public string ChequeNo { get; set; }
+        public Guid? PayToCompanyID { get; set; }
+        public Guid? BankID { get; set; }
+        public Guid? BankBranchID { get; set; }
+        public decimal? Fee { get; set; }
+        public Guid? FeeConfirmByUserID { get; set; }
+        public string FeeConfirmDate { get; set; }
+        public bool? IsFeeConfirm { get; set; }
+        public decimal? Vat { get; set; }
+        public decimal? FeeIncludingVat { get; set; }
+        public decimal? FeePercent { get; set; }
+        public string BankBranchName { get; set; }
+        public Guid? FromPaymentMethodID { get; set; }
+        public Guid? BasePaymentMethodID { get; set; }
+        public bool? IsForeignCreditCard { get; set; }
+        public string CardNo { get; set; }
+        public Guid? EDCBankID { get; set; }
+        public Guid? EDCID { get; set; }
+        public Guid? CreditCardPaymentTypeMasterCenterID { get; set; }
+        public Guid? CreditCardTypeMasterCenterID { get; set; }
+        public Guid? DirectCreditDebitExportDetailID { get; set; }
+        public Guid? ForeignTransferTypeMasterCenterID { get; set; }
+        public string IR { get; set; }
+        public string TransferorName { get; set; }
+        public bool? IsRequestFET { get; set; }
+        public Guid? UnknownPaymentID { get; set; }
+        public Guid? ForeignBankID { get; set; }
+        public bool? IsNotifyFET { get; set; }
+        public string NotifyFETMemo { get; set; }
+        public string CancelRemark { get; set; }
     }
 
    [Table("FIN.PaymentMethodToItem")]
@@ -5729,6 +6435,9 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
         public string PostGLType { get; set; }
+        public string Text1 { get; set; }
+        public string Text2 { get; set; }
+        public string Text3 { get; set; }
     }
 
    [Table("ACC.PostGLFormatTextFileDetail")]
@@ -5799,6 +6508,10 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public decimal Fee { get; set; }
         public string LastExportedDate { get; set; }
         public bool IsCancel { get; set; }
+        public string PostGLDate { get; set; }
+        public string PostGLDocumentNo { get; set; }
+        public string Description { get; set; }
+        public string ReferentNo { get; set; }
     }
 
    [Table("ACC.PostGLHouseType")]
@@ -5865,10 +6578,29 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string PostCode { get; set; }
         public string Country { get; set; }
         public Guid? ProjectID { get; set; }
-        public Guid UnitID { get; set; }
+        public Guid? UnitID { get; set; }
         public Guid DocumentKey { get; set; }
         public string GLAccountCode { get; set; }
         public string GLAccountName { get; set; }
+        public string Description { get; set; }
+    }
+
+   [Table("MST.PostTracking")]
+    public partial class PostTracking
+    {
+        [ExplicitKey]
+        public Guid ID { get; set; }
+        public string Created { get; set; }
+        public string Updated { get; set; }
+        public Guid? CreatedByUserID { get; set; }
+        public Guid? UpdatedByUserID { get; set; }
+        public bool IsDeleted { get; set; }
+        public string RefMigrateID1 { get; set; }
+        public string RefMigrateID2 { get; set; }
+        public string RefMigrateID3 { get; set; }
+        public string LastMigrateDate { get; set; }
+        public string PostTrackingNo { get; set; }
+        public bool? IsUsed { get; set; }
     }
 
    [Table("PRM.PRCancelJob")]
@@ -6135,6 +6867,23 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
+   [Table("PRJ.PriceListTempdc950a24")]
+    public partial class PriceListTempdc950a24
+    {
+        public Guid ID { get; set; }
+        public string ActiveDate { get; set; }
+        public string Created { get; set; }
+        public Guid? CreatedByUserID { get; set; }
+        public bool IsDeleted { get; set; }
+        public string LastMigrateDate { get; set; }
+        public string RefMigrateID1 { get; set; }
+        public string RefMigrateID2 { get; set; }
+        public string RefMigrateID3 { get; set; }
+        public Guid UnitID { get; set; }
+        public string Updated { get; set; }
+        public Guid? UpdatedByUserID { get; set; }
+    }
+
    [Table("SAL.PriceListWorkflow")]
     public partial class PriceListWorkflow
     {
@@ -6245,7 +6994,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
         public decimal? MaxFreeDownAmount { get; set; }
-        public float? PercentFreeDown { get; set; }
+        public double? PercentFreeDown { get; set; }
     }
 
    [Table("CTM.ProjectVisitCounterSetting")]
@@ -6577,28 +7326,6 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-   [Table("PRM.QuotationPromotionExpense")]
-    public partial class QuotationPromotionExpense
-    {
-        [ExplicitKey]
-        public Guid ID { get; set; }
-        public Guid QuotationSalePromotionID { get; set; }
-        public string Created { get; set; }
-        public string Updated { get; set; }
-        public bool IsDeleted { get; set; }
-        public Guid? MasterPriceItemID { get; set; }
-        public Guid? ExpenseReponsibleByMasterCenterID { get; set; }
-        public Guid? CreatedByUserID { get; set; }
-        public Guid? UpdatedByUserID { get; set; }
-        public decimal Amount { get; set; }
-        public decimal BuyerAmount { get; set; }
-        public decimal SellerAmount { get; set; }
-        public string LastMigrateDate { get; set; }
-        public string RefMigrateID1 { get; set; }
-        public string RefMigrateID2 { get; set; }
-        public string RefMigrateID3 { get; set; }
-    }
-
    [Table("PRM.QuotationSalePromotion")]
     public partial class QuotationSalePromotion
     {
@@ -6633,6 +7360,28 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string LastMigrateDate { get; set; }
         public Guid QuotationSalePromotionID { get; set; }
         public Guid? MasterSalePromotionCreditCardItemID { get; set; }
+    }
+
+   [Table("PRM.QuotationSalePromotionExpense")]
+    public partial class QuotationSalePromotionExpense
+    {
+        [ExplicitKey]
+        public Guid ID { get; set; }
+        public string Created { get; set; }
+        public string Updated { get; set; }
+        public Guid? CreatedByUserID { get; set; }
+        public Guid? UpdatedByUserID { get; set; }
+        public bool IsDeleted { get; set; }
+        public string RefMigrateID1 { get; set; }
+        public string RefMigrateID2 { get; set; }
+        public string RefMigrateID3 { get; set; }
+        public string LastMigrateDate { get; set; }
+        public Guid QuotationSalePromotionID { get; set; }
+        public Guid? ExpenseReponsibleByMasterCenterID { get; set; }
+        public Guid? MasterPriceItemID { get; set; }
+        public decimal Amount { get; set; }
+        public decimal SellerAmount { get; set; }
+        public decimal BuyerAmount { get; set; }
     }
 
    [Table("PRM.QuotationSalePromotionFreeItem")]
@@ -6674,24 +7423,6 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? MainQuotationSalePromotionID { get; set; }
     }
 
-   [Table("PRM.QuotationTransferCreditCardItem")]
-    public partial class QuotationTransferCreditCardItem
-    {
-        [ExplicitKey]
-        public Guid ID { get; set; }
-        public string Created { get; set; }
-        public string Updated { get; set; }
-        public Guid? CreatedByUserID { get; set; }
-        public Guid? UpdatedByUserID { get; set; }
-        public bool IsDeleted { get; set; }
-        public Guid QuotationTransferPromotionID { get; set; }
-        public Guid? MasterTransferCreditCardItemID { get; set; }
-        public string LastMigrateDate { get; set; }
-        public string RefMigrateID1 { get; set; }
-        public string RefMigrateID2 { get; set; }
-        public string RefMigrateID3 { get; set; }
-    }
-
    [Table("PRM.QuotationTransferPromotion")]
     public partial class QuotationTransferPromotion
     {
@@ -6705,6 +7436,24 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? CreatedByUserID { get; set; }
         public Guid? UpdatedByUserID { get; set; }
         public string Remark { get; set; }
+        public string LastMigrateDate { get; set; }
+        public string RefMigrateID1 { get; set; }
+        public string RefMigrateID2 { get; set; }
+        public string RefMigrateID3 { get; set; }
+    }
+
+   [Table("PRM.QuotationTransferPromotionCreditCardItem")]
+    public partial class QuotationTransferPromotionCreditCardItem
+    {
+        [ExplicitKey]
+        public Guid ID { get; set; }
+        public string Created { get; set; }
+        public string Updated { get; set; }
+        public Guid? CreatedByUserID { get; set; }
+        public Guid? UpdatedByUserID { get; set; }
+        public bool IsDeleted { get; set; }
+        public Guid QuotationTransferPromotionID { get; set; }
+        public Guid? MasterTransferPromotionCreditCardItemID { get; set; }
         public string LastMigrateDate { get; set; }
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
@@ -6778,7 +7527,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public decimal? InstallmentAmount { get; set; }
         public string InstallmentEndDate { get; set; }
         public int? InstallmentPayDate { get; set; }
-        public float? InstallmentPercent { get; set; }
+        public double? InstallmentPercent { get; set; }
         public string InstallmentStartDate { get; set; }
         public decimal? MinPrice { get; set; }
         public decimal? NetPrice { get; set; }
@@ -6793,7 +7542,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public decimal? TransferAmount { get; set; }
         public decimal? TransferDiscount { get; set; }
         public decimal? MaxFreeDownAmount { get; set; }
-        public float? PercentFreeDown { get; set; }
+        public double? PercentFreeDown { get; set; }
     }
 
    [Table("SAL.QuotationUnitPriceItem")]
@@ -7037,6 +7786,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string PaymentMethodName { get; set; }
         public string PaymentMethodNameEN { get; set; }
         public Guid? BankID { get; set; }
+        public Guid? DepositDetailID { get; set; }
         public string AmountEn { get; set; }
         public string AmountTh { get; set; }
         public string BankNameEn { get; set; }
@@ -7137,6 +7887,8 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? ProjectID { get; set; }
         public Guid? UnitID { get; set; }
         public string ReceiptTempNo { get; set; }
+        public int TotalSendEmail { get; set; }
+        public int TotalSendPrinting { get; set; }
         public decimal AgreementAmount { get; set; }
         public decimal AgreementPrice { get; set; }
         public string AmountEn { get; set; }
@@ -7151,11 +7903,11 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string Ref1 { get; set; }
         public string Ref2 { get; set; }
         public decimal TransferAmount { get; set; }
-        public int TotalSendEmail { get; set; }
-        public int TotalSendPrinting { get; set; }
         public string LockEmailRemarkCancel { get; set; }
         public string LockPrintingRemarkCancel { get; set; }
         public string ContactNo { get; set; }
+        public string ContactName { get; set; }
+        public string ArrearsDueDateTo { get; set; }
     }
 
    [Table("FIN.ReceiptSendEmailHistory")]
@@ -7313,6 +8065,8 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string ProjectNameEN { get; set; }
         public bool IsCancel { get; set; }
         public decimal TotalAmount { get; set; }
+        public string ContactName { get; set; }
+        public Guid? SendToContactID { get; set; }
     }
 
    [Table("USR.RefreshToken")]
@@ -7511,6 +8265,28 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
+    }
+
+   [Table("BI.RPT_LeadIndicator")]
+    public partial class RPTLeadIndicator
+    {
+        [ExplicitKey]
+        public int Y { get; set; }
+        public int Q { get; set; }
+        public int M { get; set; }
+        public int W { get; set; }
+        public int? YQ { get; set; }
+        public int? YM { get; set; }
+        public int? YW { get; set; }
+        public string ProjectID { get; set; }
+        public string RecType { get; set; }
+        public int? SortKey { get; set; }
+        public decimal? Target { get; set; }
+        public decimal? Actual { get; set; }
+        public decimal? Actual2 { get; set; }
+        public decimal? AsOfWeek { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public DateTime? ModifyDate { get; set; }
     }
 
    [Table("MST.RunningNumberCounter")]
@@ -8015,15 +8791,13 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-   [Table("sysdiagrams")]
-    public partial class sysdiagram
+   [Table("Sys_Log")]
+    public partial class SysLog
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
         [Key]
-        public int diagram_id { get; set; }
-        public int? version { get; set; }
-        public byte[] definition { get; set; }
+        public long LogID { get; set; }
+        public DateTime? LogDate { get; set; }
+        public string Message { get; set; }
     }
 
    [Table("USR.TaskType")]
@@ -8054,11 +8828,59 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? CountryID { get; set; }
     }
 
+   [Table("Temp_CRM_Freedown_Cancel")]
+    public partial class TempCRMFreedownCancel
+    {
+        public int ItemID { get; set; }
+        public string ProductID { get; set; }
+        public string Project { get; set; }
+        public string UnitNumber { get; set; }
+        public string BookingNumber { get; set; }
+        public DateTime? BookingDate { get; set; }
+        public DateTime? CancelDate { get; set; }
+        public string ContactID { get; set; }
+        public string CustomerName { get; set; }
+        public string CancelType { get; set; }
+        public string NewBookingNumber { get; set; }
+        public DateTime? NewBookingDate { get; set; }
+        public DateTime? NewCancelDate { get; set; }
+        public string NewContactID { get; set; }
+        public string NewCustomerName { get; set; }
+        public string BookingType { get; set; }
+        public string SameContactID { get; set; }
+        public int? DiffBookingDate { get; set; }
+    }
+
    [Table("temp_district")]
     public partial class tempdistrict
     {
         public string ContractNumber { get; set; }
         public Guid? DistrictID { get; set; }
+    }
+
+   [Table("Temp_MasterPriceItem-08-03-63")]
+    public partial class TempMasterPriceItem080363
+    {
+        public string Created { get; set; }
+        public string Updated { get; set; }
+        public bool IsDeleted { get; set; }
+        public string ACCode { get; set; }
+        public string Detail { get; set; }
+        public string DetailEN { get; set; }
+        public Guid? PriceTypeMasterCenterID { get; set; }
+        public Guid ID { get; set; }
+        public Guid? CreatedByUserID { get; set; }
+        public Guid? UpdatedByUserID { get; set; }
+        public Guid? PaymentReceiverMasterCenterID { get; set; }
+        public string Key { get; set; }
+        public string LastMigrateDate { get; set; }
+        public string RefMigrateID1 { get; set; }
+        public string RefMigrateID2 { get; set; }
+        public string RefMigrateID3 { get; set; }
+        public bool? IsToBePay { get; set; }
+        public int Order { get; set; }
+        public Guid? UnitPriceStageMasterCenterID { get; set; }
+        public Guid? GLAccountTypeMasterCenterID { get; set; }
     }
 
    [Table("temp_province")]
@@ -8073,6 +8895,222 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
     {
         public string ContractNumber { get; set; }
         public Guid? SubDistrictID { get; set; }
+    }
+
+   [Table("Temp_UnitPrice-08-03-63")]
+    public partial class TempUnitPrice080363
+    {
+        public Guid ID { get; set; }
+        public Guid BookingID { get; set; }
+        public string Created { get; set; }
+        public string Updated { get; set; }
+        public bool IsDeleted { get; set; }
+        public bool IsActive { get; set; }
+        public Guid? CreatedByUserID { get; set; }
+        public Guid? UpdatedByUserID { get; set; }
+        public Guid UnitPriceStageMasterCenterID { get; set; }
+        public string LastMigrateDate { get; set; }
+        public string RefMigrateID1 { get; set; }
+        public string RefMigrateID2 { get; set; }
+        public string RefMigrateID3 { get; set; }
+        public int Order { get; set; }
+        public decimal? AgreementAmount { get; set; }
+        public decimal? AgreementPrice { get; set; }
+        public decimal? BookingAmount { get; set; }
+        public decimal? CashDiscount { get; set; }
+        public decimal? ExpensePromotionAmount { get; set; }
+        public decimal? FGFDiscount { get; set; }
+        public decimal? FeePromotionAmount { get; set; }
+        public decimal? FreedownDiscount { get; set; }
+        public int? Installment { get; set; }
+        public decimal? InstallmentAmount { get; set; }
+        public string InstallmentEndDate { get; set; }
+        public int? InstallmentPayDate { get; set; }
+        public float? InstallmentPercent { get; set; }
+        public string InstallmentStartDate { get; set; }
+        public decimal? MinPrice { get; set; }
+        public decimal? NetPrice { get; set; }
+        public int? NormalInstallment { get; set; }
+        public decimal? RevenueAmount { get; set; }
+        public decimal? SellingPrice { get; set; }
+        public int? SpecialInstallment { get; set; }
+        public decimal? TotalInstallmentAmount { get; set; }
+        public decimal? TotalPrice { get; set; }
+        public decimal? TotalPromotionAmount { get; set; }
+        public decimal? TransferDiscount { get; set; }
+        public decimal? TransferAmount { get; set; }
+        public decimal? MaxFreeDownAmount { get; set; }
+        public float? PercentFreeDown { get; set; }
+    }
+
+   [Table("Temp_UnitPriceInstallment-08-03-63")]
+    public partial class TempUnitPriceInstallment080363
+    {
+        public Guid ID { get; set; }
+        public string Created { get; set; }
+        public string Updated { get; set; }
+        public Guid? CreatedByUserID { get; set; }
+        public Guid? UpdatedByUserID { get; set; }
+        public bool IsDeleted { get; set; }
+        public int Period { get; set; }
+        public Guid? UnitPriceID { get; set; }
+        public bool IsSpecialInstallment { get; set; }
+        public string PayDate { get; set; }
+        public bool? IsPaid { get; set; }
+        public string DueDate { get; set; }
+        public decimal Amount { get; set; }
+        public decimal PaidAmount { get; set; }
+        public bool IsSellerPay { get; set; }
+        public string LastMigrateDate { get; set; }
+        public string RefMigrateID1 { get; set; }
+        public string RefMigrateID2 { get; set; }
+        public string RefMigrateID3 { get; set; }
+    }
+
+   [Table("Temp_UnitPriceItem-08-03-63")]
+    public partial class TempUnitPriceItem080363
+    {
+        public Guid ID { get; set; }
+        public Guid UnitPriceID { get; set; }
+        public int Order { get; set; }
+        public string Name { get; set; }
+        public decimal Amount { get; set; }
+        public bool IsToBePay { get; set; }
+        public string PayDate { get; set; }
+        public string DueDate { get; set; }
+        public string Created { get; set; }
+        public string Updated { get; set; }
+        public bool IsDeleted { get; set; }
+        public decimal? PricePerUnitAmount { get; set; }
+        public double? PriceUnitAmount { get; set; }
+        public Guid? FromMasterPriceListItemID { get; set; }
+        public bool? IsPaid { get; set; }
+        public Guid? PriceTypeMasterCenterID { get; set; }
+        public Guid? PriceUnitMasterCenterID { get; set; }
+        public Guid? MasterPriceItemID { get; set; }
+        public Guid? CreatedByUserID { get; set; }
+        public Guid? UpdatedByUserID { get; set; }
+        public string LastMigrateDate { get; set; }
+        public string RefMigrateID1 { get; set; }
+        public string RefMigrateID2 { get; set; }
+        public string RefMigrateID3 { get; set; }
+    }
+
+   [Table("Temp_vw_ProRec_ReceiveItem")]
+    public partial class TempvwProRecReceiveItem
+    {
+        public int RecID { get; set; }
+        public string CRM_ProjectId { get; set; }
+        public string PRJ_NAME { get; set; }
+        public string CRM_UnitNumber { get; set; }
+        public int PRO_REC { get; set; }
+        public string ReceivePromotionID { get; set; }
+        public string DocumentID { get; set; }
+        public int? DocumentType { get; set; }
+        public int? PromotionType { get; set; }
+        public bool? IsApproved { get; set; }
+        public DateTime? ApproveDate { get; set; }
+        public string PromotionID { get; set; }
+        public string ItemID { get; set; }
+        public int? ReceiveAmount { get; set; }
+        public DateTime? ReceiveDate { get; set; }
+        public string Remark { get; set; }
+        public DateTime? deliv_date { get; set; }
+        public DateTime? Req_date { get; set; }
+        public string wbs_elem { get; set; }
+        public int? PRM_ID { get; set; }
+        public string PromotionName { get; set; }
+        public string hom_comcode { get; set; }
+        public string Plant { get; set; }
+        public int itm_type { get; set; }
+        public string TextB01 { get; set; }
+        public int? QUANTITY { get; set; }
+        public string itm_unitsap { get; set; }
+        public decimal? C_AMT_BAPI { get; set; }
+        public string Agreement { get; set; }
+        public string Agmt_Item { get; set; }
+        public string PURCH_ORG { get; set; }
+        public string MATERIAL { get; set; }
+        public string MATG_ID { get; set; }
+        public string itm_stsPr { get; set; }
+        public string itm_sapValFrom { get; set; }
+        public string itm_sapValTo { get; set; }
+        public string sap_sts { get; set; }
+        public string itm_StsMsg { get; set; }
+        public string sap_msg { get; set; }
+        public string sap_relmsg { get; set; }
+        public string sap_prno { get; set; }
+        public short? prm_tabno { get; set; }
+        public int? prm_ItmGrp { get; set; }
+        public byte? prm_ItmGrpSts { get; set; }
+        public string prm_ItmGrpItemId { get; set; }
+        public string SHORT_TEXT { get; set; }
+        public string crm_itemid { get; set; }
+        public byte? itm_prtype { get; set; }
+        public string itm_PrTypeDsc { get; set; }
+        public DateTime? data_date { get; set; }
+        public DateTime? data_time { get; set; }
+        public string pr_itemno { get; set; }
+        public string pr_cancelsts { get; set; }
+        public string pr_cancelmsg { get; set; }
+        public string realpr_itemno { get; set; }
+    }
+
+   [Table("TempChangeBookOwner")]
+    public partial class TempChangeBookOwner
+    {
+        public string HistoryID { get; set; }
+        public int? RunningID { get; set; }
+        public string ReferentID { get; set; }
+        public byte? RefType { get; set; }
+        public DateTime? OperateDate { get; set; }
+        public string OperateName { get; set; }
+        public DateTime? SignDate { get; set; }
+        public string OperateType { get; set; }
+        public int? OperateBy { get; set; }
+        public string OperateByName { get; set; }
+        public string UnitNumber { get; set; }
+        public string OldProductID { get; set; }
+        public string NewProductID { get; set; }
+        public string OldData { get; set; }
+        public string NewData { get; set; }
+        public int? isApprove { get; set; }
+        public DateTime? ApproveDate { get; set; }
+        public int? ApproveBy { get; set; }
+        public string ApproveByName { get; set; }
+        public string Remark { get; set; }
+        public decimal? TotalPaidAmount { get; set; }
+        public decimal? Paid { get; set; }
+        public decimal? SuspenseAmount { get; set; }
+        public DateTime? PaidDate { get; set; }
+        public string RCReferent { get; set; }
+        public int? CurrentStatus { get; set; }
+        public string BatchID { get; set; }
+        public string MA_RUNNO { get; set; }
+        public string RE_RUNNO { get; set; }
+        public string CreateName { get; set; }
+        public string NewReferentID { get; set; }
+        public string EffectDate { get; set; }
+        public DateTime? EffectDate2 { get; set; }
+        public int? IsPrint { get; set; }
+        public int? IsPrint2 { get; set; }
+        public int? isApprove1 { get; set; }
+        public DateTime? ApproveDate1 { get; set; }
+        public int? ApproveBy1 { get; set; }
+        public int? isApprove2 { get; set; }
+        public DateTime? ApproveDate2 { get; set; }
+        public int? ApproveBy2 { get; set; }
+        public int? isApprove3 { get; set; }
+        public DateTime? ApproveDate3 { get; set; }
+        public int? ApproveBy3 { get; set; }
+        public int? isApprove4 { get; set; }
+        public DateTime? ApproveDate4 { get; set; }
+        public int? ApproveBy4 { get; set; }
+        public bool? isThaiTransferForeign { get; set; }
+        public string ApprovePrintBy { get; set; }
+        public DateTime? ApprovePrintDate { get; set; }
+        public string ApprovePrintFlag { get; set; }
+        public string ApprovePrintFile { get; set; }
     }
 
    [Table("PRJ.TitledeedDetail")]
@@ -8238,10 +9276,8 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public decimal? GoTransportAmount { get; set; }
         public bool IsAPBalanceTransfer { get; set; }
         public bool? IsAPGiveChange { get; set; }
-        public bool? IsAPPayWithMemo { get; set; }
         public bool IsLegalEntityBalanceTransfer { get; set; }
         public bool? IsLegalEntityGiveChange { get; set; }
-        public bool? IsLegalEntityPayWithMemo { get; set; }
         public double? LandArea { get; set; }
         public decimal? LandEstimatePrice { get; set; }
         public decimal? LandOfficeTollWayAmount { get; set; }
@@ -8291,6 +9327,16 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public Guid? ReceiveDocumentUserID { get; set; }
         public string TransferDocumentRemark { get; set; }
         public decimal? LegalEntityChangeAmount { get; set; }
+        public decimal CommonFeeCharge { get; set; }
+        public decimal? CustomerNoPayAmount { get; set; }
+        public decimal? CustomerPayAmount { get; set; }
+        public decimal LandAmountCharge { get; set; }
+        public decimal MeterAmountCharge { get; set; }
+        public decimal? TotalCustomerPayAmount { get; set; }
+        public decimal TotalPaidAmount { get; set; }
+        public int? FreeDownPrintCount { get; set; }
+        public Guid? APPayWithMemoMasterCenterID { get; set; }
+        public Guid? LegalEntityPayWithMemoMasterCenterID { get; set; }
     }
 
    [Table("SAL.TransferBankTransfer")]
@@ -8313,6 +9359,8 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
+        public Guid? PayToLegalEntityID { get; set; }
+        public bool IsWrongTransfer { get; set; }
     }
 
    [Table("SAL.TransferCash")]
@@ -8332,6 +9380,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
+        public Guid? PayToLegalEntityID { get; set; }
     }
 
    [Table("SAL.TransferCheque")]
@@ -8356,28 +9405,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
-    }
-
-   [Table("PRM.TransferCreditCardItem")]
-    public partial class TransferCreditCardItem
-    {
-        [ExplicitKey]
-        public Guid ID { get; set; }
-        public string Created { get; set; }
-        public string Updated { get; set; }
-        public Guid? CreatedByUserID { get; set; }
-        public Guid? UpdatedByUserID { get; set; }
-        public bool IsDeleted { get; set; }
-        public Guid TransferPromotionID { get; set; }
-        public Guid? MasterTransferCreditCardItemID { get; set; }
-        public Guid? QuotationTransferCreditCardItemID { get; set; }
-        public Guid? QuotationTransferPromotionFreeItemID { get; set; }
-        public double Fee { get; set; }
-        public string LastMigrateDate { get; set; }
-        public string RefMigrateID1 { get; set; }
-        public string RefMigrateID2 { get; set; }
-        public string RefMigrateID3 { get; set; }
-        public bool IsActive { get; set; }
+        public Guid? PayToLegalEntityID { get; set; }
     }
 
    [Table("SAL.TransferDocument")]
@@ -8500,7 +9528,6 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string TransferLetterNo { get; set; }
         public string Remark { get; set; }
         public string ResponseDate { get; set; }
-        public string PostTrackingNo { get; set; }
         public string Created { get; set; }
         public string Updated { get; set; }
         public bool IsDeleted { get; set; }
@@ -8519,6 +9546,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string TransferLetterDate { get; set; }
         public Guid? TransferLetterFormatMasterCenterID { get; set; }
         public Guid TransferLetterTypeMasterCenterID { get; set; }
+        public Guid? PostTrackingID { get; set; }
     }
 
    [Table("SAL.TransferOwner")]
@@ -8580,10 +9608,84 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
-        public Guid? MarriageStatusMasterCenterID { get; set; }
+        public Guid? TransferMarriageStatusMasterCenterID { get; set; }
         public Guid? MarriageTitleTHMasterCenterID { get; set; }
         public string FullnameEN { get; set; }
         public string FullnameTH { get; set; }
+        public string PhoneNumberExt { get; set; }
+        public string TaxID { get; set; }
+        public string CountryTH { get; set; }
+        public string NationalTH { get; set; }
+    }
+
+   [Table("SAL.TransferPayment")]
+    public partial class TransferPayment
+    {
+        [ExplicitKey]
+        public Guid ID { get; set; }
+        public string Created { get; set; }
+        public string Updated { get; set; }
+        public Guid? CreatedByUserID { get; set; }
+        public Guid? UpdatedByUserID { get; set; }
+        public bool IsDeleted { get; set; }
+        public string RefMigrateID1 { get; set; }
+        public string RefMigrateID2 { get; set; }
+        public string RefMigrateID3 { get; set; }
+        public string LastMigrateDate { get; set; }
+        public Guid TransferID { get; set; }
+        public string TransferNo { get; set; }
+        public string CompanyName { get; set; }
+        public Guid CompanyID { get; set; }
+        public Guid ProjectID { get; set; }
+        public string ProjectNo { get; set; }
+        public string ProjectName { get; set; }
+        public string ActualTransferDate { get; set; }
+        public string UnitNo { get; set; }
+        public decimal CashAmount { get; set; }
+        public decimal MinistryOfFinanceCheque { get; set; }
+        public decimal SumChequeAP { get; set; }
+        public decimal MinistryCash { get; set; }
+        public decimal TransferToUtil { get; set; }
+        public decimal SumChequeAPUtil { get; set; }
+        public decimal APMeterAmount { get; set; }
+        public decimal APLandsAmount { get; set; }
+        public decimal RemainingAPAmount { get; set; }
+        public decimal AllIncomeTax { get; set; }
+        public decimal FeeAPAmount { get; set; }
+        public decimal FeeCustomerAmount { get; set; }
+        public decimal FeeAccountReturnAmount { get; set; }
+        public decimal GreetingAmount { get; set; }
+        public decimal XeroxAmount { get; set; }
+        public decimal FareAmount { get; set; }
+        public decimal FeeMortgageAmount { get; set; }
+        public decimal CashChangeAmount { get; set; }
+        public decimal ChangeAmount { get; set; }
+        public decimal ReceiveCash { get; set; }
+        public decimal CashAPAmount { get; set; }
+        public decimal ChequeAPAmount { get; set; }
+        public decimal TransferAPAmount { get; set; }
+        public decimal ChequeAPLandsAmount { get; set; }
+        public decimal CashAPMeterAmount { get; set; }
+        public decimal SumAPMeterAmount { get; set; }
+        public decimal TransferAPMeterAmount { get; set; }
+        public decimal ChequeAPMeterAmount { get; set; }
+        public decimal APAmount { get; set; }
+        public decimal Change { get; set; }
+        public decimal Ministry { get; set; }
+        public decimal ReturnAmount { get; set; }
+        public decimal ChangeCustomer { get; set; }
+        public decimal SumChangeCustomer { get; set; }
+        public decimal ChangeTransfer { get; set; }
+        public decimal SumChangeTransfer { get; set; }
+        public decimal SumFeeAcountReturnAmount { get; set; }
+        public decimal SumGreetingAmount { get; set; }
+        public decimal SumXeroxAmount { get; set; }
+        public decimal SumFareAmount { get; set; }
+        public decimal SumFeeMortgageAmount { get; set; }
+        public decimal SumAccountReturn { get; set; }
+        public decimal SumCashUnit { get; set; }
+        public decimal SumCash { get; set; }
+        public decimal SumCashChangeAmount { get; set; }
     }
 
    [Table("SAL.TransferPrintForm")]
@@ -8643,6 +9745,28 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string ApproveDate { get; set; }
         public bool IsApprove { get; set; }
         public string TransferPromotionDate { get; set; }
+        public Guid? TransferPromotionStatusMasterCenterID { get; set; }
+    }
+
+   [Table("PRM.TransferPromotionCreditCardItem")]
+    public partial class TransferPromotionCreditCardItem
+    {
+        [ExplicitKey]
+        public Guid ID { get; set; }
+        public string Created { get; set; }
+        public string Updated { get; set; }
+        public Guid? CreatedByUserID { get; set; }
+        public Guid? UpdatedByUserID { get; set; }
+        public bool IsDeleted { get; set; }
+        public Guid TransferPromotionID { get; set; }
+        public Guid? MasterTransferPromotionCreditCardItemID { get; set; }
+        public Guid? QuotationTransferPromotionCreditCardItemID { get; set; }
+        public double Fee { get; set; }
+        public string LastMigrateDate { get; set; }
+        public string RefMigrateID1 { get; set; }
+        public string RefMigrateID2 { get; set; }
+        public string RefMigrateID3 { get; set; }
+        public bool IsActive { get; set; }
     }
 
    [Table("PRM.TransferPromotionDelivery")]
@@ -8689,12 +9813,12 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
-        public string MaterialItem_equal { get; set; }
-        public string MaterialName_equal { get; set; }
-        public decimal? PricePerUnit_equal { get; set; }
         public bool? IsSerial { get; set; }
         public string MaterialGroup_equal { get; set; }
         public int? Quantity_equal { get; set; }
+        public decimal? PricePerUnit_equal { get; set; }
+        public string MaterialName_equal { get; set; }
+        public string MaterialItem_equal { get; set; }
     }
 
    [Table("PRM.TransferPromotionExpense")]
@@ -8974,6 +10098,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool? IsPrepareTransfer { get; set; }
         public string PrepareTransferDate { get; set; }
         public string ScheduleTransferDate { get; set; }
+        public float? RoomHeight { get; set; }
     }
 
    [Table("UnitDetail")]
@@ -9112,7 +10237,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public decimal? InstallmentAmount { get; set; }
         public string InstallmentEndDate { get; set; }
         public int? InstallmentPayDate { get; set; }
-        public float? InstallmentPercent { get; set; }
+        public double? InstallmentPercent { get; set; }
         public string InstallmentStartDate { get; set; }
         public decimal? MinPrice { get; set; }
         public decimal? NetPrice { get; set; }
@@ -9126,7 +10251,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public decimal? TransferDiscount { get; set; }
         public decimal? TransferAmount { get; set; }
         public decimal? MaxFreeDownAmount { get; set; }
-        public float? PercentFreeDown { get; set; }
+        public double? PercentFreeDown { get; set; }
     }
 
    [Table("SAL.UnitPriceInstallment")]
@@ -9268,6 +10393,31 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
+        public Guid? BankID { get; set; }
+        public Guid? CreditCardPaymentTypeMasterCenterID { get; set; }
+        public Guid? CreditCardTypeMasterCenterID { get; set; }
+        public Guid? EDCBankID { get; set; }
+        public decimal? Fee { get; set; }
+        public Guid? FeeConfirmByUserID { get; set; }
+        public string FeeConfirmDate { get; set; }
+        public decimal? FeeIncludingVat { get; set; }
+        public decimal? FeePercent { get; set; }
+        public Guid? ForeignTransferTypeMasterCenterID { get; set; }
+        public string IR { get; set; }
+        public bool? IsFeeConfirm { get; set; }
+        public bool? IsForeignCreditCard { get; set; }
+        public bool? IsNotifyFET { get; set; }
+        public bool? IsRequestFET { get; set; }
+        public bool? IsWrongAccount { get; set; }
+        public string NotifyFETMemo { get; set; }
+        public string Number { get; set; }
+        public Guid? PaymentMethodTypeMasterCenterID { get; set; }
+        public string TransferorName { get; set; }
+        public decimal? Vat { get; set; }
+        public Guid? CompanyID { get; set; }
+        public string PostGLDate { get; set; }
+        public string PostGLDocumentNo { get; set; }
+        public Guid? BillPaymentDetailID { get; set; }
     }
 
    [Table("USR.User")]
@@ -9301,6 +10451,12 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID1 { get; set; }
         public string RefMigrateID2 { get; set; }
         public string RefMigrateID3 { get; set; }
+        public Guid? DefaultRoleID { get; set; }
+        public string DisplayNameEng { get; set; }
+        public string FirstNameEng { get; set; }
+        public string LastNameEng { get; set; }
+        public string MiddleNameEng { get; set; }
+        public string TitleEng { get; set; }
     }
 
    [Table("USR.UserAuthorizeProject")]
@@ -9378,22 +10534,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
-   //[Table("Users")]
-   // public partial class User
-   // {
-   //     public int UserID { get; set; }
-   //     public string Username { get; set; }
-   //     public string FirstName { get; set; }
-   //     public string LastName { get; set; }
-   //     public bool IsSuperUser { get; set; }
-   //     public int? AffiliateId { get; set; }
-   //     public string Email { get; set; }
-   //     public string DisplayName { get; set; }
-   //     public bool UpdatePassword { get; set; }
-   //     public string EmployeeID { get; set; }
-   //     public int? LCType { get; set; }
-   //     public string UserGUID { get; set; }
-   // }
+  
 
    [Table("CTM.Visitor")]
     public partial class Visitor
@@ -9470,6 +10611,480 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string RefMigrateID3 { get; set; }
     }
 
+   [Table("vw_AP_QC_UNIT_REQUEST_PHASE")]
+    public partial class vwAPQCUNITREQUESTPHASE
+    {
+        public string M_SAP_CODE { get; set; }
+        public string UNIT_CODE { get; set; }
+        public int UnitID { get; set; }
+        public int? M_REQUEST_PHASE_ID { get; set; }
+        public string M_REQUEST_PHASE_NAME { get; set; }
+        public string REQUEST_COMPLETE { get; set; }
+        public string END_PRODUCT_COMPLETE { get; set; }
+        public DateTime? FINISHDATE { get; set; }
+        public DateTime? EndProductDate { get; set; }
+        public string ProductID { get; set; }
+        public string UnitNumber { get; set; }
+        public int IsImport { get; set; }
+        public int SE_COUNT { get; set; }
+        public string AppName { get; set; }
+        public string PhaseType { get; set; }
+    }
+
+   [Table("vw_CRM_Customer_Visit")]
+    public partial class vwCRMCustomerVisit
+    {
+        public string ContactFullName { get; set; }
+        public string ContactRunning { get; set; }
+        public string PersonalVisitCardImageStraightFace { get; set; }
+        public string PersonalVisitType { get; set; }
+        public string PersonalVisitTypeName { get; set; }
+        public string ProductID { get; set; }
+        public string ProjectStatusName { get; set; }
+        public string Status { get; set; }
+        public string VehicleType { get; set; }
+        public string VehicleRegist { get; set; }
+        public string VehicleBrand { get; set; }
+        public string VehicleColor { get; set; }
+        public string VisitDate_In { get; set; }
+        public string VisitDate_Out { get; set; }
+    }
+
+   [Table("vw_CRM_Customer_Visit_Active")]
+    public partial class vwCRMCustomerVisitActive
+    {
+        public string ProductID { get; set; }
+        public string VisitDate_In { get; set; }
+        public string VisitDate_Out { get; set; }
+        public string ContactRunning { get; set; }
+        public string ContactFullName { get; set; }
+        public string PersonalVisitType { get; set; }
+        public string PersonalVisitCardImageStraightFace { get; set; }
+        public string VehicleType { get; set; }
+        public string VehicleRegist { get; set; }
+        public string VehicleBrand { get; set; }
+        public string VehicleColor { get; set; }
+        public string Status { get; set; }
+        public string PersonalVisitTypeName { get; set; }
+        public string ProjectStatusName { get; set; }
+    }
+
+   [Table("vw_CRM_Freedown_V2")]
+    public partial class vwCRMFreedownV2
+    {
+        public string BG { get; set; }
+        public string SubBG { get; set; }
+        public string ProjectNo { get; set; }
+        public Guid? ProjectID { get; set; }
+        public string UnitNo { get; set; }
+        public decimal TotalPrice { get; set; }
+        public decimal BookingFreeDownAmount { get; set; }
+        public decimal ContractFreeDownAmount { get; set; }
+        public decimal? NetPrice { get; set; }
+        public string BookingNumber { get; set; }
+        public string BookingDate { get; set; }
+        public string BookingCancelDate { get; set; }
+        public string ContractNumber { get; set; }
+        public string ContractCancelDate { get; set; }
+        public string TransferDateApprove { get; set; }
+        public string BookingType { get; set; }
+        public string OldBookingNumber { get; set; }
+        public DateTime? OldBookingDate { get; set; }
+        public DateTime? OldCancelDate { get; set; }
+        public decimal? OldBookingPrice { get; set; }
+        public string CurrentStatus { get; set; }
+    }
+
+   [Table("vw_CRM_Walk_1")]
+    public partial class vwCRMWalk1
+    {
+        public int WalkAmt { get; set; }
+        public string Project { get; set; }
+        public int? WeekAmt { get; set; }
+        public int? MonthAmt { get; set; }
+        public DateTime? CreateDate { get; set; }
+        public string ContactNo { get; set; }
+    }
+
+   [Table("vw_ICON_EntForms_ContactsMap")]
+    public partial class vwICONEntFormsContactsMap
+    {
+        public Guid id { get; set; }
+        public int? ItemId { get; set; }
+        public int? OwnerId { get; set; }
+        public int? BUID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public int? DisplayName { get; set; }
+        public bool IsVIP { get; set; }
+        public string Nationality { get; set; }
+        public int? Status { get; set; }
+        public int? StatusReason { get; set; }
+        public int? Statusincrease { get; set; }
+        public int? CreateBy { get; set; }
+        public string CreateDate { get; set; }
+        public int? ModifyBy { get; set; }
+        public string ModifyDate { get; set; }
+        public Guid ContactGUID { get; set; }
+        public int? IsUpdated { get; set; }
+        public int? SourceKey { get; set; }
+        public string ContactID { get; set; }
+        public int? ContactRunno { get; set; }
+        public string Contactsex { get; set; }
+        public string ContactsBirthday { get; set; }
+        public string ContactsAddress { get; set; }
+        public string ContactsMoo { get; set; }
+        public string ContactsVillage { get; set; }
+        public string ContactsSoi { get; set; }
+        public string ContactsRoad { get; set; }
+        public string ContactsSubdistrict { get; set; }
+        public string ContactsDistrict { get; set; }
+        public string ContactsProvince { get; set; }
+        public string ContactsPostID { get; set; }
+        public string Country_4 { get; set; }
+        public string PermanentAddress { get; set; }
+        public string PermanentMoo { get; set; }
+        public string PermanentVillage { get; set; }
+        public string PermanentSoi { get; set; }
+        public string PermanentRoad { get; set; }
+        public string PermanentSubdistrict { get; set; }
+        public string PermanentDistrict { get; set; }
+        public string PermanentProvince { get; set; }
+        public int? PermanentPostID { get; set; }
+        public string Country_1 { get; set; }
+        public string Tel_1 { get; set; }
+        public string TelExt_1 { get; set; }
+        public string PostalCode_1 { get; set; }
+        public string ContactsCompanyAddress { get; set; }
+        public string ContactsCompanyMoo { get; set; }
+        public string ContactsCompanyVillage { get; set; }
+        public string ContactsCompanySoi { get; set; }
+        public string ContactsCompanyRoad { get; set; }
+        public string ContactsCompanySubDistrict { get; set; }
+        public string ContactsCompanyDictrict { get; set; }
+        public string ContactsCompanyProvince { get; set; }
+        public string ContactsCompanyPostID { get; set; }
+        public string Country_3 { get; set; }
+        public string HouseID_2 { get; set; }
+        public string Moo_2 { get; set; }
+        public string Village_2 { get; set; }
+        public string Soi_2 { get; set; }
+        public string Road_2 { get; set; }
+        public string SubDistrict_2 { get; set; }
+        public string District_2 { get; set; }
+        public string Province_2 { get; set; }
+        public string PostalCode_2 { get; set; }
+        public string Country_2 { get; set; }
+        public string Tel_2 { get; set; }
+        public string TelExt_2 { get; set; }
+        public string ContactsCompanyPhone { get; set; }
+        public string Tel { get; set; }
+        public string TelExt_3 { get; set; }
+        public string TelExt_4 { get; set; }
+        public string Title_1 { get; set; }
+        public string Title_2 { get; set; }
+        public int? DM_Flag { get; set; }
+        public int? SMS_Flag { get; set; }
+        public string ContactsEmail { get; set; }
+        public int? LeadOwner { get; set; }
+        public int? ContactRunningNumber { get; set; }
+        public int? WebType { get; set; }
+        public string PersonalID { get; set; }
+        public int? Remark { get; set; }
+        public int? Ref_CS_CODE { get; set; }
+        public int? autoid { get; set; }
+        public int? Source { get; set; }
+    }
+
+   [Table("vw_ICON_EntForms_TitleDeedDetail")]
+    public partial class vwICONEntFormsTitleDeedDetail
+    {
+        public string UnitNumber { get; set; }
+        public string ProductID { get; set; }
+        public string ModelID { get; set; }
+        public string UnitStatusID { get; set; }
+        public bool isDelete { get; set; }
+        public string HouseNo { get; set; }
+        public string LandStatus { get; set; }
+        public string LandStatusdata { get; set; }
+        public string LandOfficeName { get; set; }
+        public string LandOfficeNameEng { get; set; }
+        public string LandStatusDate { get; set; }
+        public string TitledeedNumber { get; set; }
+        public string LandNumber { get; set; }
+        public string LandSurveyArea { get; set; }
+        public string LandPortionNumber { get; set; }
+        public string LandBook { get; set; }
+        public string LandBookPage { get; set; }
+        public string Note { get; set; }
+        public double? AreaFromTitledeed { get; set; }
+        public decimal? EstimatePriceTitledeed { get; set; }
+        public string StatusNote { get; set; }
+        public string LoanBankName { get; set; }
+        public decimal? LoanBankAmount { get; set; }
+        public string TransferNumber { get; set; }
+    }
+
+   [Table("vw_ICON_EntForms_UnitFullViewer")]
+    public partial class vwICONEntFormsUnitFullViewer
+    {
+        public string ProductID { get; set; }
+        public string UnitNumber { get; set; }
+        public string ModelID { get; set; }
+        public int? PhaseID { get; set; }
+        public int? SubPhaseID { get; set; }
+        public int? BlockID { get; set; }
+        public double? AreaFromRE { get; set; }
+        public double? AreaFromPFB { get; set; }
+        public string TowerID { get; set; }
+        public string FloorID { get; set; }
+        public string AssetType { get; set; }
+        public int? PlanUnitNumber { get; set; }
+        public string AddressNumber { get; set; }
+        public int? LandStatus { get; set; }
+        public int? ApproveDate { get; set; }
+        public int? QC5ApprovedDate { get; set; }
+        public int? QC6ApprovedDate { get; set; }
+        public int? ConstructionStartDate { get; set; }
+        public int? ConstructionEndDate { get; set; }
+        public int? ConstructionExpectEndDate { get; set; }
+        public int? ConstructionRealStartDate { get; set; }
+        public int? Location { get; set; }
+        public string UnitStatus { get; set; }
+        public bool isDelete { get; set; }
+        public string Remark { get; set; }
+        public int? TitledeedNumber { get; set; }
+        public int? IsBOI { get; set; }
+        public int? ISEditUnit { get; set; }
+        public string ImportDate { get; set; }
+        public string SuggActiveDate { get; set; }
+        public int? VersionDate { get; set; }
+        public decimal? SuggestionPrice { get; set; }
+        public string MinPriceType { get; set; }
+        public string ActiveDate { get; set; }
+        public decimal? StandardPrice { get; set; }
+        public int? KasornPrice { get; set; }
+        public int? UnitIncreasingAreaPrice { get; set; }
+        public int? IncreasingAreaPrice { get; set; }
+        public decimal TotalSellingPrice { get; set; }
+        public int? PhusaPrice { get; set; }
+        public decimal? BookingAmount { get; set; }
+        public decimal? ContractAmount { get; set; }
+        public decimal? DownAmount { get; set; }
+        public string PriceActiveDate { get; set; }
+        public int? CommunityFund { get; set; }
+        public int? CommunityFeeRateMonth { get; set; }
+        public int? CommunityFeeMonthPeroid { get; set; }
+        public int? plId { get; set; }
+        public int? LocationPrice { get; set; }
+        public int? ExtraDownPayment { get; set; }
+        public int? ExtraDownAmount { get; set; }
+        public int DownPaymentPeriod { get; set; }
+        public decimal? DownPaymentPerPeriod { get; set; }
+        public int? DownPayment { get; set; }
+        public int? SpecialDown { get; set; }
+        public int? SpecialDownPrice { get; set; }
+        public int? isLocked { get; set; }
+        public int? PercentDownPayment { get; set; }
+        public string Paydown { get; set; }
+        public string PaydownAmount { get; set; }
+        public string CompanyID { get; set; }
+        public string ProductName { get; set; }
+        public string Producttype { get; set; }
+        public string BrandID { get; set; }
+        public int? isValueCondo { get; set; }
+        public int? IsUpcountry { get; set; }
+        public string RTPExcusive { get; set; }
+        public bool? IsNotLicenceLand { get; set; }
+        public string ModelHomeThai { get; set; }
+        public int? StandardAreaSQW { get; set; }
+        public string TypeOfRealEstate { get; set; }
+        public string UnitType { get; set; }
+        public string SaleStatus { get; set; }
+    }
+
+   [Table("vw_ICON_Payment_PaymentDetails")]
+    public partial class vwICONPaymentPaymentDetail
+    {
+        public Guid? RCReferent { get; set; }
+        public Guid ReferentID { get; set; }
+        public string RefType { get; set; }
+        public string PaymentType { get; set; }
+        public int? Period { get; set; }
+        public decimal? Amount { get; set; }
+        public decimal? TransferAmount { get; set; }
+        public decimal? TotalInstallmentAmount { get; set; }
+        public decimal? InstallmentAmount { get; set; }
+        public Guid TmpReceiptID { get; set; }
+    }
+
+   [Table("vw_IsHousePayment_V2")]
+    public partial class vwIsHousePaymentV2
+    {
+        public Guid? PaymentMethodID { get; set; }
+        public int? IsHousePayment { get; set; }
+    }
+
+   [Table("vw_LCMobile_Lead")]
+    public partial class vwLCMobileLead
+    {
+        public Guid? OwnerID { get; set; }
+        public Guid LeadID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Email { get; set; }
+        public Guid? LeadTypeID { get; set; }
+        public string LeadTypeName { get; set; }
+        public Guid? LeadStatusID { get; set; }
+        public string LeadStatusKey { get; set; }
+        public string LeadStatusName { get; set; }
+        public Guid? ActivityId { get; set; }
+        public string ActivityTypeKey { get; set; }
+        public string ActivityTypeName { get; set; }
+        public string NextCall { get; set; }
+        public string ActualDate { get; set; }
+        public string LastCall { get; set; }
+        public int? LastCallDiff { get; set; }
+    }
+
+   [Table("vw_LCMobile_LeadActivity")]
+    public partial class vwLCMobileLeadActivity
+    {
+        public long? LastRowID { get; set; }
+        public Guid ActivityId { get; set; }
+        public Guid LeadID { get; set; }
+        public Guid? ConvenientTimeMasterCenterID { get; set; }
+        public Guid? LeadActivityTypeMasterCenterID { get; set; }
+        public string Description { get; set; }
+        public string DueDate { get; set; }
+        public string AppointmentDate { get; set; }
+        public string ActualDate { get; set; }
+        public string ActivityTypeKey { get; set; }
+        public string ActivityTypeName { get; set; }
+        public bool IsCompleted { get; set; }
+        public bool IsDeleted { get; set; }
+        public string StartCallTime { get; set; }
+        public string EndCallTime { get; set; }
+        public int? CallDulation { get; set; }
+        public Guid? StatusID { get; set; }
+        public string StatusName { get; set; }
+        public Guid? FollowID { get; set; }
+        public string FollowName { get; set; }
+        public string LastCall { get; set; }
+        public int LastCallDiff { get; set; }
+    }
+
+   [Table("vw_LCMobile_LeadActivityFollowUpType")]
+    public partial class vwLCMobileLeadActivityFollowUpType
+    {
+        public Guid ID { get; set; }
+        public string Key { get; set; }
+        public string Name { get; set; }
+    }
+
+   [Table("vw_LCMobile_LeadActivityLastCall")]
+    public partial class vwLCMobileLeadActivityLastCall
+    {
+        public Guid LeadID { get; set; }
+        public string LastCall { get; set; }
+    }
+
+   [Table("vw_LCMobile_LeadActivityStatus")]
+    public partial class vwLCMobileLeadActivityStatus
+    {
+        public Guid ID { get; set; }
+        public string Description { get; set; }
+        public bool IsActive { get; set; }
+        public string Created { get; set; }
+        public string Updated { get; set; }
+        public bool IsDeleted { get; set; }
+        public int Order { get; set; }
+        public string Code { get; set; }
+        public Guid? LeadActivityFollowUpTypeMasterCenterID { get; set; }
+        public Guid? LeadActivityStatusTypeMasterCenterID { get; set; }
+        public Guid? CreatedByUserID { get; set; }
+        public Guid? UpdatedByUserID { get; set; }
+        public string LastMigrateDate { get; set; }
+        public string RefMigrateID1 { get; set; }
+        public string RefMigrateID2 { get; set; }
+        public string RefMigrateID3 { get; set; }
+        public Guid? FollowID { get; set; }
+        public string FollowName { get; set; }
+        public Guid? StatusID { get; set; }
+        public string StatusName { get; set; }
+    }
+
+   [Table("vw_LCMobile_LeadActivityStatusType")]
+    public partial class vwLCMobileLeadActivityStatusType
+    {
+        public Guid ID { get; set; }
+        public string Key { get; set; }
+        public string Name { get; set; }
+    }
+
+   [Table("vw_LCMobile_LeadActivityType")]
+    public partial class vwLCMobileLeadActivityType
+    {
+        public Guid ID { get; set; }
+        public string Key { get; set; }
+        public string Name { get; set; }
+    }
+
+   [Table("vw_LCMobile_LeadChanel")]
+    public partial class vwLCMobileLeadChanel
+    {
+        public Guid ID { get; set; }
+        public string Key { get; set; }
+        public string Name { get; set; }
+    }
+
+   [Table("vw_LCMobile_LeadStatus")]
+    public partial class vwLCMobileLeadStatus
+    {
+        public Guid ID { get; set; }
+        public string Key { get; set; }
+        public string Name { get; set; }
+    }
+
+   [Table("vw_LCMobile_Opportunity")]
+    public partial class vwLCMobileOpportunity
+    {
+        public Guid OpportunityID { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public Guid? ProjectID { get; set; }
+        public string ProjectName { get; set; }
+        public string PhoneNumber { get; set; }
+        public string OpportunityType { get; set; }
+        public Guid? OwnerID { get; set; }
+        public string BuyReason { get; set; }
+        public string Remark { get; set; }
+    }
+
+   [Table("vw_LCMobile_OpportunityActivityType")]
+    public partial class vwLCMobileOpportunityActivityType
+    {
+        public Guid ID { get; set; }
+        public string Key { get; set; }
+        public string Name { get; set; }
+    }
+
+   [Table("vw_LCsInProducts")]
+    public partial class vwLCsInProduct
+    {
+        public string ProductID { get; set; }
+        public string Project { get; set; }
+        public string BUID { get; set; }
+        public Guid? UserID { get; set; }
+        public string Username { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string DisplayName { get; set; }
+        public Guid? RoleID { get; set; }
+        public string AuthorCreated { get; set; }
+    }
+
    [Table("SAL.vw_LET_DownPaymentLetter")]
     public partial class vwLETDownPaymentLetter
     {
@@ -9479,6 +11094,7 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public string UnitNo { get; set; }
         public Guid? ProjectID { get; set; }
         public string ProjectNo { get; set; }
+        public string ProjectNameTH { get; set; }
         public string ProjectType { get; set; }
         public string ProjectTypeName { get; set; }
         public decimal? SellingPrice { get; set; }
@@ -9505,6 +11121,337 @@ namespace com.apthai.CRMMobile.Model.CRMWeb
         public bool? LastOverTwelvePointFivePercent { get; set; }
         public int? CTM1Amount { get; set; }
         public int? CTM2Amount { get; set; }
+        public bool IsVIP { get; set; }
+    }
+
+   [Table("SAL.vw_LET_TransferLetter")]
+    public partial class vwLETTransferLetter
+    {
+        public Guid AgreementID { get; set; }
+        public string AgreementNo { get; set; }
+        public string ContractDate { get; set; }
+        public string UnitNo { get; set; }
+        public Guid? ProjectID { get; set; }
+        public string ProjectNo { get; set; }
+        public string ProjectNameTH { get; set; }
+        public string ProjectType { get; set; }
+        public string ProjectTypeName { get; set; }
+        public string DisplayName { get; set; }
+        public Guid? ChangeAgreementOwnerTypeID { get; set; }
+        public string ChangeAgreementOwnerType { get; set; }
+        public Guid? LastTransferLetterTypeID { get; set; }
+        public string LastTransferLetterType { get; set; }
+        public string LastTransferLetterTypeName { get; set; }
+        public string LastResponseDate { get; set; }
+        public Guid? LastLetterStatusID { get; set; }
+        public string LastLetterStatusName { get; set; }
+        public bool IsVIP { get; set; }
+        public string TransferOwnershipDate { get; set; }
+        public string AppointmentTransferDate { get; set; }
+        public string AppointmentTransferTime { get; set; }
+    }
+
+   [Table("vw_PayInTransfer_Other")]
+    public partial class vwPayInTransferOther
+    {
+        public string PayInID { get; set; }
+        public Guid? RCReferent { get; set; }
+        public string RDate { get; set; }
+        public string BankAccountID { get; set; }
+        public decimal Amount { get; set; }
+        public decimal? Balance { get; set; }
+        public string CreateBy { get; set; }
+        public string CreateDate { get; set; }
+        public Guid AdditionRCReferent { get; set; }
+        public int IsUnknowTransfer { get; set; }
+        public string ProductID { get; set; }
+        public string UnitNumber { get; set; }
+        public string ReferentID { get; set; }
+        public string RefType { get; set; }
+    }
+
+   [Table("MST.VW_PaymentMethodCode")]
+    public partial class VWPaymentMethodCode
+    {
+        public Guid? PaymentMethodMasterCenterID { get; set; }
+        public string PaymentMethodCode { get; set; }
+    }
+
+   [Table("vw_PRO_PromotionItem")]
+    public partial class vwPROPromotionItem
+    {
+        public string PromotionID { get; set; }
+        public string ItemId { get; set; }
+        public string MaterialCode { get; set; }
+        public string Prm_TabNo { get; set; }
+        public int? ItemNo { get; set; }
+        public string prm_itmgrp { get; set; }
+        public int prm_itmgrpsts { get; set; }
+        public string DescriptionTH { get; set; }
+        public int? Amount { get; set; }
+        public double? PricePerUnit { get; set; }
+        public decimal? SumAmount { get; set; }
+        public decimal? Itm_ItmPrice { get; set; }
+        public decimal? Itm_SapPrice { get; set; }
+        public string ItemId_Head { get; set; }
+        public string MATG_ID { get; set; }
+    }
+
+   [Table("vw_RPTAP2_ExV3Booking")]
+    public partial class vwRPTAP2ExV3Booking
+    {
+        public Guid UnitID { get; set; }
+        public int? UnitAmt { get; set; }
+        public decimal? BKPrice { get; set; }
+        public string BookingDate { get; set; }
+        public int? WeekAmt { get; set; }
+        public int? MonthAmt { get; set; }
+        public Guid? ProjectID { get; set; }
+    }
+
+   [Table("vw_RPTAP2_ExV3BookingCancel")]
+    public partial class vwRPTAP2ExV3BookingCancel
+    {
+        public int? UnitAmt { get; set; }
+        public decimal? BKPrice { get; set; }
+        public string BookingDate { get; set; }
+        public int? WeekAmt { get; set; }
+        public int? MonthAmt { get; set; }
+        public Guid? ProjectID { get; set; }
+        public DateTime? CancelDate { get; set; }
+        public int? WeekAmt1 { get; set; }
+        public int? MonthAmt1 { get; set; }
+    }
+
+   [Table("vw_RPTAP2_ExV3Emty")]
+    public partial class vwRPTAP2ExV3Emty
+    {
+        public Guid? ProjectID { get; set; }
+        public int? UnitAmt { get; set; }
+        public decimal UnitPrice { get; set; }
+    }
+
+   [Table("vw_RPTAP2_ExV3NoContract")]
+    public partial class vwRPTAP2ExV3NoContract
+    {
+        public int? UnitAmt { get; set; }
+        public decimal? BKPrice { get; set; }
+        public Guid? ProjectID { get; set; }
+        public string BookingDate { get; set; }
+        public string CancelDateBK { get; set; }
+        public string CancelDateAG { get; set; }
+    }
+
+   [Table("vw_RPTAP2_ExV3NoTransfer")]
+    public partial class vwRPTAP2ExV3NoTransfer
+    {
+        public int? UnitAmt { get; set; }
+        public decimal? TFPrice { get; set; }
+        public Guid? ProjectID { get; set; }
+        public string BookingDate { get; set; }
+        public string CancelDateBK { get; set; }
+        public string CancelDateAG { get; set; }
+        public string ActualTransferDate { get; set; }
+    }
+
+   [Table("vw_RPTAP2_ExV3Transfer")]
+    public partial class vwRPTAP2ExV3Transfer
+    {
+        public int? UnitAmt { get; set; }
+        public decimal TFPrice { get; set; }
+        public Guid? ProjectID { get; set; }
+        public string ActualTransferDate { get; set; }
+        public int? WeekAmt { get; set; }
+        public int? MonthAmt { get; set; }
+    }
+
+   [Table("vw_RPTAP2_ExV4Booking")]
+    public partial class vwRPTAP2ExV4Booking
+    {
+        public Guid UnitID { get; set; }
+        public int? UnitAmt { get; set; }
+        public decimal? BKPrice { get; set; }
+        public string BookingDate { get; set; }
+        public int? WeekAmt { get; set; }
+        public int? MonthAmt { get; set; }
+        public Guid? ProjectID { get; set; }
+    }
+
+   [Table("vw_RPTAP2_ExV4Booking_ExecutiveReport_Subtract")]
+    public partial class vwRPTAP2ExV4BookingExecutiveReportSubtract
+    {
+        public string ProjectNo { get; set; }
+        public Guid? ProjectID { get; set; }
+        public string UnitNo { get; set; }
+        public decimal TotalPrice { get; set; }
+        public decimal BookingFreedownAmount { get; set; }
+        public decimal ContractFreedownAmount { get; set; }
+        public decimal? NetPrice { get; set; }
+        public string BookingNumber { get; set; }
+        public string BookingDate { get; set; }
+        public string BookingCancelDate { get; set; }
+        public string ContractNumber { get; set; }
+        public string ContractCancelDate { get; set; }
+        public string TransferDateapprove { get; set; }
+        public string BookingType { get; set; }
+        public string OldBookingNumber { get; set; }
+        public DateTime? OldBookingDate { get; set; }
+        public DateTime? OldCancelDate { get; set; }
+        public decimal? OldBookingPrice { get; set; }
+        public string CurrentStatus { get; set; }
+        public decimal? SubtractGrossBookingAmount { get; set; }
+        public int SubtractGrossBookingUnit { get; set; }
+        public decimal? SubtractCancelAmount { get; set; }
+        public int SubtractCancelUnit { get; set; }
+    }
+
+   [Table("vw_RPTAP2_ExV4BookingCancel")]
+    public partial class vwRPTAP2ExV4BookingCancel
+    {
+        public Guid UnitID { get; set; }
+        public int? UnitAmt { get; set; }
+        public decimal? BKPrice { get; set; }
+        public string BookingDate { get; set; }
+        public int? WeekAmt { get; set; }
+        public int? MonthAmt { get; set; }
+        public Guid? ProjectID { get; set; }
+        public DateTime? CancelDate { get; set; }
+        public int? WeekAmt1 { get; set; }
+        public int? MonthAmt1 { get; set; }
+    }
+
+   [Table("vw_RPTAP2_ExV4NoContract")]
+    public partial class vwRPTAP2ExV4NoContract
+    {
+        public int? UnitAmt { get; set; }
+        public decimal? BKPrice { get; set; }
+        public Guid? ProjectID { get; set; }
+        public string BookingDate { get; set; }
+        public string CancelDateBK { get; set; }
+        public string CancelDateAG { get; set; }
+    }
+
+   [Table("vw_RPTAP2_ExV4NoTransfer")]
+    public partial class vwRPTAP2ExV4NoTransfer
+    {
+        public int? UnitAmt { get; set; }
+        public decimal? TFPrice { get; set; }
+        public Guid? ProjectID { get; set; }
+        public string BookingDate { get; set; }
+        public string CancelDateBK { get; set; }
+        public string CancelDateAG { get; set; }
+        public string ActualTransferDate { get; set; }
+    }
+
+   [Table("vw_RPTAP2_New_ReceiptDetail")]
+    public partial class vwRPTAP2NewReceiptDetail
+    {
+        public string Details { get; set; }
+        public decimal? Amount { get; set; }
+        public string PaymentType { get; set; }
+        public string ReceivedID { get; set; }
+        public Guid? TmpReceiptID { get; set; }
+    }
+
+   [Table("vw_Unit")]
+    public partial class vwUnit
+    {
+        public Guid? CompanyID { get; set; }
+        public string CompanyCode { get; set; }
+        public string SAPCompany { get; set; }
+        public string CompanyName { get; set; }
+        public Guid ProjectID { get; set; }
+        public string ProjectNo { get; set; }
+        public string ProjectNameTH { get; set; }
+        public Guid? UnitID { get; set; }
+        public string UnitNo { get; set; }
+        public Guid? BookingID { get; set; }
+        public string BookingNo { get; set; }
+        public string BookingDate { get; set; }
+        public string CancelDate { get; set; }
+        public string BookingMainOwnerName { get; set; }
+        public Guid? AgreementID { get; set; }
+        public string AgreementNo { get; set; }
+        public string ContractDate { get; set; }
+        public bool? IsCancel { get; set; }
+        public string Updated { get; set; }
+        public string AgreementMainOwnerName { get; set; }
+        public Guid? TransferID { get; set; }
+        public string TransferNo { get; set; }
+        public string ActualTransferDate { get; set; }
+        public bool? IsDeleted { get; set; }
+        public string TransferUpdated { get; set; }
+    }
+
+   [Table("vw_User")]
+    public partial class vwUser
+    {
+        public int? UserID { get; set; }
+        public Guid UserGUID { get; set; }
+        public string UserName { get; set; }
+        public string EmpCode { get; set; }
+        public string TitleName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string FullName { get; set; }
+        public int? PositionName { get; set; }
+        public string Email { get; set; }
+        public string FullCodeName { get; set; }
+        public int? UserNameLogin { get; set; }
+    }
+
+   [Table("vw_UserinProduct")]
+    public partial class vwUserinProduct
+    {
+        public string ProductID { get; set; }
+        public string Project { get; set; }
+        public Guid? UserID { get; set; }
+        public string EmployeeID { get; set; }
+        public int? Username { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string DisplayName { get; set; }
+        public int Authorised { get; set; }
+    }
+
+   [Table("vw_UserProject")]
+    public partial class vwUserProject
+    {
+        public int ID { get; set; }
+        public int UserID { get; set; }
+        public string UserName { get; set; }
+        public string UserGUID { get; set; }
+        public string EmpCode { get; set; }
+        public string TitleName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string FullName { get; set; }
+        public int ProjectID { get; set; }
+        public string ProjectCode { get; set; }
+        public string ProjectWBS { get; set; }
+        public string ProjectName { get; set; }
+        public string BU { get; set; }
+        public string ProjectType { get; set; }
+        public int? CompanyID { get; set; }
+        public string CompanyCode { get; set; }
+        public string CompanySAPCode { get; set; }
+        public string CompanyName { get; set; }
+        public string AssignType { get; set; }
+        public string SourceType { get; set; }
+        public string ProjectGroup { get; set; }
+    }
+
+   [Table("vw_ZPROM_HeadOfCS")]
+    public partial class vwZPROMHeadOfC
+    {
+        public int nOrder { get; set; }
+        public string BUID { get; set; }
+        public string BrandID { get; set; }
+        public string ProductID { get; set; }
+        public Guid? HCSID { get; set; }
+        public int IsActive { get; set; }
+        public int? HCSType { get; set; }
     }
 
    [Table("PRJ.WaiveQC")]
