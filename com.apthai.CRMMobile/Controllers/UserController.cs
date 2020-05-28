@@ -1287,7 +1287,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                     {
                         Model.CRMMobile.UserLogin userLogin = _UserRepository.GetUserLoginByID_Mobile(cSUserProfile.UserLoginID);
                         //string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
-                        userLogin.FireBaseToken = data.FireBaseToken;
+                        //userLogin.FireBaseToken = data.FireBaseToken;
                         userLogin.Notification = true;
                         bool UpdateUserToken = _UserRepository.UpdateCSUserLogin(userLogin);
 

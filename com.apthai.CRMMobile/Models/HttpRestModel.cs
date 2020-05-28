@@ -35,7 +35,6 @@ namespace com.apthai.CRMMobile.HttpRestModel
     {
         public bool OnOff { get; set; }
         public string AccessKey { get; set; }
-        public string FireBaseToken { get; set; }
     }
     public partial class SetNotiIsReadParam
     {
