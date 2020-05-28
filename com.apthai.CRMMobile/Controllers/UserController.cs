@@ -623,7 +623,7 @@ namespace com.apthai.CRMMobile.Controllers
                 //    }
                 //}
 
-                Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByID(data.UserID);
+                Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByID(data.CRMContactID);
                 if (contact == null)
                 {
                     return new

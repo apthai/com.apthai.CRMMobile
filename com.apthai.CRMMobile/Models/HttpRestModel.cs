@@ -145,7 +145,7 @@ namespace com.apthai.CRMMobile.HttpRestModel
     }
     public partial class iCRMMyPropertyParam
     {
-        public string UserID { get; set; }
+        public string CRMContactID { get; set; }
         public string ContactNo { get; set; }
     }
     public partial class GetUserBillingTrackingParam
