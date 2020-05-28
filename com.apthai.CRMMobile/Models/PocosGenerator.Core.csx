@@ -79,14 +79,14 @@ public class PocosGenerator {
                 string tableNameSchema = "";
                 if (tbl.Schema == "dbo")
                 {
-                    tableNameSchema =  tbl.Name;
+                    tableNameSchema = tbl.Name;
                 }
                 else
                 {
                     tableNameSchema = tbl.Schema + "." + tbl.Name;
                 }
                 builder.AppendLine("");
-				if (_options.DapperContribAttributes) builder.AppendLine($"   [Table(\"{tableNameSchema}\")]");
+				if (_options.DapperContribAttributes) builder.AppendLine($"    [Table(\"{tableNameSchema}\")]");
 				builder.AppendLine($"    public partial class {tbl.ClassName.Replace("_","")}");
 				builder.AppendLine("    {");
 				foreach(Column col in from c in tbl.Columns where !c.Ignore select c)
@@ -287,7 +287,7 @@ public class PocosGenerator {
 		}
 	}
 
-	public List<string> LoadStoredProcedures()
+	private List<string> LoadStoredProcedures()
 	{
 		try
 		{

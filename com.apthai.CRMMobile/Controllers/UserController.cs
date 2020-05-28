@@ -166,8 +166,10 @@ namespace com.apthai.CRMMobile.Controllers
                     cSUserProfile.Updated = null;
                     cSUserProfile.UpdatedBy = null;
                     cSUserProfile.IsActive = true;
+                    cSUserProfile.ContactNo = contact.ContactNo;
                     cSUserProfile.PINCode = SHAHelper.ComputeHash(data.PINCode, "SHA512", null);
                     cSUserProfile.Language = data.Language.ToLower();
+
                     long ProfileID = 0;
                     bool insert = _UserRepository.InsertCSUserProfile(cSUserProfile, out ProfileID);
 

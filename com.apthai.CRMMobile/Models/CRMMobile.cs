@@ -12,7 +12,7 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
 {
   
 
-   [Table("DOC.DocumentDetailLevel2")]
+    [Table("DOC.DocumentDetailLevel2")]
     public partial class DocumentDetailLevel2
     {
         [Key]
@@ -29,7 +29,7 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string UpdatedBy { get; set; }
     }
 
-   [Table("DOC.DocumentHeaderLevel1")]
+    [Table("DOC.DocumentHeaderLevel1")]
     public partial class DocumentHeaderLevel1
     {
         [Key]
@@ -45,7 +45,7 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string UpdatedBy { get; set; }
     }
 
-   [Table("MST.MappingURLProject")]
+    [Table("MST.MappingURLProject")]
     public partial class MappingURLProject
     {
         [Key]
@@ -60,7 +60,7 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string UpdateBy { get; set; }
     }
 
-   [Table("NT.NotificationHistory")]
+    [Table("NT.NotificationHistory")]
     public partial class NotificationHistory
     {
         [Key]
@@ -86,7 +86,7 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public bool? IsRead { get; set; }
     }
 
-   [Table("NT.NotificationTemp")]
+    [Table("NT.NotificationTemp")]
     public partial class NotificationTemp
     {
         [Key]
@@ -109,7 +109,7 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string UpdatedBy { get; set; }
     }
 
-   [Table("NT.NotificationType")]
+    [Table("NT.NotificationType")]
     public partial class NotificationType
     {
         [Key]
@@ -121,7 +121,7 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string UpdatedBy { get; set; }
     }
 
-   [Table("PaymentTransaction")]
+    [Table("PaymentTransaction")]
     public partial class PaymentTransaction
     {
         public string CRMContractID { get; set; }
@@ -132,7 +132,7 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string TransactionInfo { get; set; }
     }
 
-   [Table("MST.ProjectLocation")]
+    [Table("MST.ProjectLocation")]
     public partial class ProjectLocation
     {
         [Key]
@@ -148,7 +148,7 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string UpdateBy { get; set; }
     }
 
-   [Table("DOC.SubDocumentDetailLevel3")]
+    [Table("DOC.SubDocumentDetailLevel3")]
     public partial class SubDocumentDetailLevel3
     {
         [Key]
@@ -165,14 +165,14 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string UpdatedBy { get; set; }
     }
 
-   [Table("Table_1")]
+    [Table("Table_1")]
     public partial class Table1
     {
         public string ID { get; set; }
         public string name { get; set; }
     }
 
-   [Table("CS.UserLogin")]
+    [Table("CS.UserLogin")]
     public partial class UserLogin
     {
         [Key]
@@ -188,7 +188,7 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string AppVersion { get; set; }
     }
 
-   [Table("CS.UserProfile")]
+    [Table("CS.UserProfile")]
     public partial class UserProfile
     {
         [Key]
@@ -211,5 +211,6 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string Updated { get; set; }
         public string UpdatedBy { get; set; }
         public string Language { get; set; }
+        public string ContactNo { get; set; }
     }
 }
