@@ -243,6 +243,7 @@ namespace com.apthai.CRMMobile.Controllers
                         cSUserLogin.UserToken = GenerateAccessToken;
                         cSUserLogin.UserProfileID = userLogin.UserProfileID;
                         cSUserLogin.CRMContactID = contact.ID;
+                        cSUserLogin.Notification = true;
                         bool insertUserLogin = _UserRepository.UpdateCSUserLogin(userLogin);
 
                         return new
@@ -1250,7 +1251,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
         }
 
         [HttpPost]
-        [Route("OnOffNotification")]
+        [Route("Notification")]
         [SwaggerOperation(Summary = "Register User เพื่อใช่ระบบ ซึ่งจะไป หาข้อมูลจากระบบ CRM",
        Description = "Access Key ใช้ในการเรียหใช้ Function ต่างๆ เพื่อไม่ให้ User Login หลายเครื่องในเวลาเดียวกัน")]
         public async Task<object> OnOffNotification([FromBody]OnOffNotification data)
@@ -1279,11 +1280,10 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         data = new VerifyPINReturnObj(),
                         message = "Cannot Find the Matach Data"
                     };
-
                 }
                 else
                 {
-                    if (data.OnOff == true)
+                    if (data.IsOn == true)
                     {
                         Model.CRMMobile.UserLogin userLogin = _UserRepository.GetUserLoginByID_Mobile(cSUserProfile.UserLoginID);
                         //string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);

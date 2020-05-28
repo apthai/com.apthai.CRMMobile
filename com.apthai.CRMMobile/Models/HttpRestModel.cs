@@ -33,7 +33,7 @@ namespace com.apthai.CRMMobile.HttpRestModel
     }
     public partial class OnOffNotification
     {
-        public bool OnOff { get; set; }
+        public bool IsOn { get; set; }
         public string AccessKey { get; set; }
     }
     public partial class SetNotiIsReadParam
