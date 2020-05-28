@@ -196,7 +196,7 @@ namespace com.apthai.CRMMobile.Repositories
             {
                 conn.Open();
                 var result = conn.Query<Model.CRMMobile.NotificationHistory>("select * from NT.NotificationHistory WITH(NOLOCK) " +
-                    " where NT.NotificationHistory.CRMContactID=@CRMContactID", new { CRMContactID = CRMContactID }).ToList();
+                    " where NT.NotificationHistory.CRMContactID=@CRMContactID Order by Created Desc", new { CRMContactID = CRMContactID }).ToList();
 
                 return result;
             }
