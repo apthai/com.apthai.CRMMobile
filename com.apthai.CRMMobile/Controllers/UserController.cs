@@ -1165,6 +1165,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 Nh.MsgTH = BodyMsgTH;
                 Nh.MessageTitleENG = BodyMsgEN;
                 Nh.MsgEN = BodyMsgEN;
+                Nh.IsRead = false;
                 bool Insert = _UserRepository.InsertNotificationHistory(Nh);
                 if (Insert)
                 {
