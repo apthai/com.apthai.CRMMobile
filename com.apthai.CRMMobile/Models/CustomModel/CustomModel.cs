@@ -20,6 +20,12 @@ namespace com.apthai.CRMMobile.CustomModel
         public string secret { get; set; }
         public string msisdn { get; set; }
     }
+    public class AdsObject
+    {
+        public string AdsUrl { get; set; }
+        public string Link { get; set; }
+    }
+
     public class PersonalContact
     {
         public string Name { get; set; }

@@ -897,20 +897,23 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 var FilePath = Path.Combine(_hostingEnvironment.WebRootPath,"Ads");
                 string[] FileExt = { ".PNG", ".jpg", ".png","png" };
                 var picture = GetFilesFrom(FilePath + "//", FileExt, true);
+                List<AdsObject> adsObjects = new List<AdsObject>();
                 List<string> MobileAdsURL = new List<string>();
                 foreach (var path in picture)
                 {
-                    string[] split = { "//", "\\" };
+                    AdsObject ads = new AdsObject();
                     var newpath = path.Split("//");
                     string fileName = newpath[newpath.Count()-1];
                     string AdsFileUrl = AdsURL + fileName;
-                    MobileAdsURL.Add(AdsFileUrl);
+                    ads.AdsUrl = AdsFileUrl;
+                    ads.Link = "http://www.apintranet.com/";
+                    adsObjects.Add(ads);
                 }
                 
                 return new
                 {
                     success = true,
-                    data = MobileAdsURL,
+                    data = adsObjects,
                     message = "Get User PersonalContact Success !"
                 };
 
