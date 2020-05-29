@@ -160,7 +160,7 @@ namespace com.apthai.CRMMobile.HttpRestModel
     }
     public partial class AdsParam
     {
-
+        public string CRMContactID { get; set; }
     }
     public partial class GetDocumentDetailParam
     {

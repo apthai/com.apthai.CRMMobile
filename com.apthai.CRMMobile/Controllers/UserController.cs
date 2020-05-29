@@ -901,7 +901,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 foreach (var path in picture)
                 {
                     string[] split = { "//", "\\" };
-                    var newpath = path.Split("\\");
+                    var newpath = path.Split("//");
                     string fileName = newpath[newpath.Count()-1];
                     string AdsFileUrl = AdsURL + fileName;
                     MobileAdsURL.Add(AdsFileUrl);
