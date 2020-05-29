@@ -761,6 +761,172 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
         }
 
         [HttpPost]
+        [Route("PersonalContact")]
+        [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
+Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
+        public async Task<object> GetUserBillingTracking([FromBody]PersonalContactParam data)
+        {
+            try
+            {
+                StringValues api_key;
+                StringValues EmpCode;
+                //if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
+                //{
+                //    string AccessKey = api_key.First();
+                //    string EmpCodeKey = EmpCode.First();
+
+                //    if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
+                //    {
+                //        return new
+                //        {
+                //            success = false,
+                //            data = new AutorizeDataJWT(),
+                //            message = "Require Key to Access the Function"
+                //        };
+                //    }
+                //    else
+                //    {
+                //        string APApiKey = Environment.GetEnvironmentVariable("API_Key");
+                //        if (APApiKey == null)
+                //        {
+                //            APApiKey = UtilsProvider.AppSetting.ApiKey;
+                //        }
+                //        if (api_key != APApiKey)
+                //        {
+                //            return new
+                //            {
+                //                success = false,
+                //                data = new AutorizeDataJWT(),
+                //                message = "Incorrect API KEY !!"
+                //            };
+                //        }
+                //    }
+                //}
+
+                //Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByID(data.UserID);
+                //if (contact == null)
+                //{
+                //    return new
+                //    {
+                //        success = false,
+                //        data = new AutorizeDataJWT(),
+                //        message = "Only AP Customer Can Regist to the System !!"
+                //    };
+                //}
+                List<PersonalContact> PS = new List<PersonalContact>();
+                PersonalContact personal = new PersonalContact();
+                personal.Name = "Puriwat Sudror";
+                personal.PhoneNumber = "0969879494";
+                personal.Remark = "คุณภูริวัช หัวหน้าสมาคม อาบอบนวด ";
+                PS.Add(personal);
+                PersonalContact personal2 = new PersonalContact();
+                personal2.Name = "Wiwat Sudror";
+                personal2.PhoneNumber = "0641956694";
+                personal2.Remark = "หัวหน้าสมาคมกวนตรีนสัส!";
+                PS.Add(personal2);
+                PersonalContact personal3 = new PersonalContact();
+                personal2.Name = "Kusuma Sudswai";
+                personal2.PhoneNumber = "0994142269";
+                personal2.Remark = "หัวหน้าไม้กระดานแห้ง ประเทศไทย!";
+                PS.Add(personal3);
+                return new
+                {
+                    success = true,
+                    data = personal3,
+                    message = "Get User PersonalContact Success !"
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error :: " + ex.Message);
+            }
+        }
+
+//        [HttpPost]
+//        [Route("Ads")]
+//        [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
+//Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
+//        public async Task<object> Ads([FromBody]PersonalContactParam data)
+//        {
+//            try
+//            {
+//                StringValues api_key;
+//                StringValues EmpCode;
+//                //if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
+//                //{
+//                //    string AccessKey = api_key.First();
+//                //    string EmpCodeKey = EmpCode.First();
+
+//                //    if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
+//                //    {
+//                //        return new
+//                //        {
+//                //            success = false,
+//                //            data = new AutorizeDataJWT(),
+//                //            message = "Require Key to Access the Function"
+//                //        };
+//                //    }
+//                //    else
+//                //    {
+//                //        string APApiKey = Environment.GetEnvironmentVariable("API_Key");
+//                //        if (APApiKey == null)
+//                //        {
+//                //            APApiKey = UtilsProvider.AppSetting.ApiKey;
+//                //        }
+//                //        if (api_key != APApiKey)
+//                //        {
+//                //            return new
+//                //            {
+//                //                success = false,
+//                //                data = new AutorizeDataJWT(),
+//                //                message = "Incorrect API KEY !!"
+//                //            };
+//                //        }
+//                //    }
+//                //}
+
+//                //Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByID(data.UserID);
+//                //if (contact == null)
+//                //{
+//                //    return new
+//                //    {
+//                //        success = false,
+//                //        data = new AutorizeDataJWT(),
+//                //        message = "Only AP Customer Can Regist to the System !!"
+//                //    };
+//                //}
+//                List<PersonalContact> PS = new List<PersonalContact>();
+//                PersonalContact personal = new PersonalContact();
+//                personal.Name = "Puriwat Sudror";
+//                personal.PhoneNumber = "0969879494";
+//                personal.Remark = "คุณภูริวัช หัวหน้าสมาคม อาบอบนวด ";
+//                PS.Add(personal);
+//                PersonalContact personal2 = new PersonalContact();
+//                personal2.Name = "Wiwat Sudror";
+//                personal2.PhoneNumber = "0641956694";
+//                personal2.Remark = "หัวหน้าสมาคมกวนตรีนสัส!";
+//                PS.Add(personal2);
+//                PersonalContact personal3 = new PersonalContact();
+//                personal2.Name = "Kusuma Sudswai";
+//                personal2.PhoneNumber = "0994142269";
+//                personal2.Remark = "หัวหน้าไม้กระดานแห้ง ประเทศไทย!";
+//                PS.Add(personal3);
+//                return new
+//                {
+//                    success = true,
+//                    data = personal3,
+//                    message = "Get User PersonalContact Success !"
+//                };
+
+//            }
+//            catch (Exception ex)
+//            {
+//                return StatusCode(500, "Internal server error :: " + ex.Message);
+//            }
+//        }
+
+        [HttpPost]
         [Route("GetUseriCRMContact")]
         [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
 Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]

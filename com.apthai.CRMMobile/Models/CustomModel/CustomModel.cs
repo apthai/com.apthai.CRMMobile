@@ -20,6 +20,12 @@ namespace com.apthai.CRMMobile.CustomModel
         public string secret { get; set; }
         public string msisdn { get; set; }
     }
+    public class PersonalContact
+    {
+        public string Name { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Remark { get; set; }
+    }
     public class ThaiBulkVerifyOTP
     {
         public string token { get; set; }

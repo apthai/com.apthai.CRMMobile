@@ -154,6 +154,10 @@ namespace com.apthai.CRMMobile.HttpRestModel
         public string Project { get; set; }
         public string Unit { get; set; }
     }
+    public partial class PersonalContactParam
+    {
+        public string CRMContactID { get; set; }
+    }
     public partial class GetDocumentDetailParam
     {
         public string HeaderID { get; set; }
