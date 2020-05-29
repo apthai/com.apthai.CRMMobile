@@ -889,19 +889,27 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 //    }
                 //}
 
-                var PhotoURL = Environment.GetEnvironmentVariable("PictureRootURL");
-                if (PhotoURL == null)
+                var AdsURL = Environment.GetEnvironmentVariable("AdsUrl");
+                if (AdsURL == null)
                 {
-                    PhotoURL = UtilsProvider.AppSetting.PictureRootURL;
+                    AdsURL = UtilsProvider.AppSetting.AdsUrl;
                 }
                 var FilePath = Path.Combine(_hostingEnvironment.WebRootPath,"Ads");
                 string[] FileExt = { ".PNG", ".jpg", ".png","png" };
                 var picture = GetFilesFrom(FilePath + "\\", FileExt, true);
+                List<string> MobileAdsURL = new List<string>();
+                foreach (var path in picture)
+                {
+                    var newpath = path.Split("\\");
+                    string fileName = newpath[newpath.Count()-1];
+                    string AdsFileUrl = AdsURL + fileName;
+                    MobileAdsURL.Add(AdsFileUrl);
+                }
                 
                 return new
                 {
                     success = true,
-                    data = "",
+                    data = MobileAdsURL,
                     message = "Get User PersonalContact Success !"
                 };
 
@@ -1646,6 +1654,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
             foreach (var filter in filters)
             {
                 filesFound.AddRange(Directory.GetFiles(searchFolder, String.Format("*.{0}", filter), searchOption));
+                var a = Directory.GetFiles(searchFolder, String.Format("*.{0}", filter), searchOption);
             }
             return filesFound.ToArray();
         }

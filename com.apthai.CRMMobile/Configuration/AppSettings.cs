@@ -25,5 +25,6 @@ namespace com.apthai.CRMMobile.Configuration
         public string SCBAPISecret { get; set; }
         public string SCBAPIKey { get; set; }
         public string APSCBAccount { get; set; }
+        public string AdsUrl { get; set; }
     }
 }
