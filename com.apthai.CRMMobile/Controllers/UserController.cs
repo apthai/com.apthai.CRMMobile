@@ -894,9 +894,9 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 {
                     PhotoURL = UtilsProvider.AppSetting.PictureRootURL;
                 }
-                var FilePath = Path.Combine(_hostingEnvironment.WebRootPath, "data","Ads");
-                string[] FileExt = { ".PNG", ".jpg", ".png" };
-                var picture = GetFilesFrom(FilePath + "/", FileExt, true);
+                var FilePath = Path.Combine(_hostingEnvironment.WebRootPath,"Ads");
+                string[] FileExt = { ".PNG", ".jpg", ".png","png" };
+                var picture = GetFilesFrom(FilePath + "\\", FileExt, true);
                 
                 return new
                 {
