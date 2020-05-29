@@ -894,7 +894,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 {
                     AdsURL = UtilsProvider.AppSetting.AdsUrl;
                 }
-                var FilePath = Path.Combine(_hostingEnvironment.ContentRootPath,"Ads");
+                var FilePath = Path.Combine(_hostingEnvironment.WebRootPath,"Ads");
                 string[] FileExt = { ".PNG", ".jpg", ".png","png" };
                 var picture = GetFilesFrom(FilePath + "//", FileExt, true);
                 List<string> MobileAdsURL = new List<string>();
