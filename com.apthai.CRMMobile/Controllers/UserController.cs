@@ -894,12 +894,13 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 {
                     AdsURL = UtilsProvider.AppSetting.AdsUrl;
                 }
-                var FilePath = Path.Combine(_hostingEnvironment.WebRootPath,"Ads");
+                var FilePath = Path.Combine(_hostingEnvironment.ContentRootPath,"Ads");
                 string[] FileExt = { ".PNG", ".jpg", ".png","png" };
-                var picture = GetFilesFrom(FilePath + "\\", FileExt, true);
+                var picture = GetFilesFrom(FilePath + "//", FileExt, true);
                 List<string> MobileAdsURL = new List<string>();
                 foreach (var path in picture)
                 {
+                    string[] split = { "//", "\\" };
                     var newpath = path.Split("\\");
                     string fileName = newpath[newpath.Count()-1];
                     string AdsFileUrl = AdsURL + fileName;
