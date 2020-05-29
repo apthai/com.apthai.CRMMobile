@@ -850,7 +850,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
         [Route("Ads")]
         [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
 Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
-        public async Task<object> Ads([FromBody]PersonalContactParam data)
+        public async Task<object> Ads([FromBody]AdsParam data)
         {
             try
             {
