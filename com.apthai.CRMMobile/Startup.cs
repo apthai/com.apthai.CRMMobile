@@ -252,7 +252,12 @@ namespace com.apthai.CRMMobile
 
             app.UseHttpsRedirection();
             app.UseCors(MyAllowSpecificOrigins);
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Policy}/{action=Index}");
+            });
 
 
             UtilsProvider.Config = Configuration;

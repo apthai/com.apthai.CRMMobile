@@ -13,6 +13,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="View\**" />
+    <Content Remove="View\**" />
+    <EmbeddedResource Remove="View\**" />
+    <None Remove="View\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Policy\index.cshtml" />
+    <Content Remove="Views\Policy\index_.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Dapper" Version="1.60.1" />
     <PackageReference Include="Dapper.Contrib" Version="1.50.7" />
     <PackageReference Include="dotnet-zip" Version="0.1.56" />
@@ -57,6 +69,11 @@
 
   <ItemGroup>
     <Folder Include="Models\Sync\NewFolder\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Policy\index.cshtml" />
+    <None Include="Views\Policy\index_.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
