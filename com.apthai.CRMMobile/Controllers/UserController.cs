@@ -1057,17 +1057,16 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 List<GetUserCardReturnObj> getUserCard = _UserRepository.GetUserCardByProjectandUnit(data.ContactNo);
                 //Model.CRMMobile.UserProfile Contact = _UserRepository.GetUserProfileByCRMContactID_Mobile(data.ContactNo);
                 
-                if (getUserCard == null)
+                if (getUserCard == null || getUserCard.Count() == 0)
                 {
                     return new
                     {
                         success = false,
                         data = new GetUserCardReturnObj(),
-                        message = "Cannot Find Data!"
+                        message = "Cannot Find User Data!"
                     };
                 }
                 
-
                 return new
                 {
                     success = true,

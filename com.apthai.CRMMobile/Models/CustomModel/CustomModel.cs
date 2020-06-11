@@ -75,6 +75,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public bool IsActive { get; set; }
         public string PINCode { get; set; }
         public string PhoneNumber { get; set; }
+        public string ContactNo { get; set; }
     }
 
     public class GetUserPropotyObj
