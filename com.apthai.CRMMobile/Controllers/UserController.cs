@@ -724,8 +724,28 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         message = "There is no Assosiate Phone Number with this IDCard Number!!"
                     };
                 }
-                List<GetBillingTrackingMobile> DistinctList = getBilling.DistinctBy(p => p.DetailDownPayment).ToList();
                 BillingFinalTrackingGroup FinalList = new BillingFinalTrackingGroup();
+                FinalList.bookingList = new List<GetBillingTrackingMobile>();
+                FinalList.ContractList = new List<GetBillingTrackingMobile>();
+                List<GetBillingTrackingMobile> TempForDelete = new List<GetBillingTrackingMobile>();
+                for (int i = 0; i < getBilling.Count(); i++)
+                {
+                    if (getBilling[i].UnitPriceStageName.Trim() == "จอง")
+                    {
+                        FinalList.bookingList.Add(getBilling[i]);
+                        TempForDelete.Add(getBilling[i]);
+                    }
+                    else if (getBilling[i].UnitPriceStageName.Trim() == "สัญญา")
+                    {
+                        FinalList.ContractList.Add(getBilling[i]);
+                        TempForDelete.Add(getBilling[i]);
+                    }
+                }
+                for (int i = 0; i < TempForDelete.Count(); i++)
+                {
+                    getBilling.Remove(TempForDelete[i]);
+                }
+                List<GetBillingTrackingMobile> DistinctList = getBilling.DistinctBy(p => p.DetailDownPayment).ToList();
                 List<BillingTrackingGroup> GroupList = new List<BillingTrackingGroup>();
                 int DownPay = 1;
                 for (int i = 0; i < DistinctList.Count(); i++)
