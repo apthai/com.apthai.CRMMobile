@@ -724,6 +724,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                     };
                 }
                 List<GetBillingTrackingMobile> DistinctList = getBilling.DistinctBy(p => p.DetailDownPayment).ToList();
+                BillingFinalTrackingGroup FinalList = new BillingFinalTrackingGroup();
                 List<BillingTrackingGroup> GroupList = new List<BillingTrackingGroup>();
                 int DownPay = 1;
                 for (int i = 0; i < DistinctList.Count(); i++)
@@ -734,45 +735,56 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                     Group.GetBillingTrackingMobile = new List<GetBillingTrackingMobile>();
                     for (int ii = 0; ii < BillingGroup.Count(); ii++)
                     {
-                        
-                        Group.GetBillingTrackingMobile.Add(BillingGroup[ii]);
-                        Group.DetailDownPayment = DownPay;
-                        Group.IsOverDue = BillingGroup[ii].FlagOverDue == "Y" ? true : false ;
-                        Group.PaymentAmount = Convert.ToDouble(BillingGroup[ii].BookingAmount);
-                        Group.PaymentDueDate = BillingGroup[ii].PaymentDueDate;
-                        //--------------------------
-                        Group.DownPerInstallment = BillingGroup[ii].DownPerInstallment;
-                        Group.NormalDownPerInstallment = BillingGroup[ii].NormalDownPerInstallment;
-                        Group.SpecialDownPaymentFlag = BillingGroup[ii].SpecialDownPaymentFlag;
-                        Group.SpecialDownPerInstallment = BillingGroup[ii].SpecialDownPerInstallment;
-                        Group.AgreementAmount = BillingGroup[ii].AgreementAmount;
-                        Group.BookingAmount = BillingGroup[ii].BookingAmount;
-                        Group.BookingPaymentDate = BillingGroup[ii].BookingPaymentDate;
-                        Group.FlagAgreement = BillingGroup[ii].FlagAgreement;
-                        Group.FlagAgreementReceipt = BillingGroup[ii].FlagAgreementReceipt;
-                        Group.FlagBooking = BillingGroup[ii].FlagBooking;
-                        Group.FlagBookingReceipt = BillingGroup[ii].FlagBookingReceipt;
-                        Group.FlagOverDue = BillingGroup[ii].FlagOverDue;
-                        Group.FlagReceipt = BillingGroup[ii].FlagReceipt;
-                        Group.PayAgreementAmount = BillingGroup[ii].PayAgreementAmount;
-                        Group.SpecialDownPaymentFlag = BillingGroup[ii].SpecialDownPaymentFlag;
-                        Group.SpecialDownPerInstallment = BillingGroup[ii].SpecialDownPerInstallment;
-                        if (Group.PayRemain == 0)
+                        if (BillingGroup[ii].UnitPriceStageName.Trim() == "จอง")
                         {
-                            Group.PayRemain = Convert.ToDouble(BillingGroup[ii].AmountBalance);
+                            FinalList.bookingList.Add(BillingGroup[ii]);
+                        }
+                        else if (BillingGroup[ii].UnitPriceStageName.Trim() == "สัญญา")
+                        {
+                            FinalList.ContractList.Add(BillingGroup[ii]);
                         }
                         else
                         {
-                            Group.PayRemain = Group.PayRemain - Convert.ToDouble(BillingGroup[ii].AmountPaid);
+                            Group.GetBillingTrackingMobile.Add(BillingGroup[ii]);
+                            Group.DetailDownPayment = DownPay;
+                            Group.IsOverDue = BillingGroup[ii].FlagOverDue == "Y" ? true : false;
+                            Group.PaymentAmount = Convert.ToDouble(BillingGroup[ii].BookingAmount);
+                            Group.PaymentDueDate = BillingGroup[ii].PaymentDueDate;
+                            //--------------------------
+                            Group.DownPerInstallment = BillingGroup[ii].DownPerInstallment;
+                            Group.NormalDownPerInstallment = BillingGroup[ii].NormalDownPerInstallment;
+                            Group.SpecialDownPaymentFlag = BillingGroup[ii].SpecialDownPaymentFlag;
+                            Group.SpecialDownPerInstallment = BillingGroup[ii].SpecialDownPerInstallment;
+                            Group.AgreementAmount = BillingGroup[ii].AgreementAmount;
+                            Group.BookingAmount = BillingGroup[ii].BookingAmount;
+                            Group.BookingPaymentDate = BillingGroup[ii].BookingPaymentDate;
+                            Group.FlagAgreement = BillingGroup[ii].FlagAgreement;
+                            Group.FlagAgreementReceipt = BillingGroup[ii].FlagAgreementReceipt;
+                            Group.FlagBooking = BillingGroup[ii].FlagBooking;
+                            Group.FlagBookingReceipt = BillingGroup[ii].FlagBookingReceipt;
+                            Group.FlagOverDue = BillingGroup[ii].FlagOverDue;
+                            Group.FlagReceipt = BillingGroup[ii].FlagReceipt;
+                            Group.PayAgreementAmount = BillingGroup[ii].PayAgreementAmount;
+                            Group.SpecialDownPaymentFlag = BillingGroup[ii].SpecialDownPaymentFlag;
+                            Group.SpecialDownPerInstallment = BillingGroup[ii].SpecialDownPerInstallment;
+                            if (Group.PayRemain == 0)
+                            {
+                                Group.PayRemain = Convert.ToDouble(BillingGroup[ii].AmountBalance);
+                            }
+                            else
+                            {
+                                Group.PayRemain = Group.PayRemain - Convert.ToDouble(BillingGroup[ii].AmountPaid);
+                            }
                         }
                     }
                     GroupList.Add(Group);
                     DownPay++;
                 }
+                FinalList.BillingTrackingGroup = GroupList;
                 return new
                 {
                     success = true,
-                    data = GroupList,
+                    data = FinalList,
                     message = "Get User iBooking Success !"
                 };
 

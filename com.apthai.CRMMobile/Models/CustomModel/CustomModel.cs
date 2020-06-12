@@ -150,6 +150,13 @@ namespace com.apthai.CRMMobile.CustomModel
         public string PayAgreementAmount { get; set; }
         public string FlagAgreementReceipt { get; set; }
     }
+    public class BillingFinalTrackingGroup
+
+    {
+        public List<BillingTrackingGroup> BillingTrackingGroup { get; set; }
+        public List<GetBillingTrackingMobile> bookingList { get; set; }
+        public List<GetBillingTrackingMobile> ContractList { get; set; }
+    }
     public class iCRMBooking
     {
         public string URLPicture { get; set; }
