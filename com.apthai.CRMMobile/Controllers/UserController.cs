@@ -725,9 +725,9 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 }
                 List<GetBillingTrackingMobile> DistinctList = getBilling.DistinctBy(p => p.DetailDownPayment).ToList();
                 List<BillingTrackingGroup> GroupList = new List<BillingTrackingGroup>();
+                int DownPay = 1;
                 for (int i = 0; i < DistinctList.Count(); i++)
                 {
-                    int DownPay = 1;
                     double Balance = 0;
                     List<GetBillingTrackingMobile> BillingGroup = getBilling.Where(S => S.DetailDownPayment == DownPay.ToString()).ToList();
                     BillingTrackingGroup Group = new BillingTrackingGroup();
@@ -737,6 +737,9 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         
                         Group.GetBillingTrackingMobile.Add(BillingGroup[ii]);
                         Group.DetailDownPayment = DownPay;
+                        Group.IsOverDue = BillingGroup[ii].FlagOverDue == "Y" ? true : false ;
+                        Group.PaymentAmount = Convert.ToDouble(BillingGroup[ii].BookingAmount);
+                        Group.PaymentDueDate = BillingGroup[ii].PaymentDueDate;
                         if (Group.PayRemain == 0)
                         {
                             Group.PayRemain = Convert.ToDouble(BillingGroup[ii].AmountBalance);

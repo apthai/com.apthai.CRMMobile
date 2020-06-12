@@ -126,10 +126,14 @@ namespace com.apthai.CRMMobile.CustomModel
         public string Period { get; set; }
     }
     public class BillingTrackingGroup
+
     {
+        public double PaymentAmount { get; set; }
+        public string PaymentDueDate { get; set; }
         public int DetailDownPayment { get; set; }
         public List<GetBillingTrackingMobile> GetBillingTrackingMobile { get; set; }
         public double PayRemain { get; set; }
+        public bool IsOverDue { get; set; }
     }
     public class iCRMBooking
     {
