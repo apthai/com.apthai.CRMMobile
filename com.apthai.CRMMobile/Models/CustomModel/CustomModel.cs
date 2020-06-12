@@ -134,6 +134,10 @@ namespace com.apthai.CRMMobile.CustomModel
         public List<GetBillingTrackingMobile> GetBillingTrackingMobile { get; set; }
         public double PayRemain { get; set; }
         public bool IsOverDue { get; set; }
+        public string DownPerInstallment { get; set; }
+        public string NormalDownPerInstallment { get; set; }
+        public string SpecialDownPaymentFlag { get; set; }
+        public string SpecialDownPerInstallment { get; set; }
     }
     public class iCRMBooking
     {
