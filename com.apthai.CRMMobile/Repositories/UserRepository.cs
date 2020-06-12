@@ -380,12 +380,12 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
-        public List<iCRMMyProperty> GetUseriCRMMyPropoty(string ContactID)
+        public List<iCRMMyProperty> GetUseriCRMMyPropoty(string ContactNo)
         {
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
-                var result = conn.Query<iCRMMyProperty>("GetiCRMMyProperty", new { ContactID = ContactID }, commandType: CommandType.StoredProcedure).ToList();
+                var result = conn.Query<iCRMMyProperty>("GetiCRMMyProperty", new { ContactNo = ContactNo }, commandType: CommandType.StoredProcedure).ToList();
 
                 return result;
             }

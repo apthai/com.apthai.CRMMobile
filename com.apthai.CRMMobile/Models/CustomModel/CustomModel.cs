@@ -199,7 +199,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string Unit { get; set; }
         public string SellingPrice { get; set; }
         public string PayAmount { get; set; }
-        public string ContactID { get; set; }
+        public Guid ContactID { get; set; }
         public string ContactNo { get; set; }
         public string FirstNameTH { get; set; }
         public string LastNameTH { get; set; }
