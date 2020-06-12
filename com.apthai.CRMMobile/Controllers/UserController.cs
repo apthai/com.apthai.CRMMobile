@@ -740,8 +740,21 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         Group.IsOverDue = BillingGroup[ii].FlagOverDue == "Y" ? true : false ;
                         Group.PaymentAmount = Convert.ToDouble(BillingGroup[ii].BookingAmount);
                         Group.PaymentDueDate = BillingGroup[ii].PaymentDueDate;
+                        //--------------------------
                         Group.DownPerInstallment = BillingGroup[ii].DownPerInstallment;
                         Group.NormalDownPerInstallment = BillingGroup[ii].NormalDownPerInstallment;
+                        Group.SpecialDownPaymentFlag = BillingGroup[ii].SpecialDownPaymentFlag;
+                        Group.SpecialDownPerInstallment = BillingGroup[ii].SpecialDownPerInstallment;
+                        Group.AgreementAmount = BillingGroup[ii].AgreementAmount;
+                        Group.BookingAmount = BillingGroup[ii].BookingAmount;
+                        Group.BookingPaymentDate = BillingGroup[ii].BookingPaymentDate;
+                        Group.FlagAgreement = BillingGroup[ii].FlagAgreement;
+                        Group.FlagAgreementReceipt = BillingGroup[ii].FlagAgreementReceipt;
+                        Group.FlagBooking = BillingGroup[ii].FlagBooking;
+                        Group.FlagBookingReceipt = BillingGroup[ii].FlagBookingReceipt;
+                        Group.FlagOverDue = BillingGroup[ii].FlagOverDue;
+                        Group.FlagReceipt = BillingGroup[ii].FlagReceipt;
+                        Group.PayAgreementAmount = BillingGroup[ii].PayAgreementAmount;
                         Group.SpecialDownPaymentFlag = BillingGroup[ii].SpecialDownPaymentFlag;
                         Group.SpecialDownPerInstallment = BillingGroup[ii].SpecialDownPerInstallment;
                         if (Group.PayRemain == 0)
