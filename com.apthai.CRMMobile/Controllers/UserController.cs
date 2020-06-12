@@ -713,6 +713,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 //        message = "Only AP Customer Can Regist to the System !!"
                 //    };
                 //}
+
                 List<GetBillingTrackingMobile> getBilling = _UserRepository.GetUserBillingTrackingByProjectandUnit(data.Project,data.Unit);
                 if (getBilling.Count == null)
                 {
