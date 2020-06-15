@@ -766,7 +766,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         {
                             BookingGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayBookingAmount);
                         }
-
+                        FinalList.bookingList.Add(BookingGroup);
                         TempForDelete.Add(getBilling[i]);
                     }
                     else if (getBilling[i].UnitPriceStageName.Trim() == "สัญญา")
@@ -801,8 +801,10 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         {
                             ContactGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].AmountPaid);
                         }
+                        FinalList.ContractList.Add(ContactGroup);
                         TempForDelete.Add(getBilling[i]);
                     }
+
                 }
                 for (int i = 0; i < TempForDelete.Count(); i++)
                 {
