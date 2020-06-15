@@ -728,7 +728,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                     };
                 }
                 BillingFinalTrackingGroup FinalList = new BillingFinalTrackingGroup();
-                FinalList.bookingList = new List<BillingTrackingGroup>();
+                FinalList.BookingList = new List<BillingTrackingGroup>();
                 FinalList.ContractList = new List<BillingTrackingGroup>();
                 List<GetBillingTrackingMobile> TempForDelete = new List<GetBillingTrackingMobile>();
                 BillingTrackingGroup ContactGroup = new BillingTrackingGroup();
@@ -769,7 +769,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         {
                             BookingGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayBookingAmount);
                         }
-                        FinalList.bookingList.Add(BookingGroup);
+                        FinalList.BookingList.Add(BookingGroup);
                         TempForDelete.Add(getBilling[i]);
                     }
                     else if (getBilling[i].UnitPriceStageName.Trim() == "สัญญา")
