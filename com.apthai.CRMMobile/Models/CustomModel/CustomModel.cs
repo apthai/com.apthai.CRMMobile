@@ -262,6 +262,7 @@ namespace com.apthai.CRMMobile.CustomModel
     public class CRMUserLoginWithContactID : Model.CRMMobile.UserLogin
     {
         public Guid CRMContactID { get; set; }
+        public string ContactNo { get; set; }
     }
     public class GetUserCardReturnObj
     {

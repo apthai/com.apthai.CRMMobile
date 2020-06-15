@@ -172,6 +172,7 @@ namespace com.apthai.CRMMobile.Controllers
                     cSUserProfile.ContactNo = contact.ContactNo;
                     cSUserProfile.PINCode = SHAHelper.ComputeHash(data.PINCode, "SHA512", null);
                     cSUserProfile.Language = data.Language.ToLower();
+                    cSUserProfile.ContactNo = contact.ContactNo;
 
                     long ProfileID = 0;
                     bool insert = _UserRepository.InsertCSUserProfile(cSUserProfile, out ProfileID);
@@ -196,6 +197,7 @@ namespace com.apthai.CRMMobile.Controllers
                     cSUserLogin.CRMContactID = contact.ID;
                     cSUserLogin.FireBaseToken = data.FireBaseToken;
                     cSUserLogin.Notification = true;
+                    cSUserLogin.ContactNo = contact.ContactNo;
                     bool insertUserLogin = _UserRepository.InsertCSUserLogin(cSUserLogin);
                     return new
                     {
@@ -211,8 +213,7 @@ namespace com.apthai.CRMMobile.Controllers
                     {
                         ExistData.PINCode = SHAHelper.ComputeHash(data.PINCode, "SHA512", null);
                         bool insert = _UserRepository.UpdateCSUserProfile(ExistData);
-
-
+                        
                         string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
                         CRMUserLoginWithContactID cSUserLogin = new CRMUserLoginWithContactID();
                         cSUserLogin.UserPhoneNumber = data.PhoneNumber;
@@ -223,6 +224,7 @@ namespace com.apthai.CRMMobile.Controllers
                         cSUserLogin.UserProfileID = ExistData.UserProfileID;
                         cSUserLogin.CRMContactID = contact.ID;
                         cSUserLogin.Notification = true;
+                        cSUserLogin.ContactNo = contact.ContactNo;
                         bool insertUserLogin = _UserRepository.InsertCSUserLogin(cSUserLogin);
 
                         return new
@@ -249,6 +251,7 @@ namespace com.apthai.CRMMobile.Controllers
                         cSUserLogin.UserProfileID = userLogin.UserProfileID;
                         cSUserLogin.CRMContactID = contact.ID;
                         cSUserLogin.Notification = true;
+                        cSUserLogin.ContactNo = contact.ContactNo;
                         bool insertUserLogin = _UserRepository.UpdateCSUserLogin(userLogin);
 
                         return new
