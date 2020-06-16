@@ -438,6 +438,9 @@ namespace com.apthai.CRMMobile.CustomModel
         public string BillerID { get; set; }
         public Guid CompanyID { get; set; }
         public string ProjectID { get; set; }
+        public string NameTH { get; set; }
+        public string NameEN { get; set; }
+        public string CompanyCode { get; set; }
     }
     
     public class DocumentDetailList : Model.CRMMobile.DocumentDetailLevel2
