@@ -69,7 +69,7 @@ namespace com.apthai.CRMMobile.Repositories
             {
                 try
                 {
-                    string sQuery = "SELECT ba.*,ba.BillerID, ba.CompanyCode , prj.projectNo " +
+                    string sQuery = "SELECT DISTINCT(ba.BillerID), ba.*,ba.BillerID, ba.CompanyCode , prj.projectNo " +
   "FROM MST.BankAccount ba " +
   "INNER JOIN MST.Company com ON com.ID = ba.CompanyID " +
   "INNER JOIN PRJ.Project prj ON prj.CompanyID = com.ID " +

@@ -1176,8 +1176,9 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 //    };
                 //}
                 List<GetUserCardReturnObj> getUserCard = _UserRepository.GetUserCardByProjectandUnit(data.ContactNo);
+
                 //Model.CRMMobile.UserProfile Contact = _UserRepository.GetUserProfileByCRMContactID_Mobile(data.ContactNo);
-                
+
                 if (getUserCard == null || getUserCard.Count() == 0)
                 {
                     return new
