@@ -12,6 +12,7 @@ using Newtonsoft.Json;
 using Dapper.Contrib.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using com.apthai.CRMMobile.CustomModel;
+using Minio;
 
 namespace com.apthai.CRMMobile.Repositories
 {
@@ -20,7 +21,8 @@ namespace com.apthai.CRMMobile.Repositories
 
         private readonly IConfiguration _config;
         private readonly IHostingEnvironment _hostingEnvironment;
-
+        private int _expireHours = 24;
+        public string _publicURL;
         public UserRepository(IHostingEnvironment environment, IConfiguration config) : base(environment, config)
         {
             _config = config;
@@ -430,6 +432,94 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
+        public async Task<FileUploadResult> UploadFileFromStreamWithOutGuid(Stream fileStream, string bucketName, string filePath, string fileName, string contentType)
+        {
+            MinioClient minio;
+
+            string _minioEndpoint = "192.168.2.29:9001"; // CRM 
+            string _minioAccessKey = "XNTYE7HIMF6KK4BVEIXA";
+            string _minioSecretKey = "naD+esQ+uV7+xwfF3bPfAn5iC7C1XUyXeM8HkBlO";
+            string _defaultBucket = "erecipt";
+            string _tempBucket = "erecipt";
+            bool _withSSL = false;
+
+            if (_withSSL)
+                minio = new MinioClient(_minioEndpoint, _minioAccessKey, _minioSecretKey).WithSSL();
+            else
+                minio = new MinioClient(_minioEndpoint, _minioAccessKey, _minioSecretKey);
+
+            bool bucketExisted = await minio.BucketExistsAsync(bucketName);
+            if (!bucketExisted)
+                await minio.MakeBucketAsync(bucketName);
+
+            string objectName = fileName;
+            objectName = Path.Combine(filePath, objectName);
+            objectName = objectName.Replace('\\', '/');
+            await minio.PutObjectAsync(bucketName, objectName, fileStream, fileStream.Length, contentType);
+            // expire in 1 day
+            var url = await minio.PresignedGetObjectAsync(bucketName, objectName, (int)TimeSpan.FromHours(_expireHours).TotalSeconds);
+            url = ReplaceWithPublicURL(url);
+            return new FileUploadResult()
+            {
+                Name = objectName,
+                BucketName = bucketName,
+                Url = url
+            };
+        }
+        public async Task<string> GetFileUrlAsync(string name)
+        {
+            string _minioEndpoint = "192.168.2.29:9001"; // CRM 
+            string _minioAccessKey = "XNTYE7HIMF6KK4BVEIXA";
+            string _minioSecretKey = "naD+esQ+uV7+xwfF3bPfAn5iC7C1XUyXeM8HkBlO";
+            string _defaultBucket = "erecipt";
+            string _tempBucket = "erecipt";
+            bool _withSSL = false;
+            MinioClient minio;
+            if (_withSSL)
+                minio = new MinioClient(_minioEndpoint, _minioAccessKey, _minioSecretKey).WithSSL();
+            else
+                minio = new MinioClient(_minioEndpoint, _minioAccessKey, _minioSecretKey);
+
+            var url = await minio.PresignedGetObjectAsync(_defaultBucket, name, (int)TimeSpan.FromHours(_expireHours).TotalSeconds);
+
+            url = ReplaceWithPublicURL(url);
+
+            return url;
+        }
+        public async Task<string> GetFileUrlAsync(string bucket,string ReceiptNo,string name)
+        {
+            string _minioEndpoint = "192.168.2.29:9001"; // CRM 
+            string _minioAccessKey = "XNTYE7HIMF6KK4BVEIXA";
+            string _minioSecretKey = "naD+esQ+uV7+xwfF3bPfAn5iC7C1XUyXeM8HkBlO";
+            string _defaultBucket = "erecipt";
+            string _tempBucket = "erecipt";
+            bool _withSSL = false;
+            MinioClient minio;
+            if (_withSSL)
+                minio = new MinioClient(_minioEndpoint, _minioAccessKey, _minioSecretKey).WithSSL();
+            else
+                minio = new MinioClient(_minioEndpoint, _minioAccessKey, _minioSecretKey);
+
+            var url = await minio.PresignedGetObjectAsync(bucket, name, (int)TimeSpan.FromHours(_expireHours).TotalSeconds);
+            //url = (!string.IsNullOrEmpty(_publicURL)) ? url.Replace(_minioEndpoint, _publicURL) : url;
+            url = ReplaceWithPublicURL(url);
+
+            return url;
+        }
+        public string ReplaceWithPublicURL(string url)
+        {
+            string _minioEndpoint = "192.168.2.29:9600";
+            string _tempBucket = "timeattendence";
+            if (!string.IsNullOrEmpty(_publicURL))
+            {
+                url = url.Replace("https://", "");
+                url = url.Replace("http://", "");
+
+                url = url.Replace(_minioEndpoint, _publicURL);
+            }
+            return url;
+        }
+
     }
 
 }

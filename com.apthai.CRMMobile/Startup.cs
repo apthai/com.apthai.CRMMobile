@@ -28,6 +28,7 @@ using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.Extensions.FileProviders;
 using FirebaseAdmin;
 using Google.Apis.Auth.OAuth2;
+using Hangfire;
 
 namespace com.apthai.CRMMobile
 {
@@ -170,10 +171,10 @@ namespace com.apthai.CRMMobile
 
             });
 
-            var conn = Environment.GetEnvironmentVariable("DefaultConnection");
+            var conn = Environment.GetEnvironmentVariable("DefaultMobileConnection");
             if (conn == null)
             {
-                conn = Configuration.GetConnectionString("DefaultConnection");
+                conn = Configuration.GetConnectionString("DefaultMobileConnection");
             }
             //services.AddHangfire(config =>
             //    config.UseSqlServerStorage(conn));

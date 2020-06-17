@@ -1658,6 +1658,58 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 return StatusCode(500, "Internal server error :: " + ex.Message);
             }
         }
+
+        [HttpPost]
+        [Route("GetUserRecieptByRecieptNo")]
+        [SwaggerOperation(Summary = "Register User เพื่อใช่ระบบ ซึ่งจะไป หาข้อมูลจากระบบ CRM",
+       Description = "Access Key ใช้ในการเรียหใช้ Function ต่างๆ เพื่อไม่ให้ User Login หลายเครื่องในเวลาเดียวกัน")]
+        public async Task<object> GetUserRecieptByRecieptNo([FromBody]GetReceiptByReceiptID data)
+        {
+            try
+            {
+                StringValues api_key;
+                StringValues EmpCode;
+
+                //Model.CRMWeb.Contact cRMContact = _UserRepository.GetCRMContactByIDCardNO(data.CitizenIdentityNo);
+                //if (cRMContact == null)
+                //{
+                //    return new
+                //    {
+                //        success = false,
+                //        data = new AutorizeDataJWT(),
+                //        message = "Only AP Customer Can Regist to the System !!"
+                //    };
+                //}
+                VerifyPINReturnObj cSUserProfile = _UserRepository.GetUserLogin_Mobile(data.AccessKey);
+                if (cSUserProfile == null)
+                {
+                    return new
+                    {
+                        success = false,
+                        data = new VerifyPINReturnObj(),
+                        message = "Cannot Find the User Matach Data"
+                    };
+
+                }
+                else
+                {
+                    string Url = await _UserRepository.GetFileUrlAsync("erecipt", data.ProjectCode, data.ReceiptNo);
+                    //Model.CRMMobile.NotificationHistory notification = _UserRepository.GetUserNotificationHistoryByNotiHistoryID_Mobile(data.NotiHistoryID);
+                    //notification.IsRead = true;
+                    //bool updateIsRead = _UserRepository.UpdateIsReadForNotification(notification);
+                    return new
+                    {
+                        success = true,
+                        data = Url,
+                        message = "Set Flag IsRead For Notification Success!"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error :: " + ex.Message);
+            }
+        }
         // [HttpPost]
         // [Route("UserNotiHistroies")]
         // [SwaggerOperation(Summary = "เปลี่ยนภาษาของบุคคลนั้นๆ",

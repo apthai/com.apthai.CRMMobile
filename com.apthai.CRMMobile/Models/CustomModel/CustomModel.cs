@@ -442,7 +442,13 @@ namespace com.apthai.CRMMobile.CustomModel
         public string NameEN { get; set; }
         public string CompanyCode { get; set; }
     }
-    
+    public class FileUploadResult
+    {
+        public string Name { get; set; }
+        public string Url { get; set; }
+        //public string PublicUrl { get; set; }
+        public string BucketName { get; set; }
+    }
     public class DocumentDetailList : Model.CRMMobile.DocumentDetailLevel2
     {
         public List<Model.CRMMobile.SubDocumentDetailLevel3> SubDoct { get; set; }

@@ -37,6 +37,7 @@ namespace com.apthai.CRMMobile.Repositories
         List<iCRMContact> GetUseriCRMContact_Web(string Contact);
         List<GetUserCardReturnObj> GetUserCardByProjectandUnit(string ContactNo);
         GetUserCreditCardReturnObj GetUserCreditCardByProjectandUnit(string ProjectID, string UnitID);
-
+        Task<string> GetFileUrlAsync(string name);
+        Task<string> GetFileUrlAsync(string bucket, string ReceiptNo, string name);
     }
 }

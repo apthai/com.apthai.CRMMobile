@@ -42,6 +42,14 @@ namespace com.apthai.CRMMobile.HttpRestModel
         public string CRMContactID { get; set; }
         public string NotiHistoryID { get; set; }
     }
+
+    public partial class GetReceiptByReceiptID
+    {
+        public string ReceiptID { get; set; }
+        public string AccessKey { get; set; }
+        public string ProjectCode { get; set; }
+        public string ReceiptNo { get; set; }
+    }
     public partial class ChangePINParam
     {
         public string OldPIN { get; set; }
