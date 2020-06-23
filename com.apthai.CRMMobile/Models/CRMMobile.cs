@@ -99,6 +99,10 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string ProjectNo { get; set; }
         public string ProjectNameTH { get; set; }
         public string UnitNo { get; set; }
+        public decimal? Amount { get; set; }
+        public int? Installments { get; set; }
+        public string PaymentDueDate { get; set; }
+        public string DeductDebitCreditDueDate { get; set; }
         public string MsgTH { get; set; }
         public string MsgEN { get; set; }
         public string MsgType { get; set; }
@@ -107,6 +111,8 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string CreatedBy { get; set; }
         public string Updated { get; set; }
         public string UpdatedBy { get; set; }
+        public string MsgHeaderTH { get; set; }
+        public string MsgheaderEN { get; set; }
     }
 
     [Table("NT.NotificationType")]
@@ -115,6 +121,7 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         [Key]
         public int NotiTypeID { get; set; }
         public string NotiType { get; set; }
+        public string NotiName { get; set; }
         public string Created { get; set; }
         public string CreatedBy { get; set; }
         public string Updated { get; set; }

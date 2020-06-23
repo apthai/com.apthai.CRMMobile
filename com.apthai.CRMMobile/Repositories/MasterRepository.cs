@@ -69,12 +69,13 @@ namespace com.apthai.CRMMobile.Repositories
             {
                 try
                 {
-                    string sQuery = "SELECT DISTINCT(ba.BillerID) ,com.NameTH ,com.NameEN ,ba.CompanyCode, ba.*,ba.BillerID, ba.CompanyCode , prj.projectNo " +
+                    string sQuery = "SELECT DISTINCT(ba.BillerID),com.TaxID,mst.name AS 'AccountType',mstB.NameTH ,com.NameTH ,com.NameEN ,ba.CompanyCode, ba.*,ba.BillerID, ba.CompanyCode , prj.projectNo " +
   "FROM MST.BankAccount ba " +
+  "INNER JOIN Mst.MasterCenter mst ON mst.ID = ba.BankAccountTypeMasterCenterID " +
+  "LEFT JOIN MST.Bank mstB ON mstB.ID = ba.BankID " +
   "INNER JOIN MST.Company com ON com.ID = ba.CompanyID " +
-  "INNER JOIN PRJ.Project prj ON prj.CompanyID = com.ID " +
-  "INNER JOIN PRJ.Unit unit ON unit.ProjectID = prj.ID " +
-  "WHERE ba.IsBillPayment = 1 AND prj.ProjectNo = @ProjectID ";
+  "INNER JOIN PRJ.Project prj ON prj.CompanyID = com.ID" +
+  "INNER JOIN PRJ.Unit unit ON unit.ProjectID = prj.ID ";
                     var result = conn.Query<GetProjectInformation>(sQuery, new { ProjectID = ProjectID }).ToList();
                     return result;
 

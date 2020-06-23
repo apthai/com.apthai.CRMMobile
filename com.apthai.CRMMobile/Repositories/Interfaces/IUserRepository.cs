@@ -21,12 +21,14 @@ namespace com.apthai.CRMMobile.Repositories
         Model.CRMWeb.ContactPhone GetSingleContactPhoneNumberByContactID_Web(string ContactID, string PhoneNumber);
         VerifyPINReturnObj GetUserLogin_Mobile(string UserToken);
         Model.CRMMobile.UserLogin GetUserLoginByID_Mobile(int UserLoginID);
+        List<Model.CRMMobile.UserLogin> GetallUserLoginByID_Mobile(int UserLoginID);
         Model.CRMMobile.UserLogin GetUserLoginByPhoneNumbandDevice_Mobile(string DeviceID, string UserPhoneNumber);
         Model.CRMMobile.UserProfile GetUserProfileByCRMContactID_Mobile(string CRMContactID);
         bool UpdateChangePINCSUserProfile(Model.CRMMobile.UserProfile data);
         bool UpdateIsReadForNotification(Model.CRMMobile.NotificationHistory data);
         bool InsertCSUserProfile(Model.CRMMobile.UserProfile data, out long ProfileID);
         bool InsertCSUserLogin(Model.CRMMobile.UserLogin data);
+        bool DeleteNotificationTemp(Model.CRMMobile.NotificationTemp data);
         bool InsertNotificationHistory(Model.CRMMobile.NotificationHistory data);
         bool InsertSCBTransaction(Model.CRMMobile.PaymentTransaction data);
         bool UpdateCSUserLogin(Model.CRMMobile.UserLogin data);

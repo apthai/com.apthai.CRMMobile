@@ -170,6 +170,17 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
+        public List<Model.CRMMobile.UserLogin> GetallUserLoginByID_Mobile(int UserLoginID)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMMobile.UserLogin>("select * from CS.UserLogin WITH(NOLOCK) " +
+                    " where CS.UserLogin.UserLoginID=@UserLoginID", new { UserLoginID = UserLoginID }).ToList();
+
+                return result;
+            }
+        }
         public Model.CRMMobile.UserLogin GetUserLoginByPhoneNumbandDevice_Mobile(string DeviceID,string UserPhoneNumber)
         {
             using (IDbConnection conn = MobileConnection)
@@ -243,6 +254,26 @@ namespace com.apthai.CRMMobile.Repositories
                     var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
 
                     var result = conn.Insert(data, tran);
+                    tran.Commit();
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("MasterRepository.InsertCSUserProfile() :: Error ", ex);
+                }
+            }
+        }
+        public bool DeleteNotificationTemp(Model.CRMMobile.NotificationTemp data)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                try
+                {
+                    conn.Open();
+                    var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
+
+                    var result = conn.Delete(data, tran);
                     tran.Commit();
 
                     return true;
