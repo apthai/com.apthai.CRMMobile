@@ -69,7 +69,7 @@ namespace com.apthai.CRMMobile.Repositories
             {
                 try
                 {
-                    string sQuery = "SELECT DISTINCT(ba.BillerID),com.TaxID,mst.name AS 'AccountType',mstB.NameTH ,com.NameTH ,com.NameEN ,ba.CompanyCode, ba.*,ba.BillerID, ba.CompanyCode , prj.projectNo " +
+                    string sQuery = "SELECT DISTINCT(ba.BillerID),com.TaxID,mst.name AS 'AccountType',mstB.NameTH as 'AccountNameTH' ,com.NameTH ,com.NameEN ,ba.CompanyCode, ba.*,ba.BillerID, ba.CompanyCode , prj.projectNo " +
   "FROM MST.BankAccount ba " +
   "INNER JOIN Mst.MasterCenter mst ON mst.ID = ba.BankAccountTypeMasterCenterID " +
   "LEFT JOIN MST.Bank mstB ON mstB.ID = ba.BankID " +
