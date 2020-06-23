@@ -75,7 +75,7 @@ namespace com.apthai.CRMMobile.Repositories
   "LEFT JOIN MST.Bank mstB ON mstB.ID = ba.BankID " +
   "INNER JOIN MST.Company com ON com.ID = ba.CompanyID " +
   "INNER JOIN PRJ.Project prj ON prj.CompanyID = com.ID" +
-  "INNER JOIN PRJ.Unit unit ON unit.ProjectID = prj.ID ";
+  "WHERE ba.IsBillPayment = 1 AND prj.ProjectNo = @ProjectID ";
                     var result = conn.Query<GetProjectInformation>(sQuery, new { ProjectID = ProjectID }).ToList();
                     return result;
 
