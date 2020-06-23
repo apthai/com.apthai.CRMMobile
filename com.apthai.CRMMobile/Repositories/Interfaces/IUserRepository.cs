@@ -35,7 +35,7 @@ namespace com.apthai.CRMMobile.Repositories
         bool UpdateCSUserProfile(Model.CRMMobile.UserProfile data);
         List<iCRMBooking> GetUseriBookingByUserID(string UserID);
         List<iCRMMyProperty> GetUseriCRMMyPropoty(string ContactNo);
-        List<GetBillingTrackingMobile> GetUserBillingTrackingByProjectandUnit(string ProjectID, string UnitID);
+        List<GetBillingTrackingMobile> GetUserBillingTrackingByProjectandUnit(string ProjectNo, string UnitNo);
         List<iCRMContact> GetUseriCRMContact_Web(string Contact);
         List<GetUserCardReturnObj> GetUserCardByProjectandUnit(string ContactNo);
         GetUserCreditCardReturnObj GetUserCreditCardByProjectandUnit(string ProjectID, string UnitID);

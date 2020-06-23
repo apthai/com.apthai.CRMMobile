@@ -423,12 +423,12 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
-        public List<GetBillingTrackingMobile> GetUserBillingTrackingByProjectandUnit(string ProjectID,string UnitID)
+        public List<GetBillingTrackingMobile> GetUserBillingTrackingByProjectandUnit(string ProjectNo, string UnitNo)
         {
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
-                var result = conn.Query<GetBillingTrackingMobile>("GetBillingTrackingMobile", new { ProjectID = ProjectID, UnitID=UnitID }, commandType: CommandType.StoredProcedure).ToList();
+                var result = conn.Query<GetBillingTrackingMobile>("GetBillingTrackingMobile", new { ProjectNo = ProjectNo, UnitNo = UnitNo }, commandType: CommandType.StoredProcedure).ToList();
 
                 return result;
             }
