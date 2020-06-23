@@ -433,6 +433,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string TaxID { get; set; }
         public string AccountType { get; set; }
         public string AccountNameTH { get; set; }
+        public string AccountNameEN { get; set; }
         public string MerchantID { get; set; }
         public string IsPCard { get; set; }
         public string GLAccountNo { get; set; }
