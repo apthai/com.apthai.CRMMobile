@@ -125,6 +125,62 @@ namespace com.apthai.CRMMobile.CustomModel
         public string MasterPriceItemID { get; set; }
         public string Period { get; set; }
         public string ReceiptNo { get; set; }
+        // ----------- เงินจอง : ใบเสร็จจริง ---------------
+        public string BookingReceiptHeaderID { get; set; }
+        public string BookingReceiptRemark { get; set; }
+        //------------ เงินจอง : ใบเสร็จชั่วคราว ---
+        public string FlagBookingTemp { get; set; }
+        public string BookingAmountTemp { get; set; }
+        public string PayBookingAmountTemp { get; set; }
+        public string BookingPaymentDateTemp { get; set; }
+        public string FlagBookingReceiptTemp { get; set; }
+        public string BookingReceiptNoTemp { get; set; }
+        public string BookingReceiptHeaderIDTemp { get; set; }
+        public string BookingReceiptRemarkTemp { get; set; }
+        //----------- เงินสัญญา : ใบเสร็จจริง ---*/
+        public string AgreementReceiptHeaderID { get; set; }
+        public string AgreementReceiptRemark { get; set; }
+        //------------ เงินสัญญา : ใบเสร็จชั่วคราว ---
+        public string FlagAgreementTemp { get; set; }
+        public string AgreementAmountTemp { get; set; }
+        public string PayAgreementAmountTemp { get; set; }
+        public string AgreementPaymentDateTemp { get; set; }
+        public string FlagAgreementReceiptTemp { get; set; }
+        public string AgreementReceiptNoTemp { get; set; }
+        public string AgreementReceiptHeaderIDTemp { get; set; }
+        public string AgreementReceiptRemarkTemp { get; set; }
+        //----------- เงินงวดดาวน์ : ข้อมูล -------
+        //----------- เงินงวดดาวน์ : ใบเสร็จจริง ---
+        public string ReceiptHeaderID { get; set; }
+        public string ReceiptRemark { get; set; }
+        //----------- เงินงวดดาวน์ : ใบเสร็จชั่วคราว ---
+        public string PaymentDateTemp { get; set; }
+        public string AmountPaidTemp { get; set; }
+        public string AmountBalanceTemp { get; set; }
+        public string FlagReceiptTemp { get; set; }
+        public string ReceiptNoTemp { get; set; }
+        public string FlagOverDueTemp { get; set; }
+        public string ReceiptHeaderIDTemp { get; set; }
+        public string ReceiptRemarkTemp { get; set; }
+        //------------ เงินโอน : ใบเสร็จจริง ---
+        public string FlagTransfer { get; set; }
+        public string TransferAmount { get; set; }
+        public string PayTransferAmount { get; set; }
+        public string TransferPaymentDate { get; set; }
+        public string FlagTransferReceipt { get; set; }
+        public string TransferReceiptNo { get; set; }
+        public string TransferReceiptHeaderID { get; set; }
+        public string TransferReceiptRemark { get; set; }
+        //------------- เงินโอน : ใบเสร็จชั่วคราว ---
+        public string FlagTransferTemp { get; set; }
+        public string TransferAmountTemp { get; set; }
+        public string PayTransferAmountTemp { get; set; }
+        public string TransferPaymentDateTemp { get; set; }
+        public string FlagTransferReceiptTemp { get; set; }
+        public string TransferReceiptNoTemp { get; set; }
+        public string TransferReceiptHeaderIDTemp { get; set; }
+        public string TransferReceiptRemarkTemp { get; set; }
+
     }
     public class BillingTrackingGroup
 
