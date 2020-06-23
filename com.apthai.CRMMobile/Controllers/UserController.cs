@@ -839,7 +839,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         {
                             ContactGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].AmountPaid);
                         }
-                        FinalList.ContractList.Add(ContactGroup);
+                        FinalList.TransferList.Add(ContactGroup);
                         TempForDelete.Add(getBilling[i]);
                     }
 

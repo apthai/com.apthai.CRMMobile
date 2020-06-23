@@ -212,6 +212,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public List<BillingTrackingGroup> BillingTrackingGroup { get; set; }
         public List<BillingTrackingGroup> BookingList { get; set; }
         public List<BillingTrackingGroup> ContractList { get; set; }
+        public List<BillingTrackingGroup> TransferList { get; set; }
     }
     public class iCRMBooking
     {
