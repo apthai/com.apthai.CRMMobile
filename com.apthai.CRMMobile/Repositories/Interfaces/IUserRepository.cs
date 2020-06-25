@@ -38,6 +38,7 @@ namespace com.apthai.CRMMobile.Repositories
         List<GetBillingTrackingMobile> GetUserBillingTrackingByProjectandUnit(string ProjectNo, string UnitNo);
         List<iCRMContact> GetUseriCRMContact_Web(string Contact);
         List<GetUserCardReturnObj> GetUserCardByProjectandUnit(string ContactNo);
+        List<GetiCRMOwnerReturnObj> GetUserICRMOwnerByProjectUnitAndCRMContactID(string ContactID, string UnitNo, string ProjectNO);
         GetUserCreditCardReturnObj GetUserCreditCardByProjectandUnit(string ProjectID, string UnitID);
         Task<string> GetFileUrlAsync(string name);
         Task<string> GetFileUrlAsync(string bucket, string ReceiptNo, string name);

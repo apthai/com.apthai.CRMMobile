@@ -340,6 +340,46 @@ namespace com.apthai.CRMMobile.CustomModel
         public bool IsThaiNationality { get; set; }
         //public FileContentResult QRCode { get; set; }
     }
+    public class GetiCRMOwnerReturnObj
+    {
+        public string ContactID { get; set; }
+        public string ContactNo { get; set; }
+        public string ProjectID { get; set; }
+        public string Project { get; set; }
+        public string Unit { get; set; }
+        public string UnitStatus { get; set; }
+        public string UnitStatusCode { get; set; }
+        public bool FlagMainBooker { get; set; }
+        public string FullnameMainBooker { get; set; }
+        public string NameMainBooker { get; set; }
+        public string LastNameMainBooker { get; set; }
+        public string CoBooker { get; set; }
+        public string CoBookerEN { get; set; }
+        public string BookingOwnerEmail { get; set; }
+        public string BookingOwnerAddressTH { get; set; }
+        public string BookingOwnerAddressEN { get; set; }
+        public bool FlagMainAgreement { get; set; }
+        public string FullnameMainAgreement { get; set; }
+        public string NameMainAgreement { get; set; }
+        public string LastNameMainAgreement { get; set; }
+        public string FullnameMainAgreementEN { get; set; }
+        public string NameMainAgreementEN { get; set; }
+        public string LastNameMainAgreementEN { get; set; }
+        public string AgreementOwnerNational { get; set; }
+        public string CoAgreement { get; set; }
+        public string CoAgreementEN { get; set; }
+        public string AgreementOwnerEmail { get; set; }
+        public string AgreementOwnerAddressTH { get; set; }
+        public string AgreementOwnerAddressEN { get; set; }
+        public bool   FlagMainTransfer { get; set; }
+        public string FullnameMainTransfer { get; set; }
+        public string NameMainTransfer { get; set; }
+        public string LastNameMainTransfer { get; set; }
+        public string TransferOwnerNational { get; set; }
+        public string TransferOwnerEmail { get; set; }
+        public string TransferOwnerAddress { get; set; }
+        //public FileContentResult QRCode { get; set; }
+    }
     public class GetUserCreditCardReturnObj
     {
         public string AccountNO { get; set; }

@@ -453,6 +453,16 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
+        public List<GetiCRMOwnerReturnObj> GetUserICRMOwnerByProjectUnitAndCRMContactID(string ContactID,string UnitNo,string ProjectNO)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<GetiCRMOwnerReturnObj>("GetiCRMOwner", new { ContactID = ContactID ,UnitNo = UnitNo , ProjectNo = ProjectNO}, commandType: CommandType.StoredProcedure).ToList();
+
+                return result;
+            }
+        }
         public GetUserCreditCardReturnObj GetUserCreditCardByProjectandUnit(string ProjectNo, string UnitNo)
         {
             using (IDbConnection conn = WebConnection)

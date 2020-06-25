@@ -1238,6 +1238,86 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
             }
         }
 
+        [Route("GetICRMOwner")]
+        [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
+Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
+        public async Task<object> GetICRMOwner([FromBody]GetUserICRMOwner data)
+        {
+            try
+            {
+                StringValues api_key;
+                StringValues EmpCode;
+                //if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
+                //{
+                //    string AccessKey = api_key.First();
+                //    string EmpCodeKey = EmpCode.First();
+
+                //    if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
+                //    {
+                //        return new
+                //        {
+                //            success = false,
+                //            data = new AutorizeDataJWT(),
+                //            message = "Require Key to Access the Function"
+                //        };
+                //    }
+                //    else
+                //    {
+                //        string APApiKey = Environment.GetEnvironmentVariable("API_Key");
+                //        if (APApiKey == null)
+                //        {
+                //            APApiKey = UtilsProvider.AppSetting.ApiKey;
+                //        }
+                //        if (api_key != APApiKey)
+                //        {
+                //            return new
+                //            {
+                //                success = false,
+                //                data = new AutorizeDataJWT(),
+                //                message = "Incorrect API KEY !!"
+                //            };
+                //        }
+                //    }
+                //}
+
+                //Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByID(data.UserID);
+                //if (contact == null)
+                //{
+                //    return new
+                //    {
+                //        success = false,
+                //        data = new AutorizeDataJWT(),
+                //        message = "Only AP Customer Can Regist to the System !!"
+                //    };
+                //}
+                List<GetiCRMOwnerReturnObj> getICRMOwner = _UserRepository.GetUserICRMOwnerByProjectUnitAndCRMContactID(data.ContactID,data.UnitNo,data.ProjectNo);
+
+                //Model.CRMMobile.UserProfile Contact = _UserRepository.GetUserProfileByCRMContactID_Mobile(data.ContactNo);
+
+                if (getICRMOwner == null || getICRMOwner.Count() == 0)
+                {
+                    return new
+                    {
+                        success = false,
+                        data = new GetiCRMOwnerReturnObj(),
+                        message = "Cannot Find ICRM Owner Data!"
+                    };
+                }
+
+                return new
+                {
+                    success = true,
+                    data = getICRMOwner,
+                    message = "Get User's ICRM Owner Success !"
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error :: " + ex.Message);
+            }
+        }
+
         [HttpPost]
         [Route("GetUserCreditCard")]
         [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
