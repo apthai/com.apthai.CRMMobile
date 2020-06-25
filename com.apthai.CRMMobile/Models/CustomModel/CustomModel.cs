@@ -337,7 +337,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string FlagCreditDebit { get; set; }
         public string Balance { get; set; }
         public string National { get; set; }
-        public string IsThaiNationality { get; set; }
+        public bool IsThaiNationality { get; set; }
         //public FileContentResult QRCode { get; set; }
     }
     public class GetUserCreditCardReturnObj

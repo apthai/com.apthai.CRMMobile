@@ -1453,6 +1453,11 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                     Token = "fd2JuQd5HKs:APA91bFdBvhFD0zFP1nP_Q5nP_WR6lkSQmIkxcSPR7xOSsmuLBc0eeYS2jaIuKIm9M3RKeQXeNYaYCzqT0KzsBVP60BAFZRfBBXTIrT8oMgDwIURd4yrwD1gHU5FTFOLQyy0sdMxkoCK";
                     CRMContactID = "c1ee1cc1-cf81-4f80-9411-b5184f6c3efc";
                 }
+                else if (data.User == "BOM")
+                {
+                    Token = "c0i-n2uiTTiIYMTNaxWNY3:APA91bFnIzYDJ4RSWTT7FZJA6AmIJaBdj-svi3CR4wglzhcWtKNiQrnk7na1y3opdpjr8WQlGsoSuAdBhOsZKpOYF-GxysFFVAnxpHIin-fmjUlmq6NfN-EHQcclJssSdtr9dEIxUUkB";
+                    CRMContactID = "c1ee1cc1-cf81-4f80-9411-b5184f6c3efc";
+                }
                 else
                 {
                     Token = "c03ntc-jHUv2vdoFonSb5v:APA91bFAPKMJJMWwFr8qDHppXy4CRJ_G3871hVkeus0zlIcqc7BpSKijiJyzH-bbo_L2WaCgFgQPvv4Ww5JX-MxPezYgrgG4UXaPFv9bM5CWIVPUJXTww2I2KBXDEVLi-3aXzoMXhy_t";

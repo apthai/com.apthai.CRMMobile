@@ -31,6 +31,7 @@ namespace com.apthai.CRMMobile.Repositories
             _config = config;
             _hostingEnvironment = environment;
             FirebaseApp app = FirebaseApp.Create(new AppOptions() { Credential = GoogleCredential.FromFile("serviceAccountKey.json").CreateScoped("https://www.googleapis.com/auth/firebase.messaging") });
+            //FirebaseApp app = FirebaseApp.Create(new AppOptions() { Credential = GoogleCredential.FromFile("google-services.json").CreateScoped("https://www.googleapis.com/auth/firebase.messaging") });
             messaging = FirebaseMessaging.GetMessaging(app);
 
         }
