@@ -1238,10 +1238,11 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
             }
         }
 
-        [Route("GetICRMOwner")]
+        [HttpPost]
+        [Route("GetICRMOwnerData")]
         [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
 Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
-        public async Task<object> GetICRMOwner([FromBody]GetUserICRMOwner data)
+        public object GetICRMOwnerData([FromBody]GetUserICRMOwner data)
         {
             try
             {
@@ -1290,7 +1291,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 //        message = "Only AP Customer Can Regist to the System !!"
                 //    };
                 //}
-                List<GetiCRMOwnerReturnObj> getICRMOwner = _UserRepository.GetUserICRMOwnerByProjectUnitAndCRMContactID(data.ContactID,data.UnitNo,data.ProjectNo);
+                List<GetiCRMOwnerReturnObj> getICRMOwner = _UserRepository.GetUserICRMOwnerByProjectUnitAndCRMContactID(data.ContactID, data.UnitNo, data.ProjectNo);
 
                 //Model.CRMMobile.UserProfile Contact = _UserRepository.GetUserProfileByCRMContactID_Mobile(data.ContactNo);
 
