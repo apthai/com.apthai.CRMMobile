@@ -151,7 +151,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string AgreementReceiptRemarkTemp { get; set; }
         //----------- เงินงวดดาวน์ : ข้อมูล -------
         //----------- เงินงวดดาวน์ : ใบเสร็จจริง ---
-        public string ReceiptHeaderID { get; set; }
+        public Guid ReceiptHeaderID { get; set; }
         public string ReceiptRemark { get; set; }
         //----------- เงินงวดดาวน์ : ใบเสร็จชั่วคราว ---
         public string PaymentDateTemp { get; set; }
