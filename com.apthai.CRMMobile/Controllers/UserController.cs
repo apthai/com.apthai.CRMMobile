@@ -905,19 +905,19 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                     DownPay++;
                 }
                 FinalList.BillingTrackingGroup = GroupList;
-                if (FinalList.BillingTrackingGroup.Count() == 0)
+                if (FinalList.BillingTrackingGroup == null || FinalList.BillingTrackingGroup.Count() == 0)
                 {
                     FinalList.BillingTrackingGroup = null;
                 }
-                if (FinalList.BookingList.Count() == 0)
+                if (FinalList.BookingList == null || FinalList.BookingList.Count() == 0)
                 {
                     FinalList.BookingList = null;
                 }
-                if (FinalList.ContractList.Count() == 0)
+                if (FinalList.ContractList == null || FinalList.ContractList.Count() == 0)
                 {
                     FinalList.ContractList = null;
                 }
-                if (FinalList.TransferList.Count() == 0)
+                if (FinalList.TransferList == null || FinalList.TransferList.Count() == 0)
                 {
                     FinalList.TransferList = null;
                 }
