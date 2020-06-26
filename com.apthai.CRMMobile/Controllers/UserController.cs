@@ -730,6 +730,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 BillingFinalTrackingGroup FinalList = new BillingFinalTrackingGroup();
                 FinalList.BookingList = new List<BillingTrackingGroup>();
                 FinalList.ContractList = new List<BillingTrackingGroup>();
+                FinalList.TransferList = new List<BillingTrackingGroup>();
                 List<GetBillingTrackingMobile> TempForDelete = new List<GetBillingTrackingMobile>();
                 BillingTrackingGroup ContactGroup = new BillingTrackingGroup();
                 ContactGroup.GetBillingTrackingMobile = new List<GetBillingTrackingMobile>();
