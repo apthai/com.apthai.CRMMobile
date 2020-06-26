@@ -202,6 +202,9 @@ namespace com.apthai.CRMMobile.HttpRestModel
     public partial class SCBPaymentParam
     {
         public string CRMContactID { get; set; }
+        public string ContactNo { get; set; }
+        public string AgreementNo { get; set; }
+        public string TaxID { get; set; }
         public string acceptlanguage { get; set; }
         public double paymentAmount { get; set; }
         public string accountFrom { get; set; }

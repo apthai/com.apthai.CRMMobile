@@ -146,9 +146,9 @@ namespace com.apthai.CRMMobile.Controllers
                 }
                 //billPayment.accountFrom = data.accountFrom;
                 billPayment.accountFrom = "";
-                billPayment.ref1 = "ABCDEFGHIJ1234567890";
-                billPayment.ref2 = "ABCDEFGHIJ1234567890";
-                billPayment.ref3 = "ABCDEFGHIJ1234567890";
+                billPayment.ref1 = data.ContactNo;
+                billPayment.ref2 = data.AgreementNo;
+                billPayment.ref3 = "";
                 sCBDeeplinkBody.billPayment = billPayment;
                 SCBDeeplinkmerchantMetaData merchantData = new SCBDeeplinkmerchantMetaData();
                 merchantData.callbackurl = "";
