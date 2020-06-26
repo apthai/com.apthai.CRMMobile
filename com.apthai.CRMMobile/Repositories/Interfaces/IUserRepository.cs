@@ -23,6 +23,7 @@ namespace com.apthai.CRMMobile.Repositories
         Model.CRMMobile.UserLogin GetUserLoginByID_Mobile(int UserLoginID);
         List<Model.CRMMobile.UserLogin> GetallUserLoginByID_Mobile(int UserLoginID);
         Model.CRMMobile.UserLogin GetUserLoginByPhoneNumbandDevice_Mobile(string DeviceID, string UserPhoneNumber);
+        Model.CRMMobile.UserLogin GetUserLoginByPhoneNumbandDeviceandUserProfileID_Mobile(string DeviceID, string UserPhoneNumber, int UserProfileID);
         Model.CRMMobile.UserProfile GetUserProfileByCRMContactID_Mobile(string CRMContactID);
         bool UpdateChangePINCSUserProfile(Model.CRMMobile.UserProfile data);
         bool UpdateIsReadForNotification(Model.CRMMobile.NotificationHistory data);

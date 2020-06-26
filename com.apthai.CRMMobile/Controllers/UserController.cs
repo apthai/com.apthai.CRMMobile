@@ -208,7 +208,7 @@ namespace com.apthai.CRMMobile.Controllers
                 }
                 else
                 {
-                    Model.CRMMobile.UserLogin userLogin = _UserRepository.GetUserLoginByPhoneNumbandDevice_Mobile(data.DeviceID, data.PhoneNumber);
+                    Model.CRMMobile.UserLogin userLogin = _UserRepository.GetUserLoginByPhoneNumbandDeviceandUserProfileID_Mobile(data.DeviceID, data.PhoneNumber,ExistData.UserProfileID);
                     if (userLogin == null)
                     {
                         ExistData.PINCode = SHAHelper.ComputeHash(data.PINCode, "SHA512", null);
