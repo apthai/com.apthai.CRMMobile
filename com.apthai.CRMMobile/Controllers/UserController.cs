@@ -247,7 +247,7 @@ namespace com.apthai.CRMMobile.Controllers
                         cSUserLogin.LoginDate = userLogin.LoginDate;
                         cSUserLogin.DeviceID = userLogin.DeviceID ;
                         cSUserLogin.DeviceType = userLogin.DeviceType;
-                        cSUserLogin.UserToken = GenerateAccessToken;
+                        cSUserLogin.UserToken = userLogin.UserToken;
                         cSUserLogin.UserProfileID = userLogin.UserProfileID;
                         cSUserLogin.CRMContactID = contact.ID;
                         cSUserLogin.Notification = true;
