@@ -935,7 +935,6 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 return StatusCode(500, "Internal server error :: " + ex.Message);
             }
         }
-
         [HttpPost]
         [Route("PersonalContact")]
         [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
