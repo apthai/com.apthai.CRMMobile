@@ -148,7 +148,7 @@ namespace com.apthai.CRMMobile.Controllers
                 billPayment.accountFrom = "";
                 billPayment.ref1 = data.ContactNo;
                 billPayment.ref2 = data.AgreementNo;
-                billPayment.ref3 = "";
+                billPayment.ref3 = "ABCDEFGHIJ1234567890";
                 sCBDeeplinkBody.billPayment = billPayment;
                 SCBDeeplinkmerchantMetaData merchantData = new SCBDeeplinkmerchantMetaData();
                 merchantData.callbackurl = "";
@@ -167,6 +167,7 @@ namespace com.apthai.CRMMobile.Controllers
                 paymentInfo2.title = "";
                 paymentInfo2.header = "";
                 paymentInfo2.description = "";
+                paymentInfo.imageUrl = null;
                 sCBsPaymentInfo.Add(paymentInfo2);
                 merchantData.paymentInfo = sCBsPaymentInfo;
                 // --------------------------------------------------------------------------------
