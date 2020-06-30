@@ -65,11 +65,11 @@ namespace com.apthai.CRMMobile.Controllers
              
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("GetProjectInformation")]
-        public async Task<object> GetProjectInformation(string ProjectID)
+        public async Task<object> GetProjectInformation(GetProjectInformationParam ProjectID)
         {
-            List<GetProjectInformation> projectInformation = _masterRepository.getProjectInformation_CRMWeb(ProjectID);
+            List<GetProjectInformation> projectInformation = _masterRepository.getProjectInformation_CRMWeb(ProjectID.ProjectID);
 
             return new
             {

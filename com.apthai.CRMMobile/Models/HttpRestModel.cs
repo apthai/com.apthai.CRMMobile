@@ -215,4 +215,8 @@ namespace com.apthai.CRMMobile.HttpRestModel
         public string SCBToken { get; set; }
         public string CRMContactID { get; set; }
     }
+    public partial class GetProjectInformationParam
+    {
+        public string ProjectID { get; set; }
+    }
 }
