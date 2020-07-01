@@ -738,7 +738,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 BookingGroup.GetBillingTrackingMobile = new List<GetBillingTrackingMobile>();
                 for (int i = 0; i < getBilling.Count(); i++)
                 {
-                    if (getBilling[i].UnitPriceStageName.Trim() == "จอง")
+                    if (getBilling[i].UnitPriceStageName.Trim() == "จอง"  && getBilling[i].FlagBooking != null)
                     {
                         BookingGroup.GetBillingTrackingMobile.Add(getBilling[i]);
                         BookingGroup.DetailDownPayment = Convert.ToInt32(getBilling[i].DetailDownPayment);
@@ -773,7 +773,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         FinalList.BookingList.Add(BookingGroup);
                         TempForDelete.Add(getBilling[i]);
                     }
-                    else if (getBilling[i].UnitPriceStageName.Trim() == "สัญญา")
+                    else if (getBilling[i].UnitPriceStageName.Trim() == "สัญญา" && getBilling[i].FlagAgreement != null)
                     {
                         ContactGroup.GetBillingTrackingMobile.Add(getBilling[i]);
                         ContactGroup.DetailDownPayment = Convert.ToInt32(getBilling[i].DetailDownPayment);
@@ -808,7 +808,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         FinalList.ContractList.Add(ContactGroup);
                         TempForDelete.Add(getBilling[i]);
                     }
-                    else if (getBilling[i].UnitPriceStageName.Trim() == "โอน")
+                    else if (getBilling[i].UnitPriceStageName.Trim() == "โอน" && getBilling[i].FlagTransfer != null)
                     {
                         ContactGroup.GetBillingTrackingMobile.Add(getBilling[i]);
                         ContactGroup.DetailDownPayment = Convert.ToInt32(getBilling[i].DetailDownPayment);
