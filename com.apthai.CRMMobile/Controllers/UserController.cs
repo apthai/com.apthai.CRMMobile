@@ -799,11 +799,11 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         ContactGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
                         if (ContactGroup.PayRemain == 0 )
                         {
-                            ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].AmountBalance);
+                            ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].AgreementAmount) - Convert.ToDouble(getBilling[i].PayAgreementAmount);
                         }
                         else
                         {
-                            ContactGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].AmountPaid);
+                            ContactGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayAgreementAmount);
                         }
                         FinalList.ContractList.Add(ContactGroup);
                         TempForDelete.Add(getBilling[i]);
@@ -834,11 +834,11 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         ContactGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
                         if (ContactGroup.PayRemain == 0)
                         {
-                            ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].AmountBalance);
+                            ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].TransferAmount) - Convert.ToDouble(getBilling[i].PayTransferAmount);
                         }
                         else
                         {
-                            ContactGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].AmountPaid);
+                            ContactGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayTransferAmount);
                         }
                         FinalList.TransferList.Add(ContactGroup);
                         TempForDelete.Add(getBilling[i]);
