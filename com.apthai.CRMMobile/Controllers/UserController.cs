@@ -10,7 +10,7 @@ using com.apthai.CRMMobile.HttpRestModel;
 using com.apthai.CRMMobile.Repositories.Interfaces;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json; 
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using com.apthai.CRMMobile.Repositories;
 using Swashbuckle.AspNetCore.Annotations;
@@ -37,7 +37,7 @@ namespace com.apthai.CRMMobile.Controllers
         private readonly IUserRepository _UserRepository;
         private readonly IMobileMessagingClient _mobileMessagingClient;
         private readonly IHostingEnvironment _hostingEnvironment;
-        public UserController(IMasterRepository masterRepo , IAuthorizeService authorizeService,IUserRepository userRepository, IMobileMessagingClient mobileMessagingClient ,IHostingEnvironment hostingEnvironment)
+        public UserController(IMasterRepository masterRepo, IAuthorizeService authorizeService, IUserRepository userRepository, IMobileMessagingClient mobileMessagingClient, IHostingEnvironment hostingEnvironment)
         {
 
             _masterRepo = masterRepo;
@@ -93,7 +93,7 @@ namespace com.apthai.CRMMobile.Controllers
                 userProfile.Language = data.Language.ToLower();
 
                 bool result = _UserRepository.UpdateCSUserProfile(userProfile);
-                
+
                 return new
                 {
                     success = true,
@@ -128,7 +128,7 @@ namespace com.apthai.CRMMobile.Controllers
                 //    };
                 //}
                 //#endregion
-                
+
                 //bool asd = SHAHelper.VerifyHash("verify", "SHA512", GenerateAccessToken);
                 Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByIDCardNO(data.CitizenIdentityNo);
                 if (contact == null)
@@ -140,7 +140,7 @@ namespace com.apthai.CRMMobile.Controllers
                         valid = false
                     };
                 }
-                Model.CRMWeb.ContactPhone contactPhone = _UserRepository.GetSingleContactPhoneNumberByContactID_Web(contact.ID.ToString(),data.PhoneNumber);
+                Model.CRMWeb.ContactPhone contactPhone = _UserRepository.GetSingleContactPhoneNumberByContactID_Web(contact.ID.ToString(), data.PhoneNumber);
                 if (contactPhone == null)
                 {
                     return new
@@ -208,12 +208,12 @@ namespace com.apthai.CRMMobile.Controllers
                 }
                 else
                 {
-                    Model.CRMMobile.UserLogin userLogin = _UserRepository.GetUserLoginByPhoneNumbandDeviceandUserProfileID_Mobile(data.DeviceID, data.PhoneNumber,ExistData.UserProfileID);
+                    Model.CRMMobile.UserLogin userLogin = _UserRepository.GetUserLoginByPhoneNumbandDeviceandUserProfileID_Mobile(data.DeviceID, data.PhoneNumber, ExistData.UserProfileID);
                     if (userLogin == null)
                     {
                         ExistData.PINCode = SHAHelper.ComputeHash(data.PINCode, "SHA512", null);
                         bool insert = _UserRepository.UpdateCSUserProfile(ExistData);
-                        
+
                         string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
                         CRMUserLoginWithContactID cSUserLogin = new CRMUserLoginWithContactID();
                         cSUserLogin.UserPhoneNumber = data.PhoneNumber;
@@ -241,11 +241,11 @@ namespace com.apthai.CRMMobile.Controllers
 
                         string GenerateAccessToken = SHAHelper.ComputeHash(data.DeviceID, "SHA512", null);
                         userLogin.UserToken = GenerateAccessToken;
-                        userLogin.LoginDate = DateTime.Now.ToShortDateString() ;
+                        userLogin.LoginDate = DateTime.Now.ToShortDateString();
                         CRMUserLoginWithContactID cSUserLogin = new CRMUserLoginWithContactID();
                         cSUserLogin.UserPhoneNumber = data.PhoneNumber;
                         cSUserLogin.LoginDate = userLogin.LoginDate;
-                        cSUserLogin.DeviceID = userLogin.DeviceID ;
+                        cSUserLogin.DeviceID = userLogin.DeviceID;
                         cSUserLogin.DeviceType = userLogin.DeviceType;
                         cSUserLogin.UserToken = userLogin.UserToken;
                         cSUserLogin.UserProfileID = userLogin.UserProfileID;
@@ -262,7 +262,7 @@ namespace com.apthai.CRMMobile.Controllers
                         };
                     }
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -290,7 +290,7 @@ namespace com.apthai.CRMMobile.Controllers
                 //    };
                 //}
                 //#endregion
-               
+
                 var client = new HttpClient();
                 ThaiBulkOTPRequest thaiBulkOTPRequest = new ThaiBulkOTPRequest();
                 thaiBulkOTPRequest.key = UtilsProvider.AppSetting.ThaiBulkApiKey;
@@ -304,7 +304,7 @@ namespace com.apthai.CRMMobile.Controllers
                 {
                     PostURL = UtilsProvider.AppSetting.ThaiBulkRequestOTPURL;
                 }
-                string RequestParam = "?key=" + thaiBulkOTPRequest.key +"&secret=" + thaiBulkOTPRequest.secret + "&msisdn=" + thaiBulkOTPRequest.msisdn;
+                string RequestParam = "?key=" + thaiBulkOTPRequest.key + "&secret=" + thaiBulkOTPRequest.secret + "&msisdn=" + thaiBulkOTPRequest.msisdn;
                 PostURL = PostURL + RequestParam;
                 var Respond = await client.PostAsync(PostURL + RequestParam, Content);
                 if (Respond.StatusCode != System.Net.HttpStatusCode.OK)
@@ -322,13 +322,13 @@ namespace com.apthai.CRMMobile.Controllers
                 returnObj = JsonConvert.DeserializeObject<thaiBulkOTPRequestReturnObj>(RespondData);
 
 
-                    return new
-                    {
-                        success = true,
-                        data = returnObj,
-                        Message = "Request OTP Successfully!. Please Check OTP Number sended to your mobile !"
-                    };
-                
+                return new
+                {
+                    success = true,
+                    data = returnObj,
+                    Message = "Request OTP Successfully!. Please Check OTP Number sended to your mobile !"
+                };
+
 
             }
             catch (Exception ex)
@@ -549,13 +549,13 @@ namespace com.apthai.CRMMobile.Controllers
                 List<iCRMBooking> getBilling = _UserRepository.GetUseriBookingByUserID(data.UserID);
                 for (int i = 0; i < getBilling.Count(); i++)
                 {
-                   var Project = getBilling[i].Project.Split(" ");
-                   string ProjectShowName = "";
+                    var Project = getBilling[i].Project.Split(" ");
+                    string ProjectShowName = "";
                     for (int ii = 1; ii < Project.Count(); ii++)
                     {
                         if (ProjectShowName == "")
                         {
-                            ProjectShowName =  Project[ii];
+                            ProjectShowName = Project[ii];
                         }
                         else
                         {
@@ -640,7 +640,7 @@ namespace com.apthai.CRMMobile.Controllers
                     };
                 }
                 List<iCRMMyProperty> cRMMyProperties = _UserRepository.GetUseriCRMMyPropoty(data.ContactNo);
-                
+
                 if (cRMMyProperties.Count == null)
                 {
                     return new
@@ -717,7 +717,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 //    };
                 //}
 
-                List<GetBillingTrackingMobile> getBilling = _UserRepository.GetUserBillingTrackingByProjectandUnit(data.Project,data.Unit);
+                List<GetBillingTrackingMobile> getBilling = _UserRepository.GetUserBillingTrackingByProjectandUnit(data.Project, data.Unit);
                 if (getBilling.Count == null)
                 {
                     return new
@@ -738,7 +738,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 BookingGroup.GetBillingTrackingMobile = new List<GetBillingTrackingMobile>();
                 for (int i = 0; i < getBilling.Count(); i++)
                 {
-                    if (getBilling[i].UnitPriceStageName.Trim() == "จอง"  && getBilling[i].FlagBooking != null)
+                    if (getBilling[i].UnitPriceStageName.Trim() == "จอง" && getBilling[i].FlagBooking != null)
                     {
                         BookingGroup.GetBillingTrackingMobile.Add(getBilling[i]);
                         BookingGroup.DetailDownPayment = Convert.ToInt32(getBilling[i].DetailDownPayment);
@@ -797,7 +797,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         ContactGroup.PayAgreementAmount = getBilling[i].PayAgreementAmount;
                         ContactGroup.SpecialDownPaymentFlag = getBilling[i].SpecialDownPaymentFlag;
                         ContactGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
-                        if (ContactGroup.PayRemain == 0 )
+                        if (ContactGroup.PayRemain == 0)
                         {
                             ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].AgreementAmount) - Convert.ToDouble(getBilling[i].PayAgreementAmount);
                         }
@@ -1066,8 +1066,8 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 {
                     AdsURL = UtilsProvider.AppSetting.AdsUrl;
                 }
-                var FilePath = Path.Combine(_hostingEnvironment.WebRootPath,"Ads");
-                string[] FileExt = { ".PNG", ".jpg", ".png","png" };
+                var FilePath = Path.Combine(_hostingEnvironment.WebRootPath, "Ads");
+                string[] FileExt = { ".PNG", ".jpg", ".png", "png" };
                 var picture = GetFilesFrom(FilePath + "//", FileExt, true);
                 List<AdsObject> adsObjects = new List<AdsObject>();
                 List<string> MobileAdsURL = new List<string>();
@@ -1075,13 +1075,13 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 {
                     AdsObject ads = new AdsObject();
                     var newpath = path.Split("//");
-                    string fileName = newpath[newpath.Count()-1];
+                    string fileName = newpath[newpath.Count() - 1];
                     string AdsFileUrl = AdsURL + fileName;
                     ads.AdsUrl = AdsFileUrl;
                     ads.Link = "http://www.apintranet.com/";
                     adsObjects.Add(ads);
                 }
-                
+
                 return new
                 {
                     success = true,
@@ -1149,7 +1149,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 //        message = "Only AP Customer Can Regist to the System !!"
                 //    };
                 //}
-                List<iCRMContact> iCRMContacts = _UserRepository.GetUseriCRMContact_Web(data.ContactNo );
+                List<iCRMContact> iCRMContacts = _UserRepository.GetUseriCRMContact_Web(data.ContactNo);
                 if (iCRMContacts.Count == null)
                 {
                     return new
@@ -1162,7 +1162,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 return new
                 {
                     success = true,
-                    data = iCRMContacts ,
+                    data = iCRMContacts,
                     message = "Get User iBooking Success !"
                 };
 
@@ -1239,7 +1239,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         message = "Cannot Find User Data!"
                     };
                 }
-                
+
                 return new
                 {
                     success = true,
@@ -1423,7 +1423,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 return StatusCode(500, "Internal server error :: " + ex.Message);
             }
         }
-        
+
         [HttpPost]
         [Route("GenerateQACode")]
         [SwaggerOperation(Summary = "GenerateQR Code สำหรับลูกค้าระบบ CRM ",
@@ -1484,7 +1484,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 QRCode qrCode = new QRCode(qrCodeData);
                 Bitmap qrCodeImage = qrCode.GetGraphic(20);
                 var bitmapBytes = BitmapToBytes(qrCodeImage); //Convert bitmap into a byte array
-                 
+
 
                 return new
                 {
@@ -1561,7 +1561,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                     Token = "c03ntc-jHUv2vdoFonSb5v:APA91bFAPKMJJMWwFr8qDHppXy4CRJ_G3871hVkeus0zlIcqc7BpSKijiJyzH-bbo_L2WaCgFgQPvv4Ww5JX-MxPezYgrgG4UXaPFv9bM5CWIVPUJXTww2I2KBXDEVLi-3aXzoMXhy_t";
                     CRMContactID = "5b3c2e99-d792-45c0-a726-859b853d0333";
                 }
-                
+
                 var a = _mobileMessagingClient.CreateNotification("tests", "My First Notifications", Token);
                 string MsgTitleTH = "พี่ปอม";
                 string MsgTitleEN = "P'Pom";
@@ -1575,7 +1575,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 {
                     var b = _mobileMessagingClient.SendNotification(Token, MsgTitleEN, BodyMsgEN);
                 }
-                
+
 
                 Model.CRMMobile.NotificationHistory Nh = new Model.CRMMobile.NotificationHistory();
                 Nh.Created = DateTime.Now.ToString();
@@ -1608,7 +1608,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         message = "Get User's Card Fail !"
                     };
                 }
-                
+
 
             }
             catch (Exception ex)
@@ -1661,7 +1661,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 //    }
                 //}
                 List<Model.CRMMobile.NotificationHistory> notificationHistories = _UserRepository.GetUserNotificationHistoryByCRMContactID_Mobile(data.CRMContactID);
-               
+
                 return new
                 {
                     success = true,

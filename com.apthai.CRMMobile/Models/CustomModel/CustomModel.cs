@@ -326,6 +326,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string ProjectID { get; set; }
         public string Project { get; set; }
         public string Unit { get; set; }
+        public double SellingPrice { get; set; }
         public string FullnameMainAgreement { get; set; }
         public string NameMainAgreement { get; set; }
         public string LastNameMainAgreement { get; set; }
