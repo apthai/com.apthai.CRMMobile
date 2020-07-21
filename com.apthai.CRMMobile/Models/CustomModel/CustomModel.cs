@@ -323,10 +323,13 @@ namespace com.apthai.CRMMobile.CustomModel
     }
     public class GetUserCardReturnObj
     {
+        public int BookingID { get; set; }
         public string ProjectID { get; set; }
         public string Project { get; set; }
         public string Unit { get; set; }
+        public string UnitStatus { get; set; }
         public double SellingPrice { get; set; }
+        public string UnitStatusCode { get; set; }
         public string FullnameMainAgreement { get; set; }
         public string NameMainAgreement { get; set; }
         public string LastNameMainAgreement { get; set; }
@@ -338,8 +341,15 @@ namespace com.apthai.CRMMobile.CustomModel
         public string FlagCreditDebit { get; set; }
         public string Balance { get; set; }
         public string National { get; set; }
-        public string UnitStatusCode { get; set; }
         public bool IsThaiNationality { get; set; }
+        public double AgreementPrice { get; set; }
+        public double ExtraAreaAmount { get; set; }
+        public double TransferDiscount { get; set; }
+        public double FreedownAmount { get; set; }
+        public double BookingAmount { get; set; }
+        public double AgreementAmount { get; set; }
+        public double AgreementInstallmentAmount { get; set; }
+        public double TotalInstallmentAmount { get; set; }
         //public FileContentResult QRCode { get; set; }
     }
     public class GetiCRMOwnerReturnObj

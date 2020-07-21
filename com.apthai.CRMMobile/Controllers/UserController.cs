@@ -1831,7 +1831,15 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 }
                 else
                 {
-                    string Url = await _UserRepository.GetFileUrlAsync("erecipt", data.ProjectCode, data.ReceiptNo);
+                    if (data.IsTemp == true)
+                    {
+                        string Url = await _UserRepository.GetFileUrlAsync("erecipt", data.ProjectCode, data.ReceiptNo);
+                    }
+                    else
+                    {
+                        string Url = await _UserRepository.GetFileUrlAsync("ereceipt-temp", data.ProjectCode, data.ReceiptNo);
+                    }
+                    
                     //Model.CRMMobile.NotificationHistory notification = _UserRepository.GetUserNotificationHistoryByNotiHistoryID_Mobile(data.NotiHistoryID);
                     //notification.IsRead = true;
                     //bool updateIsRead = _UserRepository.UpdateIsReadForNotification(notification);
