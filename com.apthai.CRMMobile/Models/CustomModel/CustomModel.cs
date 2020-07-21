@@ -323,7 +323,7 @@ namespace com.apthai.CRMMobile.CustomModel
     }
     public class GetUserCardReturnObj
     {
-        public int BookingID { get; set; }
+        public Guid BookingID { get; set; }
         public string ProjectID { get; set; }
         public string Project { get; set; }
         public string Unit { get; set; }
