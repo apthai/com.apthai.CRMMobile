@@ -540,9 +540,9 @@ namespace com.apthai.CRMMobile.Repositories
         }
         public async Task<string> GetFileUrlAsync(string bucket,string ReceiptNo,string name)
         {
-            string _minioEndpoint = "192.168.2.29:9001"; // CRM 
-            string _minioAccessKey = "XNTYE7HIMF6KK4BVEIXA";
-            string _minioSecretKey = "naD+esQ+uV7+xwfF3bPfAn5iC7C1XUyXeM8HkBlO";
+            string _minioEndpoint = "http://192.168.3.11:9001"; //192.168.2.29:9001"; // CRM 
+            string _minioAccessKey = "6GY279AXF49CP8U2OUKN";
+            string _minioSecretKey = "TPNH7YwXZioaxhcslxnSLPQZSQvr6v2hfSPJT1OD";
             string _defaultBucket = "erecipt";
             string _tempBucket = "erecipt";
             bool _withSSL = false;
@@ -560,8 +560,8 @@ namespace com.apthai.CRMMobile.Repositories
         }
         public string ReplaceWithPublicURL(string url)
         {
-            string _minioEndpoint = "192.168.2.29:9600";
-            string _tempBucket = "timeattendence";
+            string _minioEndpoint = "http://192.168.3.11:9001";
+            //string _tempBucket = "timeattendence";
             if (!string.IsNullOrEmpty(_publicURL))
             {
                 url = url.Replace("https://", "");
