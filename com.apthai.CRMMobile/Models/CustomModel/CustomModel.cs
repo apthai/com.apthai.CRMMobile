@@ -167,7 +167,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string TransferAmount { get; set; }
         public string PayTransferAmount { get; set; }
         public string TransferPaymentDate { get; set; }
-        public bool FlagTransferReceipt { get; set; }
+        public string FlagTransferReceipt { get; set; }
         public string TransferReceiptNo { get; set; }
         public Guid TransferReceiptHeaderID { get; set; }
         public string TransferReceiptRemark { get; set; }
@@ -208,7 +208,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string FlagTransfer { get; set; }
         public string TransferAmount { get; set; }
         public string TransferPaymentDate { get; set; }
-        public bool FlagTransferReceipt { get; set; }
+        public string FlagTransferReceipt { get; set; }
     }
     public class BillingFinalTrackingGroup
 
