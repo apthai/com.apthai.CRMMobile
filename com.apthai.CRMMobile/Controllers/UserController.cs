@@ -823,6 +823,10 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         ContactGroup.AgreementAmount = getBilling[i].AgreementAmount;
                         ContactGroup.BookingAmount = getBilling[i].BookingAmount;
                         ContactGroup.BookingPaymentDate = getBilling[i].BookingPaymentDate;
+                        ContactGroup.FlagTransfer = getBilling[i].FlagTransfer;
+                        ContactGroup.TransferAmount = getBilling[i].TransferAmount;
+                        ContactGroup.TransferPaymentDate = getBilling[i].TransferPaymentDate;
+                        ContactGroup.FlagTransferReceipt = getBilling[i].FlagTransferReceipt;
                         ContactGroup.FlagAgreement = getBilling[i].FlagAgreement;
                         ContactGroup.FlagAgreementReceipt = getBilling[i].FlagAgreementReceipt;
                         ContactGroup.FlagBooking = getBilling[i].FlagBooking;
@@ -1827,7 +1831,6 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         data = new VerifyPINReturnObj(),
                         message = "Cannot Find the User Matach Data"
                     };
-
                 }
                 else
                 {
