@@ -484,6 +484,16 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
+        public GetGetReceiptInfoReturnObj GetReceiptInfoByReceiptNo(string ReceiptTempNo)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<GetGetReceiptInfoReturnObj>("GetReceiptInfo", new { ReceiptTempNo = ReceiptTempNo }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+
+                return result;
+            }
+        }
         public async Task<FileUploadResult> UploadFileFromStreamWithOutGuid(Stream fileStream, string bucketName, string filePath, string fileName, string contentType)
         {
             MinioClient minio;
@@ -553,6 +563,26 @@ namespace com.apthai.CRMMobile.Repositories
                 minio = new MinioClient(_minioEndpoint, _minioAccessKey, _minioSecretKey);
 
             var url = await minio.PresignedGetObjectAsync(bucket, name, (int)TimeSpan.FromHours(_expireHours).TotalSeconds);
+            //url = (!string.IsNullOrEmpty(_publicURL)) ? url.Replace(_minioEndpoint, _publicURL) : url;
+            url = ReplaceWithPublicURL(url);
+
+            return url;
+        }
+        public async Task<string> GetFETFileUrlAsync(string bucket, string FETFilePath)
+        {
+            string _minioEndpoint = "http://192.168.3.11:9001"; //192.168.2.29:9001"; // CRM 
+            string _minioAccessKey = "6GY279AXF49CP8U2OUKN";
+            string _minioSecretKey = "TPNH7YwXZioaxhcslxnSLPQZSQvr6v2hfSPJT1OD";
+            string _defaultBucket = "finances";
+            string _tempBucket = "erecipt";
+            bool _withSSL = false;
+            MinioClient minio;
+            if (_withSSL)
+                minio = new MinioClient(_minioEndpoint, _minioAccessKey, _minioSecretKey).WithSSL();
+            else
+                minio = new MinioClient(_minioEndpoint, _minioAccessKey, _minioSecretKey);
+
+            var url = await minio.PresignedGetObjectAsync(bucket, FETFilePath, (int)TimeSpan.FromHours(_expireHours).TotalSeconds);
             //url = (!string.IsNullOrEmpty(_publicURL)) ? url.Replace(_minioEndpoint, _publicURL) : url;
             url = ReplaceWithPublicURL(url);
 
