@@ -1811,7 +1811,20 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
             {
                 StringValues api_key;
                 StringValues EmpCode;
-                
+
+               
+                VerifyPINReturnObj cSUserProfile = _UserRepository.GetUserLogin_Mobile(data.AccessKey);
+                if (cSUserProfile == null)
+                {
+                    return new
+                    {
+                        success = false,
+                        data = new VerifyPINReturnObj(),
+                        message = "Cannot Find the User Matach Data"
+                    };
+                }
+                else
+                {
                     string Url = "";
                     if (data.IsTemp == true)
                     {
@@ -1833,6 +1846,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         data = result,
                         message = "Set Flag IsRead For Notification Success!"
                     };
+                }
             }
             catch (Exception ex)
             {
