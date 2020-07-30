@@ -1811,48 +1811,28 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
             {
                 StringValues api_key;
                 StringValues EmpCode;
-
-                //Model.CRMWeb.Contact cRMContact = _UserRepository.GetCRMContactByIDCardNO(data.CitizenIdentityNo);
-                //if (cRMContact == null)
-                //{
-                //    return new
-                //    {
-                //        success = false,
-                //        data = new AutorizeDataJWT(),
-                //        message = "Only AP Customer Can Regist to the System !!"
-                //    };
-                //}
-                VerifyPINReturnObj cSUserProfile = _UserRepository.GetUserLogin_Mobile(data.AccessKey);
-                if (cSUserProfile == null)
-                {
-                    return new
-                    {
-                        success = false,
-                        data = new VerifyPINReturnObj(),
-                        message = "Cannot Find the User Matach Data"
-                    };
-                }
-                else
-                {
+                
+                    string Url = "";
                     if (data.IsTemp == true)
                     {
-                        string Url = await _UserRepository.GetFileUrlAsync("erecipt", data.ProjectCode, data.ReceiptNo);
+                        Url = await _UserRepository.GetFileUrlAsync("erecipt", data.ProjectCode, data.ReceiptNo);
                     }
                     else
                     {
-                        string Url = await _UserRepository.GetFileUrlAsync("ereceipt-temp", data.ProjectCode, data.ReceiptNo);
+                        Url = await _UserRepository.GetFileUrlAsync("ereceipt-temp", data.ProjectCode, data.ReceiptNo);
                     }
-                    
+
+                    GetGetReceiptInfoReturnObj result = _UserRepository.GetReceiptInfoByReceiptNo(data.ReceiptNo);
+                    result.URL = Url;
                     //Model.CRMMobile.NotificationHistory notification = _UserRepository.GetUserNotificationHistoryByNotiHistoryID_Mobile(data.NotiHistoryID);
                     //notification.IsRead = true;
                     //bool updateIsRead = _UserRepository.UpdateIsReadForNotification(notification);
                     return new
                     {
                         success = true,
-                        data = Url,
+                        data = result,
                         message = "Set Flag IsRead For Notification Success!"
                     };
-                }
             }
             catch (Exception ex)
             {

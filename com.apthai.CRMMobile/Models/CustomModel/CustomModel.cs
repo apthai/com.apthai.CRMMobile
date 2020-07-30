@@ -429,6 +429,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string ContactDistrictEN { get; set; }
         public string ContactProvinceEN { get; set; }
         public string ContactPostalCode { get; set; }
+        public string URL { get; set; }
     }
     public class SCBAuthenHeader
     {
