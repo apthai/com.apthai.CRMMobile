@@ -1898,8 +1898,8 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                     return new
                     {
                         success = true,
-                        data = Url,
-                        message = "Set Flag IsRead For Notification Success!"
+                        data = result,
+                        message = "Success!"
                     };
                 //}
             }
