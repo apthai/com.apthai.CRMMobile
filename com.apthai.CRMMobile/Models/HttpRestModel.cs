@@ -46,7 +46,6 @@ namespace com.apthai.CRMMobile.HttpRestModel
     public partial class GetReceiptByReceiptID
     {
         public bool IsTemp { get; set; }
-        public string ReceiptID { get; set; }
         public string AccessKey { get; set; }
         public string ProjectCode { get; set; }
         public string ReceiptNo { get; set; }
@@ -55,7 +54,7 @@ namespace com.apthai.CRMMobile.HttpRestModel
     {
         public string AccessKey { get; set; }
         public Guid FetID { get; set; }
-        public Guid? paymentID { get; set; }
+        public Guid? PaymentMethodID { get; set; }
     }
     public partial class GetReceiptinfoByNo
     {

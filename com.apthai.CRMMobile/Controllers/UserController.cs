@@ -1854,101 +1854,100 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
             }
         }
 
-        [HttpPost]
-        [Route("GetReceiptinfo")]
-        [SwaggerOperation(Summary = "Register User เพื่อใช่ระบบ ซึ่งจะไป หาข้อมูลจากระบบ CRM",
-      Description = "Access Key ใช้ในการเรียหใช้ Function ต่างๆ เพื่อไม่ให้ User Login หลายเครื่องในเวลาเดียวกัน")]
-        public async Task<object> GetReceiptinfo([FromBody]GetReceiptinfoByNo data)
-        {
-            try
-            {
-                StringValues api_key;
-                StringValues EmpCode;
-
-                //Model.CRMWeb.Contact cRMContact = _UserRepository.GetCRMContactByIDCardNO(data.CitizenIdentityNo);
-                //if (cRMContact == null)
-                //{
-                //    return new
-                //    {
-                //        success = false,
-                //        data = new AutorizeDataJWT(),
-                //        message = "Only AP Customer Can Regist to the System !!"
-                //    };
-                //}
-                //VerifyPINReturnObj cSUserProfile = _UserRepository.GetUserLogin_Mobile(data.AccessKey);
-                //if (cSUserProfile == null)
-                //{
-                //    return new
-                //    {
-                //        success = false,
-                //        data = new VerifyPINReturnObj(),
-                //        message = "Cannot Find the User Matach Data"
-                //    };
-                //}
-                //else
-                //{
-                    var result = _UserRepository.GetReceiptInfoByReceiptNo(data.ReceiptNo);
-                  
-                    return new
-                    {
-                        success = true,
-                        data = result,
-                        message = "Success!"
-                    };
-                //}
-            }
-            catch (Exception ex)
-            {
-                return StatusCode(500, "Internal server error :: " + ex.Message);
-            }
-        }
-
        // [HttpPost]
-       // [Route("GetUserFET")]
+       // [Route("GetFET")]
        // [SwaggerOperation(Summary = "Register User เพื่อใช่ระบบ ซึ่งจะไป หาข้อมูลจากระบบ CRM",
        //Description = "Access Key ใช้ในการเรียหใช้ Function ต่างๆ เพื่อไม่ให้ User Login หลายเครื่องในเวลาเดียวกัน")]
-       // public async Task<FileDTO> GetAttachFile(Guid? fetID, Guid? paymentID)
+       // public async Task<object> GetFET([FromBody]GetFETByFETID data)
        // {
-       //     var FETModel = new FET();
-       //     var id = Guid.Empty;
-
-       //     if (fetID.HasValue)
+       //     try
        //     {
-       //         id = fetID ?? Guid.Empty;
+       //         StringValues api_key;
+       //         StringValues EmpCode;
 
-       //         FETModel = await DB.FETs.IgnoreQueryFilters().Where(o => o.ID == id).FirstOrDefaultAsync() ?? new FET();
-       //     }
-       //     else if (paymentID.HasValue)
-       //     {
-       //         id = paymentID ?? Guid.Empty;
 
-       //         FETModel = await DB.FETs
-       //                 .Include(o => o.PaymentMethod)
-       //                     .ThenInclude(o => o.Payment)
-       //                .Where(o => o.PaymentMethod.PaymentID == paymentID)
-       //             .FirstOrDefaultAsync() ?? new FET();
-       //     }
-
-       //     if (!string.IsNullOrEmpty(FETModel.AttachFileUrl) && !string.IsNullOrEmpty(FETModel.AttachFileName))
-       //     {
-       //         var minioBucket = FETModel.AttachFileUrl;
-       //         var minioFileName = FETModel.AttachFileName;
-
-       //         //Base.DTOs.Extensions.ConvertToMinIOFileParam(ref minioBucket, ref minioFileName);
-
-       //         //string GeUrl = await FileHelper.GetFileUrlAsync(minioBucket, minioFileName) ?? "";
-       //         string tmpFileBucket = minioBucket + "/" + minioFileName;
-       //         string GeUrl = await FileHelper.GetFileUrlAsync(tmpFileBucket);
-       //         return new FileDTO()
+       //         VerifyPINReturnObj cSUserProfile = _UserRepository.GetUserLogin_Mobile(data.AccessKey);
+       //         if (cSUserProfile == null)
        //         {
-       //             Name = minioFileName,
-       //             Url = GeUrl,
-       //             IsTemp = !string.IsNullOrEmpty(GeUrl) ? true : false
-       //         };
-       //     }
+       //             return new
+       //             {
+       //                 success = false,
+       //                 data = new VerifyPINReturnObj(),
+       //                 message = "Cannot Find the User Matach Data"
+       //             };
+       //         }
+       //         else
+       //         {
+       //             string Url = "";
+       //             if (data.IsTemp == true)
+       //             {
+       //                 Url = await _UserRepository.GetFileUrlAsync("erecipt", data.ProjectCode, data.ReceiptNo);
+       //             }
+       //             else
+       //             {
+       //                 Url = await _UserRepository.GetFileUrlAsync("ereceipt-temp", data.ProjectCode, data.ReceiptNo);
+       //             }
 
-       //     return new FileDTO();
+       //             return new
+       //             {
+       //                 success = true,
+       //                 data = Url,
+       //                 message = "Set Flag IsRead For Notification Success!"
+       //             };
+       //         }
+       //     }
+       //     catch (Exception ex)
+       //     {
+       //         return StatusCode(500, "Internal server error :: " + ex.Message);
+       //     }
        // }
+
+        // [HttpPost]
+        // [Route("GetUserFET")]
+        // [SwaggerOperation(Summary = "Register User เพื่อใช่ระบบ ซึ่งจะไป หาข้อมูลจากระบบ CRM",
+        //Description = "Access Key ใช้ในการเรียหใช้ Function ต่างๆ เพื่อไม่ให้ User Login หลายเครื่องในเวลาเดียวกัน")]
+        // public async Task<FileDTO> GetAttachFile(Guid? fetID, Guid? paymentID)
+        // {
+        //     var FETModel = new FET();
+        //     var id = Guid.Empty;
+
+        //     if (fetID.HasValue)
+        //     {
+        //         id = fetID ?? Guid.Empty;
+
+        //         FETModel = await DB.FETs.IgnoreQueryFilters().Where(o => o.ID == id).FirstOrDefaultAsync() ?? new FET();
+        //     }
+        //     else if (paymentID.HasValue)
+        //     {
+        //         id = paymentID ?? Guid.Empty;
+
+        //         FETModel = await DB.FETs
+        //                 .Include(o => o.PaymentMethod)
+        //                     .ThenInclude(o => o.Payment)
+        //                .Where(o => o.PaymentMethod.PaymentID == paymentID)
+        //             .FirstOrDefaultAsync() ?? new FET();
+        //     }
+
+        //     if (!string.IsNullOrEmpty(FETModel.AttachFileUrl) && !string.IsNullOrEmpty(FETModel.AttachFileName))
+        //     {
+        //         var minioBucket = FETModel.AttachFileUrl;
+        //         var minioFileName = FETModel.AttachFileName;
+
+        //         //Base.DTOs.Extensions.ConvertToMinIOFileParam(ref minioBucket, ref minioFileName);
+
+        //         //string GeUrl = await FileHelper.GetFileUrlAsync(minioBucket, minioFileName) ?? "";
+        //         string tmpFileBucket = minioBucket + "/" + minioFileName;
+        //         string GeUrl = await FileHelper.GetFileUrlAsync(tmpFileBucket);
+        //         return new FileDTO()
+        //         {
+        //             Name = minioFileName,
+        //             Url = GeUrl,
+        //             IsTemp = !string.IsNullOrEmpty(GeUrl) ? true : false
+        //         };
+        //     }
+
+        //     return new FileDTO();
+        // }
         // [HttpPost]
         // [Route("UserNotiHistroies")]
         // [SwaggerOperation(Summary = "เปลี่ยนภาษาของบุคคลนั้นๆ",
