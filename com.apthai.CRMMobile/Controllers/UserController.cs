@@ -1881,18 +1881,18 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 //        message = "Only AP Customer Can Regist to the System !!"
                 //    };
                 //}
-                VerifyPINReturnObj cSUserProfile = _UserRepository.GetUserLogin_Mobile(data.AccessKey);
-                if (cSUserProfile == null)
-                {
-                    return new
-                    {
-                        success = false,
-                        data = new VerifyPINReturnObj(),
-                        message = "Cannot Find the User Matach Data"
-                    };
-                }
-                else
-                {
+                //VerifyPINReturnObj cSUserProfile = _UserRepository.GetUserLogin_Mobile(data.AccessKey);
+                //if (cSUserProfile == null)
+                //{
+                //    return new
+                //    {
+                //        success = false,
+                //        data = new VerifyPINReturnObj(),
+                //        message = "Cannot Find the User Matach Data"
+                //    };
+                //}
+                //else
+                //{
                     var result = _UserRepository.GetReceiptInfoByReceiptNo(data.ReceiptNo);
                   
                     return new
@@ -1901,7 +1901,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         data = Url,
                         message = "Set Flag IsRead For Notification Success!"
                     };
-                }
+                //}
             }
             catch (Exception ex)
             {

@@ -59,7 +59,7 @@ namespace com.apthai.CRMMobile.HttpRestModel
     }
     public partial class GetReceiptinfoByNo
     {
-        public string AccessKey { get; set; }
+        //public string AccessKey { get; set; }
         public string ReceiptNo { get; set; }
     }
     public partial class ChangePINParam
