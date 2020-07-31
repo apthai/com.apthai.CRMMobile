@@ -1,4 +1,5 @@
 ﻿using com.apthai.CRMMobile.CustomModel;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
@@ -42,6 +43,9 @@ namespace com.apthai.CRMMobile.Repositories
         List<GetiCRMOwnerReturnObj> GetUserICRMOwnerByProjectUnitAndCRMContactID(string ContactID, string UnitNo, string ProjectNO);
         GetUserCreditCardReturnObj GetUserCreditCardByProjectandUnit(string ProjectID, string UnitID);
         GetGetReceiptInfoReturnObj GetReceiptInfoByReceiptNo(string ReceiptTempNo);
+        //Model.CRMWeb.FET GetUserFETByPaymentMethodID(Guid PaymentMethodID);
+        Model.CRMWeb.FET GetUserFETDataByPaymentMethodID(Guid PaymentMethodID);
+        bool GetUserFETByPaymentMethodID(Guid PaymentMethodID);
         Task<string> GetFileUrlAsync(string name);
         Task<string> GetFETFileUrlAsync(string bucket, string FETFilePath);
         Task<string> GetFileUrlAsync(string bucket, string ReceiptNo, string name);

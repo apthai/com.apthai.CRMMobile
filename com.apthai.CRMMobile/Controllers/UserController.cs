@@ -738,6 +738,8 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 BookingGroup.GetBillingTrackingMobile = new List<GetBillingTrackingMobile>();
                 for (int i = 0; i < getBilling.Count(); i++)
                 {
+                    bool HaveFET = _UserRepository.GetUserFETByPaymentMethodID(getBilling[i].PaymentID);
+                    getBilling[i].HaveFET = HaveFET;
                     if (getBilling[i].UnitPriceStageName.Trim() == "จอง" && getBilling[i].FlagBooking != null)
                     {
                         BookingGroup.GetBillingTrackingMobile.Add(getBilling[i]);
@@ -1854,53 +1856,55 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
             }
         }
 
-       // [HttpPost]
-       // [Route("GetFET")]
-       // [SwaggerOperation(Summary = "Register User เพื่อใช่ระบบ ซึ่งจะไป หาข้อมูลจากระบบ CRM",
-       //Description = "Access Key ใช้ในการเรียหใช้ Function ต่างๆ เพื่อไม่ให้ User Login หลายเครื่องในเวลาเดียวกัน")]
-       // public async Task<object> GetFET([FromBody]GetFETByFETID data)
-       // {
-       //     try
-       //     {
-       //         StringValues api_key;
-       //         StringValues EmpCode;
+        [HttpPost]
+        [Route("GetFET")]
+        [SwaggerOperation(Summary = "Register User เพื่อใช่ระบบ ซึ่งจะไป หาข้อมูลจากระบบ CRM",
+       Description = "Access Key ใช้ในการเรียหใช้ Function ต่างๆ เพื่อไม่ให้ User Login หลายเครื่องในเวลาเดียวกัน")]
+        public async Task<object> GetFET([FromBody]GetFETByFETID data)
+        {
+            try
+            {
+                StringValues api_key;
+                StringValues EmpCode;
 
 
-       //         VerifyPINReturnObj cSUserProfile = _UserRepository.GetUserLogin_Mobile(data.AccessKey);
-       //         if (cSUserProfile == null)
-       //         {
-       //             return new
-       //             {
-       //                 success = false,
-       //                 data = new VerifyPINReturnObj(),
-       //                 message = "Cannot Find the User Matach Data"
-       //             };
-       //         }
-       //         else
-       //         {
-       //             string Url = "";
-       //             if (data.IsTemp == true)
-       //             {
-       //                 Url = await _UserRepository.GetFileUrlAsync("erecipt", data.ProjectCode, data.ReceiptNo);
-       //             }
-       //             else
-       //             {
-       //                 Url = await _UserRepository.GetFileUrlAsync("ereceipt-temp", data.ProjectCode, data.ReceiptNo);
-       //             }
+                VerifyPINReturnObj cSUserProfile = _UserRepository.GetUserLogin_Mobile(data.AccessKey);
+                if (cSUserProfile == null)
+                {
+                    return new
+                    {
+                        success = false,
+                        data = new VerifyPINReturnObj(),
+                        message = "Cannot Find the User Matach Data"
+                    };
+                }
+                else
+                {
+                    var FET = _UserRepository.GetUserFETByPaymentMethodID(data.PaymentMethodID);
+                    string Url = "";
 
-       //             return new
-       //             {
-       //                 success = true,
-       //                 data = Url,
-       //                 message = "Set Flag IsRead For Notification Success!"
-       //             };
-       //         }
-       //     }
-       //     catch (Exception ex)
-       //     {
-       //         return StatusCode(500, "Internal server error :: " + ex.Message);
-       //     }
-       // }
+                    //if (data.IsTemp == true)
+                    //{
+                    //    Url = await _UserRepository.GetFileUrlAsync("erecipt", data.ProjectCode, data.ReceiptNo);
+                    //}
+                    //else
+                    //{
+                    //    Url = await _UserRepository.GetFileUrlAsync("ereceipt-temp", data.ProjectCode, data.ReceiptNo);
+                    //}
+
+                    return new
+                    {
+                        success = true,
+                        data = Url,
+                        message = "Set Flag IsRead For Notification Success!"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error :: " + ex.Message);
+            }
+        }
 
         // [HttpPost]
         // [Route("GetUserFET")]

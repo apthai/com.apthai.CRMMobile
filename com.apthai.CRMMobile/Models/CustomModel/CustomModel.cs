@@ -94,6 +94,7 @@ namespace com.apthai.CRMMobile.CustomModel
     {
         public string ProjectNo { get; set; }
         public string UnitNo { get; set; }
+        public Guid PaymentID { get; set; }
         public string TotalInstallment { get; set; }
         public string NormalDownPayment { get; set; }
         public string SpecialDownPayment { get; set; }
@@ -180,6 +181,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string TransferReceiptNoTemp { get; set; }
         public Guid TransferReceiptHeaderIDTemp { get; set; }
         public string TransferReceiptRemarkTemp { get; set; }
+        public bool HaveFET { get; set; }
 
     }
     public class BillingTrackingGroup

@@ -236,6 +236,33 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
+        public Model.CRMWeb.FET GetUserFETDataByPaymentMethodID(Guid PaymentMethodID)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMWeb.FET>("select * from FIN.PaymentMethod WITH(NOLOCK) " +
+                    " Left join FIN.FET ft ON FIN.PaymentMethod.ID = ft.PaymentMethodID " +
+                    " where Fin.PaymentMethod.PaymentID=@PaymentMethodID", new { PaymentMethodID = PaymentMethodID }).FirstOrDefault();
+
+                return result;
+            }
+        }
+        public bool GetUserFETByPaymentMethodID(Guid PaymentMethodID)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMWeb.FET>("select * from FIN.PaymentMethod WITH(NOLOCK) " +
+                    " Left join FIN.FET ft ON FIN.PaymentMethod.ID = ft.PaymentMethodID " +
+                    " where Fin.PaymentMethod.PaymentID=@PaymentMethodID", new { PaymentMethodID = PaymentMethodID }).FirstOrDefault();
+                if (result == null)
+                {
+                    return false;
+                }
+                return true;
+            }
+        }
         public bool InsertCSUserProfile(Model.CRMMobile.UserProfile data,out long ProfileID)
         {
             using (IDbConnection conn = MobileConnection)
