@@ -1883,18 +1883,11 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 }
                 else
                 {
-                    var FET = _UserRepository.GetUserFETByPaymentMethodID(data.PaymentMethodID);
+                    var FET = _UserRepository.GetUserFETDataByPaymentMethodID(data.PaymentMethodID);
                     string Url = "";
-
-                    //if (data.IsTemp == true)
-                    //{
-                    //    Url = await _UserRepository.GetFileUrlAsync("erecipt", data.ProjectCode, data.ReceiptNo);
-                    //}
-                    //else
-                    //{
-                    //    Url = await _UserRepository.GetFileUrlAsync("ereceipt-temp", data.ProjectCode, data.ReceiptNo);
-                    //}
-
+                    
+                    Url = await _UserRepository.GetFETFileUrlAsync("finances", FET.AttachFileUrl + "/" + FET.AttachFileName);
+                   
                     return new
                     {
                         success = true,

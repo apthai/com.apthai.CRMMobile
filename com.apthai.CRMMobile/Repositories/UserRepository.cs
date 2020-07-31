@@ -607,7 +607,7 @@ namespace com.apthai.CRMMobile.Repositories
         }
         public async Task<string> GetFETFileUrlAsync(string bucket, string FETFilePath)
         {
-            string _minioEndpoint = "http://192.168.3.11:9001"; //192.168.2.29:9001"; // CRM 
+            string _minioEndpoint = "192.168.3.11:9001"; //192.168.2.29:9001"; // CRM 
             string _minioAccessKey = "6GY279AXF49CP8U2OUKN";
             string _minioSecretKey = "TPNH7YwXZioaxhcslxnSLPQZSQvr6v2hfSPJT1OD";
             string _defaultBucket = "finances";
