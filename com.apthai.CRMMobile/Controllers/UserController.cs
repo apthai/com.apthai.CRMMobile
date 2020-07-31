@@ -1884,6 +1884,15 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 else
                 {
                     var FET = _UserRepository.GetUserFETDataByPaymentMethodID(data.PaymentMethodID);
+                    if (FET == null)
+                    {
+                        return new
+                        {
+                            success = true,
+                            //data = Url,
+                            message = "Cannot Find FET Data.!"
+                        };
+                    }
                     string Url = "";
                     
                     Url = await _UserRepository.GetFETFileUrlAsync("finances", FET.AttachFileUrl + "/" + FET.AttachFileName);
