@@ -43,6 +43,7 @@ namespace com.apthai.CRMMobile.Repositories
         List<GetiCRMOwnerReturnObj> GetUserICRMOwnerByProjectUnitAndCRMContactID(string ContactID, string UnitNo, string ProjectNO);
         GetUserCreditCardReturnObj GetUserCreditCardByProjectandUnit(string ProjectID, string UnitID);
         GetGetReceiptInfoReturnObj GetReceiptInfoByReceiptNo(string ReceiptTempNo);
+        GetGetReceiptInfoReturnObj GetReceiptTempInfoByReceiptNo(string ReceiptTempNo);
         //Model.CRMWeb.FET GetUserFETByPaymentMethodID(Guid PaymentMethodID);
         Model.CRMWeb.FET GetUserFETDataByPaymentMethodID(Guid PaymentMethodID);
         bool GetUserFETByPaymentMethodID(Guid PaymentMethodID);

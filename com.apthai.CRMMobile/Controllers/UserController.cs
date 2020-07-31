@@ -23,6 +23,7 @@ using FirebaseAdmin.Auth;
 using Microsoft.EntityFrameworkCore.Internal;
 using MoreLinq;
 using Microsoft.AspNetCore.Hosting;
+using Minio;
 
 namespace com.apthai.CRMMobile.Controllers
 {
@@ -1828,16 +1829,18 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 else
                 {
                     string Url = "";
+                    GetGetReceiptInfoReturnObj result = new GetGetReceiptInfoReturnObj();
                     if (data.IsTemp == true)
                     {
-                        Url = await _UserRepository.GetFileUrlAsync("erecipt", data.ProjectCode, data.ReceiptNo);
+                        //Url = await GetFileUrlAsync("erecipt", data.ProjectCode, data.ReceiptNo);
+                        Url = await _UserRepository.GetFileUrlAsync("erecipt", data.ProjectCode, data.ProjectCode + "/" + data.ReceiptNo + ".pdf");
+                        result = _UserRepository.GetReceiptInfoByReceiptNo(data.ReceiptNo);
                     }
                     else
                     {
-                        Url = await _UserRepository.GetFileUrlAsync("ereceipt-temp", data.ProjectCode, data.ReceiptNo);
+                        Url = await _UserRepository.GetFileUrlAsync("ereceipt-temp", data.ProjectCode, data.ProjectCode + "/" + data.ReceiptNo + ".pdf");
+                        result = _UserRepository.GetReceiptInfoByReceiptNo(data.ReceiptNo);
                     }
-
-                    GetGetReceiptInfoReturnObj result = _UserRepository.GetReceiptInfoByReceiptNo(data.ReceiptNo);
                     result.URL = Url;
                     //Model.CRMMobile.NotificationHistory notification = _UserRepository.GetUserNotificationHistoryByNotiHistoryID_Mobile(data.NotiHistoryID);
                     //notification.IsRead = true;
@@ -2076,6 +2079,43 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 var a = Directory.GetFiles(searchFolder, String.Format("*.{0}", filter), searchOption);
             }
             return filesFound.ToArray();
+        }
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public string ReplaceWithPublicURL(string url)
+        {
+            string _minioEndpoint = "http://192.168.3.11:9001";
+            //string _tempBucket = "timeattendence";
+            if (!string.IsNullOrEmpty(_publicURL))
+            {
+                url = url.Replace("https://", "");
+                url = url.Replace("http://", "");
+
+                url = url.Replace(_minioEndpoint, _publicURL);
+            }
+            return url;
+        }
+        private int _expireHours = 24;
+        public string _publicURL;
+        [ApiExplorerSettings(IgnoreApi = true)]
+        public async Task<string> GetFileUrlAsync(string bucket, string ReceiptNo, string name)
+        {
+            string _minioEndpoint = "192.168.3.11:9001"; //192.168.2.29:9001"; // CRM 
+            string _minioAccessKey = "6GY279AXF49CP8U2OUKN";
+            string _minioSecretKey = "TPNH7YwXZioaxhcslxnSLPQZSQvr6v2hfSPJT1OD";
+            string _defaultBucket = "erecipt";
+            string _tempBucket = "erecipt";
+            bool _withSSL = false;
+            MinioClient minio;
+            if (_withSSL)
+                minio = new MinioClient(_minioEndpoint, _minioAccessKey, _minioSecretKey).WithSSL();
+            else
+                minio = new MinioClient(_minioEndpoint, _minioAccessKey, _minioSecretKey);
+
+            var url = await minio.PresignedGetObjectAsync(bucket, name, (int)TimeSpan.FromHours(_expireHours).TotalSeconds);
+            //url = (!string.IsNullOrEmpty(_publicURL)) ? url.Replace(_minioEndpoint, _publicURL) : url;
+            url = ReplaceWithPublicURL(url);
+
+            return url;
         }
         //public static async Task<FileDTO> CreateFromFileNameAsync(string name, FileHelper fileHelper, IConfiguration Configuration = null)
         //{
