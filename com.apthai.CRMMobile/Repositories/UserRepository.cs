@@ -13,6 +13,9 @@ using Dapper.Contrib.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using com.apthai.CRMMobile.CustomModel;
 using Minio;
+using Minio.DataModel;
+using Minio.Exceptions;
+using System.Reactive.Linq;
 
 namespace com.apthai.CRMMobile.Repositories
 {
@@ -599,6 +602,8 @@ namespace com.apthai.CRMMobile.Repositories
             else
                 minio = new MinioClient(_minioEndpoint, _minioAccessKey, _minioSecretKey);
 
+            //var observable = minio.StatObjectAsync(bucket,name );
+            
             var url = await minio.PresignedGetObjectAsync(bucket ,name, (int)TimeSpan.FromHours(_expireHours).TotalSeconds);
             //url = (!string.IsNullOrEmpty(_publicURL)) ? url.Replace(_minioEndpoint, _publicURL) : url;
             url = ReplaceWithPublicURL(url);
@@ -624,6 +629,36 @@ namespace com.apthai.CRMMobile.Repositories
             url = ReplaceWithPublicURL(url);
 
             return url;
+        }
+        public async Task<List<string>> GetListFile(string bucketName, string prefix)
+        {
+            string _minioEndpoint = "192.168.3.11:9001"; //192.168.2.29:9001"; // CRM 
+            string _minioAccessKey = "6GY279AXF49CP8U2OUKN";
+            string _minioSecretKey = "TPNH7YwXZioaxhcslxnSLPQZSQvr6v2hfSPJT1OD";
+            string _defaultBucket = "erecipt";
+            string _tempBucket = "erecipt";
+            bool _withSSL = false;
+
+            MinioClient minio;
+            if (_withSSL)
+                minio = new MinioClient(_minioEndpoint, _minioAccessKey, _minioSecretKey).WithSSL();
+            else
+                minio = new MinioClient(_minioEndpoint, _minioAccessKey, _minioSecretKey);
+
+            bool bucketExisted = await minio.BucketExistsAsync(bucketName);
+            if (bucketExisted)
+            {
+                List<string> bucketKeys = new List<string>();
+                var observable = minio.ListObjectsAsync(bucketName, prefix);
+                IDisposable subscription = observable.Subscribe(item => bucketKeys.Add(item.Key), ex => throw new Exception("Error", ex), () => Console.WriteLine("OnComplete: {0}"));
+                observable.Wait();
+
+                return bucketKeys;
+            }
+            else
+            {
+                return null;
+            }
         }
         public string ReplaceWithPublicURL(string url)
         {

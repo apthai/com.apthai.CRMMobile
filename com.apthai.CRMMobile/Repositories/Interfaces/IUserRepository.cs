@@ -50,5 +50,6 @@ namespace com.apthai.CRMMobile.Repositories
         Task<string> GetFileUrlAsync(string name);
         Task<string> GetFETFileUrlAsync(string bucket, string FETFilePath);
         Task<string> GetFileUrlAsync(string bucket, string ReceiptNo, string name);
+        Task<List<string>> GetListFile(string bucketName, string prefix);
     }
 }

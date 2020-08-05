@@ -24,6 +24,7 @@ using Microsoft.EntityFrameworkCore.Internal;
 using MoreLinq;
 using Microsoft.AspNetCore.Hosting;
 using Minio;
+using Minio.DataModel;
 
 namespace com.apthai.CRMMobile.Controllers
 {
@@ -1829,17 +1830,28 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 else
                 {
                     string Url = "";
+                    bool Exist = false;
                     GetGetReceiptInfoReturnObj result = new GetGetReceiptInfoReturnObj();
                     if (data.IsTemp == true)
                     {
                         //Url = await GetFileUrlAsync("erecipt", data.ProjectCode, data.ReceiptNo);
-                        Url = await _UserRepository.GetFileUrlAsync("erecipt", data.ProjectCode, data.ProjectCode + "/" + data.ReceiptNo + ".pdf");
-                        result = _UserRepository.GetReceiptInfoByReceiptNo(data.ReceiptNo);
+                        List<string> bucketList = await _UserRepository.GetListFile("erecipt", data.ProjectCode + "/");
+                        bool FileExist = bucketList.Contains(data.ProjectCode + "/" + data.ReceiptNo + ".pdf");
+                        if (FileExist == true)
+                        {
+                            Url = await _UserRepository.GetFileUrlAsync("erecipt", data.ProjectCode, data.ProjectCode + "/" + data.ReceiptNo + ".pdf");
+                            result = _UserRepository.GetReceiptInfoByReceiptNo(data.ReceiptNo);
+                        }
                     }
                     else
                     {
-                        Url = await _UserRepository.GetFileUrlAsync("ereceipt-temp", data.ProjectCode, data.ProjectCode + "/" + data.ReceiptNo + ".pdf");
-                        result = _UserRepository.GetReceiptInfoByReceiptNo(data.ReceiptNo);
+                        List<string> bucketList = await _UserRepository.GetListFile("ereceipt-temp", data.ProjectCode + "/");
+                        bool FileExist = bucketList.Contains(data.ProjectCode + "/" + data.ReceiptNo + ".pdf");
+                        if (true)
+                        {
+                            Url = await _UserRepository.GetFileUrlAsync("ereceipt-temp", data.ProjectCode, data.ProjectCode + "/" + data.ReceiptNo + ".pdf");
+                            result = _UserRepository.GetReceiptInfoByReceiptNo(data.ReceiptNo);
+                        }
                     }
                     result.URL = Url;
                     //Model.CRMMobile.NotificationHistory notification = _UserRepository.GetUserNotificationHistoryByNotiHistoryID_Mobile(data.NotiHistoryID);
