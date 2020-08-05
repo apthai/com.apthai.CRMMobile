@@ -25,6 +25,7 @@ using MoreLinq;
 using Microsoft.AspNetCore.Hosting;
 using Minio;
 using Minio.DataModel;
+using System.Text;
 
 namespace com.apthai.CRMMobile.Controllers
 {
@@ -565,6 +566,12 @@ namespace com.apthai.CRMMobile.Controllers
                         }
                     }
                     getBilling[i].ProjectShowName = ProjectShowName;
+                    byte[] bytes = Encoding.Default.GetBytes(getBilling[i].ProjectAddressTH);
+                    getBilling[i].ProjectAddressTH = Encoding.UTF8.GetString(bytes);
+                    byte[] bytes2 = Encoding.Default.GetBytes(getBilling[i].AgreementOwnerAddressTH);
+                    getBilling[i].AgreementOwnerAddressTH = Encoding.UTF8.GetString(bytes2);
+                    byte[] bytes3 = Encoding.Default.GetBytes(getBilling[i].BookingOwnerAddressTH);
+                    getBilling[i].BookingOwnerAddressTH = Encoding.UTF8.GetString(bytes3);
                 }
                 if (getBilling.Count == null)
                 {
