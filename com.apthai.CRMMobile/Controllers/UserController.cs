@@ -566,17 +566,17 @@ namespace com.apthai.CRMMobile.Controllers
                         }
                     }
                     getBilling[i].ProjectShowName = ProjectShowName;
-                    if (getBilling[i].ProjectAddressTH != "" && getBilling[i].ProjectAddressTH == null)
+                    if (getBilling[i].ProjectAddressTH != "" && getBilling[i].ProjectAddressTH != null)
                     {
                         byte[] bytes = Encoding.Default.GetBytes(getBilling[i].ProjectAddressTH);
                         getBilling[i].ProjectAddressTH = Encoding.UTF8.GetString(bytes);
                     }
-                    if (getBilling[i].AgreementOwnerAddressTH != "" && getBilling[i].AgreementOwnerAddressTH == null)
+                    if (getBilling[i].AgreementOwnerAddressTH != "" && getBilling[i].AgreementOwnerAddressTH != null)
                     {
                         byte[] bytes2 = Encoding.Default.GetBytes(getBilling[i].AgreementOwnerAddressTH);
                         getBilling[i].AgreementOwnerAddressTH = Encoding.UTF8.GetString(bytes2);
                     }
-                    if (getBilling[i].BookingOwnerAddressTH != "" && getBilling[i].BookingOwnerAddressTH == null)
+                    if (getBilling[i].BookingOwnerAddressTH != "" && getBilling[i].BookingOwnerAddressTH != null)
                     {
                         byte[] bytes3 = Encoding.Default.GetBytes(getBilling[i].BookingOwnerAddressTH);
                         getBilling[i].BookingOwnerAddressTH = Encoding.UTF8.GetString(bytes3);
