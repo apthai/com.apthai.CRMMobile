@@ -566,12 +566,21 @@ namespace com.apthai.CRMMobile.Controllers
                         }
                     }
                     getBilling[i].ProjectShowName = ProjectShowName;
-                    byte[] bytes = Encoding.Default.GetBytes(getBilling[i].ProjectAddressTH);
-                    getBilling[i].ProjectAddressTH = Encoding.UTF8.GetString(bytes);
-                    byte[] bytes2 = Encoding.Default.GetBytes(getBilling[i].AgreementOwnerAddressTH);
-                    getBilling[i].AgreementOwnerAddressTH = Encoding.UTF8.GetString(bytes2);
-                    byte[] bytes3 = Encoding.Default.GetBytes(getBilling[i].BookingOwnerAddressTH);
-                    getBilling[i].BookingOwnerAddressTH = Encoding.UTF8.GetString(bytes3);
+                    if (getBilling[i].ProjectAddressTH != "" && getBilling[i].ProjectAddressTH == null)
+                    {
+                        byte[] bytes = Encoding.Default.GetBytes(getBilling[i].ProjectAddressTH);
+                        getBilling[i].ProjectAddressTH = Encoding.UTF8.GetString(bytes);
+                    }
+                    if (getBilling[i].AgreementOwnerAddressTH != "" && getBilling[i].AgreementOwnerAddressTH == null)
+                    {
+                        byte[] bytes2 = Encoding.Default.GetBytes(getBilling[i].AgreementOwnerAddressTH);
+                        getBilling[i].AgreementOwnerAddressTH = Encoding.UTF8.GetString(bytes2);
+                    }
+                    if (getBilling[i].BookingOwnerAddressTH != "" && getBilling[i].BookingOwnerAddressTH == null)
+                    {
+                        byte[] bytes3 = Encoding.Default.GetBytes(getBilling[i].BookingOwnerAddressTH);
+                        getBilling[i].BookingOwnerAddressTH = Encoding.UTF8.GetString(bytes3);
+                    }
                 }
                 if (getBilling.Count == null)
                 {
