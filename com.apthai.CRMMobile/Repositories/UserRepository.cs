@@ -449,7 +449,7 @@ namespace com.apthai.CRMMobile.Repositories
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
-                var result = conn.Query<iCRMBooking>("GetUserBookingMobile", new { ContactID = UserID }, commandType: CommandType.StoredProcedure).ToList();
+                var result = conn.Query<iCRMBooking>("sp_iCRM_GetUserBookingMobile", new { ContactID = UserID }, commandType: CommandType.StoredProcedure).ToList();
 
                 return result;
             }
@@ -459,7 +459,7 @@ namespace com.apthai.CRMMobile.Repositories
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
-                var result = conn.Query<iCRMMyProperty>("GetiCRMMyProperty", new { ContactNo = ContactNo }, commandType: CommandType.StoredProcedure).ToList();
+                var result = conn.Query<iCRMMyProperty>("sp_iCRM_GetiCRMMyProperty", new { ContactNo = ContactNo }, commandType: CommandType.StoredProcedure).ToList();
 
                 return result;
             }
@@ -469,7 +469,7 @@ namespace com.apthai.CRMMobile.Repositories
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
-                var result = conn.Query<GetBillingTrackingMobile>("SP_iCRM_GetBillingTrackingMobile", new { ProjectNo = ProjectNo, UnitNo = UnitNo }, commandType: CommandType.StoredProcedure).ToList();
+                var result = conn.Query<GetBillingTrackingMobile>("sp_iCRM_GetBillingTrackingMobile", new { ProjectNo = ProjectNo, UnitNo = UnitNo }, commandType: CommandType.StoredProcedure).ToList();
 
                 return result;
             }
@@ -479,7 +479,7 @@ namespace com.apthai.CRMMobile.Repositories
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
-                var result = conn.Query<iCRMContact>("iCRMConTactForMobile", new { Contact = Contact }, commandType: CommandType.StoredProcedure).ToList();
+                var result = conn.Query<iCRMContact>("sp_iCRM_iConTactForMobile", new { Contact = Contact }, commandType: CommandType.StoredProcedure).ToList();
 
                 return result;
             }
@@ -489,7 +489,7 @@ namespace com.apthai.CRMMobile.Repositories
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
-                var result = conn.Query<GetUserCardReturnObj>("GetUserCardMobile", new { ContactNo = ContactNo}, commandType: CommandType.StoredProcedure).ToList();
+                var result = conn.Query<GetUserCardReturnObj>("sp_iCRM_GetUserCardMobile", new { ContactNo = ContactNo}, commandType: CommandType.StoredProcedure).ToList();
 
                 return result;
             }
@@ -499,7 +499,7 @@ namespace com.apthai.CRMMobile.Repositories
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
-                var result = conn.Query<GetiCRMOwnerReturnObj>("GetiCRMOwner", new { ContactID = ContactID ,UnitNo = UnitNo , ProjectNo = ProjectNO}, commandType: CommandType.StoredProcedure).ToList();
+                var result = conn.Query<GetiCRMOwnerReturnObj>("sp_iCRM_GetiCRMOwner", new { ContactID = ContactID ,UnitNo = UnitNo , ProjectNo = ProjectNO}, commandType: CommandType.StoredProcedure).ToList();
 
                 return result;
             }
@@ -509,7 +509,7 @@ namespace com.apthai.CRMMobile.Repositories
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
-                var result = conn.Query<GetUserCreditCardReturnObj>("GetUserCreditCardMobile", new { ProjectNo = ProjectNo, UnitNo = UnitNo }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                var result = conn.Query<GetUserCreditCardReturnObj>("sp_iCRM_GetUserCreditCardMobile", new { ProjectNo = ProjectNo, UnitNo = UnitNo }, commandType: CommandType.StoredProcedure).FirstOrDefault();
 
                 return result;
             }
@@ -519,7 +519,7 @@ namespace com.apthai.CRMMobile.Repositories
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
-                var result = conn.Query<GetGetReceiptInfoReturnObj>("GetReceiptInfo", new { ReceiptTempNo = ReceiptTempNo }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                var result = conn.Query<GetGetReceiptInfoReturnObj>("sp_iCRM_GetReceiptInfo", new { ReceiptTempNo = ReceiptTempNo }, commandType: CommandType.StoredProcedure).FirstOrDefault();
 
                 return result;
             }
@@ -529,7 +529,7 @@ namespace com.apthai.CRMMobile.Repositories
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
-                var result = conn.Query<GetGetReceiptInfoReturnObj>("GetTempReceiptInfo", new { ReceiptTempNo = ReceiptTempNo }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                var result = conn.Query<GetGetReceiptInfoReturnObj>("sp_iCRM_GetTempReceiptInfo", new { ReceiptTempNo = ReceiptTempNo }, commandType: CommandType.StoredProcedure).FirstOrDefault();
 
                 return result;
             }
