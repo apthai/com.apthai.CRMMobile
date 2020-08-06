@@ -469,7 +469,7 @@ namespace com.apthai.CRMMobile.Repositories
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
-                var result = conn.Query<GetBillingTrackingMobile>("GetBillingTrackingMobile", new { ProjectNo = ProjectNo, UnitNo = UnitNo }, commandType: CommandType.StoredProcedure).ToList();
+                var result = conn.Query<GetBillingTrackingMobile>("SP_iCRM_GetBillingTrackingMobile", new { ProjectNo = ProjectNo, UnitNo = UnitNo }, commandType: CommandType.StoredProcedure).ToList();
 
                 return result;
             }
