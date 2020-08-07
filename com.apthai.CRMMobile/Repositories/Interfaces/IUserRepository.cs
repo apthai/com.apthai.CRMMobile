@@ -35,10 +35,12 @@ namespace com.apthai.CRMMobile.Repositories
         bool InsertSCBTransaction(Model.CRMMobile.PaymentTransaction data);
         bool UpdateCSUserLogin(Model.CRMMobile.UserLogin data);
         bool UpdateCSUserProfile(Model.CRMMobile.UserProfile data);
+        bool UpdatePaymentTransaction(Model.CRMMobile.PaymentTransaction data);
         List<iCRMBooking> GetUseriBookingByUserID(string UserID);
         List<iCRMMyProperty> GetUseriCRMMyPropoty(string ContactNo);
         List<GetBillingTrackingMobile> GetUserBillingTrackingByProjectandUnit(string ProjectNo, string UnitNo);
         List<iCRMContact> GetUseriCRMContact_Web(string Contact);
+        Model.CRMMobile.PaymentTransaction GetUserPaymentTransactionByUserID(string TransactionID);
         List<GetUserCardReturnObj> GetUserCardByProjectandUnit(string ContactNo );
         List<GetiCRMOwnerReturnObj> GetUserICRMOwnerByProjectUnitAndCRMContactID(string ContactID, string UnitNo, string ProjectNO);
         GetUserCreditCardReturnObj GetUserCreditCardByProjectandUnit(string ProjectID, string UnitID);

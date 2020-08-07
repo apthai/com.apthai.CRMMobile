@@ -139,6 +139,25 @@ namespace com.apthai.CRMMobile.HttpRestModel
         public string Language { get; set; }
         public string CRMContactID { get; set; }
     }
+    public class PaymentTransactionParam
+    {
+        public string payeeProxyId { get; set; }
+        public string payeeProxyType { get; set; }
+        public string payeeAccountNumber { get; set; }
+        public string payerAccountName { get; set; }
+        public string payerName { get; set; }
+        public string sendingBankCode { get; set; }
+        public string receivingBankCode { get; set; }
+        public string amount { get; set; }
+        public string transactionId { get; set; }
+        public string transactionDateandTime { get; set; }
+        public string billPaymentRef1 { get; set; }
+        public string billPaymentRef2 { get; set; }
+        public string billPaymentRef3 { get; set; }
+        public string currencyCode { get; set; }
+        public string channelCode { get; set; }
+        public string transactionType { get; set; }
+    }
     public class UserNotiHistoriesParam
     {
         public string CRMContactID { get; set; }

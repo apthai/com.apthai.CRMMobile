@@ -201,6 +201,9 @@ namespace com.apthai.CRMMobile.Controllers
                     sCBDeepLinkRespond.SCBToken = SCBAuthResult.data.accessToken;
 
                     transaction.Status = "Success";
+                    transaction.AgreeMentNo = data.AgreementNo;
+                    transaction.TransactionID = sCBDeepLinkRespond.data.transactionId;
+                    transaction.TransactionAmount = Convert.ToDecimal(data.paymentAmount);
                     bool SaveResult = _UserRepository.InsertSCBTransaction(transaction);
                     return new
                     {

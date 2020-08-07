@@ -137,6 +137,15 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public DateTime? TransactionDate { get; set; }
         public string Status { get; set; }
         public string TransactionInfo { get; set; }
+        public string CurrencyCode { get; set; }
+        public string TransactionType { get; set; }
+        public string TraceNo { get; set; }
+        public string PaymentMethod { get; set; }
+        public string CompanyID { get; set; }
+        public string TransactionID { get; set; }
+        public string TransactionNo { get; set; }
+        public decimal? TransactionAmount { get; set; }
+        public string AgreeMentNo { get; set; }
     }
 
     [Table("MST.ProjectLocation")]

@@ -92,6 +92,8 @@ namespace com.apthai.CRMMobile.CustomModel
     }
     public class GetBillingTrackingMobile
     {
+        //public string AmountBalance { get; set; }
+        public int UnitPriceStage { get; set; }
         public string ProjectNo { get; set; }
         public string UnitNo { get; set; }
         public Guid PaymentID { get; set; }

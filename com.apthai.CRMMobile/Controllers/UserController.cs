@@ -50,6 +50,69 @@ namespace com.apthai.CRMMobile.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
+        [HttpGet]
+        [Route("PaymentTransaction")]
+        [SwaggerOperation(Summary = "เปลี่ยนภาษาของบุคคลนั้นๆ",
+      Description = "เปลี่ยนภาษาของบุคคลนั้นๆ")]
+        public async Task<object> ChangeLanguage([FromBody]PaymentTransactionParam data)
+        {
+            try
+            {
+                StringValues api_key;
+                StringValues EmpCode;
+                //if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
+                //{
+                //    string AccessKey = api_key.First();
+                //    string EmpCodeKey = EmpCode.First();
+
+                //    if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
+                //    {
+                //        return new
+                //        {
+                //            success = false,
+                //            data = new AutorizeDataJWT(),
+                //            message = "Require Key to Access the Function"
+                //        };
+                //    }
+                //    else
+                //    {
+                //        string APApiKey = Environment.GetEnvironmentVariable("API_Key");
+                //        if (APApiKey == null)
+                //        {
+                //            APApiKey = UtilsProvider.AppSetting.ApiKey;
+                //        }
+                //        if (api_key != APApiKey)
+                //        {
+                //            return new
+                //            {
+                //                success = false,
+                //                data = new AutorizeDataJWT(),
+                //                message = "Incorrect API KEY !!"
+                //            };
+                //        }
+                //    }
+                //}
+                Model.CRMMobile.PaymentTransaction paymentTransaction = _UserRepository.GetUserPaymentTransactionByUserID(data.transactionId);
+                //Model.CRMMobile.UserProfile userProfile = _UserRepository.GetUserProfileByCRMContactID_Mobile(data.CRMContactID);
+                paymentTransaction.CurrencyCode = data.currencyCode;
+                paymentTransaction.TransactionType = data.transactionType;
+                paymentTransaction.TransactionAmount = Convert.ToDecimal(data.amount);
+
+                bool result = _UserRepository.UpdatePaymentTransaction(paymentTransaction);
+
+                return new
+                {
+                    success = true,
+                    data = paymentTransaction,
+                    message = "change Laguage Success !"
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error :: " + ex.Message);
+            }
+        }
         [HttpPost]
         [Route("ChangeLanguage")]
         [SwaggerOperation(Summary = "เปลี่ยนภาษาของบุคคลนั้นๆ",
@@ -758,7 +821,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 {
                     bool HaveFET = _UserRepository.GetUserFETByPaymentMethodID(getBilling[i].PaymentID);
                     getBilling[i].HaveFET = HaveFET;
-                    if (getBilling[i].UnitPriceStageName.Trim() == "จอง" && getBilling[i].FlagBooking != null)
+                    if (getBilling[i].UnitPriceStage == 1 && getBilling[i].FlagBooking != null) // เงินจอง
                     {
                         BookingGroup.GetBillingTrackingMobile.Add(getBilling[i]);
                         BookingGroup.DetailDownPayment = Convert.ToInt32(getBilling[i].DetailDownPayment);
@@ -782,18 +845,19 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         BookingGroup.PayAgreementAmount = getBilling[i].PayAgreementAmount;
                         BookingGroup.SpecialDownPaymentFlag = getBilling[i].SpecialDownPaymentFlag;
                         BookingGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
-                        if (BookingGroup.PayRemain == 0)
-                        {
-                            BookingGroup.PayRemain = Convert.ToDouble(getBilling[i].BookingAmount) - Convert.ToDouble(getBilling[i].PayBookingAmount);
-                        }
-                        else
-                        {
-                            BookingGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayBookingAmount);
-                        }
+                        BookingGroup.PayRemain = Convert.ToDouble(getBilling[i].AmountBalance);
+                        //if (BookingGroup.PayRemain == 0)
+                        //{
+                        //    BookingGroup.PayRemain = Convert.ToDouble(getBilling[i].BookingAmount) - Convert.ToDouble(getBilling[i].PayBookingAmount);
+                        //}
+                        //else
+                        //{
+                        //    BookingGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayBookingAmount);
+                        //}
                         FinalList.BookingList.Add(BookingGroup);
                         TempForDelete.Add(getBilling[i]);
                     }
-                    else if (getBilling[i].UnitPriceStageName.Trim() == "สัญญา" && getBilling[i].FlagAgreement != null)
+                    else if (getBilling[i].UnitPriceStage == 2 && getBilling[i].FlagAgreement != null)
                     {
                         ContactGroup.GetBillingTrackingMobile.Add(getBilling[i]);
                         ContactGroup.DetailDownPayment = Convert.ToInt32(getBilling[i].DetailDownPayment);
@@ -817,18 +881,19 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         ContactGroup.PayAgreementAmount = getBilling[i].PayAgreementAmount;
                         ContactGroup.SpecialDownPaymentFlag = getBilling[i].SpecialDownPaymentFlag;
                         ContactGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
-                        if (ContactGroup.PayRemain == 0)
-                        {
-                            ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].AgreementAmount) - Convert.ToDouble(getBilling[i].PayAgreementAmount);
-                        }
-                        else
-                        {
-                            ContactGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayAgreementAmount);
-                        }
+                        ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].AmountBalance);
+                        //if (ContactGroup.PayRemain == 0)
+                        //{
+                        //    ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].AgreementAmount) - Convert.ToDouble(getBilling[i].PayAgreementAmount);
+                        //}
+                        //else
+                        //{
+                        //    ContactGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayAgreementAmount);
+                        //}
                         FinalList.ContractList.Add(ContactGroup);
                         TempForDelete.Add(getBilling[i]);
                     }
-                    else if (getBilling[i].UnitPriceStageName.Trim() == "โอน" && getBilling[i].FlagTransfer != null)
+                    else if (getBilling[i].UnitPriceStageName == "5" && getBilling[i].FlagTransfer != null)
                     {
                         ContactGroup.GetBillingTrackingMobile.Add(getBilling[i]);
                         ContactGroup.DetailDownPayment = Convert.ToInt32(getBilling[i].DetailDownPayment);
@@ -856,14 +921,15 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         ContactGroup.PayAgreementAmount = getBilling[i].PayAgreementAmount;
                         ContactGroup.SpecialDownPaymentFlag = getBilling[i].SpecialDownPaymentFlag;
                         ContactGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
-                        if (ContactGroup.PayRemain == 0)
-                        {
-                            ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].TransferAmount) - Convert.ToDouble(getBilling[i].PayTransferAmount);
-                        }
-                        else
-                        {
-                            ContactGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayTransferAmount);
-                        }
+                        ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].AmountBalance);
+                        //if (ContactGroup.PayRemain == 0)
+                        //{
+                        //    ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].TransferAmount) - Convert.ToDouble(getBilling[i].PayTransferAmount);
+                        //}
+                        //else
+                        //{
+                        //    ContactGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayTransferAmount);
+                        //}
                         FinalList.TransferList.Add(ContactGroup);
                         TempForDelete.Add(getBilling[i]);
                     }
@@ -916,14 +982,15 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                             Group.PayAgreementAmount = BillingGroup[ii].PayAgreementAmount;
                             Group.SpecialDownPaymentFlag = BillingGroup[ii].SpecialDownPaymentFlag;
                             Group.SpecialDownPerInstallment = BillingGroup[ii].SpecialDownPerInstallment;
-                            if (Group.PayRemain == 0)
-                            {
-                                Group.PayRemain = Convert.ToDouble(BillingGroup[ii].DownPerInstallment) - Convert.ToDouble(BillingGroup[ii].AmountPaid);
-                            }
-                            else
-                            {
-                                Group.PayRemain = Group.PayRemain - Convert.ToDouble(BillingGroup[ii].AmountPaid);
-                            }
+                            Group.PayRemain = Convert.ToDouble(BillingGroup[ii].AmountBalance);
+                            //if (Group.PayRemain == 0)
+                            //{
+                            //    Group.PayRemain = Convert.ToDouble(BillingGroup[ii].DownPerInstallment) - Convert.ToDouble(BillingGroup[ii].AmountPaid);
+                            //}
+                            //else
+                            //{
+                            //    Group.PayRemain = Group.PayRemain - Convert.ToDouble(BillingGroup[ii].AmountPaid);
+                            //}
                         }
                     }
                     GroupList.Add(Group);

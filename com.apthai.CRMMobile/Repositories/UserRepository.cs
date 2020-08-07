@@ -228,6 +228,17 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
+        public Model.CRMMobile.PaymentTransaction GetUserPaymentTransactionByUserID(string TransactionID)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMMobile.PaymentTransaction>("select * from PaymentTransaction WITH(NOLOCK) " +
+                    " WHERE transactionID=@TransactionID ", new { TransactionID = TransactionID }).FirstOrDefault();
+
+                return result;
+            }
+        }
         public Model.CRMMobile.NotificationHistory GetUserNotificationHistoryByNotiHistoryID_Mobile(string NotiHistory)
         {
             using (IDbConnection conn = MobileConnection)
@@ -386,6 +397,25 @@ namespace com.apthai.CRMMobile.Repositories
             }
         }
         public bool UpdateCSUserProfile(Model.CRMMobile.UserProfile data)
+        {
+            using (IDbConnection conn = MobileConnection)
+            {
+                try
+                {
+                    conn.Open();
+                    var tran = conn.BeginTransaction(IsolationLevel.ReadUncommitted);
+                    var result = conn.Update(data, tran);
+                    tran.Commit();
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception("MasterRepository.UpdateCSUserProfile() :: Error ", ex);
+                }
+            }
+        }
+        public bool UpdatePaymentTransaction(Model.CRMMobile.PaymentTransaction data)
         {
             using (IDbConnection conn = MobileConnection)
             {
