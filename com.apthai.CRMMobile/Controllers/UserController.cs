@@ -99,11 +99,15 @@ namespace com.apthai.CRMMobile.Controllers
                 paymentTransaction.TransactionAmount = Convert.ToDecimal(data.amount);
 
                 bool result = _UserRepository.UpdatePaymentTransaction(paymentTransaction);
+                SCBReturnObject obj = new SCBReturnObject();
+                obj.resCode = "00";
+                obj.resDesc = "Success";
+                obj.transactionId = paymentTransaction.TransactionID;
 
                 return new
                 {
                     success = true,
-                    data = paymentTransaction,
+                    data = obj,
                     message = "change Laguage Success !"
                 };
 

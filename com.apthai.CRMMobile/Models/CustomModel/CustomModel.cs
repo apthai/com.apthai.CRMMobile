@@ -86,6 +86,13 @@ namespace com.apthai.CRMMobile.CustomModel
         public Model.CRMWeb.Project Project { get; set; }
         public Model.CRMWeb.Floor Floor { get; set; }
     }
+    public class SCBReturnObject
+    {
+        public string resCode { get; set; }
+        public string resDesc { get; set; }
+        public string transactionId { get; set; }
+        public string confirmId { get; set; }
+    }
     public class GetUserPropotyReturnObj
     {
         public List<GetUserPropotyObj> getUserPropotyObjs { get; set; }
