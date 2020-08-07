@@ -138,6 +138,7 @@ namespace com.apthai.CRMMobile.CustomModel
         // ----------- เงินจอง : ใบเสร็จจริง ---------------
         public Guid BookingReceiptHeaderID { get; set; }
         public string BookingReceiptRemark { get; set; }
+        public string BookingReceiptTempNo { get; set; }
         //------------ เงินจอง : ใบเสร็จชั่วคราว ---
         public string FlagBookingTemp { get; set; }
         public string BookingAmountTemp { get; set; }
@@ -191,6 +192,10 @@ namespace com.apthai.CRMMobile.CustomModel
         public Guid TransferReceiptHeaderIDTemp { get; set; }
         public string TransferReceiptRemarkTemp { get; set; }
         public bool HaveFET { get; set; }
+        public string AgreementReceiptTempNo { get; set; }
+        public string DownReceiptNo { get; set; }
+        public string DownReceiptTempNo { get; set; }
+        public string TransferReceiptTempNo { get; set; }
 
     }
     public class BillingTrackingGroup
