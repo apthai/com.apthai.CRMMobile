@@ -1919,7 +1919,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                     string Url = "";
                     bool Exist = false;
                     GetGetReceiptInfoReturnObj result = new GetGetReceiptInfoReturnObj();
-                    if (data.IsTemp == true)
+                    if (data.IsTemp == false)
                     {
                         //Url = await GetFileUrlAsync("erecipt", data.ProjectCode, data.ReceiptNo);
                         List<string> bucketList = await _UserRepository.GetListFile("erecipt", data.ProjectCode + "/");
@@ -1937,7 +1937,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         if (true)
                         {
                             Url = await _UserRepository.GetFileUrlAsync("ereceipt-temp", data.ProjectCode, data.ProjectCode + "/" + data.ReceiptNo + ".pdf");
-                            result = _UserRepository.GetReceiptInfoByReceiptNo(data.ReceiptNo);
+                            result = _UserRepository.GetReceiptTempInfoByReceiptNo(data.ReceiptNo);
                         }
                     }
                     result.URL = Url;
