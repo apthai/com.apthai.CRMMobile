@@ -2120,6 +2120,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
         {
             return string.Format("{0}_{1:N}", PhoneNumber, Guid.NewGuid());
         }
+
         [ApiExplorerSettings(IgnoreApi = true)]
         public bool VerifyHeader(out string ErrorMsg)
         {
@@ -2160,6 +2161,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
             ErrorMsg = "SomeThing Wrong with Header Contact Developer ASAP";
             return false;
         }
+
         [ApiExplorerSettings(IgnoreApi = true)]
         private static byte[] BitmapToBytes(Bitmap img)
         {
@@ -2169,6 +2171,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 return stream.ToArray();
             }
         }
+
         [ApiExplorerSettings(IgnoreApi = true)]
         public static String[] GetFilesFrom(String searchFolder, String[] filters, bool isRecursive)
         {
@@ -2181,10 +2184,11 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
             }
             return filesFound.ToArray();
         }
+
         [ApiExplorerSettings(IgnoreApi = true)]
         public string ReplaceWithPublicURL(string url)
         {
-            string _minioEndpoint = "http://192.168.3.11:9001";
+            string _minioEndpoint = "http://192.168.2.29:9001";
             //string _tempBucket = "timeattendence";
             if (!string.IsNullOrEmpty(_publicURL))
             {
@@ -2195,14 +2199,15 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
             }
             return url;
         }
+
         private int _expireHours = 24;
         public string _publicURL;
         [ApiExplorerSettings(IgnoreApi = true)]
         public async Task<string> GetFileUrlAsync(string bucket, string ReceiptNo, string name)
         {
-            string _minioEndpoint = "192.168.3.11:9001"; //192.168.2.29:9001"; // CRM 
-            string _minioAccessKey = "6GY279AXF49CP8U2OUKN";
-            string _minioSecretKey = "TPNH7YwXZioaxhcslxnSLPQZSQvr6v2hfSPJT1OD";
+            string _minioEndpoint = "192.168.2.29:9001"; //192.168.2.29:9001"; // CRM 
+            string _minioAccessKey = "XNTYE7HIMF6KK4BVEIXA";
+            string _minioSecretKey = "naD+esQ+uV7+xwfF3bPfAn5iC7C1XUyXeM8HkBlO";
             string _defaultBucket = "erecipt";
             string _tempBucket = "erecipt";
             bool _withSSL = false;
