@@ -50,6 +50,10 @@ namespace com.apthai.CRMMobile.HttpRestModel
         public string ProjectCode { get; set; }
         public string ReceiptNo { get; set; }
     }
+    public partial class GetReceiptListByReceiptID
+    {
+        public List<GetReceiptByReceiptID> getReceiptListByReceiptIDs { get; set; }
+    }
     public partial class GetFETByFETID
     {
         public string AccessKey { get; set; }

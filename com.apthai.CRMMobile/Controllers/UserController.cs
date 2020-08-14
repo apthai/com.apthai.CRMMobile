@@ -1957,6 +1957,76 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 return StatusCode(500, "Internal server error :: " + ex.Message);
             }
         }
+        [HttpPost]
+        [Route("GetUserRecieptListByRecieptNo")]
+        [SwaggerOperation(Summary = "Register User เพื่อใช่ระบบ ซึ่งจะไป หาข้อมูลจากระบบ CRM",
+       Description = "Access Key ใช้ในการเรียหใช้ Function ต่างๆ เพื่อไม่ให้ User Login หลายเครื่องในเวลาเดียวกัน")]
+        public async Task<object> GetUserRecieptListByRecieptNo([FromBody]GetReceiptListByReceiptID data)
+        {
+            try
+            {
+                StringValues api_key;
+                StringValues EmpCode;
+
+
+                VerifyPINReturnObj cSUserProfile = _UserRepository.GetUserLogin_Mobile(data.getReceiptListByReceiptIDs[0].AccessKey);
+                if (cSUserProfile == null)
+                {
+                    return new
+                    {
+                        success = false,
+                        data = new VerifyPINReturnObj(),
+                        message = "Cannot Find the User Matach Data"
+                    };
+                }
+                else
+                {
+                    List<GetGetReceiptInfoReturnObj> FinalResult = new List<GetGetReceiptInfoReturnObj>();
+                    for (int i = 0; i < data.getReceiptListByReceiptIDs.Count(); i++)
+                    {
+                        string Url = "";
+                        bool Exist = false;
+                        GetGetReceiptInfoReturnObj result = new GetGetReceiptInfoReturnObj();
+                        if (data.getReceiptListByReceiptIDs[i].IsTemp == false)
+                        {
+                            //Url = await GetFileUrlAsync("erecipt", data.ProjectCode, data.ReceiptNo);
+                            List<string> bucketList = await _UserRepository.GetListFile("erecipt", data.getReceiptListByReceiptIDs[i].ProjectCode + "/");
+                            bool FileExist = bucketList.Contains(data.getReceiptListByReceiptIDs[i].ProjectCode + "/" + data.getReceiptListByReceiptIDs[i].ReceiptNo + ".pdf");
+                            if (FileExist == true)
+                            {
+                                Url = await _UserRepository.GetFileUrlAsync("erecipt", data.getReceiptListByReceiptIDs[i].ProjectCode, data.getReceiptListByReceiptIDs[i].ProjectCode + "/" + data.getReceiptListByReceiptIDs[i].ReceiptNo + ".pdf");
+                            }
+                            result = _UserRepository.GetReceiptInfoByReceiptNo(data.getReceiptListByReceiptIDs[i].ReceiptNo);
+                        }
+                        else
+                        {
+                            List<string> bucketList = await _UserRepository.GetListFile("ereceipt-temp", data.getReceiptListByReceiptIDs[i].ProjectCode + "/");
+                            bool FileExist = bucketList.Contains(data.getReceiptListByReceiptIDs[i].ProjectCode + "/" + data.getReceiptListByReceiptIDs[i].ReceiptNo + ".pdf");
+                            if (true)
+                            {
+                                Url = await _UserRepository.GetFileUrlAsync("ereceipt-temp", data.getReceiptListByReceiptIDs[i].ProjectCode, data.getReceiptListByReceiptIDs[i].ProjectCode + "/" + data.getReceiptListByReceiptIDs[i].ReceiptNo + ".pdf");
+                            }
+                            result = _UserRepository.GetReceiptInfoByReceiptNo(data.getReceiptListByReceiptIDs[i].ReceiptNo);
+                        }
+                        result.URL = Url;
+                        //Model.CRMMobile.NotificationHistory notification = _UserRepository.GetUserNotificationHistoryByNotiHistoryID_Mobile(data.NotiHistoryID);
+                        //notification.IsRead = true;
+                        //bool updateIsRead = _UserRepository.UpdateIsReadForNotification(notification);
+                        FinalResult.Add(result);
+                    }
+                    return new
+                    {
+                        success = true,
+                        data = FinalResult,
+                        message = "Set Flag IsRead For Notification Success!"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error :: " + ex.Message);
+            }
+        }
 
         [HttpPost]
         [Route("GetFET")]
