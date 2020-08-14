@@ -1927,8 +1927,8 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         if (FileExist == true)
                         {
                             Url = await _UserRepository.GetFileUrlAsync("erecipt", data.ProjectCode, data.ProjectCode + "/" + data.ReceiptNo + ".pdf");
-                            result = _UserRepository.GetReceiptInfoByReceiptNo(data.ReceiptNo);
                         }
+                        result = _UserRepository.GetReceiptInfoByReceiptNo(data.ReceiptNo);
                     }
                     else
                     {
@@ -1937,8 +1937,8 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         if (true)
                         {
                             Url = await _UserRepository.GetFileUrlAsync("ereceipt-temp", data.ProjectCode, data.ProjectCode + "/" + data.ReceiptNo + ".pdf");
-                            result = _UserRepository.GetReceiptTempInfoByReceiptNo(data.ReceiptNo);
                         }
+                        result = _UserRepository.GetReceiptInfoByReceiptNo(data.ReceiptNo);
                     }
                     result.URL = Url;
                     //Model.CRMMobile.NotificationHistory notification = _UserRepository.GetUserNotificationHistoryByNotiHistoryID_Mobile(data.NotiHistoryID);
