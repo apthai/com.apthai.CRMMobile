@@ -131,6 +131,7 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
     [Table("PaymentTransaction")]
     public partial class PaymentTransaction
     {
+        public int? PaymentID { get; set; }
         public string CRMContractID { get; set; }
         public decimal? PaymentAmount { get; set; }
         public string AccountFrom { get; set; }

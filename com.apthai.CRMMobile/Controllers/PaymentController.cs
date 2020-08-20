@@ -200,7 +200,7 @@ namespace com.apthai.CRMMobile.Controllers
                     sCBDeepLinkRespond = JsonConvert.DeserializeObject<SCBDeepLinkRetrunObj>(DeepLinkResponData);
                     sCBDeepLinkRespond.SCBToken = SCBAuthResult.data.accessToken;
 
-                    transaction.Status = "Success";
+                    transaction.Status = "Pending";
                     transaction.AgreeMentNo = data.AgreementNo;
                     transaction.TransactionID = sCBDeepLinkRespond.data.transactionId;
                     transaction.TransactionAmount = Convert.ToDecimal(data.paymentAmount);

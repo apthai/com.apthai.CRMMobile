@@ -50,7 +50,7 @@ namespace com.apthai.CRMMobile.Controllers
             _hostingEnvironment = hostingEnvironment;
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("PaymentTransaction")]
         [SwaggerOperation(Summary = "เปลี่ยนภาษาของบุคคลนั้นๆ",
       Description = "เปลี่ยนภาษาของบุคคลนั้นๆ")]
@@ -94,6 +94,7 @@ namespace com.apthai.CRMMobile.Controllers
                 //}
                 Model.CRMMobile.PaymentTransaction paymentTransaction = _UserRepository.GetUserPaymentTransactionByUserID(data.transactionId);
                 //Model.CRMMobile.UserProfile userProfile = _UserRepository.GetUserProfileByCRMContactID_Mobile(data.CRMContactID);
+                paymentTransaction.Status = "Success";
                 paymentTransaction.CurrencyCode = data.currencyCode;
                 paymentTransaction.TransactionType = data.transactionType;
                 paymentTransaction.TransactionAmount = Convert.ToDecimal(data.amount);
