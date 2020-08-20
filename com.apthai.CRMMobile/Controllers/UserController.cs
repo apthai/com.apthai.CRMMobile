@@ -1928,15 +1928,23 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         {
                             Url = await _UserRepository.GetFileUrlAsync("erecipt", data.ProjectCode, data.ProjectCode + "/" + data.ReceiptNo + ".pdf");
                         }
+                        else
+                        {
+                            Url = "";
+                        }
                         result = _UserRepository.GetReceiptInfoByReceiptNo(data.ReceiptNo);
                     }
                     else
                     {
                         List<string> bucketList = await _UserRepository.GetListFile("ereceipt-temp", data.ProjectCode + "/");
                         bool FileExist = bucketList.Contains(data.ProjectCode + "/" + data.ReceiptNo + ".pdf");
-                        if (true)
+                        if (FileExist == true)
                         {
                             Url = await _UserRepository.GetFileUrlAsync("ereceipt-temp", data.ProjectCode, data.ProjectCode + "/" + data.ReceiptNo + ".pdf");
+                        }
+                        else
+                        {
+                            Url = "";
                         }
                         result = _UserRepository.GetReceiptTempInfoByReceiptNo(data.ReceiptNo);
                     }
@@ -1997,17 +2005,25 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                             {
                                 Url = await _UserRepository.GetFileUrlAsync("erecipt", data.getReceiptListByReceiptIDs[i].ProjectCode, data.getReceiptListByReceiptIDs[i].ProjectCode + "/" + data.getReceiptListByReceiptIDs[i].ReceiptNo + ".pdf");
                             }
+                            else
+                            {
+                                Url = "";
+                            }
                             result = _UserRepository.GetReceiptInfoByReceiptNo(data.getReceiptListByReceiptIDs[i].ReceiptNo);
                         }
                         else
                         {
                             List<string> bucketList = await _UserRepository.GetListFile("ereceipt-temp", data.getReceiptListByReceiptIDs[i].ProjectCode + "/");
                             bool FileExist = bucketList.Contains(data.getReceiptListByReceiptIDs[i].ProjectCode + "/" + data.getReceiptListByReceiptIDs[i].ReceiptNo + ".pdf");
-                            if (true)
+                            if (FileExist == true)
                             {
                                 Url = await _UserRepository.GetFileUrlAsync("ereceipt-temp", data.getReceiptListByReceiptIDs[i].ProjectCode, data.getReceiptListByReceiptIDs[i].ProjectCode + "/" + data.getReceiptListByReceiptIDs[i].ReceiptNo + ".pdf");
                             }
-                            result = _UserRepository.GetReceiptInfoByReceiptNo(data.getReceiptListByReceiptIDs[i].ReceiptNo);
+                            else
+                            {
+                                Url = "";
+                            }
+                            result = _UserRepository.GetReceiptTempInfoByReceiptNo(data.getReceiptListByReceiptIDs[i].ReceiptNo);
                         }
                         result.URL = Url;
                         //Model.CRMMobile.NotificationHistory notification = _UserRepository.GetUserNotificationHistoryByNotiHistoryID_Mobile(data.NotiHistoryID);
