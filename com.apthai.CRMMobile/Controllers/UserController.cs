@@ -1714,6 +1714,130 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
         }
 
         [HttpPost]
+        [Route("SendMobileNotificationFromWeb")]
+        [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด User = MIN | OAT",
+Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
+        public async Task<object> SendMobileNotificationFromWeb([FromBody]CreateMobileNotificationFromWebParam data)
+        {
+            try
+            {
+                StringValues api_key;
+                StringValues EmpCode;
+
+                //if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
+                //{
+                //    string AccessKey = api_key.First();
+                //    string EmpCodeKey = EmpCode.First();
+
+                //    if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
+                //    {
+                //        return new
+                //        {
+                //            success = false,
+                //            data = new AutorizeDataJWT(),
+                //            message = "Require Key to Access the Function"
+                //        };
+                //    }
+                //    else
+                //    {
+                //        string APApiKey = Environment.GetEnvironmentVariable("API_Key");
+                //        if (APApiKey == null)
+                //        {
+                //            APApiKey = UtilsProvider.AppSetting.ApiKey;
+                //        }
+                //        if (api_key != APApiKey)
+                //        {
+                //            return new
+                //            {
+                //                success = false,
+                //                data = new AutorizeDataJWT(),
+                //                message = "Incorrect API KEY !!"
+                //            };
+                //        }
+                //    }
+                //}
+
+                string Token = "";
+                string CRMContactID = "";
+                Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByID(data.CRMContactID);
+                Model.CRMMobile.UserProfile userProfile = _UserRepository.GetUserProfileByCRMContactID_Mobile(data.CRMContactID);
+                Model.CRMMobile.UserLogin userLogin = _UserRepository.GetUserLoginByID_Mobile(userProfile.UserProfileID);
+                if (contact == null)
+                {
+                    return new
+                    {
+                        success = false,
+                        data = new AutorizeDataJWT(),
+                        message = "Only AP Customer Can Regist to the System !!"
+                    };
+                }
+                
+
+                //var a = _mobileMessagingClient.CreateNotification("tests", "My First Notifications", Token);
+                //string MsgTitleTH = "พี่ปอม";
+                //string MsgTitleEN = "P'Pom";
+                //string BodyMsgTH = "คิดถึงน้องพลอยจัง วันนี้ไม่เจอเลย /r/n " + "จะออกไปแตะขอบฟ้า แต่เหมือนว่าโชคชะตาไม่เข้าใจ มองไปไม่มัหนทาง แต่รู้ว่าจะต้องไปต่อไป สิ้นแสงขอบฟ้าสีคราม ร้องต่อไม่ได้แล้ว อยู่กับพี่จะมัแต่เสียงร้องของดนตรี ไม่มีเสียงร้องพร้อมน้ำตาแน่นอน <3";
+                //string BodyMsgEN = "I miss N'Ploy /r/n " + "I want to touch the end of the sky. but distiny never understand me. there is no way ahead but i have to make a way through. If N'Ploy is with me there will be only a sound of joy , Never tears.";
+                if (userProfile.Language.ToLower() == "th")
+                {
+                    var b = _mobileMessagingClient.SendNotification(userLogin.FireBaseToken, data.MsgTitleTH, data.BodyMsgTH);
+                }
+                else
+                {
+                    var b = _mobileMessagingClient.SendNotification(userLogin.FireBaseToken, data.MsgTitleEN, data.BodyMsgEN);
+                }
+
+
+                Model.CRMMobile.NotificationHistory Nh = new Model.CRMMobile.NotificationHistory();
+                Nh.Created = DateTime.Now.ToString();
+                Nh.ProjectNo = data.ProjectCode;
+                Nh.CRMContactID = CRMContactID;
+                Nh.UnitNo = data.UnitNo;
+                Nh.ProjectNameTH = "";
+                Nh.MsgType = "Web";
+                Nh.SendMsgStatus = true;
+                Nh.MessageTitleTH = data.MsgTitleTH;
+                Nh.MsgTH = data.BodyMsgTH;
+                Nh.MessageTitleENG = data.BodyMsgEN;
+                Nh.MsgEN = data.BodyMsgEN;
+                Nh.IsRead = false;
+                if (userProfile.Language.ToLower() == "th")
+                {
+                    Nh.MsgLanguage = "TH";
+                }
+                else
+                {
+                    Nh.MsgLanguage = "EN";
+                }
+                bool Insert = _UserRepository.InsertNotificationHistory(Nh);
+                if (Insert)
+                {
+                    return new
+                    {
+                        success = true,
+                        data = "",
+                        message = "Get User's Card Success !"
+                    };
+                }
+                else
+                {
+                    return new
+                    {
+                        success = false,
+                        data = "",
+                        message = "Get User's Card Fail !"
+                    };
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error :: " + ex.Message);
+            }
+        }
+
+        [HttpPost]
         [Route("UserNotiHistroies")]
         [SwaggerOperation(Summary = "เปลี่ยนภาษาของบุคคลนั้นๆ",
        Description = "เปลี่ยนภาษาของบุคคลนั้นๆ")]
@@ -2025,6 +2149,15 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                                 Url = "";
                             }
                             result = _UserRepository.GetReceiptTempInfoByReceiptNo(data.getReceiptListByReceiptIDs[i].ReceiptNo);
+                        }
+                        if (result.ReceiptTempNo != null)
+                        {
+                            result.ReceiptNo = result.ReceiptTempNo;
+                            result.IsTemp = true;
+                        }
+                        else
+                        {
+                            result.IsTemp = false;
                         }
                         result.URL = Url;
                         //Model.CRMMobile.NotificationHistory notification = _UserRepository.GetUserNotificationHistoryByNotiHistoryID_Mobile(data.NotiHistoryID);

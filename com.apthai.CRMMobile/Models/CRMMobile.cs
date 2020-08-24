@@ -84,6 +84,7 @@ namespace com.apthai.CRMMobile.Model.CRMMobile
         public string Updated { get; set; }
         public string UpdatedBy { get; set; }
         public bool? IsRead { get; set; }
+        public string MsgLanguage { get; set; }
     }
 
     [Table("NT.NotificationTemp")]

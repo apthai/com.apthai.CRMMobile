@@ -234,6 +234,16 @@ namespace com.apthai.CRMMobile.HttpRestModel
         public string Token { get; set; }
         public string Language { get; set; }
     }
+    public partial class CreateMobileNotificationFromWebParam
+    {
+        public string CRMContactID { get; set; }
+        public string MsgTitleTH { get; set; }
+        public string MsgTitleEN { get; set; }
+        public string BodyMsgTH { get; set; }
+        public string BodyMsgEN { get; set; }
+        public string ProjectCode { get; set; }
+        public string UnitNo { get; set; }
+    }
     public partial class SCBPaymentParam
     {
         public string CRMContactID { get; set; }

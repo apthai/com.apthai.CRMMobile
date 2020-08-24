@@ -421,6 +421,7 @@ namespace com.apthai.CRMMobile.CustomModel
     }
     public class GetGetReceiptInfoReturnObj
     {
+        public string ReceiptNo { get; set; }
         public string ReceiptTempNo { get; set; }
         public string PaymentMethodTH { get; set; }
         public string PaymentMethodEN { get; set; }
@@ -446,6 +447,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string ContactProvinceEN { get; set; }
         public string ContactPostalCode { get; set; }
         public string URL { get; set; }
+        public bool IsTemp { get; set; }
     }
     public class SCBAuthenHeader
     {
