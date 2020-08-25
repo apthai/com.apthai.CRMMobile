@@ -243,6 +243,8 @@ namespace com.apthai.CRMMobile.HttpRestModel
         public string BodyMsgEN { get; set; }
         public string ProjectCode { get; set; }
         public string UnitNo { get; set; }
+        public string MsgType { get; set; }
+        public string MsgReferenceKey { get; set; }
     }
     public partial class SCBPaymentParam
     {
