@@ -17,6 +17,7 @@
         "AdsUrl": "https://test-icrmapi.apthai.com/Ads/",
         "DefaultMobileConnection": "Data Source=192.168.2.52;Initial Catalog=db_icrm;User ID=sa;Password=P@ssw0rd; Application Name=ApiSync",
         "SCBAPISecret": "0bd444d01f7a436fade44121266e8952",
+        "SCBURL": "https://api-sandbox.partners.scb/partners/sandbox/v1/oauth/token",
         "AuthorizeEndpointUrlAddress": "http://192.168.0.40/authorizewebservice/Authorize.asmx?wsdl",
         "Api_Token": "CtOcOl54qoQVGAp6XaRnfI/PC/77cjN6c4tVj76uXwT+sEjnimRK8j2Dw+7uWPtqSSpt+rr/vZcswsd1o+V1phuvsBv0Ag==",
         "DefaultConnection": "Data Source=192.168.2.27;Initial Catalog=crmrevo_dev;User ID=revo;Password=P@ssw0rd; Application Name=WebAPI_com.apthai.CRMMobile",
@@ -25,7 +26,8 @@
         "AuthenticationURL": "http://58.137.32.228/DotNetCoreAuth/Api/authorize/JWTUserLogin",
         "AuthenticationURL_PRD": "https://authorizewebservice.apthai.com/newapi/Api/authorize/JWTUserLogin",
         "APSCBAccount": "389949969500836",
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "DeeplinkPostURL": "https://api-sandbox.partners.scb/partners/sandbox/v3/deeplink/transactions"
       }
     },
     "com.apthai.CRMMobile": {

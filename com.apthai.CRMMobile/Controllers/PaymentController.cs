@@ -103,7 +103,12 @@ namespace com.apthai.CRMMobile.Controllers
                 content.Headers.Add("resourceOwnerId", sCB.applicationKey);
                 content.Headers.Add("requestUId", RequestID);
                 //content.Headers.Add("accept-language", data.acceptlanguage);
-                string PostURL = "https://api-sandbox.partners.scb/partners/sandbox/v1/oauth/token"; // SCB Link Auth
+                string PostURL = Environment.GetEnvironmentVariable("SCBURL");
+                if (PostURL == null)
+                {
+                    PostURL = UtilsProvider.AppSetting.SCBURL;
+                }
+                //string PostURL = "https://api-sandbox.partners.scb/partners/sandbox/v1/oauth/token"; // SCB Link Auth
                 var respond = await client.PostAsync(PostURL, content);
                 SCBAuthenRetrunObj SCBAuthResult = new SCBAuthenRetrunObj();
                 if (respond.StatusCode != System.Net.HttpStatusCode.OK)
@@ -182,7 +187,12 @@ namespace com.apthai.CRMMobile.Controllers
                 DeeplinkContent.Headers.Add("requestUId", RequestID);
                 DeeplinkContent.Headers.Add("channel", "scbeasy");
                 //content.Headers.Add("accept-language", data.acceptlanguage);
-                string DeeplinkPostURL = "https://api-sandbox.partners.scb/partners/sandbox/v3/deeplink/transactions"; // SCB Link Auth
+                string DeeplinkPostURL = Environment.GetEnvironmentVariable("DeeplinkPostURL");
+                if (DeeplinkPostURL == null)
+                {
+                    DeeplinkPostURL = UtilsProvider.AppSetting.DeeplinkPostURL;
+                }
+                //string DeeplinkPostURL = "https://api-sandbox.partners.scb/partners/sandbox/v3/deeplink/transactions"; // SCB Link Auth
                 var Deeplinkrespond = await Deeplinkclient.PostAsync(DeeplinkPostURL, DeeplinkContent);
                 SCBDeepLinkRetrunObj sCBDeepLinkRespond = new SCBDeepLinkRetrunObj();
                 if (Deeplinkrespond.StatusCode != System.Net.HttpStatusCode.Created)
