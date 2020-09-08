@@ -198,6 +198,8 @@ namespace com.apthai.CRMMobile.CustomModel
         public string TransferReceiptTempNo { get; set; }
         public string PaymentItemNameTH { get; set; }
         public string PaymentItemNameEN { get; set; }
+        public string ContactAddressTH { get; set; }
+        public string ContactAddressEN { get; set; }
     }
     public class BillingTrackingGroup
 
