@@ -622,6 +622,7 @@ namespace com.apthai.CRMMobile.Controllers
                 {
                     if (getBilling[i].Project == null || getBilling[i].Project == "")
                     {
+                        getBilling.Remove(getBilling[i]);
                         continue;
                     }
                     var Project = getBilling[i].Project.Split(" ");
