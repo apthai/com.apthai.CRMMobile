@@ -455,6 +455,9 @@ namespace com.apthai.CRMMobile.CustomModel
         public string URL { get; set; }
         public bool IsTemp { get; set; }
         public string ReceiveDate { get; set; }
+        public string PaymentItemNameTH { get; set; }
+        public string PaymentItemNameEN { get; set; }
+        public string ReceiptAmount { get; set; }
     }
     public class SCBAuthenHeader
     {
