@@ -620,6 +620,10 @@ namespace com.apthai.CRMMobile.Controllers
                 List<iCRMBooking> getBilling = _UserRepository.GetUseriBookingByUserID(data.UserID);
                 for (int i = 0; i < getBilling.Count(); i++)
                 {
+                    if (getBilling[i].Project == null || getBilling[i].Project == "")
+                    {
+                        continue;
+                    }
                     var Project = getBilling[i].Project.Split(" ");
                     string ProjectShowName = "";
                     for (int ii = 1; ii < Project.Count(); ii++)
