@@ -856,6 +856,8 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         BookingGroup.SpecialDownPaymentFlag = getBilling[i].SpecialDownPaymentFlag;
                         BookingGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
                         BookingGroup.PayRemain = Convert.ToDouble(getBilling[i].AmountBalance);
+                        BookingGroup.PaymentItemNameTH = getBilling[i].PaymentItemNameTH;
+                        BookingGroup.PaymentItemNameEN = getBilling[i].PaymentItemNameEN;
                         //if (BookingGroup.PayRemain == 0)
                         //{
                         //    BookingGroup.PayRemain = Convert.ToDouble(getBilling[i].BookingAmount) - Convert.ToDouble(getBilling[i].PayBookingAmount);
@@ -892,6 +894,8 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         ContactGroup.SpecialDownPaymentFlag = getBilling[i].SpecialDownPaymentFlag;
                         ContactGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
                         ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].AmountBalance);
+                        ContactGroup.PaymentItemNameTH = getBilling[i].PaymentItemNameTH;
+                        ContactGroup.PaymentItemNameEN = getBilling[i].PaymentItemNameEN;
                         //if (ContactGroup.PayRemain == 0)
                         //{
                         //    ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].AgreementAmount) - Convert.ToDouble(getBilling[i].PayAgreementAmount);
@@ -993,6 +997,8 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                             Group.SpecialDownPaymentFlag = BillingGroup[ii].SpecialDownPaymentFlag;
                             Group.SpecialDownPerInstallment = BillingGroup[ii].SpecialDownPerInstallment;
                             Group.PayRemain = Convert.ToDouble(BillingGroup[ii].AmountBalance);
+                            Group.PaymentItemNameTH = BillingGroup[ii].PaymentItemNameTH;
+                            Group.PaymentItemNameEN = BillingGroup[ii].PaymentItemNameEN;
                             //if (Group.PayRemain == 0)
                             //{
                             //    Group.PayRemain = Convert.ToDouble(BillingGroup[ii].DownPerInstallment) - Convert.ToDouble(BillingGroup[ii].AmountPaid);

@@ -228,9 +228,10 @@ namespace com.apthai.CRMMobile.CustomModel
         public string TransferAmount { get; set; }
         public string TransferPaymentDate { get; set; }
         public string FlagTransferReceipt { get; set; }
+        public string PaymentItemNameTH { get; set; }
+        public string PaymentItemNameEN { get; set; }
     }
     public class BillingFinalTrackingGroup
-
     {
         public List<BillingTrackingGroup> BillingTrackingGroup { get; set; }
         public List<BillingTrackingGroup> BookingList { get; set; }
