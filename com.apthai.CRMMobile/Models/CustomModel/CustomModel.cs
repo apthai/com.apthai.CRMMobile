@@ -288,6 +288,8 @@ namespace com.apthai.CRMMobile.CustomModel
         public string ProjectAddressTH { get; set; }
         public string ProjectAddressEN { get; set; }
         public string PhoneNumber { get; set; }
+        public string ContactAddressTH { get; set; }
+        public string ContactAddressEN { get; set; }
     }
     public class iCRMMyProperty
     {
