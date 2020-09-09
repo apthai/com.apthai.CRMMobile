@@ -453,6 +453,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string ContactPostalCode { get; set; }
         public string URL { get; set; }
         public bool IsTemp { get; set; }
+        public string ReceiveDate { get; set; }
     }
     public class SCBAuthenHeader
     {
