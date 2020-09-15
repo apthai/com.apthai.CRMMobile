@@ -206,7 +206,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string PayDownAmount { get; set; }
         public string DownPaymentDate { get; set; }
         public string FlagDownReceipt { get; set; }
-        public string DownReceiptHeaderID { get; set; }
+        public Guid DownReceiptHeaderID { get; set; }
         public string DownReceiptRemark { get; set; }
 
         public Guid TransferPaymentID { get; set; }
