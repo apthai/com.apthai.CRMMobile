@@ -200,6 +200,17 @@ namespace com.apthai.CRMMobile.CustomModel
         public string PaymentItemNameEN { get; set; }
         public string ContactAddressTH { get; set; }
         public string ContactAddressEN { get; set; }
+        // ดาวน์
+        public string FlagDown { get; set; }
+        public string DownAmount { get; set; }
+        public string PayDownAmount { get; set; }
+        public string DownPaymentDate { get; set; }
+        public string FlagDownReceipt { get; set; }
+        public string DownReceiptHeaderID { get; set; }
+        public string DownReceiptRemark { get; set; }
+
+        public Guid TransferPaymentID { get; set; }
+
     }
     public class BillingTrackingGroup
 
@@ -237,6 +248,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public List<BillingTrackingGroup> BookingList { get; set; }
         public List<BillingTrackingGroup> ContractList { get; set; }
         public List<BillingTrackingGroup> TransferList { get; set; }
+        public List<BillingTrackingGroup> DownpayList { get; set; }
     }
     public class iCRMBooking
     {
