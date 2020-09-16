@@ -267,10 +267,11 @@ namespace com.apthai.CRMMobile.Repositories
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
-                var result = conn.Query<Model.CRMWeb.FET>("SELECT fet.* FROM FIN.Payment p " +
-                    " LEFT JOIN FIN.PaymentMethod pm ON pm.PaymentID = p.ID " +
-                    " LEFT JOIN FIN.FET fet ON fet.PaymentMethodID = pm.ID " +
-                    " WHERE p.ID=@PaymentMethodID", new { PaymentMethodID = PaymentMethodID }).FirstOrDefault();
+                conn.Open();
+                var result = conn.Query<Model.CRMWeb.FET>("select * from FIN.PaymentMethod WITH(NOLOCK) " +
+                    " Left join FIN.FET ft ON FIN.PaymentMethod.ID = ft.PaymentMethodID " +
+                    " where Fin.PaymentMethod.PaymentID=@PaymentMethodID", new { PaymentMethodID = PaymentMethodID }).FirstOrDefault();
+                
                 if (result == null)
                 {
                     return false;
