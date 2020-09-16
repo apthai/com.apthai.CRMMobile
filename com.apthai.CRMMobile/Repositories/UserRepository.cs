@@ -267,7 +267,6 @@ namespace com.apthai.CRMMobile.Repositories
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
-                conn.Open();
                 var result = conn.Query<Model.CRMWeb.FET>("select * from FIN.PaymentMethod WITH(NOLOCK) " +
                     " Left join FIN.FET ft ON FIN.PaymentMethod.ID = ft.PaymentMethodID " +
                     " where Fin.PaymentMethod.PaymentID=@PaymentMethodID", new { PaymentMethodID = PaymentMethodID }).FirstOrDefault();
