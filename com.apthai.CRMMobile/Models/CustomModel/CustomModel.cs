@@ -140,6 +140,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string BookingReceiptRemark { get; set; }
         public string BookingReceiptTempNo { get; set; }
         //------------ เงินจอง : ใบเสร็จชั่วคราว ---
+        public Guid BookingPaymentID { get; set; }
         public string FlagBookingTemp { get; set; }
         public string BookingAmountTemp { get; set; }
         public string PayBookingAmountTemp { get; set; }
