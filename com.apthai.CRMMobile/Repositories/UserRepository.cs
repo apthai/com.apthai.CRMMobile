@@ -252,7 +252,7 @@ namespace com.apthai.CRMMobile.Repositories
         }
         public Model.CRMWeb.FET GetUserFETDataByPaymentMethodID(Guid PaymentMethodID)
         {
-            using (IDbConnection conn = MobileConnection)
+            using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
                 var result = conn.Query<Model.CRMWeb.FET>("select * from FIN.PaymentMethod WITH(NOLOCK) " +
