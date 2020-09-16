@@ -828,6 +828,8 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 ContactGroup.GetBillingTrackingMobile = new List<GetBillingTrackingMobile>();
                 BillingTrackingGroup BookingGroup = new BillingTrackingGroup();
                 BookingGroup.GetBillingTrackingMobile = new List<GetBillingTrackingMobile>();
+                BillingTrackingGroup TransferGroup = new BillingTrackingGroup();
+                TransferGroup.GetBillingTrackingMobile = new List<GetBillingTrackingMobile>();
                 for (int i = 0; i < getBilling.Count(); i++)
                 {
                     bool HaveFET = _UserRepository.GetUserFETByPaymentMethodID(getBilling[i].PaymentID);
@@ -910,33 +912,33 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                     }
                     else if (getBilling[i].UnitPriceStage == 5 && getBilling[i].FlagTransfer != null)//โอน
                     {
-                        ContactGroup.GetBillingTrackingMobile.Add(getBilling[i]);
-                        ContactGroup.DetailDownPayment = Convert.ToInt32(getBilling[i].DetailDownPayment);
-                        ContactGroup.IsOverDue = getBilling[i].FlagOverDue == "Y" ? true : false;
-                        ContactGroup.PaymentAmount = Convert.ToDouble(getBilling[i].BookingAmount);
-                        ContactGroup.PaymentDueDate = getBilling[i].PaymentDueDate;
+                        TransferGroup.GetBillingTrackingMobile.Add(getBilling[i]);
+                        TransferGroup.DetailDownPayment = Convert.ToInt32(getBilling[i].DetailDownPayment);
+                        TransferGroup.IsOverDue = getBilling[i].FlagOverDue == "Y" ? true : false;
+                        TransferGroup.PaymentAmount = Convert.ToDouble(getBilling[i].BookingAmount);
+                        TransferGroup.PaymentDueDate = getBilling[i].PaymentDueDate;
                         //--------------------------
-                        ContactGroup.DownPerInstallment = getBilling[i].DownPerInstallment;
-                        ContactGroup.NormalDownPerInstallment = getBilling[i].NormalDownPerInstallment;
-                        ContactGroup.SpecialDownPaymentFlag = getBilling[i].SpecialDownPaymentFlag;
-                        ContactGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
-                        ContactGroup.AgreementAmount = getBilling[i].AgreementAmount;
-                        ContactGroup.BookingAmount = getBilling[i].BookingAmount;
-                        ContactGroup.BookingPaymentDate = getBilling[i].BookingPaymentDate;
-                        ContactGroup.FlagTransfer = getBilling[i].FlagTransfer;
-                        ContactGroup.TransferAmount = getBilling[i].TransferAmount;
-                        ContactGroup.TransferPaymentDate = getBilling[i].TransferPaymentDate;
-                        ContactGroup.FlagTransferReceipt = getBilling[i].FlagTransferReceipt;
-                        ContactGroup.FlagAgreement = getBilling[i].FlagAgreement;
-                        ContactGroup.FlagAgreementReceipt = getBilling[i].FlagAgreementReceipt;
-                        ContactGroup.FlagBooking = getBilling[i].FlagBooking;
-                        ContactGroup.FlagBookingReceipt = getBilling[i].FlagBookingReceipt;
-                        ContactGroup.FlagOverDue = getBilling[i].FlagOverDue;
-                        ContactGroup.FlagReceipt = getBilling[i].FlagReceipt;
-                        ContactGroup.PayAgreementAmount = getBilling[i].PayAgreementAmount;
-                        ContactGroup.SpecialDownPaymentFlag = getBilling[i].SpecialDownPaymentFlag;
-                        ContactGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
-                        ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].AmountBalance);
+                        TransferGroup.DownPerInstallment = getBilling[i].DownPerInstallment;
+                        TransferGroup.NormalDownPerInstallment = getBilling[i].NormalDownPerInstallment;
+                        TransferGroup.SpecialDownPaymentFlag = getBilling[i].SpecialDownPaymentFlag;
+                        TransferGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
+                        TransferGroup.AgreementAmount = getBilling[i].AgreementAmount;
+                        TransferGroup.BookingAmount = getBilling[i].BookingAmount;
+                        TransferGroup.BookingPaymentDate = getBilling[i].BookingPaymentDate;
+                        TransferGroup.FlagTransfer = getBilling[i].FlagTransfer;
+                        TransferGroup.TransferAmount = getBilling[i].TransferAmount;
+                        TransferGroup.TransferPaymentDate = getBilling[i].TransferPaymentDate;
+                        TransferGroup.FlagTransferReceipt = getBilling[i].FlagTransferReceipt;
+                        TransferGroup.FlagAgreement = getBilling[i].FlagAgreement;
+                        TransferGroup.FlagAgreementReceipt = getBilling[i].FlagAgreementReceipt;
+                        TransferGroup.FlagBooking = getBilling[i].FlagBooking;
+                        TransferGroup.FlagBookingReceipt = getBilling[i].FlagBookingReceipt;
+                        TransferGroup.FlagOverDue = getBilling[i].FlagOverDue;
+                        TransferGroup.FlagReceipt = getBilling[i].FlagReceipt;
+                        TransferGroup.PayAgreementAmount = getBilling[i].PayAgreementAmount;
+                        TransferGroup.SpecialDownPaymentFlag = getBilling[i].SpecialDownPaymentFlag;
+                        TransferGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
+                        TransferGroup.PayRemain = Convert.ToDouble(getBilling[i].AmountBalance);
                         //if (ContactGroup.PayRemain == 0)
                         //{
                         //    ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].TransferAmount) - Convert.ToDouble(getBilling[i].PayTransferAmount);
@@ -945,7 +947,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         //{
                         //    ContactGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayTransferAmount);
                         //}
-                        FinalList.TransferList.Add(ContactGroup);
+                        FinalList.TransferList.Add(TransferGroup);
                         TempForDelete.Add(getBilling[i]);
                     }
 
