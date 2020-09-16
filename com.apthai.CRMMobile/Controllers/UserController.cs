@@ -2390,6 +2390,65 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
             }
         }
 
+        [HttpPost]
+        [Route("GetFETList")]
+        [SwaggerOperation(Summary = "Register User เพื่อใช่ระบบ ซึ่งจะไป หาข้อมูลจากระบบ CRM",
+Description = "Access Key ใช้ในการเรียหใช้ Function ต่างๆ เพื่อไม่ให้ User Login หลายเครื่องในเวลาเดียวกัน")]
+        public async Task<object> GetFETList([FromBody]GetFETByFETIDList data)
+        {
+            try
+            {
+                StringValues api_key;
+                StringValues EmpCode;
+
+
+                VerifyPINReturnObj cSUserProfile = _UserRepository.GetUserLogin_Mobile(data.AccessKey);
+                if (cSUserProfile == null)
+                {
+                    return new
+                    {
+                        success = false,
+                        data = new VerifyPINReturnObj(),
+                        message = "Cannot Find the User Matach Data"
+                    };
+                }
+                else
+                {
+                    List<FetListResult> Result = new List<FetListResult>();
+                    for (int i = 0; i < data.PaymentMethodID.Count(); i++)
+                    {
+                        FetListResult datas = new FetListResult();
+                        var FET = _UserRepository.GetUserFETDataByPaymentMethodID(data.PaymentMethodID[i]);
+                        if (FET == null)
+                        {
+                            datas.PaymentMethodID = data.PaymentMethodID[i].ToString();
+                            datas.Url = null;
+                            Result.Add(datas);
+                        }
+                        else
+                        {
+                            string Url = "";
+                            Url = await _UserRepository.GetFETFileUrlAsync("finances", FET.AttachFileUrl + "/" + FET.AttachFileName);
+                            datas.PaymentMethodID = data.PaymentMethodID[i].ToString();
+                            datas.Url = Url;
+                            Result.Add(datas);
+                        }
+                    }
+
+                    return new
+                    {
+                        success = true,
+                        data = Result,
+                        message = "Set Flag IsRead For Notification Success!"
+                    };
+                }
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error :: " + ex.Message);
+            }
+        }
+
         // [HttpPost]
         // [Route("GetUserFET")]
         // [SwaggerOperation(Summary = "Register User เพื่อใช่ระบบ ซึ่งจะไป หาข้อมูลจากระบบ CRM",

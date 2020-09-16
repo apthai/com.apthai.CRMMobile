@@ -57,8 +57,12 @@ namespace com.apthai.CRMMobile.HttpRestModel
     public partial class GetFETByFETID
     {
         public string AccessKey { get; set; }
-        public Guid FetID { get; set; }
         public Guid PaymentMethodID { get; set; }
+    }
+    public partial class GetFETByFETIDList
+    {
+        public string AccessKey { get; set; }
+        public List<Guid> PaymentMethodID { get; set; }
     }
     public partial class GetReceiptinfoByNo
     {
