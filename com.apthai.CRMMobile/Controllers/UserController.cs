@@ -2451,6 +2451,316 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
             }
         }
 
+        [HttpPost]
+        [Route("GetUserBillingTrackingNew")]
+        [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
+Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
+        public async Task<object> GetUserBillingTrackingNew([FromBody]GetUserBillingTrackingParam data)
+        {
+            try
+            {
+                StringValues api_key;
+                StringValues EmpCode;
+                //if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
+                //{
+                //    string AccessKey = api_key.First();
+                //    string EmpCodeKey = EmpCode.First();
+
+                //    if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
+                //    {
+                //        return new
+                //        {
+                //            success = false,
+                //            data = new AutorizeDataJWT(),
+                //            message = "Require Key to Access the Function"
+                //        };
+                //    }
+                //    else
+                //    {
+                //        string APApiKey = Environment.GetEnvironmentVariable("API_Key");
+                //        if (APApiKey == null)
+                //        {
+                //            APApiKey = UtilsProvider.AppSetting.ApiKey;
+                //        }
+                //        if (api_key != APApiKey)
+                //        {
+                //            return new
+                //            {
+                //                success = false,
+                //                data = new AutorizeDataJWT(),
+                //                message = "Incorrect API KEY !!"
+                //            };
+                //        }
+                //    }
+                //}
+
+                //Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByID(data.UserID);
+                //if (contact == null)
+                //{
+                //    return new
+                //    {
+                //        success = false,
+                //        data = new AutorizeDataJWT(),
+                //        message = "Only AP Customer Can Regist to the System !!"
+                //    };
+                //}
+
+                List<GetBillingTrackingMobile> getBilling = _UserRepository.GetUserBillingTrackingByProjectandUnit(data.Project, data.Unit);
+                if (getBilling.Count == null)
+                {
+                    return new
+                    {
+                        success = false,
+                        data = new AutorizeDataJWT(),
+                        message = "There is no Assosiate Phone Number with this IDCard Number!!"
+                    };
+                }
+                BillingFinalTrackingGroup FinalList = new BillingFinalTrackingGroup();
+                FinalList.BookingList = new List<BillingTrackingGroup>();
+                FinalList.ContractList = new List<BillingTrackingGroup>();
+                FinalList.TransferList = new List<BillingTrackingGroup>();
+                FinalList.DownpayList = new List<BillingTrackingGroup>();
+                List<GetBillingTrackingMobile> TempForDelete = new List<GetBillingTrackingMobile>();
+                BillingTrackingGroup ContactGroup = new BillingTrackingGroup();
+                ContactGroup.GetBillingTrackingMobile = new List<GetBillingTrackingMobile>();
+                BillingTrackingGroup BookingGroup = new BillingTrackingGroup();
+                BookingGroup.GetBillingTrackingMobile = new List<GetBillingTrackingMobile>();
+                List<GetBillingTrackingMobile> BookingList = new List<GetBillingTrackingMobile>();
+                List<GetBillingTrackingMobile> ContactList = new List<GetBillingTrackingMobile>();
+                List<GetBillingTrackingMobile> TransferList = new List<GetBillingTrackingMobile>();
+                BillingTrackingGroup TransferGroup = new BillingTrackingGroup();
+                TransferGroup.GetBillingTrackingMobile = new List<GetBillingTrackingMobile>();
+
+                for (int i = 0; i < getBilling.Count(); i++)
+                {
+                    bool HaveFET = _UserRepository.GetUserFETByPaymentMethodID(getBilling[i].PaymentID);
+                    getBilling[i].HaveFET = HaveFET;
+                    if (getBilling[i].UnitPriceStage == 1 && getBilling[i].FlagBooking != null) // เงินจอง
+                    {
+                        BookingGroup.GetBillingTrackingMobile.Add(getBilling[i]);
+                        BookingList.Add(getBilling[i]);
+                        BookingGroup.DetailDownPayment = Convert.ToInt32(getBilling[i].DetailDownPayment);
+                        BookingGroup.IsOverDue = getBilling[i].FlagOverDue == "Y" ? true : false;
+                        BookingGroup.PaymentAmount = Convert.ToDouble(getBilling[i].BookingAmount);
+                        BookingGroup.PaymentDueDate = getBilling[i].PaymentDueDate;
+                        //--------------------------
+                        BookingGroup.DownPerInstallment = getBilling[i].DownPerInstallment;
+                        BookingGroup.NormalDownPerInstallment = getBilling[i].NormalDownPerInstallment;
+                        BookingGroup.SpecialDownPaymentFlag = getBilling[i].SpecialDownPaymentFlag;
+                        BookingGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
+                        BookingGroup.AgreementAmount = getBilling[i].AgreementAmount;
+                        BookingGroup.BookingAmount = getBilling[i].BookingAmount;
+                        BookingGroup.BookingPaymentDate = getBilling[i].BookingPaymentDate;
+                        BookingGroup.FlagAgreement = getBilling[i].FlagAgreement;
+                        BookingGroup.FlagAgreementReceipt = getBilling[i].FlagAgreementReceipt;
+                        BookingGroup.FlagBooking = getBilling[i].FlagBooking;
+                        BookingGroup.FlagBookingReceipt = getBilling[i].FlagBookingReceipt;
+                        BookingGroup.FlagOverDue = getBilling[i].FlagOverDue;
+                        BookingGroup.FlagReceipt = getBilling[i].FlagReceipt;
+                        BookingGroup.PayAgreementAmount = getBilling[i].PayAgreementAmount;
+                        BookingGroup.SpecialDownPaymentFlag = getBilling[i].SpecialDownPaymentFlag;
+                        BookingGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
+                        BookingGroup.PayRemain = Convert.ToDouble(getBilling[i].AmountBalance);
+                        BookingGroup.PaymentItemNameTH = getBilling[i].PaymentItemNameTH;
+                        BookingGroup.PaymentItemNameEN = getBilling[i].PaymentItemNameEN;
+                        if (BookingGroup.PayRemain == 0)
+                        {
+                            BookingGroup.PayRemain = Convert.ToDouble(getBilling[i].BookingAmount) - Convert.ToDouble(getBilling[i].PayBookingAmount);
+                        }
+                        else
+                        {
+                            BookingGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayBookingAmount);
+                        }
+                        //FinalList.BookingList.Add(BookingGroup);
+                        TempForDelete.Add(getBilling[i]);
+                    }
+                    else if (getBilling[i].UnitPriceStage == 2 && getBilling[i].FlagAgreement != null) //สัญญา
+                    {
+                        ContactGroup.GetBillingTrackingMobile.Add(getBilling[i]);
+                        ContactList.Add(getBilling[i]);
+                        ContactGroup.DetailDownPayment = Convert.ToInt32(getBilling[i].DetailDownPayment);
+                        ContactGroup.IsOverDue = getBilling[i].FlagOverDue == "Y" ? true : false;
+                        ContactGroup.PaymentAmount = Convert.ToDouble(getBilling[i].BookingAmount);
+                        ContactGroup.PaymentDueDate = getBilling[i].PaymentDueDate;
+                        //--------------------------
+                        ContactGroup.DownPerInstallment = getBilling[i].DownPerInstallment;
+                        ContactGroup.NormalDownPerInstallment = getBilling[i].NormalDownPerInstallment;
+                        ContactGroup.SpecialDownPaymentFlag = getBilling[i].SpecialDownPaymentFlag;
+                        ContactGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
+                        ContactGroup.AgreementAmount = getBilling[i].AgreementAmount;
+                        ContactGroup.BookingAmount = getBilling[i].BookingAmount;
+                        ContactGroup.BookingPaymentDate = getBilling[i].BookingPaymentDate;
+                        ContactGroup.FlagAgreement = getBilling[i].FlagAgreement;
+                        ContactGroup.FlagAgreementReceipt = getBilling[i].FlagAgreementReceipt;
+                        ContactGroup.FlagBooking = getBilling[i].FlagBooking;
+                        ContactGroup.FlagBookingReceipt = getBilling[i].FlagBookingReceipt;
+                        ContactGroup.FlagOverDue = getBilling[i].FlagOverDue;
+                        ContactGroup.FlagReceipt = getBilling[i].FlagReceipt;
+                        ContactGroup.PayAgreementAmount = getBilling[i].PayAgreementAmount;
+                        ContactGroup.SpecialDownPaymentFlag = getBilling[i].SpecialDownPaymentFlag;
+                        ContactGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
+                        ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].AmountBalance);
+                        ContactGroup.PaymentItemNameTH = getBilling[i].PaymentItemNameTH;
+                        ContactGroup.PaymentItemNameEN = getBilling[i].PaymentItemNameEN;
+                        if (ContactGroup.PayRemain == 0)
+                        {
+                            ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].AgreementAmount) - Convert.ToDouble(getBilling[i].PayAgreementAmount);
+                        }
+                        else
+                        {
+                            ContactGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayAgreementAmount);
+                        }
+                        //FinalList.ContractList.Add(ContactGroup);
+                        TempForDelete.Add(getBilling[i]);
+                    }
+                    else if (getBilling[i].UnitPriceStage == 5 && getBilling[i].FlagTransfer != null)//โอน
+                    {
+                        TransferGroup.GetBillingTrackingMobile.Add(getBilling[i]);
+                        TransferList.Add(getBilling[i]);
+                        TransferGroup.DetailDownPayment = Convert.ToInt32(getBilling[i].DetailDownPayment);
+                        TransferGroup.IsOverDue = getBilling[i].FlagOverDue == "Y" ? true : false;
+                        TransferGroup.PaymentAmount = Convert.ToDouble(getBilling[i].BookingAmount);
+                        TransferGroup.PaymentDueDate = getBilling[i].PaymentDueDate;
+                        //--------------------------
+                        TransferGroup.DownPerInstallment = getBilling[i].DownPerInstallment;
+                        TransferGroup.NormalDownPerInstallment = getBilling[i].NormalDownPerInstallment;
+                        TransferGroup.SpecialDownPaymentFlag = getBilling[i].SpecialDownPaymentFlag;
+                        TransferGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
+                        TransferGroup.AgreementAmount = getBilling[i].AgreementAmount;
+                        TransferGroup.BookingAmount = getBilling[i].BookingAmount;
+                        TransferGroup.BookingPaymentDate = getBilling[i].BookingPaymentDate;
+                        TransferGroup.FlagTransfer = getBilling[i].FlagTransfer;
+                        TransferGroup.TransferAmount = getBilling[i].TransferAmount;
+                        TransferGroup.TransferPaymentDate = getBilling[i].TransferPaymentDate;
+                        TransferGroup.FlagTransferReceipt = getBilling[i].FlagTransferReceipt;
+                        TransferGroup.FlagAgreement = getBilling[i].FlagAgreement;
+                        TransferGroup.FlagAgreementReceipt = getBilling[i].FlagAgreementReceipt;
+                        TransferGroup.FlagBooking = getBilling[i].FlagBooking;
+                        TransferGroup.FlagBookingReceipt = getBilling[i].FlagBookingReceipt;
+                        TransferGroup.FlagOverDue = getBilling[i].FlagOverDue;
+                        TransferGroup.FlagReceipt = getBilling[i].FlagReceipt;
+                        TransferGroup.PayAgreementAmount = getBilling[i].PayAgreementAmount;
+                        TransferGroup.SpecialDownPaymentFlag = getBilling[i].SpecialDownPaymentFlag;
+                        TransferGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
+                        TransferGroup.PayRemain = Convert.ToDouble(getBilling[i].AmountBalance);
+                        if (ContactGroup.PayRemain == 0)
+                        {
+                            ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].TransferAmount) - Convert.ToDouble(getBilling[i].PayTransferAmount);
+                        }
+                        else
+                        {
+                            ContactGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayTransferAmount);
+                        }
+                        //FinalList.TransferList.Add(TransferGroup);
+                        TempForDelete.Add(getBilling[i]);
+                    }
+                }
+                FinalList.BookingList.Add(BookingGroup);
+                FinalList.ContractList.Add(ContactGroup);
+                FinalList.TransferList.Add(TransferGroup);
+                for (int i = 0; i < TempForDelete.Count(); i++)
+                {
+                    getBilling.Remove(TempForDelete[i]);
+                }
+                // Billing Tracking Group Object Creation
+                //BillingTrackingGroup BillingGroup = new BillingTrackingGroup();
+               
+                //FinalList.BookingList.Add(BillingGroup);
+                //-------------
+                List<GetBillingTrackingMobile> DistinctList = getBilling.DistinctBy(p => p.DetailDownPayment).ToList();
+                List<BillingTrackingGroup> GroupList = new List<BillingTrackingGroup>();
+                int DownPay = 1;
+                for (int i = 0; i < DistinctList.Count(); i++)
+                {
+                    double Balance = 0;
+                    List<GetBillingTrackingMobile> BillingGroup = getBilling.Where(S => S.DetailDownPayment == DownPay.ToString()).ToList();
+                    BillingTrackingGroup Group = new BillingTrackingGroup();
+                    Group.GetBillingTrackingMobile = new List<GetBillingTrackingMobile>();
+                    for (int ii = 0; ii < BillingGroup.Count(); ii++)
+                    {
+                        if (BillingGroup[ii].UnitPriceStageName.Trim() == "จอง")
+                        {
+                            //FinalList.bookingList.Add(BillingGroup[ii]);
+                        }
+                        else if (BillingGroup[ii].UnitPriceStageName.Trim() == "สัญญา")
+                        {
+                            //FinalList.ContractList.Add(BillingGroup[ii]);
+                        }
+                        else
+                        {
+                            Group.GetBillingTrackingMobile.Add(BillingGroup[ii]);
+                            Group.DetailDownPayment = DownPay;
+                            Group.IsOverDue = BillingGroup[ii].FlagOverDue == "Y" ? true : false;
+                            Group.PaymentAmount = Convert.ToDouble(BillingGroup[ii].BookingAmount);
+                            Group.PaymentDueDate = BillingGroup[ii].PaymentDueDate;
+                            //--------------------------
+                            Group.DownPerInstallment = BillingGroup[ii].DownPerInstallment;
+                            Group.NormalDownPerInstallment = BillingGroup[ii].NormalDownPerInstallment;
+                            Group.SpecialDownPaymentFlag = BillingGroup[ii].SpecialDownPaymentFlag;
+                            Group.SpecialDownPerInstallment = BillingGroup[ii].SpecialDownPerInstallment;
+                            Group.AgreementAmount = BillingGroup[ii].AgreementAmount;
+                            Group.BookingAmount = BillingGroup[ii].BookingAmount;
+                            Group.BookingPaymentDate = BillingGroup[ii].BookingPaymentDate;
+                            Group.FlagAgreement = BillingGroup[ii].FlagAgreement;
+                            Group.FlagAgreementReceipt = BillingGroup[ii].FlagAgreementReceipt;
+                            Group.FlagBooking = BillingGroup[ii].FlagBooking;
+                            Group.FlagBookingReceipt = BillingGroup[ii].FlagBookingReceipt;
+                            Group.FlagOverDue = BillingGroup[ii].FlagOverDue;
+                            Group.FlagReceipt = BillingGroup[ii].FlagReceipt;
+                            Group.PayAgreementAmount = BillingGroup[ii].PayAgreementAmount;
+                            Group.SpecialDownPaymentFlag = BillingGroup[ii].SpecialDownPaymentFlag;
+                            Group.SpecialDownPerInstallment = BillingGroup[ii].SpecialDownPerInstallment;
+                            Group.PayRemain = Convert.ToDouble(BillingGroup[ii].AmountBalance);
+                            Group.PaymentItemNameTH = BillingGroup[ii].PaymentItemNameTH;
+                            Group.PaymentItemNameEN = BillingGroup[ii].PaymentItemNameEN;
+                            //if (Group.PayRemain == 0)
+                            //{
+                            //    Group.PayRemain = Convert.ToDouble(BillingGroup[ii].DownPerInstallment) - Convert.ToDouble(BillingGroup[ii].AmountPaid);
+                            //}
+                            //else
+                            //{
+                            //    Group.PayRemain = Group.PayRemain - Convert.ToDouble(BillingGroup[ii].AmountPaid);
+                            //}
+                        }
+                    }
+                    GroupList.Add(Group);
+                    DownPay++;
+                }
+                FinalList.BillingTrackingGroup = GroupList;
+                if (FinalList.BillingTrackingGroup == null || FinalList.BillingTrackingGroup.Count() == 0)
+                {
+                    FinalList.BillingTrackingGroup = null;
+                }
+                if (FinalList.BookingList == null || FinalList.BookingList.Count() == 0)
+                {
+                    FinalList.BookingList = null;
+                }
+                if (FinalList.ContractList == null || FinalList.ContractList.Count() == 0)
+                {
+                    FinalList.ContractList = null;
+                }
+                if (FinalList.TransferList == null || FinalList.TransferList.Count() == 0)
+                {
+                    FinalList.TransferList = null;
+                }
+                if (FinalList.DownpayList == null || FinalList.DownpayList.Count() == 0)
+                {
+                    FinalList.DownpayList = null;
+                }
+                return new
+                {
+                    success = true,
+                    data = FinalList,
+                    message = "Get User iBooking Success !"
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error :: " + ex.Message);
+            }
+        }
+
         // [HttpPost]
         // [Route("GetUserFET")]
         // [SwaggerOperation(Summary = "Register User เพื่อใช่ระบบ ซึ่งจะไป หาข้อมูลจากระบบ CRM",
