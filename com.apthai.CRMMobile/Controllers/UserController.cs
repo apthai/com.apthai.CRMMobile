@@ -755,10 +755,10 @@ namespace com.apthai.CRMMobile.Controllers
             }
         }
         [HttpPost]
-        [Route("GetUserBillingTracking")]
+        [Route("GetUserBillingTrackingold")]
         [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
 Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
-        public async Task<object> GetUserBillingTracking([FromBody]GetUserBillingTrackingParam data)
+        public async Task<object> GetUserBillingTrackingold([FromBody]GetUserBillingTrackingParam data)
         {
             try
             {
@@ -2452,10 +2452,10 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
         }
 
         [HttpPost]
-        [Route("GetUserBillingTrackingNew")]
+        [Route("GetUserBillingTracking")]
         [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
 Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
-        public async Task<object> GetUserBillingTrackingNew([FromBody]GetUserBillingTrackingParam data)
+        public async Task<object> GetUserBillingTracking([FromBody]GetUserBillingTrackingParam data)
         {
             try
             {
@@ -2563,14 +2563,15 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         BookingGroup.PayRemain = Convert.ToDouble(getBilling[i].AmountBalance);
                         BookingGroup.PaymentItemNameTH = getBilling[i].PaymentItemNameTH;
                         BookingGroup.PaymentItemNameEN = getBilling[i].PaymentItemNameEN;
-                        if (BookingGroup.PayRemain == 0)
-                        {
-                            BookingGroup.PayRemain = Convert.ToDouble(getBilling[i].BookingAmount) - Convert.ToDouble(getBilling[i].PayBookingAmount);
-                        }
-                        else
-                        {
-                            BookingGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayBookingAmount);
-                        }
+                        BookingGroup.PayRemain = Convert.ToDouble(getBilling[i].AmountBalance);
+                        //if (BookingGroup.PayRemain == 0)
+                        //{
+                        //    BookingGroup.PayRemain = Convert.ToDouble(getBilling[i].BookingAmount) - Convert.ToDouble(getBilling[i].PayBookingAmount);
+                        //}
+                        //else
+                        //{
+                        //    BookingGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayBookingAmount);
+                        //}
                         //FinalList.BookingList.Add(BookingGroup);
                         TempForDelete.Add(getBilling[i]);
                     }
@@ -2602,14 +2603,14 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].AmountBalance);
                         ContactGroup.PaymentItemNameTH = getBilling[i].PaymentItemNameTH;
                         ContactGroup.PaymentItemNameEN = getBilling[i].PaymentItemNameEN;
-                        if (ContactGroup.PayRemain == 0)
-                        {
-                            ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].AgreementAmount) - Convert.ToDouble(getBilling[i].PayAgreementAmount);
-                        }
-                        else
-                        {
-                            ContactGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayAgreementAmount);
-                        }
+                        //if (ContactGroup.PayRemain == 0)
+                        //{
+                        //    ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].AgreementAmount) - Convert.ToDouble(getBilling[i].PayAgreementAmount);
+                        //}
+                        //else
+                        //{
+                        //    ContactGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayAgreementAmount);
+                        //}
                         //FinalList.ContractList.Add(ContactGroup);
                         TempForDelete.Add(getBilling[i]);
                     }
@@ -2643,14 +2644,14 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         TransferGroup.SpecialDownPaymentFlag = getBilling[i].SpecialDownPaymentFlag;
                         TransferGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
                         TransferGroup.PayRemain = Convert.ToDouble(getBilling[i].AmountBalance);
-                        if (ContactGroup.PayRemain == 0)
-                        {
-                            ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].TransferAmount) - Convert.ToDouble(getBilling[i].PayTransferAmount);
-                        }
-                        else
-                        {
-                            ContactGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayTransferAmount);
-                        }
+                        //if (ContactGroup.PayRemain == 0)
+                        //{
+                        //    ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].TransferAmount) - Convert.ToDouble(getBilling[i].PayTransferAmount);
+                        //}
+                        //else
+                        //{
+                        //    ContactGroup.PayRemain = BookingGroup.PayRemain - Convert.ToDouble(getBilling[i].PayTransferAmount);
+                        //}
                         //FinalList.TransferList.Add(TransferGroup);
                         TempForDelete.Add(getBilling[i]);
                     }
