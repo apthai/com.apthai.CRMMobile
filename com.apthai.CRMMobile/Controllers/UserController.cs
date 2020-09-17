@@ -2644,6 +2644,8 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         TransferGroup.SpecialDownPaymentFlag = getBilling[i].SpecialDownPaymentFlag;
                         TransferGroup.SpecialDownPerInstallment = getBilling[i].SpecialDownPerInstallment;
                         TransferGroup.PayRemain = Convert.ToDouble(getBilling[i].AmountBalance);
+                        TransferGroup.PaymentItemNameTH = getBilling[i].PaymentItemNameTH;
+                        TransferGroup.PaymentItemNameEN = getBilling[i].PaymentItemNameEN;
                         //if (ContactGroup.PayRemain == 0)
                         //{
                         //    ContactGroup.PayRemain = Convert.ToDouble(getBilling[i].TransferAmount) - Convert.ToDouble(getBilling[i].PayTransferAmount);
