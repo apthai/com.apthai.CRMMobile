@@ -211,6 +211,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string DownReceiptRemark { get; set; }
 
         public Guid TransferPaymentID { get; set; }
+        public Guid AgreementPaymentID { get; set; }
 
     }
     public class BillingTrackingGroup

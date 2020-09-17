@@ -2533,10 +2533,10 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
 
                 for (int i = 0; i < getBilling.Count(); i++)
                 {
-                    bool HaveFET = _UserRepository.GetUserFETByPaymentMethodID(getBilling[i].PaymentID);
-                    getBilling[i].HaveFET = HaveFET;
                     if (getBilling[i].UnitPriceStage == 1 && getBilling[i].FlagBooking != null) // เงินจอง
                     {
+                        bool HaveFET = _UserRepository.GetUserFETByPaymentMethodID(getBilling[i].BookingPaymentID);
+                        getBilling[i].HaveFET = HaveFET;
                         BookingGroup.GetBillingTrackingMobile.Add(getBilling[i]);
                         BookingList.Add(getBilling[i]);
                         BookingGroup.DetailDownPayment = Convert.ToInt32(getBilling[i].DetailDownPayment);
@@ -2578,6 +2578,8 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                     else if (getBilling[i].UnitPriceStage == 2 && getBilling[i].FlagAgreement != null) //สัญญา
                     {
                         ContactGroup.GetBillingTrackingMobile.Add(getBilling[i]);
+                        bool HaveFET = _UserRepository.GetUserFETByPaymentMethodID(getBilling[i].AgreementPaymentID);
+                        getBilling[i].HaveFET = HaveFET;
                         ContactList.Add(getBilling[i]);
                         ContactGroup.DetailDownPayment = Convert.ToInt32(getBilling[i].DetailDownPayment);
                         ContactGroup.IsOverDue = getBilling[i].FlagOverDue == "Y" ? true : false;
@@ -2617,6 +2619,8 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                     else if (getBilling[i].UnitPriceStage == 5 && getBilling[i].FlagTransfer != null)//โอน
                     {
                         TransferGroup.GetBillingTrackingMobile.Add(getBilling[i]);
+                        ContactGroup.GetBillingTrackingMobile.Add(getBilling[i]);
+                        bool HaveFET = _UserRepository.GetUserFETByPaymentMethodID(getBilling[i].TransferPaymentID);
                         TransferList.Add(getBilling[i]);
                         TransferGroup.DetailDownPayment = Convert.ToInt32(getBilling[i].DetailDownPayment);
                         TransferGroup.IsOverDue = getBilling[i].FlagOverDue == "Y" ? true : false;
@@ -2692,6 +2696,8 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         else
                         {
                             Group.GetBillingTrackingMobile.Add(BillingGroup[ii]);
+                            ContactGroup.GetBillingTrackingMobile.Add(getBilling[i]);
+                            bool HaveFET = _UserRepository.GetUserFETByPaymentMethodID(getBilling[i].BookingPaymentID);
                             Group.DetailDownPayment = DownPay;
                             Group.IsOverDue = BillingGroup[ii].FlagOverDue == "Y" ? true : false;
                             Group.PaymentAmount = Convert.ToDouble(BillingGroup[ii].BookingAmount);
