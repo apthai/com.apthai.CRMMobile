@@ -2619,7 +2619,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                     else if (getBilling[i].UnitPriceStage == 5 && getBilling[i].FlagTransfer != null)//โอน
                     {
                         TransferGroup.GetBillingTrackingMobile.Add(getBilling[i]);
-                        ContactGroup.GetBillingTrackingMobile.Add(getBilling[i]);
+                        //ContactGroup.GetBillingTrackingMobile.Add(getBilling[i]);
                         bool HaveFET = _UserRepository.GetUserFETByPaymentMethodID(getBilling[i].TransferPaymentID);
                         TransferList.Add(getBilling[i]);
                         TransferGroup.DetailDownPayment = Convert.ToInt32(getBilling[i].DetailDownPayment);
