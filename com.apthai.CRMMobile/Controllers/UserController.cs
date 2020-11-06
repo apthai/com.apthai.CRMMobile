@@ -1369,6 +1369,87 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
         }
 
         [HttpPost]
+        [Route("GetUserCardByUnit")]
+        [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
+Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
+        public async Task<object> GetUserCardByUnit([FromBody]GetUserCardParam data)
+        {
+            try
+            {
+                StringValues api_key;
+                StringValues EmpCode;
+                //if (Request.Headers.TryGetValue("api_Accesskey", out api_key) && Request.Headers.TryGetValue("EmpCode", out EmpCode))
+                //{
+                //    string AccessKey = api_key.First();
+                //    string EmpCodeKey = EmpCode.First();
+
+                //    if (!string.IsNullOrEmpty(AccessKey) && !string.IsNullOrEmpty(EmpCodeKey))
+                //    {
+                //        return new
+                //        {
+                //            success = false,
+                //            data = new AutorizeDataJWT(),
+                //            message = "Require Key to Access the Function"
+                //        };
+                //    }
+                //    else
+                //    {
+                //        string APApiKey = Environment.GetEnvironmentVariable("API_Key");
+                //        if (APApiKey == null)
+                //        {
+                //            APApiKey = UtilsProvider.AppSetting.ApiKey;
+                //        }
+                //        if (api_key != APApiKey)
+                //        {
+                //            return new
+                //            {
+                //                success = false,
+                //                data = new AutorizeDataJWT(),
+                //                message = "Incorrect API KEY !!"
+                //            };
+                //        }
+                //    }
+                //}
+
+                //Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByID(data.UserID);
+                //if (contact == null)
+                //{
+                //    return new
+                //    {
+                //        success = false,
+                //        data = new AutorizeDataJWT(),
+                //        message = "Only AP Customer Can Regist to the System !!"
+                //    };
+                //}
+                List<GetUserCardReturnObj> getUserCard = _UserRepository.GetUserCardByUserCardByUnitMobile(data.ContactNo,data.UnitNo);
+
+                //Model.CRMMobile.UserProfile Contact = _UserRepository.GetUserProfileByCRMContactID_Mobile(data.ContactNo);
+
+                if (getUserCard == null || getUserCard.Count() == 0)
+                {
+                    return new
+                    {
+                        success = false,
+                        data = new GetUserCardReturnObj(),
+                        message = "Cannot Find User Data!"
+                    };
+                }
+
+                return new
+                {
+                    success = true,
+                    data = getUserCard,
+                    message = "Get User's Card Success !"
+                };
+
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Internal server error :: " + ex.Message);
+            }
+        }
+
+        [HttpPost]
         [Route("GetICRMOwnerData")]
         [SwaggerOperation(Summary = "เรียกดูเบอร์โทรศัพท์ของลูกค้าจากระบบ CRM ทั้งหมด",
 Description = "Access Key ใช้ในการเรียหใช้ Function ถึงจะเรียกใช้ Function ได้")]
@@ -1780,13 +1861,38 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 Model.CRMWeb.Contact contact = _UserRepository.GetCRMContactByID(data.CRMContactID);
                 Model.CRMMobile.UserProfile userProfile = _UserRepository.GetUserProfileByCRMContactID_Mobile(data.CRMContactID);
                 Model.CRMMobile.UserLogin userLogin = _UserRepository.GetUserLoginByID_Mobile(userProfile.UserProfileID);
+                Model.CRMWeb.Project project = project = _UserRepository.GetProjectByProjectNo(data.ProjectCode);
                 if (contact == null)
                 {
+                    Model.CRMMobile.NotificationHistory NhLog = new Model.CRMMobile.NotificationHistory();
+                    NhLog.Created = DateTime.Now.ToString();
+                    NhLog.ProjectNo = data.ProjectCode;
+                    NhLog.CRMContactID = data.CRMContactID;
+                    NhLog.UnitNo = data.UnitNo;
+                    NhLog.ProjectNameTH = "";
+                    NhLog.MsgType = data.MsgReferenceKey;
+                    NhLog.MsgFrom = "Web";
+                    NhLog.SendMsgStatus = false;
+                    NhLog.MessageTitleTH = data.MsgTitleTH;
+                    NhLog.MsgTH = data.BodyMsgTH;
+                    NhLog.MessageTitleENG = data.BodyMsgEN;
+                    NhLog.MsgEN = data.BodyMsgEN;
+                    NhLog.IsRead = false;
+                    if (userProfile.Language.ToLower() == "th")
+                    {
+                        NhLog.MsgLanguage = "TH";
+                    }
+                    else
+                    {
+                        NhLog.MsgLanguage = "EN";
+                    }
+                    bool result = _UserRepository.InsertNotificationHistory(NhLog);
+
                     return new
                     {
                         success = false,
                         data = new AutorizeDataJWT(),
-                        message = "Only AP Customer Can Regist to the System !!"
+                        message = "Only AP Customer Can User the System !!"
                     };
                 }
                 
@@ -1798,11 +1904,13 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 //string BodyMsgEN = "I miss N'Ploy /r/n " + "I want to touch the end of the sky. but distiny never understand me. there is no way ahead but i have to make a way through. If N'Ploy is with me there will be only a sound of joy , Never tears.";
                 if (userProfile.Language.ToLower() == "th")
                 {
-                    var b = _mobileMessagingClient.SendNotification(userLogin.FireBaseToken, data.MsgTitleTH, data.BodyMsgTH);
+                    string Title = project.ProjectNameTH + " ( "  + data.UnitNo + " )";
+                    var b = _mobileMessagingClient.SendNotification(userLogin.FireBaseToken, Title, data.BodyMsgTH);
                 }
                 else
                 {
-                    var b = _mobileMessagingClient.SendNotification(userLogin.FireBaseToken, data.MsgTitleEN, data.BodyMsgEN);
+                    string Title = project.ProjectNameEN + " - " + data.UnitNo;
+                    var b = _mobileMessagingClient.SendNotification(userLogin.FireBaseToken, Title, data.BodyMsgEN);
                 }
 
 

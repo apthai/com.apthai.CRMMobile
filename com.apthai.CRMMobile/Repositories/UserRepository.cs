@@ -138,6 +138,18 @@ namespace com.apthai.CRMMobile.Repositories
             }
         }
 
+        public Model.CRMWeb.Project GetProjectByProjectNo(string ProjectNO)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<Model.CRMWeb.Project>("SELECT * FROM PRJ.Project WITH(NOLOCK) " +
+                    "where ProjectNo=@ProjectNO", new { ProjectNO = ProjectNO }).FirstOrDefault();
+
+                return result;
+            }
+        }
+
         public Model.CRMWeb.Floor GetFloorByID(string ID)
         {
             using (IDbConnection conn = WebConnection)
@@ -521,6 +533,16 @@ namespace com.apthai.CRMMobile.Repositories
             {
                 conn.Open();
                 var result = conn.Query<GetUserCardReturnObj>("sp_iCRM_GetUserCardMobile", new { ContactNo = ContactNo}, commandType: CommandType.StoredProcedure).ToList();
+
+                return result;
+            }
+        }
+        public List<GetUserCardReturnObj> GetUserCardByUserCardByUnitMobile(string ContactNo , string UnitNo)
+        {
+            using (IDbConnection conn = WebConnection)
+            {
+                conn.Open();
+                var result = conn.Query<GetUserCardReturnObj>("sp_iCRM_GetUserCardByUnitMobile", new { ContactNo = ContactNo , UnitNo = UnitNo }, commandType: CommandType.StoredProcedure).ToList();
 
                 return result;
             }

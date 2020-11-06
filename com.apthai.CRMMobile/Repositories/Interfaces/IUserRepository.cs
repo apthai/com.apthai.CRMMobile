@@ -10,6 +10,7 @@ namespace com.apthai.CRMMobile.Repositories
     {
         Model.CRMWeb.Contact GetCRMContactByIDCardNO(string CitizenIdentityNo);
         Model.CRMWeb.Contact GetCRMContactByID(string ID);
+        Model.CRMWeb.Project GetProjectByProjectNo(string ProjectNO);
         List<Model.CRMMobile.NotificationHistory> GetUserNotificationHistoryByCRMContactID_Mobile(string CRMContactID);
         Model.CRMMobile.NotificationHistory GetUserNotificationHistoryByNotiHistoryID_Mobile(string NotiHistory);
         List<Model.CRMWeb.TransferOwner> GetTransferOwnerByIDCardNO(string CitizenIdentityNo);
@@ -42,6 +43,7 @@ namespace com.apthai.CRMMobile.Repositories
         List<iCRMContact> GetUseriCRMContact_Web(string Contact);
         Model.CRMMobile.PaymentTransaction GetUserPaymentTransactionByUserID(string TransactionID);
         List<GetUserCardReturnObj> GetUserCardByProjectandUnit(string ContactNo );
+        List<GetUserCardReturnObj> GetUserCardByUserCardByUnitMobile(string ContactNo, string UnitNo);
         List<GetiCRMOwnerReturnObj> GetUserICRMOwnerByProjectUnitAndCRMContactID(string ContactID, string UnitNo, string ProjectNO);
         GetUserCreditCardReturnObj GetUserCreditCardByProjectandUnit(string ProjectID, string UnitID);
         GetGetReceiptInfoReturnObj GetReceiptInfoByReceiptNo(string ReceiptTempNo);
