@@ -482,6 +482,51 @@ namespace com.apthai.CRMMobile.CustomModel
         public string PaymentItemNameEN { get; set; }
         public string ReceiptAmount { get; set; }
     }
+    public class GetGetReceiptInfoNewReturnObj
+    {
+        public string ReceiptNo { get; set; }
+        public string ReceiptTempNo { get; set; }
+        public string PaymentMethodTH { get; set; }
+        public string PaymentMethodEN { get; set; }
+        public string ReceiveFromTH { get; set; }
+        public string ReceiveFromEN { get; set; }
+        public string ContactHouseNoTH { get; set; }
+        public string ContactMooTH { get; set; }
+        public string ContactVillageTH { get; set; }
+        public string ContactSoiTH { get; set; }
+        public string ContactRoadTH { get; set; }
+        public string ContactCountryTH { get; set; }
+        public string ContactSubDistrictTH { get; set; }
+        public string ContactDistrictTH { get; set; }
+        public string ContactProvinceTH { get; set; }
+        public string ContactHouseNoEN { get; set; }
+        public string ContactMooEN { get; set; }
+        public string ContactVillageEN { get; set; }
+        public string ContactSoiEN { get; set; }
+        public string ContactRoadEN { get; set; }
+        public string ContactCountryEN { get; set; }
+        public string ContactSubDistrictEN { get; set; }
+        public string ContactDistrictEN { get; set; }
+        public string ContactProvinceEN { get; set; }
+        public string ContactPostalCode { get; set; }
+        public string URL { get; set; }
+        public bool IsTemp { get; set; }
+        public string ReceiveDate { get; set; }
+        public string PaymentItemNameTH { get; set; }
+        public string PaymentItemNameEN { get; set; }
+        public string ReceiptAmount { get; set; }
+        public string AgreementPrice { get; set; } = "0.00";
+        public string BookingAmount { get; set; } = "0.00" ;
+        public string AgreementAmount { get; set; } = "0.00";
+        public string InstallmentAmount { get; set; } = "0.00";
+        public string TransferAmount { get; set; } = "0.00";
+        public string SumPaid { get; set; } = "0.00";
+        public string NextInstallmentPeriodTH { get; set; } = "";
+        public string NextInstallmentPeriodEN { get; set; } = "";
+        public DateTime NextInstallmentDueDate { get; set; } 
+        public string NextInstallmentAmount { get; set; } = "0.00";
+
+    }
     public class SCBAuthenHeader
     {
         public string resourceOwnerId { get; set; }

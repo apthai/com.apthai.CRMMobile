@@ -571,9 +571,9 @@ namespace com.apthai.CRMMobile.Repositories
         {
             using (IDbConnection conn = WebConnection)
             {
-                conn.Open();
-                var result = conn.Query<GetGetReceiptInfoReturnObj>("sp_iCRM_GetReceiptInfo", new { ReceiptTempNo = ReceiptTempNo }, commandType: CommandType.StoredProcedure).FirstOrDefault();
-
+                conn.Open(); 
+                //var result = conn.Query<GetGetReceiptInfoReturnObj>("sp_iCRM_GetReceiptInfo", new { ReceiptTempNo = ReceiptTempNo }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                var result = conn.Query<GetGetReceiptInfoReturnObj>("sp_iCRM_GetReceiptInfo_Detail", new { ReceiptTempNo = ReceiptTempNo }, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 return result;
             }
         }
