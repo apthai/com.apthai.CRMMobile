@@ -567,22 +567,22 @@ namespace com.apthai.CRMMobile.Repositories
                 return result;
             }
         }
-        public GetGetReceiptInfoReturnObj GetReceiptInfoByReceiptNo(string ReceiptTempNo)
+        public GetGetReceiptInfoNewReturnObj GetReceiptInfoByReceiptNo(string ReceiptTempNo)
         {
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open(); 
                 //var result = conn.Query<GetGetReceiptInfoReturnObj>("sp_iCRM_GetReceiptInfo", new { ReceiptTempNo = ReceiptTempNo }, commandType: CommandType.StoredProcedure).FirstOrDefault();
-                var result = conn.Query<GetGetReceiptInfoReturnObj>("sp_iCRM_GetReceiptInfo_Detail", new { ReceiptTempNo = ReceiptTempNo }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                var result = conn.Query<GetGetReceiptInfoNewReturnObj>("sp_iCRM_GetReceiptInfo_Detail", new { ReceiptTempNo = ReceiptTempNo }, commandType: CommandType.StoredProcedure).FirstOrDefault();
                 return result;
             }
         }
-        public GetGetReceiptInfoReturnObj GetReceiptTempInfoByReceiptNo(string ReceiptTempNo)
+        public GetGetReceiptInfoNewReturnObj GetReceiptTempInfoByReceiptNo(string ReceiptTempNo)
         {
             using (IDbConnection conn = WebConnection)
             {
                 conn.Open();
-                var result = conn.Query<GetGetReceiptInfoReturnObj>("sp_iCRM_GetTempReceiptInfo", new { ReceiptTempNo = ReceiptTempNo }, commandType: CommandType.StoredProcedure).FirstOrDefault();
+                var result = conn.Query<GetGetReceiptInfoNewReturnObj>("sp_iCRM_GetTempReceiptInfo", new { ReceiptTempNo = ReceiptTempNo }, commandType: CommandType.StoredProcedure).FirstOrDefault();
 
                 return result;
             }

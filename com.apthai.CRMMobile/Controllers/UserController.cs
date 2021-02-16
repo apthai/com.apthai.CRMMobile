@@ -2312,7 +2312,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 {
                     string Url = "";
                     bool Exist = false;
-                    GetGetReceiptInfoReturnObj result = new GetGetReceiptInfoReturnObj();
+                    GetGetReceiptInfoNewReturnObj result = new GetGetReceiptInfoNewReturnObj();
                     if (data.IsTemp == false)
                     {
                         //Url = await GetFileUrlAsync("erecipt", data.ProjectCode, data.ReceiptNo);
@@ -2384,12 +2384,12 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                 }
                 else
                 {
-                    List<GetGetReceiptInfoReturnObj> FinalResult = new List<GetGetReceiptInfoReturnObj>();
+                    List<GetGetReceiptInfoNewReturnObj> FinalResult = new List<GetGetReceiptInfoNewReturnObj>();
                     for (int i = 0; i < data.getReceiptListByReceiptIDs.Count(); i++)
                     {
                         string Url = "";
                         bool Exist = false;
-                        GetGetReceiptInfoReturnObj result = new GetGetReceiptInfoReturnObj();
+                        GetGetReceiptInfoNewReturnObj result = new GetGetReceiptInfoNewReturnObj();
                         if (data.getReceiptListByReceiptIDs[i].IsTemp == false)
                         {
                             //Url = await GetFileUrlAsync("erecipt", data.ProjectCode, data.ReceiptNo);
