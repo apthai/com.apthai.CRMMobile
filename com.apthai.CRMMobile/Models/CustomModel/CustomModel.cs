@@ -523,7 +523,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string SumPaid { get; set; } = "0.00";
         public string NextInstallmentPeriodTH { get; set; } = "";
         public string NextInstallmentPeriodEN { get; set; } = "";
-        public DateTime NextInstallmentDueDate { get; set; } 
+        public string NextInstallmentDueDate { get; set; } 
         public string NextInstallmentAmount { get; set; } = "0.00";
 
     }
