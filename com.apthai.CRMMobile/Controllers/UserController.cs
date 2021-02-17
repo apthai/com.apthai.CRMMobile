@@ -2419,7 +2419,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                             }
                             result = _UserRepository.GetReceiptTempInfoByReceiptNo(data.getReceiptListByReceiptIDs[i].ReceiptNo);
                         }
-                        if (result.ReceiptTempNo != null)
+                        if (result.ReceiptTempNo != null && result.ReceiptTempNo != "")
                         {
                             result.ReceiptNo = result.ReceiptTempNo;
                             result.IsTemp = true;
