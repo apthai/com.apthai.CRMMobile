@@ -2419,15 +2419,15 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                             }
                             result = _UserRepository.GetReceiptTempInfoByReceiptNo(data.getReceiptListByReceiptIDs[i].ReceiptNo);
                         }
-                        if (result.ReceiptTempNo != null && result.ReceiptTempNo != "")
-                        {
-                            result.ReceiptNo = result.ReceiptTempNo;
-                            result.IsTemp = true;
-                        }
-                        else
-                        {
-                            result.IsTemp = false;
-                        }
+                        //if (result.ReceiptTempNo != null && result.ReceiptTempNo != "")
+                        //{
+                        //    result.ReceiptNo = result.ReceiptTempNo;
+                        //    result.IsTemp = true;
+                        //}
+                        //else
+                        //{
+                        //    result.IsTemp = false;
+                        //}
                         result.URL = Url;
                         //Model.CRMMobile.NotificationHistory notification = _UserRepository.GetUserNotificationHistoryByNotiHistoryID_Mobile(data.NotiHistoryID);
                         //notification.IsRead = true;
