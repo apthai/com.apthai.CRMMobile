@@ -2804,7 +2804,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         else
                         {
                             Group.GetBillingTrackingMobile.Add(BillingGroup[ii]);
-                            ContactGroup.GetBillingTrackingMobile.Add(getBilling[i]);
+                            //ContactGroup.GetBillingTrackingMobile.Add(getBilling[i]);
                             bool HaveFET = _UserRepository.GetUserFETByPaymentMethodID(getBilling[i].BookingPaymentID);
                             Group.DetailDownPayment = DownPay;
                             Group.IsOverDue = BillingGroup[ii].FlagOverDue == "Y" ? true : false;
