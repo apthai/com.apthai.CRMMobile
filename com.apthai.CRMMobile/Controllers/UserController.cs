@@ -2429,6 +2429,7 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         //    result.IsTemp = false;
                         //}
                         result.URL = Url;
+                        result.IsTemp = data.getReceiptListByReceiptIDs[i].IsTemp;
                         //Model.CRMMobile.NotificationHistory notification = _UserRepository.GetUserNotificationHistoryByNotiHistoryID_Mobile(data.NotiHistoryID);
                         //notification.IsRead = true;
                         //bool updateIsRead = _UserRepository.UpdateIsReadForNotification(notification);
