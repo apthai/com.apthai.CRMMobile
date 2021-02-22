@@ -314,6 +314,7 @@ namespace com.apthai.CRMMobile.CustomModel
         public string PhoneNumber { get; set; }
         public string ContactAddressTH { get; set; }
         public string ContactAddressEN { get; set; }
+        public string UnitStatusEN { get; set; } = "";
     }
     public class iCRMMyProperty
     {
