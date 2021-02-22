@@ -325,8 +325,11 @@ namespace com.apthai.CRMMobile.CustomModel
         public string PayAmount { get; set; }
         public Guid ContactID { get; set; }
         public string ContactNo { get; set; }
-        public string FirstNameTH { get; set; }
-        public string LastNameTH { get; set; }
+        public string FirstNameTH { get; set; } = "";
+        public string LastNameTH { get; set; } = "";
+        public string UnitStatusCode { get; set; }
+        public string UnitStatus { get; set; }
+        public string UnitStatusEN { get; set; } = "";
     }
     public class iCRMContact
     {
