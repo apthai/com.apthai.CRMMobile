@@ -685,33 +685,41 @@ namespace com.apthai.CRMMobile.Repositories
         }
         public async Task<List<string>> GetListFile(string bucketName, string prefix)
         {
-            string _minioEndpoint = "192.168.2.29:9001"; //192.168.2.29:9001"; // CRM 
-            string _minioAccessKey = "XNTYE7HIMF6KK4BVEIXA";
-            string _minioSecretKey = "naD+esQ+uV7+xwfF3bPfAn5iC7C1XUyXeM8HkBlO";
-            string _defaultBucket = "erecipt";
-            string _tempBucket = "erecipt";
-            bool _withSSL = false;
-
-            MinioClient minio;
-            if (_withSSL)
-                minio = new MinioClient(_minioEndpoint, _minioAccessKey, _minioSecretKey).WithSSL();
-            else
-                minio = new MinioClient(_minioEndpoint, _minioAccessKey, _minioSecretKey);
-
-            bool bucketExisted = await minio.BucketExistsAsync(bucketName);
-            if (bucketExisted)
+            try
             {
-                List<string> bucketKeys = new List<string>();
-                var observable = minio.ListObjectsAsync(bucketName, prefix);
-                IDisposable subscription = observable.Subscribe(item => bucketKeys.Add(item.Key), ex => throw new Exception("Error", ex), () => Console.WriteLine("OnComplete: {0}"));
-                observable.Wait();
+                string _minioEndpoint = "192.168.2.29:9001"; //192.168.2.29:9001"; // CRM 
+                string _minioAccessKey = "XNTYE7HIMF6KK4BVEIXA";
+                string _minioSecretKey = "naD+esQ+uV7+xwfF3bPfAn5iC7C1XUyXeM8HkBlO";
+                string _defaultBucket = "erecipt";
+                string _tempBucket = "erecipt";
+                bool _withSSL = false;
 
-                return bucketKeys;
+                MinioClient minio;
+                if (_withSSL)
+                    minio = new MinioClient(_minioEndpoint, _minioAccessKey, _minioSecretKey).WithSSL();
+                else
+                    minio = new MinioClient(_minioEndpoint, _minioAccessKey, _minioSecretKey);
+
+                bool bucketExisted = await minio.BucketExistsAsync(bucketName);
+                if (bucketExisted)
+                {
+                    List<string> bucketKeys = new List<string>();
+                    var observable = minio.ListObjectsAsync(bucketName, prefix);
+                    IDisposable subscription = observable.Subscribe(item => bucketKeys.Add(item.Key), ex => throw new Exception("Error", ex), () => Console.WriteLine("OnComplete: {0}"));
+                    observable.Wait();
+
+                    return bucketKeys;
+                }
+                else
+                {
+                    return null;
+                }
             }
-            else
+            catch (Exception ex)
             {
                 return null;
             }
+            
         }
         public string ReplaceWithPublicURL(string url)
         {

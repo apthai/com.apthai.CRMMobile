@@ -2394,10 +2394,17 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         {
                             //Url = await GetFileUrlAsync("erecipt", data.ProjectCode, data.ReceiptNo);
                             List<string> bucketList = await _UserRepository.GetListFile("erecipt", data.getReceiptListByReceiptIDs[i].ProjectCode + "/");
-                            bool FileExist = bucketList.Contains(data.getReceiptListByReceiptIDs[i].ProjectCode + "/" + data.getReceiptListByReceiptIDs[i].ReceiptNo + ".pdf");
-                            if (FileExist == true)
+                            if (bucketList != null)
                             {
-                                Url = await _UserRepository.GetFileUrlAsync("erecipt", data.getReceiptListByReceiptIDs[i].ProjectCode, data.getReceiptListByReceiptIDs[i].ProjectCode + "/" + data.getReceiptListByReceiptIDs[i].ReceiptNo + ".pdf");
+                                bool FileExist = bucketList.Contains(data.getReceiptListByReceiptIDs[i].ProjectCode + "/" + data.getReceiptListByReceiptIDs[i].ReceiptNo + ".pdf");
+                                if (FileExist == true)
+                                {
+                                    Url = await _UserRepository.GetFileUrlAsync("erecipt", data.getReceiptListByReceiptIDs[i].ProjectCode, data.getReceiptListByReceiptIDs[i].ProjectCode + "/" + data.getReceiptListByReceiptIDs[i].ReceiptNo + ".pdf");
+                                }
+                                else
+                                {
+                                    Url = "";
+                                }
                             }
                             else
                             {
@@ -2408,15 +2415,23 @@ Description = "Access Key ใช้ในการเรียหใช้ Funct
                         else
                         {
                             List<string> bucketList = await _UserRepository.GetListFile("ereceipt-temp", data.getReceiptListByReceiptIDs[i].ProjectCode + "/");
-                            bool FileExist = bucketList.Contains(data.getReceiptListByReceiptIDs[i].ProjectCode + "/" + data.getReceiptListByReceiptIDs[i].ReceiptNo + ".pdf");
-                            if (FileExist == true)
+                            if (bucketList != null)
                             {
-                                Url = await _UserRepository.GetFileUrlAsync("ereceipt-temp", data.getReceiptListByReceiptIDs[i].ProjectCode, data.getReceiptListByReceiptIDs[i].ProjectCode + "/" + data.getReceiptListByReceiptIDs[i].ReceiptNo + ".pdf");
+                                bool FileExist = bucketList.Contains(data.getReceiptListByReceiptIDs[i].ProjectCode + "/" + data.getReceiptListByReceiptIDs[i].ReceiptNo + ".pdf");
+                                if (FileExist == true)
+                                {
+                                    Url = await _UserRepository.GetFileUrlAsync("ereceipt-temp", data.getReceiptListByReceiptIDs[i].ProjectCode, data.getReceiptListByReceiptIDs[i].ProjectCode + "/" + data.getReceiptListByReceiptIDs[i].ReceiptNo + ".pdf");
+                                }
+                                else
+                                {
+                                    Url = "";
+                                }
                             }
                             else
                             {
                                 Url = "";
                             }
+                            
                             result = _UserRepository.GetReceiptTempInfoByReceiptNo(data.getReceiptListByReceiptIDs[i].ReceiptNo);
                         }
                         //if (result.ReceiptTempNo != null && result.ReceiptTempNo != "")
