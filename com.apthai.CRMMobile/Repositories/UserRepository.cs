@@ -39,7 +39,7 @@ namespace com.apthai.CRMMobile.Repositories
             {
                 conn.Open();
                 var result = conn.Query<Model.CRMWeb.ContactPhone>("select * from CTM.ContactPhone WITH(NOLOCK) " +
-                    "where ContactID=@ContactID", new { ContactID = ContactID }).ToList();
+                    "where ContactID=@ContactID And PhoneTypeMasterCenterID = 'aea43111-cc3c-4ca8-baaa-f952c4c5594d' ", new { ContactID = ContactID }).ToList();
 
                 return result;
             }
