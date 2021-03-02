@@ -281,7 +281,7 @@ namespace com.apthai.CRMMobile.Repositories
                 conn.Open();
                 var result = conn.Query<Model.CRMWeb.FET>("select * from FIN.PaymentMethod WITH(NOLOCK) " +
                     " Left join FIN.FET ft ON FIN.PaymentMethod.ID = ft.PaymentMethodID " +
-                    " where Fin.PaymentMethod.PaymentID=@PaymentMethodID", new { PaymentMethodID = PaymentMethodID }).FirstOrDefault();
+                    " where Fin.PaymentMethod.PaymentID=@PaymentMethodID and FIN.PaymentMethod.IsRequestFET = 1 and  ft.IsDeleted = 0 ", new { PaymentMethodID = PaymentMethodID }).FirstOrDefault();
                 
                 if (result == null)
                 {
